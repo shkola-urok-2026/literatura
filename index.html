@@ -4,138 +4,144 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Галерея писателей 6 класса — Литература</title>
-<meta property="og:title" content="Галерея писателей 6 класса" />
-<meta property="og:description" content="Интерактивная галерея: все писатели и поэты, которых изучают в 6 классе по ФГОС. Кроссворд и викторина внутри!" />
-<meta property="og:image" content="https://jovial-pony-6e4c82.netlify.app/preview.png" />
-<meta property="og:url" content="https://jovial-pony-6e4c82.netlify.app/" />
+<meta property="og:title" content="Галерея писателей 6 класса — Литература">
+<meta property="og:description" content="Интерактивная галерея: все писатели и поэты, которых изучают в 6 классе по ФГОС. Биографии, произведения, викторина.">
+<meta property="og:image" content="https://shkola-urok-2026.github.io/literatura/preview.png">
+<meta property="og:url" content="https://shkola-urok-2026.github.io/literatura/">
 <style>
+:root{--bg:#1a2340;--card:#223057;--gold:#f5e6c8;--accent:#e6c783;--ink:#f2ead8}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Georgia',serif;background:linear-gradient(135deg,#1a2340 0%,#2c3e60 100%);color:#333;min-height:100vh;padding-bottom:60px}
-header{text-align:center;padding:40px 20px 20px;color:#f5e6c8}
-header h1{font-size:2.2em;text-shadow:2px 2px 6px rgba(0,0,0,.4)}
-header p{margin-top:10px;font-style:italic;opacity:.85}
-.controls{max-width:1100px;margin:20px auto;padding:0 20px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-.controls input{padding:10px 18px;border-radius:25px;border:2px solid #c9a44c;font-size:1em;min-width:240px;outline:none}
-.controls button{padding:10px 18px;border-radius:25px;border:2px solid #c9a44c;background:transparent;color:#f5e6c8;cursor:pointer;font-size:.95em;font-family:inherit;transition:.2s}
-.controls button.active,.controls button:hover{background:#c9a44c;color:#1a2340}
-.gallery{max-width:1200px;margin:0 auto;padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-.card{perspective:1000px;height:340px;cursor:pointer}
-.card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
-.card.flipped .card-inner{transform:rotateY(180deg)}
-.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:20px;display:flex;flex-direction:column;box-shadow:0 6px 18px rgba(0,0,0,.3)}
-.front{background:linear-gradient(160deg,#fdf6e3,#f3e5c0);border:2px solid #c9a44c;align-items:center;justify-content:center;text-align:center}
-.front .avatar{font-size:64px;margin-bottom:12px}
-.front h3{color:#1a2340;font-size:1.15em}
-.front .years{color:#8a6d2b;font-size:.9em;margin:6px 0}
-.front .tag{margin-top:auto;background:#1a2340;color:#f5e6c8;padding:5px 14px;border-radius:15px;font-size:.78em}
-.back{background:linear-gradient(160deg,#1a2340,#2c3e60);color:#f5e6c8;transform:rotateY(180deg);border:2px solid #c9a44c;font-size:.88em;overflow:auto}
-.back h4{color:#c9a44c;margin-bottom:8px;font-size:1em}
-.back ul{list-style:none}
-.back li{margin-bottom:6px;padding-left:14px;position:relative}
-.back li::before{content:'✒';position:absolute;left:0;color:#c9a44c;font-size:.8em}
-.back .hint{margin-top:auto;font-size:.75em;opacity:.7;text-align:center}
-section.info{max-width:900px;margin:30px auto;background:rgba(253,246,227,.95);border-radius:16px;padding:30px;border:2px solid #c9a44c}
-section.info h2{color:#1a2340;margin-bottom:14px;text-align:center}
-.quiz-q{background:#fff;border-radius:10px;padding:16px;margin-bottom:14px;border-left:4px solid #c9a44c}
-.quiz-q p{font-weight:bold;margin-bottom:10px}
-.quiz-q button{display:block;width:100%;text-align:left;margin:5px 0;padding:9px 14px;border:1px solid #ccc;border-radius:8px;background:#f7f3e8;cursor:pointer;font-family:inherit;font-size:.95em}
-.quiz-q button:hover{background:#efe3c2}
-.quiz-q button.correct{background:#c8e6c9;border-color:#4caf50}
-.quiz-q button.wrong{background:#ffcdd2;border-color:#e57373}
-#quizResult{display:none;text-align:center;font-size:1.3em;color:#1a2340;margin-top:16px;font-weight:bold}
-footer{text-align:center;color:#f5e6c8;opacity:.7;margin-top:40px;font-size:.9em}
-@media(max-width:600px){header h1{font-size:1.6em}.card{height:300px}}
+body{font-family:Georgia,'Times New Roman',serif;background:linear-gradient(135deg,#1a2340 0%,#2c3e60 100%);color:var(--ink);min-height:100vh}
+header{text-align:center;padding:36px 20px 10px}
+h1{font-size:2.1em;color:var(--accent);font-weight:normal}
+.sub{margin-top:6px;color:#b9c2d8;font-size:1.02em}
+.controls{max-width:1100px;margin:24px auto 0;padding:0 20px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.controls button{background:#223057;color:var(--gold);font-size:1em;min-width:150px;padding:10px 22px;border:2px solid #9a944c;border-radius:18px;cursor:pointer;font-family:inherit}
+.controls button.active,.controls button:hover{background:var(--accent);color:var(--bg)}
+#search{background:#223057;color:var(--ink);border:1px solid #4a5a80;border-radius:18px;padding:10px 16px;font-size:1em;min-width:240px;font-family:inherit}
+.gallery{max-width:1200px;margin:26px auto;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.card{background:var(--card);border-radius:14px;padding:18px;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35);transition:transform .15s}
+.card:hover{transform:translateY(-4px)}
+.ava{width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:3px solid var(--accent);background:#31426b}
+.ava-txt{width:120px;height:120px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;background:var(--accent);color:#1a2340;font-size:2em;font-weight:bold}
+.nm{font-size:1.12em;color:var(--gold)}
+.yr{color:#93a3c4;font-size:.9em;margin-top:3px}
+.tag{display:inline-block;margin-top:8px;font-size:.8em;border:1px solid #6b7aa3;border-radius:10px;padding:2px 10px;color:#cdd6ea}
+.modal{display:none;position:fixed;inset:0;background:rgba(10,14,28,.85);z-index:50;overflow:auto}
+.mbox{background:var(--card);max-width:640px;margin:6vh auto;padding:28px;border-radius:16px}
+.mbox .ava-txt{width:140px;height:140px}
+.mbox h2{color:var(--accent);margin-top:12px;font-weight:normal}
+.mbox p{margin-top:12px;line-height:1.55}
+.mbox .w{color:var(--gold)}
+.more{display:inline-block;margin-top:16px;background:var(--accent);color:#1a2340;padding:10px 22px;border-radius:10px;text-decoration:none;font-weight:bold}
+.close{float:right;font-size:1.6em;cursor:pointer;color:#93a3c4}
+.quiz{max-width:640px;margin:34px auto 60px;padding:26px;background:var(--card);border-radius:16px}
+.quiz h2{color:var(--accent);font-weight:normal;margin-bottom:14px}
+.q p{margin:14px 0 8px}
+.q label{display:block;margin:6px 0;cursor:pointer;color:#dfe6f3}
+.res{margin-top:16px;font-size:1.1em;color:var(--gold)}
+footer{text-align:center;padding:20px;color:#8b97b4;font-size:.9em}
+@media(max-width:600px){h1{font-size:1.6em}}
 </style>
 </head>
 <body>
-<header>
-<h1>📖 Галерея писателей 6 класса</h1>
-<p>Все авторы из программы по литературе (ФГОС) — нажми на карточку, чтобы узнать больше</p>
-</header>
+<header><h1>Галерея писателей и поэтов 6 класса</h1><div class="sub">По программе ФГОС • 38 имён • Биографии, произведения, викторина</div></header>
 <div class="controls">
-<input type="text" id="search" placeholder="🔍 Поиск писателя...">
-<button class="active" data-f="all" onclick="filter(this)">Все</button>
-<button data-f="19" onclick="filter(this)">XIX век</button>
-<button data-f="20" onclick="filter(this)">XX век</button>
-<button data-f="modern" onclick="filter(this)">Современные</button>
-<button data-f="world" onclick="filter(this)">Зарубежные</button>
-<button data-f="ancient" onclick="filter(this)">Старина и мифы</button>
+<button data-f="all" class="active">Все авторы</button><button data-f="поэт">Поэты</button><button data-f="писатель">Писатели</button><button data-f="зарубежный">Зарубежные</button><button data-f="народы России">Поэты народов России</button>
+<input id="search" placeholder="Поиск по имени или произведению…">
 </div>
-<div class="gallery" id="gallery"></div>
-<section class="info">
-<h2>🎯 Викторина: угадай писателя</h2>
-<div id="quiz"></div>
-<div id="quizResult"></div>
-</section>
-<footer>Интерактивный урок литературы · 6 класс · ФГОС</footer>
+<div class="gallery" id="g"></div>
+<div class="modal" id="m" onclick="if(event.target===this)closeM()"><div class="mbox"><span class="close" onclick="closeM()">✕</span><div id="mi"></div><h2 id="mh"></h2><div class="yr" id="my"></div><p id="mt"></p><p class="w" id="mw"></p><a class="more" id="ml" target="_blank" rel="noopener"></a></div></div>
+<div class="quiz"><h2>Викторина: угадай автора</h2><div id="qz"></div><div class="res" id="rz"></div></div>
+<footer>Галерея по программе 6 класса (ФГОС) • Портреты — Википедия (свободная лицензия) • Биографии — Культура.РФ</footer>
 <script>
-const W=[
-{a:'📜',n:'Гомер',y:'VIII в. до н. э.',g:'ancient',t:'Античная литература',w:['«Илиада» (фрагменты)','«Одиссея» (Одиссей и Полифем)'],f:'Древнегреческий сказитель. Его поэмы пели наизусть почти 3000 лет назад!'},
-{a:'🕯️',n:'«Повесть временных лет»',y:'XII век',g:'ancient',t:'Древнерусская литература',w:['«Сказание о белгородском киселе»','«Предание о смерти князя Олега»'],f:'Автор неизвестен — монах Нестор, как считают учёные, записал первые страницы русской истории.'},
-{a:'✨',n:'А. С. Пушкин',y:'1799–1837',g:'19',t:'XIX век',w:['Роман «Дубровский»','«Песнь о вещем Олеге»','«Узник», «Зимняя дорога», «Туча»','«Повести Белкина»'],f:'Солнце русской поэзии. Своим лицее он называл «отчизной» — там он нашёл друзей на всю жизнь.'},
-{a:'🏔️',n:'М. Ю. Лермонтов',y:'1814–1841',g:'19',t:'XIX век',w:['«Три пальмы»','«Листок», «Утёс», «Тучи»'],f:'Прожил всего 26 лет, но успел написать «Бородино» и «Мцыри». Кавказ знал как родной дом.'},
-{a:'🌾',n:'А. В. Кольцов',y:'1809–1842',g:'19',t:'XIX век',w:['«Косарь»','«Соловей»'],f:'Сын воронежского торговца, самоучка. Писал о поле, степи и крестьянском труде — песни поют до сих пор.'},
-{a:'🍂',n:'Ф. И. Тютчев',y:'1803–1873',g:'19',t:'XIX век',w:['«Есть в осени первоначальной…»','«С поляны коршун поднялся…»'],f:'Мастер пейзажной лирики. Говорил, что «нельзя понять Россию умом» — строки знакомы каждому.'},
-{a:'🌸',n:'А. А. Фет',y:'1820–1892',g:'19',t:'XIX век',w:['«Я пришёл к тебе с приветом…»','«Учись у них — у дуба, у берёзы…»'],f:'Поэт чистых чувств: у него не о чём и не о чём — только о любви и природе, зато как!'},
-{a:'🌲',n:'И. С. Тургенев',y:'1818–1883',g:'19',t:'XIX век',w:['«Бежин луг» (из «Записок охотника»)'],f:'Создатель образа русского крестьянина. За «Записки охотника» даже попал под арест.'},
-{a:'🔧',n:'Н. С. Лесков',y:'1831–1895',g:'19',t:'XIX век',w:['Сказ «Левша»'],f:'Написал «Левшу» так, будто слышал его речь сам. Гвоздь подковать умели, а не подковали!'},
-{a:'📕',n:'Л. Н. Толстой',y:'1828–1910',g:'19',t:'XIX век',w:['Повесть «Детство» (главы)'],f:'Граф, который отказался от роскоши. «Детство» — первый размышляющий взгляд на собственные воспоминания.'},
-{a:'😄',n:'А. П. Чехов',y:'1860–1904',g:'19',t:'XIX век',w:['«Толстый и тонкий»','«Хамелеон»','«Смерть чиновника»'],f:'Врач и писатель. Считал краткость сестрой таланта — его рассказы иногда короче письма!'},
-{a:'🎁',n:'А. И. Куприн',y:'1870–1938',g:'19',t:'XIX век',w:['«Чудесный доктор»'],f:'Прошёл военную службу, был репортёром, пилот. Писал о людях — живых, а не о «типах».'},
-{a:'🥈',n:'А. С. Грин',y:'1880–1932',g:'20',t:'XX век',w:['«Алые паруса» (фрагмент)'],f:'Придумал страну Гринландию. «Алые паруса» он начал писать из окна канцелярии военного моряка.'},
-{a:'🌻',n:'А. П. Платонов',y:'1899–1951',g:'20',t:'XX век',w:['«Неизвестный цветок»','«Корова»'],f:'Язык его книг особенный — «странно красивый». Считал, что без мечты человек — это просто растения без солнца.'},
-{a:'🐎',n:'В. П. Астафьев',y:'1924–2001',g:'20',t:'XX век',w:['«Конь с розовой гривой»'],f:'Сирота, прошедший войну. Писал о детстве и войне без прикрас — оттого так честно.'},
-{a:'🕰️',n:'М. М. Пришвин',y:'1873–1954',g:'20',t:'XX век',w:['«Кладовая солнца»','«Таинственный ящик»'],f:'Был агрономом и путешественником, потом полюбил лес. Дневник вел почти 50 лет!'},
-{a:'🎓',n:'В. Г. Распутин',y:'1937–2015',g:'20',t:'XX век',w:['«Уроки французского»'],f:'Сибиряк, писал о деревне. В «Уроках французского» — история из жизни его собственного детства.'},
-{a:'📷',n:'В. М. Шукшин',y:'1929–1974',g:'20',t:'XX век',w:['«Критики»','«Срезал»'],f:'Кинорежиссёр, актёр и писатель в одном лице. Снимал село и играл в своих фильмах сам.'},
-{a:'🏺',n:'Ф. А. Искандер',y:'1929–2016',g:'20',t:'XX век',w:['«Тринадцатый подвиг Геракла»'],f:'Писатель из Абхазии. Смех в его рассказах особенный — умный и добрый.'},
-{a:'⚖️',n:'Ю. П. Казаков',y:'1927–1982',g:'20',t:'XX век',w:['«Тихое утро»'],f:'Был музыкантом — контрабасистом. Изящный стиль рассказов сравнивают с чеховским.'},
-{a:'🕊️',n:'С. А. Есенин',y:'1895–1925',g:'20',t:'XX век',w:['Стихи о родной природе'],f:'Певец берёз и полей. Называл себя «хулиганом», а писал так нежно, что до сих пор поют.'},
-{a:'📢',n:'В. В. Маяковский',y:'1893–1930',g:'20',t:'XX век',w:['Стихи (одно в программе)'],f:'Придумал «лесенку» стихов. Обложки его книг вырезаны как плакаты — он и художник тоже.'},
-{a:'🌿',n:'Д. С. Самойлов',y:'1920–2008',g:'20',t:'XX век',w:['«Сороковые»'],f:'«Сороковые, роковые…» — его строки о войне узнаёт наизусть каждое поколение.'},
-{a:'🔔',n:'Р. Гамзатов',y:'1923–2003',g:'modern',t:'Литература народов РФ',w:['«Журавли»','«Мой Дагестан»'],f:'Аварский поэт. Песня «Журавли» стала реквиемом по всем погибшим в войнах.'},
-{a:'🌼',n:'Г. Тукай',y:'1886–1913',g:'modern',t:'Литература народов РФ',w:['«Родная деревня»','«Книга»'],f:'Татарский поэт, «солнце татарской литературы». Умер в 26 лет, как Лермонтов.'},
-{a:'⏳',n:'А. В. Жвалевский и Е. Б. Пастернак',y:'совр.',g:'modern',t:'Современные фантасты',w:['«Время всегда хорошее»'],f:'Белорусский дуэт. В их повести герои меняются местами: пионер 1980-х — в наше время, девочка из нашего — в прошлое.'},
-{a:'🗓️',n:'В. В. Ледерман',y:'совр.',g:'modern',t:'Современные фантасты',w:['«Календарь ма(й)я»'],f:'Пишет детские книги с юмором и загадками. «Календарь ма(й)я» — история про весну, дружбу и сложные дни.'},
-{a:'🚢',n:'Д. Дефо',y:'1660–1731',g:'world',t:'Зарубежная литература',w:['«Робинзон Крузо» (главы)'],f:'Англичанин, бывший купец. Его роман — одна из первых книг, где человек побеждает сам себя и природу.'},
-{a:'🧪',n:'Дж. Свифт',y:'1667–1745',g:'world',t:'Зарубежная литература',w:['«Путешествия Гулливера» (главы)'],f:'Священник и писатель-сатирик. Гулливеров он путешествует не ради приключений, а чтобы высмеять людские пороки.'},
-{a:'🌋',n:'Ж. Верн',y:'1828–1905',g:'world',t:'Зарубежная литература',w:['«Дети капитана Гранта» (главы)'],f:'Француз, «отец научной фантастики». Предсказал подводные лодки, вертолёты и полёт на Луну!'},
-{a:'⚖️',n:'Х. Ли',y:'1926–2016',g:'world',t:'Зарубежная литература',w:['«Убить пересмешника» (главы)'],f:'Американка. Роман о справедливости получил Пулитцеровскую премию и стал классикой.'},
-{a:'🏰',n:'М. де Сервантес',y:'1547–1616',g:'world',t:'Зарубежная литература',w:['«Дон Кихот» (главы)'],f:'Испанец, «одинокий рыцарь на тощий кобыле». Его роман называют первым в мире настоящим романом.'},
-{a:'✈️',n:'А. де Сент-Экзюпери',y:'1900–1944',g:'world',t:'Зарубежная литература',w:['«Маленький принц»'],f:'Лётчик-романтик. Сам рисовал иллюстрации к своей книге — и они стали знаменитыми.'},
-{a:'🩳',n:'И. Ф. Шиллер',y:'1759–1805',g:'world',t:'Зарубежная литература',w:['«Перчатка»','«Кубок»'],f:'Немецкий поэт и драматург. Его баллады — как маленькие пьесы: в каждой есть страсть и выбор.'},
-{a:'🏴',n:'Р. Л. Стивенсон',y:'1850–1894',g:'world',t:'Зарубежная литература',w:['«Вересковый мед»'],f:'Шотландец, писавший приключения для детей и взрослых. Вересковый напиток он «превратил» в легенду о мужестве.'}
+const A=[
+{"n":"Иван Крылов","y":"1769–1844","t":["писатель","русский"],"p":"Иван Крылов","b":"Великий баснописец: за жизнь написал 236 басен в девяти сборниках. Работал библиотекарем Императорской публичной библиотеки; его строки стали крылатыми.","w":"«Свинья под Дубом», «Осёл и Соловей», «Ворона и Курица»","u":"https://www.culture.ru/materials/85781/glavnyi-basnopisec-svoei-zemli"},
+{"n":"Александр Пушкин","y":"1799–1837","t":["поэт","писатель","русский"],"p":"Александр Пушкин","b":"Солнце русской поэзии, создатель современного литературного языка. В 6 классе — повесть «Дубровский» и лирика.","w":"«Дубровский», «Зимнее утро», «Зимняя дорога», «Повести Белкина»","u":"https://www.culture.ru/persons/8195/aleksandr-pushkin"},
+{"n":"Михаил Лермонтов","y":"1814–1841","t":["поэт","русский"],"p":"Михаил Лермонтов","b":"Поэт-романтик, прожил всего 27 лет, но стал классиком. Стихи о природе, свободе и одиночестве.","w":"«Парус», «Три пальмы», «На севере диком…»","u":"https://www.culture.ru/persons/8188/mikhail-lermontov"},
+{"n":"Николай Гоголь","y":"1809–1852","t":["писатель","русский"],"p":"Николай Гоголь","b":"Мастер художественной прозы, знаток народных легенд и малороссийских преданий.","w":"«Майская ночь, или Утопленница», «Ночь перед Рождеством»","u":"https://www.culture.ru/persons/8127/nikolai-gogol"},
+{"n":"Николай Некрасов","y":"1821–1878","t":["поэт","русский"],"p":"Николай Некрасов","b":"Народный поэт, редактор журнала «Современник». Писал о детстве, деревне и крестьянском труде.","w":"«Крестьянские дети», «Железная дорога»","u":"https://www.culture.ru/persons/8160/nikolai-nekrasov"},
+{"n":"Иван Тургенев","y":"1818–1883","t":["писатель","русский"],"p":"Иван Тургенев","b":"Автор «Записок охотника», мастер рассказа и тонкий лирик.","w":"«Бежин луг», «Бирюк», стихотворения в прозе","u":"https://www.culture.ru/persons/8217/ivan-turgenev"},
+{"n":"Фёдор Тютчев","y":"1803–1873","t":["поэт","русский"],"p":"Фёдор Тютчев","b":"Философская лирика: поэзия природы, судьбы и мысли. Современники считали его «поэтом-мыслителем».","w":"«Не то, что мните вы, природа…», «Есть в осени первоначальной…», «С поляны коршун поднялся…»","u":"https://www.culture.ru/persons/8283/fedor-tyutchev"},
+{"n":"Афанасий Фет","y":"1820–1892","t":["поэт","русский"],"p":"Афанасий Фет","b":"Мастер слова и интонации: воспевал красоту природы и мгновения человеческого чувства.","w":"«Я пришёл к тебе с приветом…», «Учись у них — у дуба, у берёзы…»","u":"https://www.culture.ru/persons/8274/afanasii-fet"},
+{"n":"Фёдор Достоевский","y":"1821–1881","t":["писатель","русский"],"p":"Фёдор Достоевский","b":"Великий романист-психолог. В 6 классе изучается отрывок о мальчиках из «Братьев Карамазовых».","w":"Отрывок «Мальчики» из романа «Братья Карамазовы»","u":"https://www.culture.ru/persons/8159/fedor-dostoevskii"},
+{"n":"Антон Чехов","y":"1860–1904","t":["писатель","русский"],"p":"Антон Чехов","b":"Мастер короткого рассказа и мягкого юмора, врач по образованию.","w":"«Толстый и тонкий», «Лошадиная фамилия»","u":"https://www.culture.ru/persons/8209/anton-chekhov"},
+{"n":"Лев Толстой","y":"1828–1910","t":["писатель","русский"],"p":"Лев Толстой","b":"Классик мировой литературы, автор «Войны и мира»; в 6 классе — рассказы и басни.","w":"«Бедные люди», «Два товарища», рассказы для детей","u":"https://www.culture.ru/persons/8211/lev-tolstoi"},
+{"n":"Иван Бунин","y":"1870–1953","t":["поэт","писатель","русский"],"p":"Иван Бунин","b":"Первый русский лауреат Нобелевской премии по литературе; лирика и рассказы о деревне.","w":"«Лапти», «Слон», «Косцы», «В деревне»","u":"https://www.culture.ru/persons/9549/ivan-bunin"},
+{"n":"Александр Куприн","y":"1870–1938","t":["писатель","русский"],"p":"Александр Куприн","b":"Писатель о человеческом достоинстве и доброте; был военным, моряком, путешественником.","w":"«Чудесный доктор»","u":"https://www.culture.ru/persons/8191/aleksandr-kuprin"},
+{"n":"Александр Грин","y":"1880–1932","t":["писатель","русский"],"p":"Александр Грин","b":"Певец мечты и чуда, создатель волнующей повести о любви и вере.","w":"«Алые паруса» (отрывки)","u":"https://www.culture.ru/persons/8222/aleksandr-grin"},
+{"n":"Владимир Короленко","y":"1853–1921","t":["писатель","русский"],"p":"Короленко, Владимир Галактионович","b":"Писатель-гуманист и публицист, современники звали его «совестью России».","w":"«В дурном обществе»","u":"https://www.culture.ru/literature/persons/writer"},
+{"n":"Михаил Пришвин","y":"1873–1954","t":["писатель","русский"],"p":"Михаил Пришвин","b":"Писатель о природе, путешественник и фотограф, вёл дневник всю жизнь.","w":"«Кладовая солнца»","u":"https://www.culture.ru/materials/79587/mikhail-prishvin-dnevniki-fotografii-lekcii"},
+{"n":"Константин Паустовский","y":"1892–1968","t":["писатель","русский"],"p":"Константин Паустовский","b":"Мастер лирической прозы о природе, труде и творчестве; учитель многих писателей.","w":"«Заячьи лапы», «Тёплый хлеб», «Кот-ворюга»","u":"https://www.culture.ru/persons/8968/konstantin-paustovskii"},
+{"n":"Андрей Платонов","y":"1899–1951","t":["писатель","русский"],"p":"Андрей Платонов","b":"Самобытный прозаик с особым «платоновским» языком; писал и сказки для детей.","w":"«Никита», «Неизвестный цветок»","u":"https://www.culture.ru/persons/13775/andrei-platonov"},
+{"n":"Виктор Астафьев","y":"1924–2001","t":["писатель","русский"],"p":"Виктор Астафьев","b":"Сибиряк, фронтовик, дважды лауреат Государственной премии; писал о детстве и войне.","w":"«Конь с розовой гривой»","u":"https://www.culture.ru/persons/9831/viktor-astafev"},
+{"n":"Василий Шукшин","y":"1929–1974","t":["писатель","русский"],"p":"Василий Шукшин","b":"Писатель и кинорежиссёр из алтайского села, мастер рассказов о простых людях.","w":"«Срезал», «Микроскоп»","u":"https://www.culture.ru/persons/2222/vasilii-shukshin"},
+{"n":"Валентин Распутин","y":"1937–2015","t":["писатель","русский"],"p":"Валентин Распутин","b":"Классик деревенской прозы; в «Уроках французского» — история его собственного детства.","w":"«Уроки французского»","u":"https://www.culture.ru/materials/95457/odin-iz-poslednikh-predstavitelei-derevenskoi-prozy"},
+{"n":"Александр Блок","y":"1880–1921","t":["поэт","русский"],"p":"Александр Блок","b":"Один из главных поэтов Серебряного века.","w":"«Летний вечер», «Задремали золотые поля…»","u":"https://www.culture.ru/persons/8190/aleksandr-blok"},
+{"n":"Сергей Есенин","y":"1895–1925","t":["поэт","русский"],"p":"Сергей Есенин","b":"Певец русского села: лирика о природе, родине и любви.","w":"«Клён ты мой опавший», «Топи да болота…»","u":"https://www.culture.ru/persons/8133/sergei-esenin"},
+{"n":"Николай Гумилёв","y":"1886–1921","t":["поэт","русский"],"p":"Николай Гумилёв","b":"Поэт, создатель школы акмеизма, путешественник и африканист.","w":"«Капитаны»","u":"https://www.culture.ru/persons/9803/nikolai-gumilev"},
+{"n":"Юрий Казаков","y":"1927–1982","t":["писатель","русский"],"p":"Казаков, Юрий Павлович","b":"Мастер лирического рассказа XX века, продолжатель классической традиции.","w":"«Тихое утро»","u":"https://www.culture.ru/literature/persons/writer"},
+{"n":"Габдулла Тукай","y":"1886–1913","t":["поэт","народы России"],"p":"Габдулла Тукай","b":"Великий татарский поэт, сказки и стихи которого знают все дети Татарстана.","w":"«Родная деревня», «Шурале»","u":"https://www.culture.ru/persons/11082/gabdulla-tukai"},
+{"n":"Муса Джалиль","y":"1906–1944","t":["поэт","народы России"],"p":"Муса Джалиль","b":"Татарский поэт-герой, погиб в концлагере; в тюрьме писал стихи «Моабитской тетради» на лоскутах.","w":"Стихи из «Моабитской тетради»","u":"https://www.culture.ru/events/2489/musa-dzalil-poet-geroi"},
+{"n":"Кайсын Кулиев","y":"1917–1985","t":["поэт","народы России"],"p":"Кайсын Кулиев","b":"Балкарский поэт, воин и лирик, переводил на языки народов России.","w":"Стихи о родине и войне","u":"https://www.culture.ru/institutes/34399/dom-muzei-kaisyna-kulieva"},
+{"n":"Расул Гамзатов","y":"1923–2003","t":["поэт","народы России"],"p":"Расул Гамзатов","b":"Аварский поэт из Дагестана, автор знаменитого стихотворения «Журавли».","w":"«Журавли»","u":"https://www.culture.ru/persons/11504/rasul-gamzatov"},
+{"n":"Юрий Рытхэу","y":"1930–2008","t":["писатель","народы России"],"p":"Юрий Рытхэу","b":"Чукотский писатель, самый известный прозаик Севера; писал о жизни чукчей.","w":"«Хантые — смелый человек», рассказы о Севере","u":"https://www.culture.ru/materials/139137/knizhnaya-polka-yurii-rytheu"},
+{"n":"Даниэль Дефо","y":"1660–1731","t":["писатель","зарубежный"],"p":"Даниэль Дефо","b":"Английский писатель; его роман о выживании на острове стал первой классикой приключений.","w":"«Робинзон Крузо»","u":"https://www.culture.ru/literature"},
+{"n":"Джонатан Свифт","y":"1667–1745","t":["писатель","зарубежный"],"p":"Джонатан Свифт","b":"Английский сатирик, придумавший страну лилипутов и великанов.","w":"«Путешествие Гулливера»","u":"https://www.culture.ru/literature"},
+{"n":"Жюль Верн","y":"1828–1905","t":["писатель","зарубежный"],"p":"Жюль Верн","b":"Французский «отец» научной фантастики, предсказал многие изобретения будущего.","w":"«Дети капитана Гранта»","u":"https://www.culture.ru/materials/110517/deti-kapitana-granta"},
+{"n":"Роберт Стивенсон","y":"1850–1894","t":["писатель","зарубежный"],"p":"Роберт Стивенсон","b":"Шотландский писатель, автор самого знаменитого романа о пиратах и сокровищах.","w":"«Остров сокровищ»","u":"https://www.culture.ru/literature"},
+{"n":"Марк Твен","y":"1835–1910","t":["писатель","зарубежный"],"p":"Марк Твен","b":"Американский юморист, придумавший неугомонного Тома Сойера.","w":"«Приключения Тома Сойера»","u":"https://www.culture.ru/materials/131896/mark-tven"},
+{"n":"Джек Лондон","y":"1876–1916","t":["писатель","зарубежный"],"p":"Джек Лондон","b":"Американский писатель, бывший матрос и золотоискатель; писал о силе духа человека.","w":"«Любовь к жизни»","u":"https://www.culture.ru/materials/90526/dzhek-london-vospominaniya-kuprina"},
+{"n":"Ханс Кристиан Андерсен","y":"1805–1875","t":["писатель","зарубежный"],"p":"Ханс Кристиан Андерсен","b":"Датский сказочник, самый читаемый автор сказок в мире.","w":"«Соловей», «Снежная королева»","u":"https://www.culture.ru/materials/93899/lekciya-skazochnyi-mir-andersena"},
+{"n":"Антуан де Сент-Экзюпери","y":"1900–1944","t":["писатель","зарубежный"],"p":"Антуан де Сент-Экзюпери","b":"Французский лётчик и писатель; его сказка — о дружбе, ответственности и человечности.","w":"«Маленький принц»","u":"https://www.culture.ru/events/2320/malenkii-princ"}
 ];
-let cur='all';
-function render(){
- const q=(document.getElementById('search').value||'').toLowerCase();
- const g=W.filter(w=>(cur==='all'||w.g===cur)&&(!q||w.n.toLowerCase().includes(q)||w.w.join(' ').toLowerCase().includes(q)));
- document.getElementById('gallery').innerHTML=g.map(w=>
- `<div class="card" onclick="this.classList.toggle('flipped')">
- <div class="card-inner">
- <div class="face front"><div class="avatar">${w.a}</div><h3>${w.n}</h3><div class="years">${w.y}</div><div class="tag">${w.t}</div></div>
- <div class="face back"><h4>${w.a} ${w.n}</h4><ul>${w.w.map(x=>`<li>${x}</li>`).join('')}</ul><div class="hint">💡 ${w.f}</div></div>
- </div></div>`).join('')||'<p style="color:#f5e6c8;grid-column:1/-1;text-align:center;font-size:1.2em">Никого не нашлось 😔</p>';
-}
-function filter(b){document.querySelectorAll('.controls button').forEach(x=>x.classList.remove('active'));b.classList.add('active');cur=b.dataset.f;render()}
-document.getElementById('search').addEventListener('input',render);
-render();
+const TITLES=["Иван Крылов","Александр Пушкин","Михаил Лермонтов","Николай Гоголь","Николай Некрасов","Иван Тургенев","Фёдор Тютчев","Афанасий Фет","Фёдор Достоевский","Антон Чехов","Лев Толстой","Иван Бунин","Александр Куприн","Александр Грин","Короленко, Владимир Галактионович","Михаил Пришвин","Константин Паустовский","Андрей Платонов","Виктор Астафьев","Василий Шукшин","Валентин Распутин","Александр Блок","Сергей Есенин","Николай Гумилёв","Казаков, Юрий Павлович","Габдулла Тукай","Муса Джалиль","Кайсын Кулиев","Расул Гамзатов","Юрий Рытхэу","Даниэль Дефо","Джонатан Свифт","Жюль Верн","Роберт Стивенсон","Марк Твен","Джек Лондон","Ханс Кристиан Андерсен","Антуан де Сент-Экзюпери"];
 const Q=[
-{q:'Кто написал роман «Дубровский»?',o:['М. Ю. Лермонтов','А. С. Пушкин','Н. С. Лесков'],a:1},
-{q:'Кто автор сказа «Левша»?',o:['А. П. Чехов','Н. С. Лесков','Л. Н. Толстой'],a:1},
-{q:'В каком рассказе учитель Елизавета Васильевна приносит учащемуся хлеб?',o:['«Уроки французского»','«Конь с розовой гривой»','«Тихое утро»'],a:0},
-{q:'Кто пел о «Журавлях» и жил на Кавказе?',o:['Г. Тукай','Р. Гамзатов','С. А. Есенин'],a:1},
-{q:'Кто рассказывал о Робинзоне на необитаемом острове?',o:['Дж. Свифт','Д. Дефо','Ж. Верн'],a:1},
-{q:'В каком произведении герои меняются веками — 1980-й и 2025-й?',o:['«Календарь ма(й)я»','«Время всегда хорошее»','«Правдивая история Деда Мороза»'],a:1}
+{"q":"Кто написал повесть «Дубровский»?","o":["А. С. Пушкин","М. Ю. Лермонтов","И. С. Тургенев"],"a":0},
+{"q":"Кто автор рассказа «Уроки французского»?","o":["В. П. Астафьев","В. Г. Распутин","К. Г. Паустовский"],"a":1},
+{"q":"«Белеет парус одинокий…» — чьи строки?","o":["М. Ю. Лермонтов","С. А. Есенин","А. А. Блок"],"a":0},
+{"q":"Кто написал рассказ «Конь с розовой гривой»?","o":["В. П. Астафьев","Ю. П. Казаков","В. М. Шукшин"],"a":0},
+{"q":"Кто автор сказки «Маленький принц»?","o":["Д. Дефо","Ж. Верн","А. де Сент-Экзюпери"],"a":2}
 ];
-let done=0,ok=0;
-document.getElementById('quiz').innerHTML=Q.map((x,i)=>`<div class="quiz-q" data-i="${i}"><p>${i+1}. ${x.q}</p>${x.o.map((o,j)=>`<button onclick="ans(this,${i},${j})">${o}</button>`).join('')}</div>`).join('');
-function ans(b,i,j){const q=Q[i];const p=b.parentElement;
- if(p.dataset.done)return;
- p.dataset.done=1;done++;
- p.querySelectorAll('button').forEach(x=>x.disabled=true);
- if(j===q.a){b.classList.add('correct');ok++}else{b.classList.add('wrong');p.querySelectorAll('button')[q.a].classList.add('correct')}
- if(done===Q.length)document.getElementById('quizResult').innerHTML=`Результат: ${ok} из ${Q.length} — ${ok===Q.length?'блестяще! 🏆':ok>=4?'Хорошо, можно лучше!':'Стоит перечитать галерею 🙂'}`}
+const g=document.getElementById("g");
+function initials(n){const p=n.split(" ");return ((p[0][0]||"")+(p[1]?(p[1][0]||""):""));}
+function card(a,i){const d=document.createElement("div");d.className="card";
+d.innerHTML='<div class="ph" id="ph'+i+'"><div class="ava-txt">'+initials(a.n)+'</div></div>'+
+'<div class="nm">'+a.n+'</div><div class="yr">'+a.y+'</div>'+
+'<span class="tag">'+a.t[0]+(a.t.includes("зарубежный")?" · зарубежный":(a.t.includes("народы России")?" · народы России":""))+'</span>';
+d.onclick=()=>openM(i);return d;}
+function render(list){g.innerHTML="";list.forEach(a=>g.appendChild(card(a,A.indexOf(a))));}
+render(A);
+let cur="all";
+document.querySelectorAll(".controls button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".controls button").forEach(x=>x.classList.remove("active"));b.classList.add("active");cur=b.dataset.f;apply();});
+document.getElementById("search").oninput=apply;
+function apply(){const q=document.getElementById("search").value.toLowerCase();
+render(A.filter(a=>(cur==="all"||a.t.includes(cur))&&(a.n.toLowerCase().includes(q)||a.w.toLowerCase().includes(q))));}
+function openM(i){const a=A[i];document.getElementById("mi").innerHTML='<div class="ava-txt">'+initials(a.n)+'</div>';
+document.getElementById("mh").textContent=a.n;document.getElementById("my").textContent=a.y;
+document.getElementById("mt").textContent=a.b;document.getElementById("mw").textContent=a.w;
+const l=document.getElementById("ml");l.href=a.u;l.textContent="Узнать больше на Культуре.РФ →";
+document.getElementById("m").style.display="block";}
+function closeM(){document.getElementById("m").style.display="none";}
+for(let i=0;i<TITLES.length;i+=10){
+  const ch=TITLES.slice(i,i+10);
+  const url="https://ru.wikipedia.org/w/api.php?action=query&format=json&formatversion=2&prop=pageimages&piprop=thumbnail&pithumbsize=400&origin=*&titles="+encodeURIComponent(ch.join("|"));
+  fetch(url).then(r=>r.json()).then(d=>{((d.query&&d.query.pages)||[]).forEach(p=>{
+    if(p.thumbnail&&p.thumbnail.source){A.forEach((a,idx)=>{if(a.p===p.title){
+      const ph=document.getElementById("ph"+idx);
+      if(ph)ph.innerHTML='<img class="ava" alt="'+a.n+'" src="'+p.thumbnail.source+'">';
+    }});}
+  });}).catch(()=>{});
+}
+let done=0,score=0;const qz=document.getElementById("qz");
+Q.forEach((q,i)=>{const d=document.createElement("div");d.className="q";
+d.innerHTML='<p><b>'+(i+1)+". "+q.q+'</b></p>';
+q.o.forEach((o,j)=>{const lb=document.createElement("label");
+lb.innerHTML='<input type="radio" name="q'+i+'" value="'+j+'"> '+o;
+lb.querySelector("input").onchange=()=>{if(!d.dataset.done){d.dataset.done=1;done++;
+if(j===q.a){score++;lb.style.color="#9be29b";}else lb.style.color="#f08a8a";
+if(done===Q.length)document.getElementById("rz").textContent="Результат: "+score+" из "+Q.length+" ✦";}};
+d.appendChild(lb);});
+qz.appendChild(d);});
 </script>
-</body>
-</html>
+</body></html>
