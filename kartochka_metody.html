@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Методы исследования: качественные и количественные — интерактивная карточка</title>
+<style>
+:root{--gold:#b8860b;--goldd:#8b6508;--cream:#fffaf0;--ink:#2c2418;--green:#2e7d32;--red:#c62828;--blue:#1565c0}
+*{box-sizing:border-box}
+body{margin:0;font-family:Georgia,'Times New Roman',serif;background:#f3ead8;color:var(--ink);line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding:18px 14px 40px}
+header{background:linear-gradient(135deg,#8b6508,#b8860b 60%,#d4a017);color:#fff;border-radius:14px;padding:26px 22px;text-align:center;box-shadow:0 4px 14px rgba(139,101,8,.35)}
+header .orn{font-size:22px;letter-spacing:6px;margin-bottom:6px}
+header h1{margin:0;font-size:26px;font-weight:normal;letter-spacing:.5px}
+header p{margin:8px 0 0;font-size:15px;opacity:.95}
+section{background:#fff;border:1px solid #e3d5b3;border-radius:12px;padding:20px 20px 16px;margin-top:18px;box-shadow:0 2px 8px rgba(90,70,20,.08)}
+h2{margin:0 0 14px;font-size:20px;color:var(--goldd);border-bottom:2px solid #e8d9b0;padding-bottom:8px;font-weight:normal}
+h2 .num{display:inline-block;background:var(--gold);color:#fff;border-radius:50%;width:28px;height:28px;line-height:28px;text-align:center;font-size:15px;margin-right:8px}
+.plates{display:flex;gap:12px;flex-wrap:wrap}
+.plate{flex:1;min-width:220px;border-radius:10px;padding:14px 16px;text-align:center;color:#fff;font-size:17px}
+.plate small{display:block;font-size:13px;margin-top:4px;opacity:.9}
+.plate.q{background:#1565c0}
+.plate.w{background:#2e7d32}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:4px}
+th,td{border:1px solid #e0d2ae;padding:8px 10px;text-align:left;vertical-align:top}
+th{background:#f6ecd4;color:#6d4f06;font-size:14px}
+tr:nth-child(even) td{background:#fbf7ec}
+details{border:1px solid #e3d5b3;border-radius:10px;margin-top:10px;overflow:hidden;background:#fffdf7}
+details summary{cursor:pointer;padding:11px 14px;font-weight:bold;color:#5c4208;list-style:none;position:relative}
+details summary::-webkit-details-marker{display:none}
+details summary:after{content:"+";position:absolute;right:14px;font-size:20px;color:var(--gold)}
+details[open] summary:after{content:"–"}
+details .body{padding:2px 16px 12px;font-size:15px}
+.tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:20px;color:#fff;margin-left:6px;vertical-align:middle}
+.tag.kv{background:#1565c0}
+.tag.kl{background:#2e7d32}
+.qcard{border:1px solid #e3d5b3;border-radius:10px;padding:13px 15px;margin-top:12px;background:#fffdf7}
+.qcard .qq{font-weight:bold;margin-bottom:9px}
+.opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid #d9c795;border-radius:8px;padding:9px 12px;margin-top:7px;font-family:inherit;font-size:15px;cursor:pointer;transition:.15s}
+.opt:hover{background:#fdf6e0;border-color:var(--gold)}
+.opt.right{background:#e6f4e6;border-color:var(--green);color:var(--green);font-weight:bold}
+.opt.wrong{background:#fdecea;border-color:var(--red);color:var(--red)}
+.opt:disabled{cursor:default}
+.exp{display:none;margin-top:9px;padding:9px 12px;background:#f2f8f2;border-left:4px solid var(--green);border-radius:6px;font-size:14px}
+.exp.show{display:block}
+.score{margin-top:14px;font-weight:bold;color:var(--goldd)}
+.btn{background:var(--gold);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-family:inherit;font-size:15px;cursor:pointer;margin-top:10px}
+.btn:hover{background:var(--goldd)}
+.check{list-style:none;padding:0;margin:6px 0 0}
+.check li{margin-top:8px}
+.check label{cursor:pointer;font-size:15px}
+.check input{margin-right:8px;transform:scale(1.25)}
+.check li.done label{color:var(--green);text-decoration:line-through}
+.hw ol{margin:6px 0 0;padding-left:22px}
+.hw ol li{margin-top:8px;font-size:15px}
+.hw .note{margin-top:12px;padding:10px 13px;background:#fdf6e0;border-left:4px solid var(--gold);border-radius:6px;font-size:14px}
+footer{text-align:center;margin-top:22px;font-size:13px;color:#8a7444}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="orn">&#10087; &#10087; &#10087;</div>
+  <h1>Методы исследования и разработки</h1>
+  <p>Качественные и количественные &middot; выбор метода под задачу &middot; индивидуальный проект, 10 класс</p>
+</header>
+
+<section>
+  <h2><span class="num">1</span>Теория: два типа методов</h2>
+  <div class="plates">
+    <div class="plate q">СКОЛЬКО?<small>количественные методы: числа, доли, средние</small></div>
+    <div class="plate w">ПОЧЕМУ?<small>качественные методы: мнения, мотивы, детали</small></div>
+  </div>
+  <table>
+    <tr><th>Критерий</th><th>Количественные</th><th>Качественные</th></tr>
+    <tr><td>Главный вопрос</td><td>сколько? как часто? какая доля?</td><td>почему? как именно? что стоит за мнением?</td></tr>
+    <tr><td>Результат</td><td>числа, таблицы, диаграммы</td><td>слова, описания, объяснения</td></tr>
+    <tr><td>Число участников</td><td>много (десятки и сотни)</td><td>мало (5–15 человек)</td></tr>
+    <tr><td>Глубина</td><td>широко, но поверхностно</td><td>узко, но глубоко</td></tr>
+    <tr><td>Пример вывода</td><td>«62% учеников пользуются столовой»</td><td>«ученики не идут в кружок, потому что стесняются выступать»</td></tr>
+  </table>
+  <p style="font-size:15px;margin-top:12px"><b>Ключевая формула урока:</b> метод подбирается под задачу, а не задача под метод. Перед выбором метода спросите себя: мне нужно <i>посчитать</i> или <i>понять</i>?</p>
+</section>
+
+<section>
+  <h2><span class="num">2</span>Каталог методов</h2>
+  <details><summary>Анкетирование (опрос)<span class="tag kv">количественный</span></summary><div class="body">Даёт числа: доли, средние, рейтинги. Уместен, когда нужно охватить много людей. Важно: вопросы формулируем так, чтобы на них можно было посчитать ответ («да/нет», шкала, выбор варианта), а не «почему?».</div></details>
+  <details><summary>Анализ статистики и документов<span class="tag kv">количественный</span></summary><div class="body">Использует готовые данные: официальную статистику, отчёты, архивы, данные школы. Уместен, когда источники уже существуют и им можно доверять. Экономит время, но требует проверки достоверности.</div></details>
+  <details><summary>Эксперимент / измеряющее наблюдение<span class="tag kv">количественный</span></summary><div class="body">Проверяет зависимость: меняем одно — измеряем другое. Уместен, когда явление можно измерить и сравнить («до» и «после», контрольная и опытная группы).</div></details>
+  <details><summary>Интервью<span class="tag kl">качественный</span></summary><div class="body">Живой разговор по вопросам. Даёт мотивы, подробности, неожиданные повороты. Уместен, когда нужен глубокий ответ конкретного человека (эксперта, участника событий).</div></details>
+  <details><summary>Фокус-группа<span class="tag kl">качественный</span></summary><div class="body">Обсуждение в группе из 6–10 человек. Даёт спектр мнений и споры между ними. Уместен, когда важен обмен позициями (например, почему класс не пользуется чем-то).</div></details>
+  <details><summary>Включённое наблюдение<span class="tag kl">качественный</span></summary><div class="body">Исследователь сам находится в ситуации и описывает поведение «как на самом деле». Уместен, когда люди в анкете отвечают не так, как ведут себя в жизни.</div></details>
+  <details><summary>Анализ текстов и продуктов деятельности<span class="tag kl">качественный</span></summary><div class="body">Изучаем содержание: сочинения, публикации, произведения, предметы. Даёт смыслы и признаки. Уместен, когда объект исследования — текст или артефакт, а не человек.</div></details>
+</section>
+
+<section>
+  <h2><span class="num">3</span>Тренажёр «Узнай метод»</h2>
+  <p style="font-size:15px;margin-top:0">Прочитайте задачу и выберите подходящий метод. Клик по варианту сразу покажет решение.</p>
+  <div id="trainer"></div>
+  <div class="score" id="score">Решено верно: 0 из 5</div>
+  <button class="btn" id="again">Пройти заново</button>
+</section>
+
+<section>
+  <h2><span class="num">4</span>Чек-лист письменного обоснования</h2>
+  <p style="font-size:15px;margin-top:0">Перед защитой проекта проверьте своё обоснование по списку. Отмечайте выполненное — пункт зеленеет.</p>
+  <ul class="check" id="checklist">
+    <li><label><input type="checkbox"> Я сформулировал(а) задачу проекта одним предложением</label></li>
+    <li><label><input type="checkbox"> Я указал(а), что именно хочу узнать: посчитать или понять</label></li>
+    <li><label><input type="checkbox"> Я назвал(а) выбранный метод и привёл(а) минимум два аргумента «за»</label></li>
+    <li><label><input type="checkbox"> Я объяснил(а), почему не подошла хотя бы одна альтернатива</label></li>
+    <li><label><input type="checkbox"> Я указал(а), кто и сколько участников (или какие источники) будет задействовано</label></li>
+  </ul>
+</section>
+
+<section class="hw">
+  <h2><span class="num">5</span>Домашнее задание</h2>
+  <ol>
+    <li><b>Основное.</b> Дописать письменное обоснование выбора метода для своего проекта начисто — не менее половины страницы. Используйте чек-лист из раздела 4: каждый его пункт должен быть закрыт в тексте.</li>
+    <li><b>Если ваш метод — опрос или интервью.</b> Составить черновик из 5–7 вопросов. Для опроса вопросы должны допускать счёт (варианты ответа, шкала), для интервью — открытые («почему?», «расскажите, как…»). Принести черновик на следующий урок.</li>
+    <li><b>Опережающее.</b> Определить источники данных: кто и где даст ответы (ученики, родители, документы школы, официальная статистика), когда и в какой форме будете собирать материал. Записать план сбора данных в тетрадь — 3–4 строки.</li>
+  </ol>
+  <div class="note"><b>Подсказка для обоснования.</b> Сильный аргумент выглядит так: «Я выбрал(а) опрос, потому что мне нужно узнать долю учеников, пользующихся столовой, а это число можно получить только подсчётом по большой группе». Слабый аргумент: «мне нравится этот метод» — на защите он не засчитывается.</div>
+</section>
+
+<footer>Индивидуальный проект &middot; 10 класс &middot; методы исследования и разработки</footer>
+</div>
+
+<script>
+var QS = [
+ {q:"Выяснить, сколько учеников школы пользуются школьной столовой.", opts:["Включённое наблюдение","Опрос (анкетирование)","Интервью"], right:1, exp:"Нам нужно число — долю учеников. Число получают подсчётом по большой группе, значит, нужен количественный метод — опрос."},
+ {q:"Понять, почему старшеклассники не записываются в театральный кружок.", opts:["Анализ статистики","Фокус-группа или интервью","Эксперимент"], right:1, exp:"Вопрос «почему?» требует живых ответов и мотивов — это качественный метод. Статистика покажет «сколько», но не объяснит причин."},
+ {q:"Определить, изменилась ли успеваемость после введения электронного дневника.", opts:["Фокус-группа","Анализ статистики (сравнение данных)","Включённое наблюдение"], right:1, exp:"Есть измеримые данные «до» и «после». Их нужно сравнить в числах — это количественный анализ статистики."},
+ {q:"Выяснить, какие эмоции вызывает у зрителей школьный спектакль и чем они объясняются.", opts:["Опрос со шкалой","Фокус-группа","Анализ статистики"], right:1, exp:"Нужны мнения и их причины — слова, а не числа. Фокус-группа даст обмен позициями и объяснения."},
+ {q:"Проверить, помогает ли короткая физкультминутка улучшить концентрацию на уроке.", opts:["Эксперимент с измерением","Интервью","Анализ текстов"], right:0, exp:"Здесь проверяется зависимость: ввели физкультминутку — измерили концентрацию «до» и «после». Это классический количественный эксперимент."}
+];
+var trainer = document.getElementById('trainer');
+var scoreEl = document.getElementById('score');
+var score = 0, answered = [];
+function render(){
+  trainer.innerHTML=''; score=0; answered=[]; scoreEl.textContent='Решено верно: 0 из 5';
+  for(var i=0;i<QS.length;i++){
+    (function(idx){
+      var card=document.createElement('div'); card.className='qcard';
+      var q=document.createElement('div'); q.className='qq'; q.textContent=(idx+1)+'. '+QS[idx].q; card.appendChild(q);
+      answered[idx]=false;
+      for(var j=0;j<QS[idx].opts.length;j++){
+        (function(jn){
+          var b=document.createElement('button'); b.className='opt'; b.type='button'; b.textContent=QS[idx].opts[jn];
+          b.addEventListener('click',function(){
+            var opts=card.querySelectorAll('.opt');
+            for(var k=0;k<opts.length;k++){opts[k].classList.remove('right','wrong');opts[k].disabled=false;}
+            var exp=card.querySelector('.exp'); if(exp){exp.remove();}
+            if(jn===QS[idx].right){
+              b.classList.add('right');
+              if(!answered[idx]){answered[idx]=true;score++;scoreEl.textContent='Решено верно: '+score+' из '+QS.length;}
+            } else {
+              b.classList.add('wrong');
+            }
+            var e=document.createElement('div'); e.className='exp show'; e.textContent=QS[idx].exp; card.appendChild(e);
+            if(jn===QS[idx].right){for(var k2=0;k2<opts.length;k2++){opts[k2].disabled=true;}}
+          });
+          card.appendChild(b);
+        })(j);
+      }
+      trainer.appendChild(card);
+    })(i);
+  }
+}
+document.getElementById('again').addEventListener('click',render);
+render();
+var checks=document.querySelectorAll('#checklist input');
+for(var c=0;c<checks.length;c++){
+  checks[c].addEventListener('change',function(){this.parentNode.parentNode.className=this.checked?'done':'';});
+}
+</script>
+</body>
+</html>
