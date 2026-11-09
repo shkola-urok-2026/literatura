@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Прорастание семян. 6 класс</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Georgia',serif}
+  body{background:#0d1b1e;color:#e8e6d9;min-height:100vh;padding:20px}
+  .wrap{max-width:900px;margin:0 auto}
+  header{text-align:center;padding:30px 10px 20px}
+  h1{color:#e8c877;font-size:2.1em;margin-bottom:8px}
+  .sub{color:#a8c4a0;font-style:italic;font-size:1.05em}
+  .gold-line{width:80px;height:2px;background:#e8c877;margin:14px auto}
+  nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:20px 0}
+  nav button{background:#1b3035;color:#e8e6d9;border:1px solid #3a5a5f;border-radius:25px;
+    padding:10px 18px;cursor:pointer;font-size:0.95em;font-family:inherit;transition:.2s}
+  nav button:hover{border-color:#e8c877}
+  nav button.active{background:#e8c877;color:#0d1b1e;font-weight:bold}
+  section{display:none;background:#16282c;border:1px solid #2e4a50;border-radius:14px;
+    padding:26px;margin-bottom:20px;animation:fade .3s}
+  section.show{display:block}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  h2{color:#e8c877;margin-bottom:14px;font-size:1.4em}
+  h3{color:#a8c4a0;margin:16px 0 8px}
+  p,li{line-height:1.65;margin-bottom:8px}
+  ul,ol{margin:8px 0 8px 22px}
+  .card{background:#1d3338;border-left:4px solid #e8c877;border-radius:8px;padding:14px 16px;margin:12px 0}
+  .green{border-color:#7fbf7f}
+  .note{background:#2a2213;border-left:4px solid #e8c877;border-radius:8px;padding:12px 16px;margin:12px 0}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.95em}
+  th,td{border:1px solid #3a5a5f;padding:8px 10px;text-align:left}
+  th{background:#1b3035;color:#e8c877}
+  .btn{background:#e8c877;color:#0d1b1e;border:none;border-radius:8px;padding:12px 24px;
+    font-size:1em;cursor:pointer;font-family:inherit;font-weight:bold;margin:10px 4px 10px 0}
+  .btn:hover{background:#f5d98f}
+  .btn.dark{background:#2e4a50;color:#e8e6d9}
+  .hidden{display:none}
+  .q{background:#1d3338;border-radius:10px;padding:14px 16px;margin:12px 0}
+  .q p{font-weight:bold;margin-bottom:10px}
+  label.opt{display:block;padding:8px 12px;border:1px solid #3a5a5f;border-radius:8px;
+    margin:6px 0;cursor:pointer;transition:.15s}
+  label.opt:hover{border-color:#e8c877}
+  .right{background:#1e3a24;border-color:#7fbf7f}
+  .wrong{background:#3a1e1e;border-color:#c87f7f}
+  input[type=number],input[type=text]{background:#0d1b1e;color:#e8e6d9;border:1px solid #3a5a5f;
+    border-radius:6px;padding:8px 10px;width:90px;font-size:1em}
+  .big{font-size:1.3em;color:#e8c877;font-weight:bold}
+  .seed{font-size:2.4em;margin:4px}
+  .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+  footer{text-align:center;color:#5a7a80;font-size:.85em;padding:16px}
+  .check{display:flex;align-items:flex-start;gap:10px;margin:10px 0;cursor:pointer;
+    background:#1d3338;padding:10px 14px;border-radius:8px;border:1px solid #3a5a5f}
+  .check:hover{border-color:#e8c877}
+  .ok-badge{color:#7fbf7f;font-weight:bold}
+  .no-badge{color:#c87f7f;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="gold-line"></div>
+  <h1>🌾 Прорастание семян</h1>
+  <div class="sub">Биология · 6 класс · Интерактивный урок + практическая работа</div>
+  <p class="sub" style="margin-top:6px">Практическая работа «Определение всхожести семян культурных растений и посев их в грунт» · «Определение условий прорастания семян»</p>
+</header>
+
+<nav>
+  <button class="active" onclick="show(0,this)">🗺 Карта урока</button>
+  <button onclick="show(1,this)">🌱 Строение семени</button>
+  <button onclick="show(2,this)">🔬 Условия прорастания</button>
+  <button onclick="show(3,this)">🧪 Практическая работа</button>
+  <button onclick="show(4,this)">🌡 Всхожесть: расчёт</button>
+  <button onclick="show(5,this)">🧑‍🌾 Посев в грунт</button>
+  <button onclick="show(6,this)">❓ Тест</button>
+  <button onclick="show(7,this)">📝 Вывод</button>
+</nav>
+
+<!-- ЭТАП 1 -->
+<section class="show" id="s0">
+<h2>🗺 Карта урока</h2>
+<p>Нажимайте на вкладки сверху и проходите урок по шагам. Всего 8 этапов:</p>
+<table>
+<tr><th>Этап</th><th>Что делаем</th><th>Время</th></tr>
+<tr><td>1. Организационный момент</td><td>Настраиваемся на работу</td><td>1–2 мин</td></tr>
+<tr><td>2. Актуализация знаний</td><td>Вспоминаем строение семени</td><td>5 мин</td></tr>
+<tr><td>3. Постановка учебной задачи</td><td>Формулируем цель опыта</td><td>3 мин</td></tr>
+<tr><td>4. Открытие нового знания</td><td>Изучаем условия прорастания</td><td>10 мин</td></tr>
+<tr><td>5. Практическая работа</td><td>Определяем всхожесть семян</td><td>15 мин</td></tr>
+<tr><td>6. Посев в грунт</td><td>Высеваем проросшие семена</td><td>10 мин</td></tr>
+<tr><td>7. Закрепление</td><td>Тест с оценкой</td><td>8 мин</td></tr>
+<tr><td>8. Вывод</td><td>Формулируем результат</td><td>3 мин</td></tr>
+</table>
+<div class="card"><b>Учебник:</b> Биология. 6 класс / под ред. В. И. Понченко (или Пасечник), тема «Прорастание семян».</div>
+</section>
+
+<!-- ЭТАП 2 -->
+<section id="s1">
+<h2>🌱 Актуализация: строение семени</h2>
+<p>Прежде чем семя прорастёт, вспомним, из чего оно состоит. Нажимайте на части — подсказка появится рядом.</p>
+<div class="row" style="margin:14px 0">
+  <span class="seed" onclick="hint('Кожура защищает семя от повреждений, высыхания и микробов.')" title="Кожура">🛡</span>
+  <span class="seed" onclick="hint('Зародыш — будущий росток: зачаточный корешок, стебелёк и почечка.')" title="Зародыш">🌱</span>
+  <span class="seed" onclick="hint('Эндосперм — запас питательных веществ, «обед» для растущего зародыша.')" title="Эндосперм">🥣</span>
+</div>
+<div class="card" id="hintbox">👆 Нажмите на символ, чтобы прочитать подсказку.</div>
+<h3>Проверьте себя</h3>
+<p>Какая часть семени первой трогается в рост при прорастании?</p>
+<div class="q">
+  <label class="opt" onclick="ans(this,false)">Стебелёк</label>
+  <label class="opt" onclick="ans(this,true)">Корешок</label>
+  <label class="opt" onclick="ans(this,false)">Почечка</label>
+</div>
+<div class="note"><b>Запомните:</b> первым из семени всегда выходит корешок — он закрепляет растение и начинает всасывать воду.</div>
+</section>
+
+<!-- ЭТАП 3 -->
+<section id="s2">
+<h2>🔬 Условия прорастания семян</h2>
+<p>Какие условия нужны семени, чтобы проснуться? Поставьте галочки рядом с нужными условиями — и проверим!</p>
+<div id="conds">
+  <label class="check"><input type="checkbox" data-ok="1"> Вода — набухание и запуск роста</label>
+  <label class="check"><input type="checkbox"> Яркий солнечный свет</label>
+  <label class="check"><input type="checkbox" data-ok="1"> Воздух (кислород) — для дыхания</label>
+  <label class="check"><input type="checkbox" data-ok="1"> Тепло — ферменты начинают работать</label>
+  <label class="check"><input type="checkbox"> Почва (гумус)</label>
+  <label class="check"><input type="checkbox"> Удобрения</label>
+  <label class="check"><input type="checkbox"> Музыка классическая 😊</label>
+  <label class="check"><input type="checkbox" data-ok="1"> Живой зародыш (всхожесть)</label>
+</div>
+<button class="btn" onclick="checkCond()">Проверить</button>
+<div id="condres"></div>
+<div class="note"><b>Важно:</b> почва, удобрения и свет большинству семян при прорастании НЕ нужны — запас питания лежит внутри семени, а свет понадобится позже, когда появится зеленый росток. Прорастание семян фасоли и гороха опыты показывают и в полной темноте.</div>
+<h3>Опыт «Три пробирки» (мысленный эксперимент)</h3>
+<table>
+<tr><th>Пробирка</th><th>Условия</th><th>Результат</th></tr>
+<tr><td>№ 1</td><td>вода + воздух + тепло</td><td class="ok-badge">семена проросли</td></tr>
+<tr><td>№ 2</td><td>вода + тепло, но без воздуха (вода залита полностью)</td><td class="no-badge">не проросли — задохнулись</td></tr>
+<tr><td>№ 3</td><td>воздух + тепло, но без воды</td><td class="no-badge">не проросли — нет воды</td></tr>
+</table>
+<div class="card green"><b>Вывод опыта:</b> для прорастания необходимы <b>вода, воздух и тепло</b>. Отсутствие любого из этих условий останавливает процесс.</div>
+<h3>Глубина посева — почему это важно?</h3>
+<ul>
+<li>Мелкие семена (лук, морковь, салат) сеют на глубину <b>0,5–2 см</b> — маленькому ростку не хватит сил пробиться с глубины.</li>
+<li>Крупные семена (фасоль, горох, тыква) сеют на глубину <b>3–6 см</b> — им нужен запас влаги и устойчивость.</li>
+</ul>
+</section>
+
+<!-- ЭТАП 4 -->
+<section id="s3">
+<h2>🧪 Практическая работа. Определение всхожести семян</h2>
+<div class="card"><b>Цель:</b> научиться определять всхожесть семян и высевать их в грунт на нужную глубину.</div>
+<h3>Оборудование</h3>
+<div class="row">
+  <span class="seed" onclick="pick(this,1)">🥣</span><span>чашка Петри (или блюдце)</span>
+  <span class="seed" onclick="pick(this,2)">🧻</span><span>фильтровальная бумага / вата</span>
+  <span class="seed" onclick="pick(this,3)">💧</span><span>вода</span>
+  <span class="seed" onclick="pick(this,4)">🌡</span><span>термометр</span>
+  <span class="seed" onclick="pick(this,5)">✏️</span><span>этикетки</span>
+  <span class="seed" onclick="pick(this,6)">🪴</span><span>ящик с грунтом</span>
+</div>
+<div class="card" id="pickres" style="min-height:54px">Нажимайте на значки по мере сбора оборудования.</div>
+<h3>Ход работы</h3>
+<ol>
+<li>Отсчитайте <b>100 семян</b> (если семян мало — 10, счёт ведём кратными десятками).</li>
+<li>На дно чашки Петри положите влажную фильтровальную бумагу (или вату, смоченную водой).</li>
+<li>Разложите семена пинцетом ровно, не слипаясь.</li>
+<li>Подпишите этикетку: культура, сорт, дата.</li>
+<li>Поместите в тёплое место (+20…+25 °C), следите, чтобы бумага не пересыхала.</li>
+<li>Ежедневно отмечайте число наклюнувшихся семян.</li>
+</ol>
+<h3>Дневник наблюдений — заполните вместе с уроком</h3>
+<table>
+<tr><th>День</th><th>Наблюдение</th><th>Проросло из 100</th></tr>
+<tr><td>1</td><td>семена набухли</td><td><input type="number" id="d1" value="0"></td></tr>
+<tr><td>2</td><td>появились корешки</td><td><input type="number" id="d2" value="0"></td></tr>
+<tr><td>3</td><td>рост корня 1–2 см</td><td><input type="number" id="d3" value="0"></td></tr>
+<tr><td>4</td><td>окончательный учёт</td><td><input type="number" id="d4" value="0"></td></tr>
+</table>
+</section>
+
+<!-- ЭТАП 5 -->
+<section id="s4">
+<h2>🌡 Расчёт всхожести</h2>
+<p>Всхожесть показывает, какая доля семян способна дать нормальный росток. Считают в процентах:</p>
+<div class="card" style="text-align:center;font-size:1.15em">
+Всхожесть (%) = (число проросших семян ÷ общее число семян) × 100
+</div>
+<h3>Калькулятор всхожести</h3>
+<div class="row" style="font-size:1.05em">
+  Всего семян: <input type="number" id="total" value="100">
+  Проросло: <input type="number" id="sprout" value="0">
+  <button class="btn" onclick="calc()">Рассчитать</button>
+</div>
+<div class="card" id="calcres" style="margin-top:12px">Введите числа и нажмите «Рассчитать».</div>
+<h3>Шкала качества</h3>
+<table>
+<tr><th>Всхожесть</th><th>Оценка партии семян</th></tr>
+<tr><td>90–100%</td><td class="ok-badge">отличная — сеем смело</td></tr>
+<tr><td>70–89%</td><td>удовлетворительная — сеем с запасом</td></tr>
+<tr><td>50–69%</td><td>низкая — норму высева увеличиваем</td></tr>
+<tr><td>менее 50%</td><td class="no-badge">непригодная — партию бракуют</td></tr>
+</table>
+<div class="note"><b>Задача для смекалки:</b> посеяли 50 семян фасоли, проросло 42. Какова всхожесть? Проверьте себя в калькуляторе. (Ответ: 84% — партия хорошая.)</div>
+</section>
+
+<!-- ЭТАП 6 -->
+<section id="s5">
+<h2>🧑‍🌾 Посев проросших семян в грунт</h2>
+<h3>Ход работы</h3>
+<ol>
+<li>Наполните ящик (или горшок) готовым грунтом на 3/4, разровняйте.</li>
+<li>Пролейте грунт тёплой отстоянной водой.</li>
+<li>Отберите семена с <b>корешком 0,5–1 см</b> — только такие считаются проросшими.</li>
+<li>Разложите семена по схеме: рядки на глубине, соответствующей размеру семян.</li>
+<li>Присыпьте слоем почвы 1–2 см, слегка уплотните.</li>
+<li>Полейте из пульверизатора и подпишите этикетку с датой посева.</li>
+</ol>
+<div class="card"><b>Правило посева:</b> глубина заделки ≈ 2–3 диаметра семени. Мелкие — мелко, крупные — глубже.</div>
+<h3>Уход за посевами</h3>
+<ul>
+<li>Полив по мере подсыхания верхнего слоя почвы.</li>
+<li>Температура +20…+25 °C до появления всходов.</li>
+<li>После всходов — хорошее освещение (досветка или подоконник на юг).</li>
+</ul>
+<div class="note"><b>Наблюдение — задание на неделю:</b> отмечайте в дневнике дату появления всходов, высоту проростка каждые 2 дня. Постройте график роста — он станет материалом для следующего урока.</div>
+</section>
+
+<!-- ЭТАП 7 -->
+<section id="s6">
+<h2>❓ Тест: проверьте себя</h2>
+<p>Выберите по одному ответу в каждом вопросе. В конце — оценка.</p>
+
+<div class="q"><p>1. Какие условия ОБЯЗАТЕЛЬНЫ для прорастания семян?</p>
+<label class="opt"><input type="radio" name="q1" value="a">Свет, удобрения, почва</label>
+<label class="opt"><input type="radio" name="q1" value="b">Вода, воздух, тепло</label>
+<label class="opt"><input type="radio" name="q1" value="c">Только вода</label></div>
+
+<div class="q"><p>2. Какая часть зародыша выходит из семени первой?</p>
+<label class="opt"><input type="radio" name="q2" value="a">Почечка</label>
+<label class="opt"><input type="radio" name="q2" value="b">Семядоля</label>
+<label class="opt"><input type="radio" name="q2" value="c">Корешок</label></div>
+
+<div class="q"><p>3. Всхожесть — это…</p>
+<label class="opt"><input type="radio" name="q3" value="a">масса 1000 семян</label>
+<label class="opt"><input type="radio" name="q3" value="b">доля семян, давших нормальные проростки, в %</label>
+<label class="opt"><input type="radio" name="q3" value="c">срок хранения семян</label></div>
+
+<div class="q"><p>4. Проросло 30 семян из 100. Всхожесть равна:</p>
+<label class="opt"><input type="radio" name="q4" value="a">30%</label>
+<label class="opt"><input type="radio" name="q4" value="b">3%</label>
+<label class="opt"><input type="radio" name="q4" value="c">70%</label></div>
+
+<div class="q"><p>5. Почему семена, полностью залитые водой, не прорастают?</p>
+<label class="opt"><input type="radio" name="q5" value="a">нет доступа воздуха (кислорода)</label>
+<label class="opt"><input type="radio" name="q5" value="b">слишком много света</label>
+<label class="opt"><input type="radio" name="q5" value="c">вода «смывает» зародыш</label></div>
+
+<div class="q"><p>6. На какую глубину сеют мелкие семена (морковь, салат)?</p>
+<label class="opt"><input type="radio" name="q6" value="a">на 15–20 см</label>
+<label class="opt"><input type="radio" name="q6" value="b">на 0,5–2 см</label>
+<label class="opt"><input type="radio" name="q6" value="c">на 8–10 см</label></div>
+
+<div class="q"><p>7. Запас питательных веществ у семени фасоли находится в:</p>
+<label class="opt"><input type="radio" name="q7" value="a">семядолях</label>
+<label class="opt"><input type="radio" name="q7" value="b">кожуре</label>
+<label class="opt"><input type="radio" name="q7" value="c">цветке</label></div>
+
+<div class="q"><p>8. Опыт «Три пробирки» доказывает, что прорастание возможно только при:</p>
+<label class="opt"><input type="radio" name="q8" value="a">наличии почвы</label>
+<label class="opt"><input type="radio" name="q8" value="b">всех условиях сразу: вода + воздух + тепло</label>
+<label class="opt"><input type="radio" name="q8" value="c">наличии удобрений</label></div>
+
+<button class="btn" onclick="grade()">Проверить тест</button>
+<div class="card hidden" id="testres"></div>
+</section>
+
+<!-- ЭТАП 8 -->
+<section id="s7">
+<h2>📝 Вывод по практической работе</h2>
+<p>Соберите вывод, выбирая правильные фрагменты — готовый текст можно скопировать в тетрадь.</p>
+<div class="row" style="margin:10px 0">
+<button class="btn dark" onclick="addV('Для прорастания семенам необходимы вода, воздух и тепло. ')">➕ Условия</button>
+<button class="btn dark" onclick="addV('Всхожесть — это доля проросших семян от общего числа, выраженная в процентах. ')">➕ Всхожесть</button>
+<button class="btn dark" onclick="addV('Глубина посева зависит от размера семян: мелкие сеют на 0,5–2 см, крупные — на 3–6 см. ')">➕ Глубина</button>
+<button class="btn dark" onclick="addV('При всхожести ниже 50% партия семян непригодна для посева. ')">➕ Брак</button>
+<button class="btn dark" onclick="addV('Первым из семени выходит корешок, который закрепляет проросток и всасывает воду. ')">➕ Корешок</button>
+<button class="btn dark" onclick="clearV()">🗑 Очистить</button>
+</div>
+<div class="card" id="vout" style="min-height:90px">Нажимайте кнопки, чтобы собрать вывод.</div>
+<button class="btn" onclick="copyV()">📋 Скопировать вывод</button>
+</section>
+
+<footer>Интерактивный урок биологии, 6 класс · Тема «Прорастание семян» · работает офлайн</footer>
+</div>
+
+<script>
+function show(i,btn){
+  var s=document.querySelectorAll('section');
+  for(var j=0;j<s.length;j++)s[j].classList.remove('show');
+  document.getElementById('s'+i).classList.add('show');
+  var b=document.querySelectorAll('nav button');
+  for(var j=0;j<b.length;j++)b[j].classList.remove('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function hint(t){document.getElementById('hintbox').innerHTML='<b>Подсказка:</b> '+t;}
+function ans(el,ok){
+  var q=el.parentNode.querySelectorAll('.opt');
+  for(var i=0;i<q.length;i++){q[i].classList.remove('right','wrong');}
+  el.classList.add(ok?'right':'wrong');
+}
+function pick(el,n){
+  var names={1:'чашка Петри',2:'фильтровальная бумага',3:'вода',4:'термометр',5:'этикетки',6:'ящик с грунтом'};
+  document.getElementById('pickres').innerHTML='<span class="ok-badge">✓</span> Взял(а): '+names[n]+' — '+Object.keys(names).length+' единиц оборудования в наборе.';
+}
+function checkCond(){
+  var boxes=document.querySelectorAll('#conds input');
+  var score=0,okc=0;
+  for(var i=0;i<boxes.length;i++){
+    if(boxes[i].dataset.ok==='1')okc++;
+    if(boxes[i].dataset.ok==='1'&&boxes[i].checked)score++;
+    if(boxes[i].dataset.ok!=='1'&&boxes[i].checked)score--;
+  }
+  var r=document.getElementById('condres');
+  if(score===okc)r.innerHTML='<div class="card green"><span class="ok-badge">Отлично!</span> Вы верно выбрали все условия прорастания: вода, воздух, тепло и живой зародыш.</div>';
+  else r.innerHTML='<div class="card">Пока не всё верно: правильных условий должно быть ровно 4, лишние — снимите. Попробуйте ещё раз!</div>';
+}
+function calc(){
+  var t=parseFloat(document.getElementById('total').value)||0;
+  var s=parseFloat(document.getElementById('sprout').value)||0;
+  var r=document.getElementById('calcres');
+  if(t<=0){r.textContent='Всего семян должно быть больше нуля.';return;}
+  if(s>t){r.innerHTML='<span class="no-badge">Проросших не может быть больше, чем всего семян.</span>';return;}
+  var v=Math.round(s/t*1000)/10;
+  var verdict=v>=90?'<span class="ok-badge">отличная партия — сеем смело</span>':
+    v>=70?'удовлетворительная — сеем с запасом':
+    v>=50?'низкая — увеличиваем норму высева':'<span class="no-badge">непригодная — партию бракуют</span>';
+  r.innerHTML='Всхожесть = <span class="big">'+v+'%</span> ('+s+' из '+t+')<br>Оценка партии: '+verdict;
+}
+function grade(){
+  var keys={q1:'b',q2:'c',q3:'b',q4:'a',q5:'a',q6:'b',q7:'a',q8:'b'};
+  var right=0,answered=0;
+  for(var q in keys){
+    var sel=document.querySelector('input[name='+q+']:checked');
+    if(sel)answered++;
+    var labels=document.querySelectorAll('input[name='+q+']');
+    for(var i=0;i<labels.length;i++){
+      var lb=labels[i].parentNode;
+      lb.classList.remove('right','wrong');
+      if(labels[i].value===keys[q])lb.classList.add(labels[i].checked?'right':'');
+      else if(labels[i].checked)lb.classList.add('wrong');
+    }
+    if(sel&&sel.value===keys[q])right++;
+  }
+  var mark=right>=8?'5':right>=6?'4':right>=4?'3':'2';
+  var r=document.getElementById('testres');
+  r.classList.remove('hidden');
+  r.innerHTML='<b>Результат:</b> правильных ответов '+right+' из 8.<br>Отметка: <span class="big">'+mark+'</span>'+(answered<8?'<br><i>Отвечены не все вопросы!</i>':'');
+}
+var parts=[];
+function addV(t){parts.push(t);document.getElementById('vout').innerHTML='<b>Вывод:</b><br>'+parts.join(' ');}
+function clearV(){parts=[];document.getElementById('vout').innerHTML='Нажимайте кнопки, чтобы собрать вывод.';}
+function copyV(){
+  var t=parts.join(' ');
+  if(!t){t='Вывод не собран';}
+  if(navigator.clipboard)navigator.clipboard.writeText(t);
+}
+</script>
+</body>
+</html>
