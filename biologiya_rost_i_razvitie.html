@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рост и развитие растения. 6 класс</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Georgia', 'Times New Roman', serif; background:#0d1b3e; color:#e8e4d0; min-height:100vh; }
+  .wrap { max-width:900px; margin:0 auto; padding:20px 16px 60px; }
+  .deco { text-align:center; color:#c9a84c; font-size:20px; margin:14px 0 4px; }
+  h1 { text-align:center; color:#c9a84c; font-size:34px; font-weight:normal; letter-spacing:1px; margin-top:10px; }
+  .sub { text-align:center; color:#9db4d8; font-style:italic; margin:8px 0 24px; font-size:17px; }
+  .card { background:#16264d; border:1px solid #2a3f73; border-radius:14px; padding:22px 26px; margin:18px 0; }
+  h2 { color:#c9a84c; font-size:22px; font-weight:normal; margin-bottom:12px; }
+  h3 { color:#e8c96a; font-size:18px; margin:14px 0 8px; }
+  p, li { line-height:1.65; font-size:16.5px; }
+  ul, ol { margin:8px 0 8px 24px; }
+  .btn { display:inline-block; background:#c9a84c; color:#16264d; border:none; padding:10px 20px; border-radius:24px; font-size:15px; font-family:inherit; cursor:pointer; margin:6px 8px 6px 0; font-weight:bold; }
+  .btn:hover { background:#e0c05e; }
+  .btn.ghost { background:transparent; color:#c9a84c; border:1px solid #c9a84c; }
+  .nav { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:16px 0; }
+  .nav button { background:#1a2c5a; color:#e8e4d0; border:1px solid #3a4f86; padding:8px 16px; border-radius:20px; cursor:pointer; font-family:inherit; font-size:14px; }
+  .nav button.active { background:#c9a84c; color:#16264d; border-color:#c9a84c; }
+  .section { display:none; }
+  .section.visible { display:block; }
+  .hidden { display:none; }
+  .pill { display:inline-block; border:1px solid #3a4f86; border-radius:16px; padding:4px 14px; margin:4px; cursor:pointer; background:#1a2c5a; font-size:15px; }
+  .pill.on { background:#2e7d4f; border-color:#2e7d4f; color:#fff; }
+  .ok { color:#7fd6a0; font-weight:bold; }
+  .no { color:#e88; font-weight:bold; }
+  input[type=number], input[type=text] { background:#0d1b3e; color:#e8e4d0; border:1px solid #3a4f86; border-radius:8px; padding:8px 12px; font-size:16px; width:110px; font-family:inherit; }
+  table { width:100%; border-collapse:collapse; margin:12px 0; }
+  th, td { border:1px solid #3a4f86; padding:8px 10px; text-align:center; font-size:15px; }
+  th { color:#c9a84c; font-weight:normal; }
+  .note { color:#9db4d8; font-size:14px; font-style:italic; }
+  .big { font-size:22px; color:#c9a84c; }
+  .progress { background:#0d1b3e; border-radius:10px; height:14px; margin:10px 0; overflow:hidden; border:1px solid #2a3f73; }
+  .progress div { background:#c9a84c; height:100%; width:0; transition:width .5s; }
+  .eq { background:#1a2c5a; border-radius:10px; padding:12px 16px; margin:10px 0; }
+  textarea { width:100%; min-height:80px; background:#0d1b3e; color:#e8e4d0; border:1px solid #3a4f86; border-radius:10px; padding:12px; font-family:inherit; font-size:15px; line-height:1.5; }
+  .footer { text-align:center; color:#6a7fa8; font-size:13px; margin-top:30px; font-style:italic; }
+  .stage { color:#9db4d8; font-size:14px; margin-bottom:6px; }
+  .steps > div { border:1px solid #2a3f73; border-radius:10px; padding:12px 16px; margin:8px 0; }
+  .num { color:#c9a84c; font-weight:bold; margin-right:8px; }
+  @media (max-width:600px){ h1{font-size:26px} .card{padding:16px 14px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="deco">✦ ✦ ✦</div>
+  <h1>Рост и развитие растения</h1>
+  <div class="sub">6 класс &bull; ФГОС &bull; Практическая работа «Наблюдение за ростом и развитием цветкового растения (фасоль, посевной горох)»</div>
+
+  <div class="nav" id="nav"></div>
+  <div class="progress"><div id="pbar"></div></div>
+  <div class="stage" id="pstage">Выполнено этапов: 0 из 9</div>
+
+  <!-- 1. Карта урока -->
+  <div class="section visible" id="s0">
+    <div class="card">
+      <h2>Карта урока</h2>
+      <table>
+        <tr><th>Этап</th><th>Время</th></tr>
+        <tr><td>1. Организационный момент</td><td>1–2 мин</td></tr>
+        <tr><td>2. Актуализация знаний: семя → росток</td><td>5 мин</td></tr>
+        <tr><td>3. Постановка учебной задачи</td><td>2 мин</td></tr>
+        <tr><td>4. Открытие нового знания: рост и развитие</td><td>10 мин</td></tr>
+        <tr><td>5. Практическая работа «Фасоль растёт»</td><td>12 мин</td></tr>
+        <tr><td>6. Измерения и график роста</td><td>8 мин</td></tr>
+        <tr><td>7. Закрепление: тест</td><td>5 мин</td></tr>
+        <tr><td>8. Вывод</td><td>2 мин</td></tr>
+        <tr><td>9. Домашнее задание</td><td>1 мин</td></tr>
+      </table>
+      <p class="note">Учебник: Биология. 6 класс. Под ред. В. М. Константинова и др.; Пасечник В. В. — Просвещение, 2024.</p>
+      <button class="btn" onclick="go(1)">Начать урок ▸</button>
+    </div>
+  </div>
+
+  <!-- 2. Актуализация -->
+  <div class="section" id="s1">
+    <div class="card">
+      <h2>Актуализация знаний</h2>
+      <p>На прошлом уроке мы прорастили семена. Вспомним строение проростка:</p>
+      <div id="sprout"></div>
+      <h3>Разминка</h3>
+      <p><b>Вопрос:</b> из какой части семени появляется первый корешок?</p>
+      <div>
+        <span class="pill" onclick="pick(this,'no','Не совсем. Корешок выходит из зародышевого корешка — части зародыша.')">из кожицы семени</span>
+        <span class="pill" onclick="pick(this,'ok','Верно! Первым выходит зародышевый корешок — он растёт вниз.')">из зародышевого корешка</span>
+        <span class="pill" onclick="pick(this,'no','Нет, эндосперм — это запас питательных веществ, сам он не растёт.')">из эндосперма</span>
+      </div>
+      <div id="s1fb" style="margin-top:8px"></div>
+      <button class="btn" onclick="go(2)">Дальше ▸</button>
+    </div>
+  </div>
+
+  <!-- 3. Задача урока -->
+  <div class="section" id="s2">
+    <div class="card">
+      <h2>Постановка учебной задачи</h2>
+      <p>Проросток появился. Но семя и взрослое растение — это не одно и то же. Сможет ли маленький росток стать цветущим растением с плодами?</p>
+      <p><b>Задача урока:</b> выяснить, <i>чем отличается рост от развития растения</i> и как вести наблюдение за ростом фасоли в комнатных условиях.</p>
+      <div class="eq">💡 <b>Ключевые понятия:</b> рост, развитие, этапы развития растения, всходы, вегетативные и генеративные органы.</div>
+      <button class="btn" onclick="go(3)">Дальше ▸</button>
+    </div>
+  </div>
+
+  <!-- 4. Новое знание -->
+  <div class="section" id="s3">
+    <div class="card">
+      <h2>Открытие нового знания</h2>
+      <h3>Рост — это изменение размеров</h3>
+      <p>Рост — процесс <b>увеличения размеров и массы</b> растения. Он происходит за счёт деления клеток в <b>образовательных тканях</b> — у корня (кончик корня) и стебля (верхушка побега).</p>
+      <h3>Развитие — это изменения качества</h3>
+      <p>Развитие — процесс <b>качественных изменений</b>: растение проходит этапы от семени до цветения и плодоношения. Растение может расти, но не развиваться (не цвести) — если ему не хватает условий.</p>
+      <h3>Этапы развития цветкового растения</h3>
+      <ol>
+        <li>Прорастание семени</li>
+        <li>Всходы (появление побега над почвой)</li>
+        <li>Рост вегетативных органов (листья, стебель)</li>
+        <li>Бутонизация</li>
+        <li>Цветение</li>
+        <li>Плодоношение</li>
+        <li>Созревание семян</li>
+      </ol>
+      <h3>Проверь себя</h3>
+      <p>Фасоль выросла на 5 см за неделю, но цветков ещё нет. Это пример роста или развития?</p>
+      <div>
+        <span class="pill" onclick="pick(this,'ok','Верно! Увеличение размеров — это рост.')">рост</span>
+        <span class="pill" onclick="pick(this,'no','Появление цветков — развитие, а вот увеличение размеров — рост.')">развитие</span>
+      </div>
+      <div id="s3fb" style="margin-top:8px"></div>
+      <button class="btn" onclick="go(4)">К практике ▸</button>
+    </div>
+  </div>
+
+  <!-- 5. Практика -->
+  <div class="section" id="s4">
+    <div class="card">
+      <h2>Практическая работа. Наблюдение за ростом фасоли</h2>
+      <h3>Оборудование</h3>
+      <p>Отметь то, что уже есть на вашем столе:</p>
+      <div>
+        <span class="pill" onclick="pill(this)">Проросшие семена фасоли (5–7 шт.)</span>
+        <span class="pill" onclick="pill(this)">Стакан с почвой или прозрачный контейнер</span>
+        <span class="pill" onclick="pill(this)">Линейка</span>
+        <span class="pill" onclick="pill(this)">Пипетка и стакан с водой</span>
+        <span class="pill" onclick="pill(this)">Дневник наблюдений (таблица в тетради)</span>
+      </div>
+      <h3>Ход работы</h3>
+      <div class="steps">
+        <div><span class="num">1.</span>Посадите проросшие семена в почву на глубину 2–3 см, наклонив семя боком (корешком вниз).</div>
+        <div><span class="num">2.</span>Полейте умеренно: почва должна быть влажной, но не «болотом».</div>
+        <div><span class="num">3.</span>Поставьте стакан на самое светлое место у окна.</div>
+        <div><span class="num">4.</span><b>Каждый день</b> отмечайте в дневнике: высоту стебля (мм), число листьев, цвет и общее состояние растения.</div>
+        <div><span class="num">5.</span>Через 5–7 дней постройте график роста по своим измерениям.</div>
+      </div>
+      <h3>Дневник наблюдений — заполни строку первого дня</h3>
+      <table>
+        <tr><th>День</th><th>Высота стебля, мм</th><th>Число листьев</th><th>Заметки</th></tr>
+        <tr><td>1</td><td><input type="number" id="d1" min="0"></td><td><input type="number" id="l1" min="0" style="width:80px"></td><td><input type="text" placeholder="всходы, цвет…" style="width:150px"></td></tr>
+        <tr><td>2</td><td><input type="number" id="d2" min="0"></td><td><input type="number" id="l2" min="0" style="width:80px"></td><td>—</td></tr>
+        <tr><td>3</td><td><input type="number" id="d3" min="0"></td><td><input type="number" id="l3" min="0" style="width:80px"></td><td>—</td></tr>
+      </table>
+      <p class="note">Совет: измеряйте в одно и то же время дня — так данные будут точнее.</p>
+      <button class="btn" onclick="go(5)">К графику ▸</button>
+    </div>
+  </div>
+
+  <!-- 6. График -->
+  <div class="section" id="s5">
+    <div class="card">
+      <h2>Измерения и график роста</h2>
+      <p>Введи свои измерения за 3 дня (в мм) — калькулятор построит вывод о скорости роста:</p>
+      <div class="eq">
+        День 1: <input type="number" id="g1" placeholder="напр. 5"> мм &nbsp;&nbsp;
+        День 2: <input type="number" id="g2" placeholder="напр. 15"> мм &nbsp;&nbsp;
+        День 3: <input type="number" id="g3" placeholder="напр. 30"> мм
+      </div>
+      <button class="btn" onclick="calcGrowth()">Рассчитать</button>
+      <div id="gres" style="margin-top:10px"></div>
+      <div id="gtable" class="hidden" style="margin-top:12px"></div>
+      <button class="btn ghost" onclick="go(6)">К тесту ▸</button>
+    </div>
+  </div>
+
+  <!-- 7. Тест -->
+  <div class="section" id="s6">
+    <div class="card">
+      <h2>Тест на закрепление</h2>
+      <div id="quiz"></div>
+      <button class="btn" onclick="checkQuiz()">Проверить ответы</button>
+      <div id="qres" style="margin-top:12px"></div>
+      <button class="btn ghost hidden" id="qnext" onclick="go(7)">К выводу ▸</button>
+    </div>
+  </div>
+
+  <!-- 8. Вывод -->
+  <div class="section" id="s7">
+    <div class="card">
+      <h2>Конструктор вывода</h2>
+      <p>Собери вывод для тетради — нажимай кнопки по порядку:</p>
+      <div>
+        <button class="btn ghost" onclick="addW('В ходе практической работы мы наблюдали за ростом и развитием фасоли в комнатных условиях. ')">1. Что делали</button>
+        <button class="btn ghost" onclick="addW('Проросток ежедневно увеличивался в размерах: стебель рос вверх, появлялись новые листья. ')">2. Что наблюдали</button>
+        <button class="btn ghost" onclick="addW('Мы установили, что рост — это увеличение размеров растения, а развитие — качественные изменения: появление листьев, бутонов и цветков. ')">3. Что доказали</button>
+        <button class="btn ghost" onclick="addW('Для роста и развития растению необходимы вода, воздух, тепло, свет и питательные вещества. ')">4. Условия</button>
+        <button class="btn ghost" onclick="clearW()">Очистить</button>
+      </div>
+      <textarea id="wtext" readonly placeholder="Вывод появится здесь…"></textarea>
+      <button class="btn" onclick="copyW()">Скопировать вывод</button>
+      <button class="btn ghost" onclick="go(8)">Дальше ▸</button>
+    </div>
+  </div>
+
+  <!-- 9. ДЗ -->
+  <div class="section" id="s8">
+    <div class="card">
+      <h2>Домашнее задание</h2>
+      <ul>
+        <li>Продолжайте дневник наблюдений за фасолью — 7 дней подряд.</li>
+        <li>Учебник: прочитать параграф «Рост и развитие растений», ответить на вопросы после параграфа.</li>
+        <li>По желанию: поставьте второй стакан с фасолью в тёмный шкаф и сравните рост через неделю.</li>
+      </ul>
+      <div class="footer">Интерактивный урок биологии &bull; 6 класс &bull; Рост и развитие растения</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var total = 9, done = {}, titles = ["Карта урока","Актуализация","Задача урока","Новое знание","Практика","График","Тест","Вывод","Дом. задание"];
+function renderNav(){
+  var n = document.getElementById('nav'), h='';
+  for (var i=0;i<total;i++){ h += '<button class="'+(document.getElementById('s'+i).classList.contains('visible')?'active':'')+'" onclick="go('+i+')">'+(i+1)+'. '+titles[i]+'</button>'; }
+  n.innerHTML = h;
+}
+function go(i){
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('visible');});
+  document.getElementById('s'+i).classList.add('visible');
+  done[i]=true; done[0]=true;
+  var c=0; for (var k in done) c++;
+  var pct=Math.min(100,Math.round(c/total*100));
+  document.getElementById('pbar').style.width=pct+'%';
+  document.getElementById('pstage').textContent='Выполнено этапов: '+c+' из '+total+'  ('+pct+'%)';
+  window.scrollTo({top:0,behavior:'smooth'}); renderNav();
+}
+function pick(el,res,msg){
+  var sibs = el.parentElement.querySelectorAll('.pill');
+  sibs.forEach(function(s){s.classList.remove('on');});
+  el.classList.add('on');
+  var fb = el.closest('.card').querySelector('[id$="fb"]');
+  fb.innerHTML = (res==='ok'?'<span class="ok">✔ </span>':'<span class="no">✘ </span>')+msg;
+}
+function pill(el){ el.classList.toggle('on'); }
+function calcGrowth(){
+  var a=+document.getElementById('g1').value, b=+document.getElementById('g2').value, c=+document.getElementById('g3').value;
+  if(!(a>=0&&b>=0&&c>=0&&b>=a&&c>=b)||a===0&&b===0&&c===0){ document.getElementById('gres').innerHTML='<span class="no">Введите высоту за три дня по возрастанию (мм).</span>'; return; }
+  var s1=b-a, s2=c-b, avg=(c-a)/2;
+  var concl;
+  if(avg<3) concl='Рост пока медленный: растение приживается после посадки. Это нормально!';
+  else if(avg<=12) concl='Скорость роста средняя — так обычно растёт фасоль в первые дни.';
+  else concl='Отличный темп! Ваше растение активно растёт.';
+  document.getElementById('gres').innerHTML='<div class="eq ok">Прирост за день: ~'+avg.toFixed(1)+' мм. '+concl+'</div>';
+  document.getElementById('gtable').classList.remove('hidden');
+  document.getElementById('gtable').innerHTML='<table><tr><th></th><th>День 1</th><th>День 2</th><th>День 3</th></tr><tr><th>Высота, мм</th><td>'+a+'</td><td>'+b+' <span class="note">(+'+s1+')</span></td><td>'+c+' <span class="note">(+'+s2+')</span></td></tr></table>';
+}
+var q=[
+ {q:'Рост растения — это…', a:['увеличение размеров и массы','изменение окраски листьев','появление семян'], c:0},
+ {q:'Клетки делятся и обеспечивают рост в…', a:['сердцевине стебля','образовательной ткани','коре корня'], c:1},
+ {q:'Появление бутонов и цветков — это…', a:['рост','развитие','обмен веществ'], c:1},
+ {q:'Первый этап развития цветкового растения —', a:['прорастание семени','цветение','плодоношение'], c:0},
+ {q:'Для роста и развития растению НЕ нужны…', a:['вода','свет','льдина'], c:2},
+ {q:'Всходы — это…', a:['появление побега над почвой','появление корешка в семени','созревание плодов'], c:0},
+ {q:'Мерная линейка в практической работе нужна, чтобы…', a:['поливать растение','измерять высоту стебля','окрашивать воду'], c:1},
+ {q:'При отсутствии света росток…', a:['будет расти нормально','вырастет бледным и вытянутым','не прорастёт никогда'], c:1}
+];
+var qa=[], qh='';
+q.forEach(function(it,i){
+  qh+='<p style="margin-top:14px"><b>'+(i+1)+'.</b> '+it.q+'</p><div id="q'+i+'">';
+  it.a.forEach(function(opt,j){ qh+='<span class="pill" data-i="'+i+'" data-j="'+j+'" onclick="qpick(this)">'+opt+'</span>'; });
+  qh+='</div>';
+});
+document.getElementById('quiz').innerHTML=qh;
+function qpick(el){
+  var i=+el.dataset.i, j=+el.dataset.j;
+  qa[i]=j;
+  el.parentElement.querySelectorAll('.pill').forEach(function(s){s.classList.remove('on');});
+  el.classList.add('on');
+}
+function checkQuiz(){
+  var score=0, answered=qa.filter(function(x){return x!==undefined;}).length;
+  q.forEach(function(it,i){
+    if(qa[i]===undefined) return;
+    var el=document.getElementById('q'+i);
+    el.querySelectorAll('.pill').forEach(function(s,j){
+      if(j===it.c){ s.style.borderColor='#2e7d4f'; s.style.color='#7fd6a0'; }
+      else if(j===qa[i]){ s.style.borderColor='#c0392b'; s.style.color='#e88'; }
+    });
+    if(qa[i]===it.c) score++;
+  });
+  var mark = answered<q.length ? 'Ответьте на все вопросы!' : (score>=7?'<span class="ok">Отлично! '+score+'/'+q.length+' — оценка 5</span>':score>=5?'Хорошо! '+score+'/'+q.length+' — оценка 4':'Ещё раз прочитайте материал. '+score+'/'+q.length);
+  document.getElementById('qres').innerHTML='<div class="eq">'+mark+'</div>';
+  if(answered===q.length) document.getElementById('qnext').classList.remove('hidden');
+}
+var words=[];
+function addW(t){ words.push(t); document.getElementById('wtext').value=words.join(''); }
+function clearW(){ words=[]; document.getElementById('wtext').value=''; }
+function copyW(){ var t=document.getElementById('wtext'); t.select(); document.execCommand('copy'); }
+renderNav();
+</script>
+</body>
+</html>
