@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Строение семян — Биология 6 класс</title>
+<style>
+:root{
+  --bg:#14120c; --panel:#1f1b12; --panel2:#29231474; --gold:#d9b44a; --gold2:#f0d98c;
+  --text:#f4ecd8; --muted:#b9a97e; --green:#8fbf6a; --red:#e0705e;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{background:var(--bg); color:var(--text); font-family:Georgia,'Times New Roman',serif; line-height:1.55;}
+.wrap{max-width:900px; margin:0 auto; padding:18px 16px 60px;}
+header{text-align:center; padding:26px 10px 18px; border-bottom:1px solid #3a3012;}
+h1{color:var(--gold2); font-size:1.7em; letter-spacing:.5px;}
+.sub{color:var(--muted); margin-top:8px; font-size:1.02em;}
+.badge{display:inline-block; background:#2e2712; border:1px solid var(--gold); color:var(--gold2); border-radius:20px; padding:3px 14px; font-size:.85em; margin-top:10px;}
+section{background:var(--panel); border:1px solid #4a3d1e; border-radius:14px; padding:22px; margin-top:22px; box-shadow:0 3px 12px rgba(0,0,0,.4);}
+h2{color:var(--gold); font-size:1.28em; margin-bottom:12px; display:flex; align-items:center; gap:10px;}
+h2 .num{background:var(--gold); color:#1a1608; border-radius:50%; width:32px; height:32px; display:inline-flex; align-items:center; justify-content:center; font-size:.85em; flex-shrink:0;}
+h3{color:var(--gold2); margin:14px 0 8px; font-size:1.06em;}
+p{margin-bottom:10px;}
+.timer{color:var(--muted); font-style:italic; font-size:.9em;}
+.table{width:100%; border-collapse:collapse; margin:12px 0; font-size:.95em;}
+.table th,.table td{border:1px solid #57491f; padding:8px 10px; text-align:left;}
+.table th{background:#2e2712; color:var(--gold2);}
+.table td{background:#1c180e;}
+.hint{background:#241e10; border-left:4px solid var(--gold); border-radius:8px; padding:10px 14px; margin:12px 0; font-size:.95em; color:#e8dcbf;}
+.hint b{color:var(--gold2);}
+button{background:linear-gradient(135deg,#d9b44a,#b8912f); color:#1a1608; border:none; border-radius:10px; padding:10px 20px; font-family:inherit; font-size:1em; font-weight:bold; cursor:pointer; margin:6px 8px 6px 0;}
+button:hover{filter:brightness(1.1);}
+button.ghost{background:transparent; color:var(--gold2); border:1px solid var(--gold);}
+.chip{display:inline-block; border:2px solid var(--gold); border-radius:12px; padding:8px 16px; margin:6px; cursor:pointer; background:#2a2412; color:var(--text); font-size:.98em; user-select:none;}
+.chip.on{background:var(--gold); color:#1a1608; font-weight:bold;}
+.chip.wrong{border-color:var(--red); color:var(--red);}
+.chip.right{border-color:var(--green); color:var(--green);}
+input[type=text],select{background:#241e10; color:var(--text); border:1px solid #57491f; border-radius:8px; padding:8px 12px; font-family:inherit; font-size:.98em; margin:4px 6px 4px 0;}
+input.wrong{border-color:var(--red);} input.right{border-color:var(--green);}
+.ok{color:var(--green); font-weight:bold;} .bad{color:var(--red); font-weight:bold;}
+.hid{display:none;}
+.seed{font-size:2.6em; text-align:center; margin:8px 0;}
+.calc{background:#241e10; border:1px dashed var(--gold); border-radius:10px; padding:14px; margin:12px 0;}
+.calc input{width:90px; text-align:center;}
+.result{font-size:1.15em; color:var(--gold2); margin-top:8px; min-height:1.4em;}
+.footer{color:var(--muted); text-align:center; margin-top:30px; font-size:.88em;}
+.vegs{display:flex; flex-wrap:wrap; gap:10px; margin:10px 0;}
+.veg{flex:1 1 180px; background:#241e10; border:1px solid #57491f; border-radius:10px; padding:12px; text-align:center;}
+.veg .t{color:var(--gold2); font-weight:bold; margin-bottom:6px;}
+.out{background:#241e10; border:1px solid #57491f; border-radius:10px; padding:12px 14px; margin-top:10px; font-style:italic; color:#f0e6c8;}
+.q{margin:14px 0; padding:12px; background:#1c180e; border-radius:10px; border-left:3px solid var(--gold);}
+.q p{margin-bottom:8px;}
+.opt{display:block; margin:6px 0; cursor:pointer; padding:7px 10px; border-radius:8px; background:#241e10; border:1px solid #3a3012;}
+.opt:hover{border-color:var(--gold);}
+label{cursor:pointer;}
+.score-big{font-size:2em; color:var(--gold2); text-align:center; margin:10px 0;}
+.part{font-size:1.6em; text-align:center; margin-bottom:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🌾 Строение семян</h1>
+  <div class="sub">Биология • 6 класс • Интерактивный урок</div>
+  <div class="badge">Лабораторная работа: «Изучение строения семян однодольных и двудольных растений»</div>
+</header>
+
+<!-- 1. Карта урока -->
+<section>
+  <h2><span class="num">1</span>Карта урока</h2>
+  <table class="table">
+    <tr><th>Этап</th><th>Время</th></tr>
+    <tr><td>1. Актуализация: вспоминаем пройденное</td><td>5 мин</td></tr>
+    <tr><td>2. Задача урока</td><td>2 мин</td></tr>
+    <tr><td>3. Открытие нового знания: строение семени</td><td>10 мин</td></tr>
+    <tr><td>4. Лабораторная работа</td><td>15 мин</td></tr>
+    <tr><td>5. Сравнение однодольных и двудольных</td><td>5 мин</td></tr>
+    <tr><td>6. Тест</td><td>7 мин</td></tr>
+    <tr><td>7. Вывод и домашнее задание</td><td>3 мин</td></tr>
+  </table>
+</section>
+
+<!-- 2. Актуализация -->
+<section>
+  <h2><span class="num">2</span>Актуализация: вспоминаем</h2>
+  <p class="timer">⏱ 5 минут</p>
+  <p>На прошлом уроке мы изучали органы растения. Семя — это <b>зачаточное растение</b>: в нём уже спрятаны будущие корень, стебель и листья. Проверим память!</p>
+  <div class="q">
+    <p><b>Вопрос-разминка:</b> из чего прорастает новое растение?</p>
+    <span class="chip" onclick="ansA(this,false)">Из почвы</span>
+    <span class="chip" onclick="ansA(this,false)">Из плода</span>
+    <span class="chip" onclick="ansA(this,true)">Из семени</span>
+    <div id="ansA" class="hint hid"></div>
+  </div>
+  <div class="seed">🌰 🫘 🌱</div>
+</section>
+
+<!-- 3. Задача урока -->
+<section>
+  <h2><span class="num">3</span>Задача урока</h2>
+  <p>Сегодня мы:</p>
+  <p>🔸 <b>узнаем</b>, как устроено семя изнутри;</p>
+  <p>🔸 <b>научимся</b> различать семена однодольных и двудольных растений;</p>
+  <p>🔸 <b>сумеем</b> найти у семени зародыш, эндосперм и семенную кожуру.</p>
+</section>
+
+<!-- 4. Открытие нового знания -->
+<section>
+  <h2><span class="num">4</span>Открытие нового знания: что внутри семени</h2>
+  <p class="timer">⏱ 10 минут</p>
+  <p>Снаружи семя одето <b>семенной кожурой</b> — она защищает содержимое от высыхания и повреждений. Внутри — <b>зародыш</b> (будущее растение) и запас питательных веществ.</p>
+  <h3>Главные части семени</h3>
+  <table class="table">
+    <tr><th>Часть</th><th>Роль</th></tr>
+    <tr><td>Семенная кожура</td><td>Защита от повреждений и высыхания</td></tr>
+    <tr><td>Зародышевый корешок</td><td>Даёт начало корню растения</td></tr>
+    <tr><td>Зародышевый стебелёк и почечка</td><td>Даёт начало побегу и первым листьям</td></tr>
+    <tr><td>Семядоли</td><td>Первые листья зародыша; у двудольных — хранилище запасов</td></tr>
+    <tr><td>Эндосперм</td><td>Ткань, в которой запасены питательные вещества</td></tr>
+  </table>
+  <h3>Где спрятаны запасы?</h3>
+  <p>У <b>двудольных</b> растений (фасоль, горох) запасы лежат в <b>двух крупных семядолях</b> зародыша. У <b>однодольных</b> (пшеница, кукуруза) семядоля маленькая, а запасы хранятся в <b>эндосперме</b>.</p>
+  <div class="hint"><b>Подсказка:</b> слово «двудольные» подсказывает само себя — две семядоли! 🫘</div>
+  <div class="q">
+    <p><b>Проверка:</b> у какого растения запасы питательных веществ находятся в эндосперме?</p>
+    <span class="chip" onclick="ansB(this,false)">У фасоли</span>
+    <span class="chip" onclick="ansB(this,true)">У пшеницы</span>
+    <span class="chip" onclick="ansB(this,false)">У гороха посевного</span>
+    <div id="ansB" class="hint hid"></div>
+  </div>
+</section>
+
+<!-- 5. Лабораторная работа -->
+<section>
+  <h2><span class="num">5</span>Лабораторная работа</h2>
+  <p class="timer">⏱ 15 минут</p>
+  <p><b>Тема:</b> «Изучение строения семян однодольных и двудольных растений»</p>
+  <p><b>Цель:</b> изучить внешнее и внутреннее строение семян однодольных и двудольных растений, научиться их различать.</p>
+
+  <h3>Оборудование — отметьте, что есть у вас на столе</h3>
+  <div id="equip">
+    <span class="chip" onclick="tog(this)">Набухшие семена фасоли</span>
+    <span class="chip" onclick="tog(this)">Набухшие зерна пшеницы</span>
+    <span class="chip" onclick="tog(this)">Лупа</span>
+    <span class="chip" onclick="tog(this)">Препаровальная игла</span>
+    <span class="chip" onclick="tog(this)">Чашка Петри / блюдце</span>
+  </div>
+
+  <h3>Ход работы</h3>
+  <table class="table">
+    <tr><th>№</th><th>Что делаем</th><th>Что видим</th></tr>
+    <tr><td>1</td><td>Рассматриваем набухшее семя фасоли через лупу</td><td>Кожура, рубчик, крупная семядоля</td></tr>
+    <tr><td>2</td><td>Снимаем кожуру и разделяем семядоли иглой</td><td>Между ними зародыш: корешок, стебелёк, почечка</td></tr>
+    <tr><td>3</td><td>Смотрим, сколько семядолей у фасоли</td><td>Две</td></tr>
+    <tr><td>4</td><td>Рассматриваем зерно пшеницы, надрезаем вдоль</td><td>Эндосперм и маленький зародыш сбоку</td></tr>
+    <tr><td>5</td><td>Считаем семядоли у пшеницы</td><td>Одна</td></tr>
+  </table>
+
+  <h3>Заполните таблицу в тетради</h3>
+  <table class="table">
+    <tr><th>Признак</th><th>Фасоль (двудольное)</th><th>Пшеница (однодольное)</th></tr>
+    <tr><td>Семядолей</td><td>две</td><td>одна</td></tr>
+    <tr><td>Где запасы</td><td>в семядолях</td><td>в эндосперме</td></tr>
+    <tr><td>Эндосперм</td><td>не развит (съеден семядолями)</td><td>крупный, мучнистый</td></tr>
+  </table>
+</section>
+
+<!-- 6. Сравнение -->
+<section>
+  <h2><span class="num">6</span>Сравнение однодольных и двудольных</h2>
+  <p class="timer">⏱ 5 минут</p>
+  <div class="vegs">
+    <div class="veg"><div class="t">🫘 Двудольные</div>Фасоль, горох, тыква, яблоня, подсолнечник. Две семядоли, запасы в семядолях.</div>
+    <div class="veg"><div class="t">🌾 Однодольные</div>Пшеница, кукуруза, лук, тюльпан. Одна семядоля, запасы в эндосперме.</div>
+  </div>
+  <div class="hint"><b>Интересно:</b> проросшее зерно пшеницы часто «плачет» — из-за эндосперма под кожурой выступают капельки влаги. Фасоль при этом сухая: вся вода уже «вошла» в семядоли!</div>
+  <div class="q">
+    <p><b>Задание на сравнение:</b> распределите растения по группам. Нажимайте на растение, чтобы отнести его к однодольным (🌾) или двудольным (🫘).</p>
+    <div id="sort1"><span class="chip" onclick="sortR(this,'d')">Кукуруза</span><span class="chip" onclick="sortR(this,'d')">Тюльпан</span><span class="chip" onclick="sortR(this,'d')">Лук</span><span class="chip" onclick="sortR(this,'o')">Тыква</span><span class="chip" onclick="sortR(this,'o')">Подсолнечник</span><span class="chip" onclick="sortR(this,'o')">Яблоня</span></div>
+    <p style="margin-top:8px;">Сначала решите: однодольное это или двудольное? Затем нажмите: если ошибётесь — чип станет красным, если верно — зелёным.</p>
+    <p id="sortScore"></p>
+  </div>
+</section>
+
+<!-- 7. Тест -->
+<section>
+  <h2><span class="num">7</span>Тест: проверьте себя</h2>
+  <p class="timer">⏱ 7 минут</p>
+  <div id="test">
+    <div class="q"><p><b>1.</b> Защитную функцию в семени выполняет:</p>
+      <label class="opt"><input type="radio" name="t1" value="0"> эндосперм</label>
+      <label class="opt"><input type="radio" name="t1" value="1"> семенная кожура</label>
+      <label class="opt"><input type="radio" name="t1" value="0"> зародышевый корешок</label></div>
+    <div class="q"><p><b>2.</b> Зародыш семени состоит из:</p>
+      <label class="opt"><input type="radio" name="t2" value="1"> корешка, стебелька, почечки и семядолей</label>
+      <label class="opt"><input type="radio" name="t2" value="0"> кожуры и эндосперма</label>
+      <label class="opt"><input type="radio" name="t2" value="0"> только корешка</label></div>
+    <div class="q"><p><b>3.</b> У двудольных растений семядолей:</p>
+      <label class="opt"><input type="radio" name="t3" value="0"> одна</label>
+      <label class="opt"><input type="radio" name="t3" value="1"> две</label>
+      <label class="opt"><input type="radio" name="t3" value="0"> три</label></div>
+    <div class="q"><p><b>4.</b> У однодольных растений запасы питательных веществ хранятся:</p>
+      <label class="opt"><input type="radio" name="t4" value="1"> в эндосперме</label>
+      <label class="opt"><input type="radio" name="t4" value="0"> в семядолях</label>
+      <label class="opt"><input type="radio" name="t4" value="0"> в кожуре</label></div>
+    <div class="q"><p><b>5.</b> Первые листья зародыша — это:</p>
+      <label class="opt"><input type="radio" name="t5" value="1"> семядоли</label>
+      <label class="opt"><input type="radio" name="t5" value="0"> почечка</label>
+      <label class="opt"><input type="radio" name="t5" value="0"> рубчик</label></div>
+    <div class="q"><p><b>6.</b> Какое растение — однодольное?</p>
+      <label class="opt"><input type="radio" name="t6" value="0"> фасоль</label>
+      <label class="opt"><input type="radio" name="t6" value="0"> горох</label>
+      <label class="opt"><input type="radio" name="t6" value="1"> кукуруза</label></div>
+    <div class="q"><p><b>7.</b> Зародышевый корешок при прорастании даёт начало:</p>
+      <label class="opt"><input type="radio" name="t7" value="1"> главному корню</label>
+      <label class="opt"><input type="radio" name="t7" value="0"> стеблю</label>
+      <label class="opt"><input type="radio" name="t7" value="0"> листьям</label></div>
+    <div class="q"><p><b>8.</b> Что нужно сделать, чтобы увидеть зародыш в семени фасоли?</p>
+      <label class="opt"><input type="radio" name="t8" value="1"> снять кожуру и разделить семядоли</label>
+      <label class="opt"><input type="radio" name="t8" value="0"> высушить семя</label>
+      <label class="opt"><input type="radio" name="t8" value="0"> сварить семя</label></div>
+    <button onclick="checkTest()">Проверить тест</button>
+    <button class="ghost" onclick="resetTest()">Начать заново</button>
+    <div id="tRes" class="hid"><div class="part"></div><div class="score-big"></div><div class="out"></div></div>
+  </div>
+</section>
+
+<!-- 8. Вывод -->
+<section>
+  <h2><span class="num">8</span>Конструктор вывода</h2>
+  <p>Нажимайте кнопки — из них соберётся готовый вывод для тетради.</p>
+  <button class="ghost" onclick="addOut('Семя состоит из семенной кожуры и зародыша. ')">Часть 1</button>
+  <button class="ghost" onclick="addOut('Зародыш включает корешок, стебелёк, почечку и семядоли. ')">Часть 2</button>
+  <button class="ghost" onclick="addOut('У двудольных две семядоли, запасы — в них; у однодольных одна семядоля, запасы — в эндосперме. ')">Часть 3</button>
+  <button class="ghost" onclick="copyOut()">📋 Скопировать</button>
+  <div class="out" id="outBox">Здесь появится вывод…</div>
+</section>
+
+<!-- 9. ДЗ -->
+<section>
+  <h2><span class="num">9</span>Домашнее задание</h2>
+  <p>🔸 Найдите дома 2–3 продукта из семян (крупа, мука, фасоль, горох) и определите, однодольные или двудольные это растения.</p>
+  <p>🔸 Рассмотрите семечко яблока или подсолнечника: сколько семядолей оно имеет?</p>
+</section>
+
+<div class="footer">Интерактивный урок • Биология • 6 класс • «Строение семян»</div>
+</div>
+
+<script>
+function tog(el){el.classList.toggle('on');}
+function ansA(el,right){
+  var box=document.getElementById('ansA'); box.classList.remove('hid');
+  if(right){el.classList.add('right'); box.innerHTML='<b>Верно!</b> Новое растение прорастает из семени: в нём спрятан зародыш.';}
+  else{el.classList.add('wrong'); box.innerHTML='<b>Не совсем.</b> Из семени! Плод лишь окружает и защищает семена.';}
+}
+function ansB(el,right){
+  var box=document.getElementById('ansB'); box.classList.remove('hid');
+  if(right){el.classList.add('right'); box.innerHTML='<b>Точно!</b> У пшеницы (однодольного) запасы — в эндосперме. У фасоли и гороха — в семядолях.';}
+  else{el.classList.add('wrong'); box.innerHTML='<b>Нет.</b> У фасоли и гороха запасы лежат в семядолях. Правильный ответ — пшеница.';}
+}
+var sortDone=0, sortOk=0;
+function sortR(el,expect){
+  var d={ 'Кукуруза':1,'Тюльпан':1,'Лук':1,'Тыква':0,'Подсолнечник':0,'Яблоня':0 }[el.textContent];
+  if(d==null){ // expect: 'd' -> однодольные правильный(1)? wait: chips labeled with expectation
+  }
+  var correct = (expect==='d' && ['Кукуруза','Тюльпан','Лук'].includes(el.textContent)) || (expect==='o' && ['Тыква','Подсолнечник','Яблоня'].includes(el.textContent));
+  if(el.classList.contains('right')||el.classList.contains('wrong'))return;
+  el.classList.add(correct?'right':'wrong');
+  if(correct)sortOk++; sortDone++;
+  document.getElementById('sortScore').innerHTML = sortDone<6 ? 'Отмечено '+sortDone+' из 6' : (sortOk===6 ? '<span class="ok">Отлично! Все 6 верно.</span>' : '<span class="bad">Верно '+sortOk+' из 6. Вспомните: однодольные — злаки, лук, тюльпан; двудольные — тыква, подсолнечник, яблоня.</span>');
+}
+var out='';
+function addOut(t){out+=t; document.getElementById('outBox').textContent=out.trim();}
+function copyOut(){navigator.clipboard&&navigator.clipboard.writeText(out.trim());}
+function checkTest(){
+  var total=8, ok=0, det=[];
+  for(var i=1;i<=8;i++){
+    var q=document.querySelector('input[name="t'+i+'"]:checked');
+    var good=(q&&q.value==='1');
+    if(good)ok++;
+    det.push(i+(good?'✅':'❌'));
+  }
+  var pct=ok/total;
+  var mark = pct>=0.9?'5':pct>=0.75?'4':pct>=0.55?'3':'2';
+  var box=document.getElementById('tRes'); box.classList.remove('hid');
+  box.querySelector('.part').textContent=det.join(' ');
+  box.querySelector('.score-big').textContent=ok+' из '+total+' — оценка «'+mark+'»';
+  box.querySelector('.out').textContent= ok===total ? 'Превосходно! Строение семян усвоено на отлично.' : (ok>=5 ? 'Хорошо! Обратите внимание на сравнение однодольных и двудольных.' : 'Перечитайте этап 4 — там всё, что нужно знать о частях семени.');
+}
+function resetTest(){
+  document.querySelectorAll('#test input').forEach(function(i){i.checked=false;});
+  document.getElementById('tRes').classList.add('hid');
+}
+</script>
+</body>
+</html>
