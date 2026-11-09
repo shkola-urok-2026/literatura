@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контрольная работа «Растительный организм» — Биология 6 класс</title>
+<style>
+:root{--bg:#1a1a24;--card:#242433;--accent:#d4a94e;--accent2:#7fb069;--text:#f0ead6;--dim:#a89e8c;--bad:#d96a5f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-serif;line-height:1.55;padding:16px}
+.wrap{max-width:820px;margin:0 auto}
+h1{color:var(--accent);font-size:1.5em;margin:14px 0 6px}
+h2{color:var(--accent);font-size:1.2em;margin:26px 0 10px;border-bottom:2px solid var(--accent);padding-bottom:6px}
+.sub{color:var(--dim);font-size:1em;margin-bottom:14px}
+.card{background:var(--card);border-radius:12px;padding:18px;margin:12px 0;border:1px solid #3a3a4c}
+.q{margin:14px 0}
+.q b{color:var(--accent2)}
+label{display:block;padding:8px 12px;margin:5px 0;border-radius:8px;cursor:pointer;border:1px solid #3a3a4c}
+label:hover{background:#2e2e40}
+select,input[type=text],input[type=number]{background:#15151f;color:var(--text);border:1px solid var(--accent);border-radius:8px;padding:8px 10px;font-size:1em;width:auto;min-width:120px}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+td,th{border:1px solid #3a3a4c;padding:8px;text-align:left}
+th{color:var(--accent)}
+.btn{display:inline-block;background:var(--accent);color:#1a1a24;font-weight:bold;font-size:1.05em;border:none;border-radius:10px;padding:12px 26px;cursor:pointer;margin:12px 4px 0 0}
+.btn:hover{filter:brightness(1.1)}
+.btn2{background:#3a3a4c;color:var(--text)}
+#result{display:none;margin-top:18px}
+.grade{font-size:2em;font-weight:bold;text-align:center;padding:14px;border-radius:12px;margin:10px 0}
+.g5{background:#2f4a2f;color:#a8e6a0}.g4{background:#4a412f;color:#f0d9a0}.g3{background:#4a3d2f;color:#e8c39e}.g2{background:#4a2f2f;color:#f0a0a0}
+.ok{color:var(--accent2);font-weight:bold}.no{color:var(--bad);font-weight:bold}
+.name-input{width:100%;font-size:1.1em;margin:8px 0}
+.hint{color:var(--dim);font-size:.92em}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.toc button{background:#2e2e40;color:var(--text);border:1px solid var(--accent);border-radius:20px;padding:6px 14px;cursor:pointer;font-size:.95em}
+.toc button:hover{background:var(--accent);color:#1a1a24}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>🔬 Контрольная работа «Растительный организм»</h1>
+<div class="sub">Биология • 6 класс • автопроверка • 17 баллов</div>
+
+<div class="toc">
+<button onclick="location.href='#b1'">Блок А</button>
+<button onclick="location.href='#b2'">Блок Б</button>
+<button onclick="location.href='#b3'">Блок В</button>
+<button onclick="location.href='#b4'">Блок Г</button>
+<button onclick="document.getElementById('result').scrollIntoView()">К проверке</button>
+</div>
+
+<div class="card">
+<label class="q" style="cursor:text">Фамилия и имя: <input type="text" id="pname" class="name-input" placeholder="Напишите своё имя"></label>
+</div>
+
+<h2 id="b1">Блок А. Выберите один ответ — 1 балл за вопрос</h2>
+<div class="card" id="blockA"></div>
+
+<h2 id="b2">Блок Б. Соотнесите орган и его функцию — по 1 баллу</h2>
+<div class="card">
+<table>
+<tr><th>Орган</th><th>Функция</th></tr>
+<tr><td>Корень</td><td><select id="m0"><option value="">— выберите —</option><option value="3">всасывание воды и минеральных солей</option><option value="0">испарение воды</option><option value="1">опора и транспорт веществ</option><option value="2">образование плодов</option></select></td></tr>
+<tr><td>Стебель</td><td><select id="m1"><option value="">— выберите —</option><option value="3">образование плодов</option><option value="0">испарение воды</option><option value="1">опора и транспорт веществ</option><option value="2">всасывание воды</option></select></td></tr>
+<tr><td>Лист</td><td><select id="m2"><option value="">— выберите —</option><option value="3">образование плодов</option><option value="0">фотосинтез и испарение воды</option><option value="1">опора растения</option><option value="2">всасывание воды</option></select></td></tr>
+<tr><td>Цветок</td><td><select id="m3"><option value="">— выберите —</option><option value="3">образование плодов и семян</option><option value="0">испарение воды</option><option value="1">транспорт веществ</option><option value="2">запас питательных веществ</option></select></td></tr>
+</table>
+<div class="hint">Правильные функции: 3-всасывание, 1-опора и транспорт, 0-фотосинтез, 3-образование плодов</div>
+</div>
+
+<h2 id="b3">Блок В. Верно или неверно? — по 1 баллу</h2>
+<div class="card" id="blockC"></div>
+
+<h2 id="b4">Блок Г. Задача — 1 балл</h2>
+<div class="card">
+<p>Ученик посеял <b>50 семян</b> фасоли. Через неделю проросло <b>45 семян</b>. Какова всхожесть семян в процентах? Введите только число.</p>
+<input type="number" id="taskG" placeholder="Ваш ответ">
+</div>
+
+<button class="btn" onclick="check()">✅ Проверить работу</button>
+<button class="btn btn2" onclick="location.reload()">🔄 Начать заново</button>
+
+<div id="result">
+<div id="gradeBox" class="grade"></div>
+<div class="card" id="details"></div>
+</div>
+
+<script>
+const A=[
+{q:"1. Какой орган растения всасывает воду и минеральные соли из почвы?",o:["Лист","Стебель","Корень","Цветок"],a:2},
+{q:"2. Главный процесс, который происходит в зелёных листьях на свету:",o:["Фотосинтез","Дыхание корней","Всасывание воды","Опыление"],a:0},
+{q:"3. Зародыш будущего растения находится:",o:["В кожице семени","В семени","В лепестках","В почве"],a:1},
+{q:"4. Какое условие НЕ нужно для прорастания семян?",o:["Вода","Воздух","Тепло","Яркий свет"],a:3},
+{q:"5. Рост растения — это:",o:["Качественные изменения","Увеличение размеров","Появление цветков","Всхожесть семян"],a:1},
+{q:"6. Развитие растения — это:",o:["Увеличение размеров","Накопление массы","Качественные изменения: проросток → взрослое растение","Всасывание воды"],a:2},
+{q:"7. Через какую часть стебля вода поднимается к листьям?",o:["Через кору","Через древесину","Через сердцевину","Через кожицу"],a:1},
+{q:"8. Пастушья сумка, дикая редька и лютик едкий относятся к:",o:["Деревьям","Кустарникам","Травянистым цветковым растениям","Мхам"],a:2}
+];
+const C=[
+{t:"1. Клетка — наименьшая единица строения живого организма.",a:true},
+{t:"2. Плод развивается из цветка после опыления.",a:true},
+{t:"3. Камбий — часть корня, отвечающая за всасывание воды.",a:false},
+{t:"4. Вегетативные органы — это корень, стебель и лист.",a:true}
+];
+let htmlA="";
+A.forEach((it,i)=>{
+ htmlA+=`<div class="q"><b>${it.q}</b>`;
+ it.o.forEach((o,j)=>{htmlA+=`<label><input type="radio" name="A${i}" value="${j}"> ${o}</label>`});
+ htmlA+="</div>";
+});
+document.getElementById("blockA").innerHTML=htmlA;
+let htmlC="";
+C.forEach((it,i)=>{
+ htmlC+=`<div class="q"><b>${it.t}</b><label><input type="radio" name="C${i}" value="1"> Верно</label><label><input type="radio" name="C${i}" value="0"> Неверно</label></div>`;
+});
+document.getElementById("blockC").innerHTML=htmlC;
+
+function check(){
+ let score=0,max=17,det=[];
+ A.forEach((it,i)=>{
+  const sel=document.querySelector(`input[name=A${i}]:checked`);
+  if(sel&&+sel.value===it.a){score++;det.push(`<span class="ok">✔ Блок А, вопрос ${i+1}</span>`)}
+  else{det.push(`<span class="no">✘ Блок А, вопрос ${i+1} — правильно: ${it.o[it.a]}</span>`)}
+ });
+ const keys=[3,1,0,3];
+ keys.forEach((k,i)=>{
+  const sel=document.getElementById("m"+i).value;
+  if(sel!==""&&+sel===k){score++;det.push(`<span class="ok">✔ Блок Б, строка ${i+1}</span>`)}
+  else{det.push(`<span class="no">✘ Блок Б, строка ${i+1} — выбрана неверная функция</span>`)}
+ });
+ C.forEach((it,i)=>{
+  const sel=document.querySelector(`input[name=C${i}]:checked`);
+  const val=sel?(+sel.value===1):null;
+  if(val===it.a){score++;det.push(`<span class="ok">✔ Блок В, утверждение ${i+1} — верно</span>`)}
+  else{det.push(`<span class="no">✘ Блок В, утверждение ${i+1} — правильно: ${it.a?"верно":"неверно"}</span>`)}
+ });
+ const g=document.getElementById("taskG").value;
+ if(g!==""&&+g===45){score++;det.push(`<span class="ok">✔ Блок Г — правильно: 90%</span>`)}
+ else{det.push(`<span class="no">✘ Блок Г — правильно: 45 из 50 = 90% всхожести</span>`)}
+ const pct=Math.round(score/max*100);
+ let gr,cls;
+ if(pct>=90){gr="5 — отлично!";cls="g5"}
+ else if(pct>=75){gr="4 — хорошо!";cls="g4"}
+ else if(pct>=55){gr="3 — удовлетворительно";cls="g3"}
+ else{gr="2 — нужно повторить материал";cls="g2"}
+ document.getElementById("gradeBox").className="grade "+cls;
+ document.getElementById("gradeBox").innerHTML=`Оценка: ${gr}<br><span style="font-size:.6em">Баллов: ${score} из ${max} (${pct}%)</span>`;
+ document.getElementById("details").innerHTML="<b>Разбор работы:</b><br>"+det.join("<br>");
+ document.getElementById("result").style.display="block";
+ document.getElementById("result").scrollIntoView({behavior:"smooth"});
+}
+</script>
+</div>
+</body>
+</html>
