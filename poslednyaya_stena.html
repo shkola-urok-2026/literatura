@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Последняя стена — гибель Византии</title>
+<style>
+body{font-family:Georgia,serif;margin:0;background:#1a2238;color:#eee}
+header{background:linear-gradient(135deg,#5b2333,#7a2e3d);padding:24px 18px;text-align:center}
+header h1{margin:0;color:#f4d58d;font-size:1.7em}
+header p{margin:8px 0 0;color:#eee;font-style:italic}
+.wrap{max-width:900px;margin:0 auto;padding:18px}
+.badge{display:inline-block;background:#f4d58d;color:#4a2c2c;border-radius:8px;padding:4px 10px;margin:6px 4px 6px 0;font-size:.85em;text-decoration:none;font-family:Arial,sans-serif;font-weight:bold}
+.station{background:#232d4a;border:1px solid #3a466b;border-radius:12px;padding:18px;margin:14px 0}
+.station h2{color:#f4d58d;margin-top:0}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+td,th{border:1px solid #3a466b;padding:7px;font-size:.95em}
+th{background:#2e3a5f;color:#f4d58d}
+.quiz button{display:block;width:100%;text-align:left;margin:6px 0;padding:10px;border-radius:8px;border:1px solid #3a466b;background:#2e3a5f;color:#eee;cursor:pointer;font-size:1em}
+.quiz button.ok{background:#2e7d32;border-color:#4caf50}
+.quiz button.bad{background:#8b2e2e;border-color:#c62828}
+.exp{font-style:italic;color:#c9d1f0;font-size:.9em;margin:4px 0 12px}
+#mapwrap{background:#2e3a5f;border-radius:10px;position:relative;padding:10px}
+.spot{position:absolute;width:22px;height:22px;border-radius:50%;background:#f4d58d;border:2px solid #7a2e3d;cursor:pointer}
+.spot.ok{background:#4caf50}
+.spot.bad{background:#c62828;animation:blink .4s}
+@keyframes blink{50%{opacity:.3}}
+.spot-label{position:absolute;font-size:.72em;color:#f4d58d;pointer-events:none;text-shadow:0 0 3px #000}
+.schemanode{border:1px solid #f4d58d;border-radius:8px;padding:9px;margin:6px 0;cursor:pointer;background:#2e3a5f}
+.schemanode .cmt{display:none;font-size:.9em;color:#c9d1f0;margin-top:6px}
+.schemanode.open .cmt{display:block}
+textarea{width:100%;min-height:180px;background:#2e3a5f;color:#eee;border:1px solid #3a466b;border-radius:8px;padding:10px;font-family:Georgia,serif;font-size:1em;box-sizing:border-box}
+.ck{display:block;margin:8px 0;cursor:pointer}
+.done-list li{list-style:none;margin:4px 0}
+#status{font-family:Arial,sans-serif}
+.banner{display:none;background:#2e7d32;border-radius:10px;padding:14px;text-align:center;font-size:1.1em;margin:10px 0}
+.teacher{color:#888;font-size:.8em;margin:10px 0}
+a{color:#f4d58d}
+</style>
+</head>
+<body>
+<header>
+<h1>🛡 Последняя стена</h1>
+<p>Гибель Византии и возникновение Османской империи — § 23, с. 200–211</p>
+<p style="font-size:.95em"><em>Девиз экспедиции: «Почему империя, пережившая тысячу лет, пала за два месяца осады?»</em></p>
+<button id="bell" style="background:#f4d58d;color:#4a2c2c;border:none;border-radius:8px;padding:10px 18px;font-size:1em;cursor:pointer;font-weight:bold">🔔 Звонок на урок</button>
+</header>
+<div class="wrap">
+
+<nav class="station"><h2>🗺 Карта экспедиции</h2>
+<p>Пройдите станции — маршрут зажжётся целиком.</p>
+<ul class="done-list">
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> 🏛 Закат двуглавого орла</label></li>
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> 🏰 Балканская буря</label></li>
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> 🌙 Звезда Османа</label></li>
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> ⛓ Живой налог</label></li>
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> 🕊 Последняя надежда</label></li>
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> 🛡 Последняя стена</label></li>
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> 🎯 Битва за Царьград</label></li>
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> 🗺 Дорожный свиток хрониста</label></li>
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> ✍️ Келья хрониста</label></li>
+<li><label class="ck"><input type="checkbox" class="st" onchange="stat()"> 🏆 Трофеи хрониста</label></li>
+</ul>
+<div class="banner" id="banner">Хроника дописана! Экспедиция завершена! 🏆</div>
+</nav>
+
+<section class="station" id="s1"><h2>🏛 Закат двуглавого орла</h2>
+<a class="badge" href="uchebnik_istoriya.pdf#page=200" target="_blank">📖 Учебник: § 23, п. 1 «Умирающая империя», с. 200–203</a>
+<p>В 1204 г. крестоносцы разгромили Константинополь — Византия распалась на Никейскую империю, Трапезундскую империю и Эпирский деспотат. В 1261 г. Никейская империя вернула столицу, но империя уже была «не та»: казна пуста, морская торговля — в руках Венеции и Генуи, на севере усилились Болгария и Сербия. Палеологи воевали сами с собой.</p>
+<p><strong>Парадокс:</strong> эпоха упадка страны стала временем расцвета её культуры — мозаики и иконы XIV в. отличались особой одухотворённостью (Христос Вседержитель из монастыря Хора).</p>
+<table><tr><th>Что потеряла</th><th>Кому ушла</th></tr>
+<tr><td>Доходы от морской торговли</td><td>Венеция и Генуя</td></tr>
+<tr><td>Балканские земли</td><td>Болгария и Сербия</td></tr>
+<tr><td>Мир внутри династии</td><td>Усобицы Палеологов</td></tr></table>
+</section>
+
+<section class="station" id="s2"><h2>🏰 Балканская буря</h2>
+<a class="badge" href="uchebnik_istoriya.pdf#page=203" target="_blank">📖 Учебник: § 23, п. 2 «Болгария и Сербия», с. 203–204</a>
+<p>Второе Болгарское царство (1186–1396, столица Тырново) после монгольского нашествия прежнего величия не достигло. Сербия расцвела при короле <strong>Стефане Душане</strong> (1331–1355) — законодателе и полководце, бившем основным ударом по Византии: его держава простиралась от Адриатического до Эгейского моря.</p>
+</section>
+
+<section class="station" id="s3"><h2>🌙 Звезда Османа</h2>
+<a class="badge" href="uchebnik_istoriya.pdf#page=204" target="_blank">📖 Учебник: § 23, п. 3 «Османы», с. 204–205</a>
+<p>В конце XIII в. на северо-западе Малой Азии возникло воинственное мусульманское государство правителя <strong>Османа</strong> — отсюда «турки-османы». Осман принял титул султана. Сила османов — талантливые полководцы, умная система комплектования войска, многочисленная конница и <strong>лучшая в Европе артиллерия</strong>.</p>
+<p>Дверь в Европу османам открыли сами византийцы: претенденты на престол звали их в помощники в усобицах.</p>
+</section>
+
+<section class="station" id="s4"><h2>⛓ Живой налог</h2>
+<a class="badge" href="uchebnik_istoriya.pdf#page=204" target="_blank">📖 Учебник: рубрика «Подробнее», с. 204–205</a>
+<p>С покорённых христианских семей забирали здоровых мальчиков, воспитывали их в преданности исламу и султану. Способные становились чиновниками, остальные — <strong>янычарами</strong> («новое войско»), ядром армии. Так османы наращивали силы за счёт покорённых народов, а их армия превосходила врага в 2–3 раза.</p>
+</section>
+
+<section class="station" id="s5"><h2>🕊 Последняя надежда</h2>
+<a class="badge" href="uchebnik_istoriya.pdf#page=205" target="_blank">📖 Учебник: § 23, п. 4 «В поисках спасения», с. 205–206</a>
+<p>К концу XIV в. Болгария попала под власть турок на пять столетий. В 1389 г. на Косовом поле сербы потерпели решающее поражение — серб Милош Обилич, притворившись перебежчиком, убил султана, но смятения в турецком войске не вызвал. Разгром османов Тимуром дал Византии передышку — её использовали для переговоров с Западом.</p>
+<p>В 1439 г. на Флорентийском соборе заключили <strong>церковную унию</strong> с католиками — но почти все разногласия решили в пользу Рима, и большинство православных унию не приняло. Вражда сторонников и противников унии лишь ослабила империю.</p>
+<p><strong>Мостик к России:</strong> митрополит всея Руси Исидор подписал унию — московский князь Василий II его арестовал.</p>
+</section>
+
+<section class="station" id="s6"><h2>🛡 Последняя стена</h2>
+<a class="badge" href="uchebnik_istoriya.pdf#page=206" target="_blank">📖 Учебник: § 23, п. 5 «Падение Константинополя», с. 206–209</a>
+<p>Молодой <strong>Мехмед II Завоеватель</strong> начал готовить осаду сразу после вступления на престол. В 1453 г. около 150 тыс. турок окружили город с суши и моря; защитников — лишь 7 тыс., помощь Запада опоздала. После двухмесячной осады и решающего штурма турки ворвались в город; последний император <strong>Константин XI</strong> погиб с оружием в руках. Константинополь стал Стамбулом, Святая София — мечетью. В 1475 г. османы взяли генуэзские колонии Южного берега Крыма.</p>
+<p><strong>Историческая ирония:</strong> стены Константинополя строили в V в., и за всю историю их брали штурмом лишь дважды — крестоносцы в XIII в. и османы в XV в.</p>
+</section>
+
+<section class="station quiz" id="quiz"><h2>🎯 Битва за Царьград</h2>
+<p id="qcount">Решено верно: 0 из 7</p>
+<div id="qbox"></div>
+<button onclick="resetQuiz()">Пройти заново</button>
+</section>
+
+<section class="station" id="scroll"><h2>🗺 Дорожный свиток хрониста</h2>
+<p><strong>Блок 1. «Где это случилось?»</strong> Кликните по верной точке на карте.</p>
+<p id="spotq"></p>
+<div id="mapwrap" style="max-width:640px;margin:10px auto">
+<svg viewBox="0 0 640 380" style="width:100%;background:#2e3a5f;border-radius:8px">
+<path d="M0,0 L250,0 L270,60 L240,140 L260,220 L230,300 L250,380 L0,380 Z" fill="#5b7a5b" stroke="#f4d58d"/>
+<path d="M250,0 L640,0 L640,180 L420,180 L400,120 L270,60 Z" fill="#7a8f5b" stroke="#f4d58d"/>
+<path d="M400,120 L640,180 L640,260 L420,260 L390,190 Z" fill="#8f7a5b" stroke="#f4d58d"/>
+<path d="M270,60 L400,120 L390,190 L360,260 L260,220 Z" fill="#6b5b8f" stroke="#f4d58d"/>
+<rect x="395" y="150" width="120" height="40" fill="#2e5f7a" stroke="#f4d58d"/>
+<rect x="480" y="260" width="160" height="120" fill="#2e5f7a" stroke="#f4d58d"/>
+<text x="450" y="177" fill="#cfe6f0" font-size="13">Мраморное море</text>
+<text x="530" y="320" fill="#cfe6f0" font-size="13">Чёрное море</text>
+<text x="60" y="90" fill="#fff" font-size="14">Сербия</text>
+<text x="150" y="200" fill="#fff" font-size="14">Болгария</text>
+<text x="300" y="160" fill="#fff" font-size="14">Византия</text>
+<text x="440" y="100" fill="#fff" font-size="14">Земли османов</text>
+</svg>
+</div>
+<p id="spotcount">Верно указано: 0 из 6</p>
+<button onclick="resetSpots()">Пройти заново</button>
+<hr>
+<p><strong>Блок 2. «Летопись дат»</strong> — соедините год и событие.</p>
+<div id="years"></div><div id="events"></div>
+<p id="paircount">Собрано пар: 0 из 6</p>
+</section>
+
+<section class="station" id="scribe"><h2>✍️ Келья хрониста</h2>
+<p>Вы — житель Константинополя весны 1453 года. Напишите <strong>«Хронику осады»</strong>: 3–4 записи от лица защитника города (даты, факты, чувства). Пишите так, как могли бы писать тогда — кратко и честно.</p>
+<textarea id="chronicle" placeholder="29 апреля. Турки подвезли пушки к стенам..."></textarea>
+<button onclick="saveChronicle()">💾 Сохранить хронику в файл</button>
+</section>
+
+<section class="station" id="trophies"><h2>🏆 Трофеи хрониста</h2>
+<p><strong>Вывод для тетради:</strong> Византия пала под натиском Османской империи, ослабленная крестовыми походами, усобицами и расколом с Западом. Османы унаследовали не только земли, но и опыт византийского управления.</p>
+
+<h3>🗺 Наследница Византии</h3>
+<a class="badge" href="uchebnik_istoriya.pdf#page=210" target="_blank">📖 Учебник: с. 210</a>
+<p>1448 г. — автокефалия Русской церкви. 1472 г. — брак Ивана III и <strong>Софьи Палеолог</strong>, племянницы последнего византийского императора. Отсюда вырастает идея Москвы как наследницы Византии — зацепка к следующему курсу истории.</p>
+<a class="badge" href="uchebnik_istoriya.pdf#page=236" target="_blank">📖 Синхронистическая таблица, с. 236</a>
+
+<h3>Опорная схема (перечертите в тетрадь)</h3>
+<div id="scheme">
+<div class="schemanode" onclick="this.classList.toggle('open')">Византия: тысячелетняя империя<div class="cmt">С конца IV в. — преемница Рима, столица Константинополь (Царьград).</div></div>
+<div class="schemanode" onclick="this.classList.toggle('open')">↓ 1204 г. — разгром крестоносцами<div class="cmt">Империя распалась; вернулась в 1261 г., но ослабленной. Палеологи воюют сами с собой.</div></div>
+<div class="schemanode" onclick="this.classList.toggle('open')">↓ Османы: сила и «живой налог»<div class="cmt">Султан Осман, конница, лучшая артиллерия; янычары из мальчиков покорённых народов.</div></div>
+<div class="schemanode" onclick="this.classList.toggle('open')">↓ 1389 г. Косово — 1439 г. уния<div class="cmt">Балканы под турками; уния с Римом не спасла, а расколола.</div></div>
+<div class="schemanode" onclick="this.classList.toggle('open')">↓ 1453 г. — падение Константинополя<div class="cmt">150 тыс. против 7 тыс.; Константин XI погиб с оружием в руках. Город стал Стамбулом.</div></div>
+<div class="schemanode" onclick="this.classList.toggle('open')">↓ Османская империя наследует Византии<div class="cmt">Земли Балкан, опыт управления; Святая София — мечеть. Схема управления — с. 211.</div></div>
+<div class="schemanode" onclick="this.classList.toggle('open')">→ Москва — наследница: Софья Палеолог<div class="cmt">1448 г. — автокефалия Русской церкви; 1472 г. — брак Ивана III и Софьи Палеолог.</div></div>
+</div>
+<button onclick="openScheme()">Раскрыть всю схему</button>
+
+<h3>Домашнее задание</h3>
+<ol>
+<li>§ 23, с. 200–211 — пересказ; вопросы и задания в конце параграфа.</li>
+<li>Перечертить опорную схему в тетрадь.</li>
+<li>Дописать и отшлифовать «Хронику осады» — принести на следующий урок.</li>
+</ol>
+<p class="exp">Рефлексия: что из пережитого хронистом откликается вам больше всего — и почему?</p>
+</section>
+
+<p class="teacher">Педагогу: станции маршрута соответствуют пунктам параграфа § 23 и этапам плана урока (актуализация → изучение нового → закрепление → контроль → рефлексия).</p>
+</div>
+
+<script>
+var MEET_URL = "https://max.ru/joincall/DD2Oq1fsUN920GfcQffG56ZfywO9RP0Wfer_CeXNkg8";
+document.getElementById('bell').onclick = function(){ window.open(MEET_URL,'_blank'); };
+
+function stat(){
+  var n = document.querySelectorAll('.st:checked').length;
+  var t = document.querySelectorAll('.st').length;
+  if(n === t) document.getElementById('banner').style.display = 'block';
+}
+
+var QS = [
+ ['В каком году крестоносцы разгромили Константинополь?', ['1204','1261','1453'], 0, 'Четвёртый крестовый поход 1204 г. располовинил империю.'],
+ ['Кто вернул Константинополь в 1261 г.?', ['Никейская империя','Эпирский деспотат','Трапезундская империя'], 0, 'Никейская империя восстановила державу Палеологов.'],
+ ['Кто правил Сербией в 1331–1355 гг.?', ['Стефан Душан','Осман','Мехмед II'], 0, 'Стефан Душан расширил державу от Адриатики до Эгейского моря.'],
+ ['Кого называли янычарами?', ['Мальчиков покорённых христианских семей, набранных султаном','Турецких купцов','Византийских перебежчиков'], 0, 'Янычары — «новое войско», ядро армии османов.'],
+ ['Когда турки разгромили сербов на Косовом поле?', ['1389','1439','1475'], 0, 'Милош Обилич убил султана, но поражение сербов это не изменило.'],
+ ['Сколько защитников было у Константинополя в 1453 г.?', ['около 7 тыс.','около 150 тыс.','около 50 тыс.'], 0, 'Мехмед II вёл около 150 тыс., защитников — 7 тыс.'],
+ ['Как звали последнего византийского императора?', ['Константин XI','Юстиниан I','Осман'], 0, 'Константин XI погиб с оружием в руках при штурме.']
+];
+var qdone = 0, qok = 0;
+function renderQ(i){
+  var b = document.getElementById('qbox');
+  if(i >= QS.length){ b.innerHTML = '<p>Битва окончена! Верно: '+qok+' из '+QS.length+'.</p>'; return; }
+  var q = QS[i];
+  var h = '<p><strong>'+(i+1)+'. '+q[0]+'</strong></p>';
+  for(var j=0;j<q[1].length;j++) h += '<button data-ok="'+(j===q[2])+'" onclick="answer(this,'+i+')">'+q[1][j]+'</button>';
+  h += '<p class="exp" id="qe'+i+'" style="display:none">'+q[3]+'</p>';
+  b.innerHTML = h;
+}
+function answer(btn, i){
+  var ok = btn.getAttribute('data-ok') === 'true';
+  btn.classList.add(ok ? 'ok' : 'bad');
+  if(ok) qdone++, qok++; else qdone++;
+  document.getElementById('qcount').textContent = 'Решено верно: '+qok+' из '+QS.length;
+  document.getElementById('qe'+i).style.display = 'block';
+  var bs = btn.parentNode.querySelectorAll('button');
+  for(var k=0;k<bs.length;k++) bs[k].disabled = true;
+  setTimeout(function(){ renderQ(i+1); }, 1400);
+}
+function resetQuiz(){ qdone = 0; qok = 0; document.getElementById('qcount').textContent = 'Решено верно: 0 из 7'; renderQ(0); }
+renderQ(0);
+
+var SPOTS = [
+ {name:'Константинополь', x:415, y:145, q:'Столица, которую за тысячу лет брали штурмом лишь дважды?', lx:415, ly:130},
+ {name:'Косово поле', x:120, y:130, q:'Где сербы потерпели решающее поражение в 1389 г.?', lx:120, ly:115},
+ {name:'Варна', x:250, y:250, q:'Где крестоносцы были разбиты в 1444 г.?', lx:250, ly:235},
+ {name:'Тырново', x:190, y:170, q:'Столица Второго Болгарского царства?', lx:190, ly:155},
+ {name:'Земли османов', x:470, y:90, q:'Откуда родом турки-османы?', lx:470, ly:75},
+ {name:'Крым', x:560, y:300, q:'Где в 1475 г. османы взяли генуэзские колонии?', lx:560, ly:285}
+];
+var sqi = 0, sok = 0;
+function buildSpots(){
+  var w = document.getElementById('mapwrap');
+  var olds = w.querySelectorAll('.spot,.spot-label'); for(var k=0;k<olds.length;k++) olds[k].remove();
+  SPOTS.forEach(function(s,i){
+    var d = document.createElement('div'); d.className = 'spot';
+    d.style.left = 'calc('+(s.x/640*100)+'% - 11px)'; d.style.top = 'calc('+(s.y/380*100)+'% - 11px)';
+    d.onclick = function(){ trySpot(d, s); };
+    var l = document.createElement('div'); l.className = 'spot-label';
+    l.style.left = 'calc('+(s.lx/640*100)+'%)'; l.style.top = 'calc('+(s.ly/380*100)+'%)';
+    l.textContent = s.name; w.appendChild(l); w.appendChild(d);
+  });
+}
+function trySpot(d, s){
+  if(s.name === SPOTS[sqi].name){
+    d.classList.add('ok'); d.classList.remove('bad'); sok++;
+    document.getElementById('spotq').innerHTML = '✅ <strong>'+s.name+'</strong> — верно! '+s.q.replace('Кликните','Отмечено');
+    sqi++;
+    if(sqi < SPOTS.length) document.getElementById('spotq').innerHTML += '<br>Следующее: '+SPOTS[sqi].q;
+    else document.getElementById('spotq').innerHTML += '<br><strong>Свиток прочитан!</strong>';
+    document.getElementById('spotcount').textContent = 'Верно указано: '+sok+' из 6';
+  } else {
+    d.classList.add('bad'); setTimeout(function(){ d.classList.remove('bad'); }, 600);
+  }
+}
+function resetSpots(){ sqi = 0; sok = 0; document.getElementById('spotcount').textContent = 'Верно указано: 0 из 6'; document.getElementById('spotq').textContent = SPOTS[0].q; buildSpots(); }
+document.getElementById('spotq').textContent = SPOTS[0].q;
+buildSpots();
+
+var PAIRS = [['1204','Разгром Константинополя крестоносцами'],['1261','Возвращение Константинополя Никейской империей'],['1389','Поражение сербов на Косовом поле'],['1439','Флорентийская церковная уния'],['1453','Падение Константинополя'],['1475','Османы берут генуэзские колонии Крыма']];
+var selY = null, selE = null, pairsOk = 0, usedY = [], usedE = [];
+function buildPairs(){
+  usedY = []; usedE = []; pairsOk = 0; selY = selE = null;
+  document.getElementById('paircount').textContent = 'Собрано пар: 0 из 6';
+  var ys = PAIRS.slice().sort(function(){return Math.random()-0.5;});
+  var es = PAIRS.slice().sort(function(){return Math.random()-0.5;});
+  var yh = '<p><strong>Годы:</strong></p>', eh = '<p><strong>События:</strong></p>';
+  ys.forEach(function(p,i){ yh += '<button class="yb" data-v="'+p[0]+'">'+p[0]+'</button>'; });
+  es.forEach(function(p,i){ eh += '<button class="eb" data-v="'+p[1]+'">'+p[1]+'</button>'; });
+  document.getElementById('years').innerHTML = yh;
+  document.getElementById('events').innerHTML = eh;
+  wirePairs();
+}
+function wirePairs(){
+  document.querySelectorAll('.yb').forEach(function(b){
+    b.onclick = function(){ if(b.disabled) return; selY = b.dataset.v; selE && matchPairs(); };
+  });
+  document.querySelectorAll('.eb').forEach(function(b){
+    b.onclick = function(){ if(b.disabled) return; selE = b.dataset.v; selY && matchPairs(); };
+  });
+}
+function matchPairs(){
+  var correct = PAIRS.some(function(p){ return p[0]===selY && p[1]===selE; });
+  var yb = document.querySelector('.yb[data-v="'+selY+'"]'), eb = document.querySelector('.eb[data-v="'+selE+'"]');
+  if(correct){
+    yb.classList.add('ok'); eb.classList.add('ok'); yb.disabled = eb.disabled = true;
+    pairsOk++;
+    document.getElementById('paircount').textContent = 'Собрано пар: '+pairsOk+' из 6';
+  } else {
+    yb.classList.add('bad'); eb.classList.add('bad');
+    setTimeout(function(){ yb.classList.remove('bad'); eb.classList.remove('bad'); }, 600);
+  }
+  selY = selE = null;
+}
+buildPairs();
+
+function saveChronicle(){
+  var t = document.getElementById('chronicle').value.trim();
+  if(!t){ alert('Сначала напишите хронику!'); return; }
+  var blob = new Blob(['ХРОНИКА ОСАДЫ КОНСТАНТИНОПОЛЯ, 1453 г.
+
+'+t], {type:'text/plain;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'hronika_osady.txt'; a.click();
+}
+
+function openScheme(){ document.querySelectorAll('.schemanode').forEach(function(n){ n.classList.add('open'); }); }
+</script>
+</body>
+</html>
