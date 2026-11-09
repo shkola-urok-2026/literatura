@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Практическая работа: Передвижение воды по древесине — Биология, 6 класс</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Verdana,sans-serif;background:#eef3ea;color:#243b2a;line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1b5e20,#388e3c);color:#fff;border-radius:14px;padding:22px;text-align:center;margin-bottom:18px}
+header h1{font-size:1.35em;margin-bottom:6px}
+header p{opacity:.9;font-size:.95em}
+section{background:#fff;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+h2{font-size:1.15em;color:#1b5e20;margin-bottom:12px;border-left:5px solid #66bb6a;padding-left:10px}
+.btn{display:inline-block;background:#2e7d32;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:1em;cursor:pointer;margin:4px}
+.btn:hover{background:#1b5e20}
+.btn.sec{background:#607d8b}
+.hint{background:#fff8e1;border-left:4px solid #ffb300;padding:10px;border-radius:6px;font-size:.92em;margin:10px 0}
+.ok{background:#e8f5e9;border-left:4px solid #2e7d32;padding:10px;border-radius:6px}
+.err{background:#ffebee;border-left:4px solid #c62828;padding:10px;border-radius:6px}
+.cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.card{width:150px;background:#f1f8e9;border:2px solid #aed581;border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:.2s;font-size:.9em}
+.card:hover{transform:translateY(-3px)}
+.card .emo{font-size:2em;display:block;margin-bottom:6px}
+.card.picked{border-color:#2e7d32;background:#c8e6c9;box-shadow:0 0 0 3px #2e7d32}
+.card.wrongpick{border-color:#e53935;background:#ffcdd2}
+.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:12px 0}
+input[type=range]{flex:1;min-width:200px}
+.stembox{text-align:center}
+#stem{transition:.5s}
+#dyeLabel{font-weight:bold;color:#c62828}
+.layer{cursor:pointer}
+.layer:hover{opacity:.75}
+#layerInfo{margin-top:12px;min-height:56px}
+.quiz{border:1px solid #c5e1a5;border-radius:10px;padding:14px;margin:14px 0}
+.quiz p.q{font-weight:bold;margin-bottom:8px}
+.opts label{display:block;padding:8px;border-radius:8px;cursor:pointer;margin:4px 0;border:2px solid transparent}
+.opts label:hover{background:#f1f8e9}
+.opts input{margin-right:8px}
+.fillin{padding:4px 8px;border:2px solid #aed581;border-radius:6px;width:110px;text-align:center;font-size:1em}
+#result{font-size:1.2em;font-weight:bold;text-align:center;margin-top:14px}
+.score{display:flex;justify-content:center;gap:8px;font-size:1.6em}
+.conclusion p{margin:8px 0}
+@media print{.noprint{display:none}section{box-shadow:none;border:1px solid #ccc}}
+footer{text-align:center;font-size:.85em;color:#5d7a5f;padding:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>🌿 Практическая работа «Выявление передвижения воды и минеральных веществ по древесине»</h1>
+<p>Биология • 6 класс • интерактивное выполнение опыта</p>
+</header>
+
+<section>
+<h2>🎯 Цель работы</h2>
+<p>Убедиться на опыте, что <b>вода и растворённые в ней минеральные вещества передвигаются по стеблю к листьям</b>, и выяснить, по какой части стебля (древесине) это происходит.</p>
+<h2 style="margin-top:16px">🧰 Соберите оборудование</h2>
+<p class="hint noprint">Нажимайте на карточки: выберите только то, что действительно нужно для опыта. Лишние карточки будут подсвечены красным!</p>
+<div class="cards" id="equip">
+<div class="card" data-ok="1"><span class="emo">🌿</span>Побег растения<br>(веточка)</div>
+<div class="card" data-ok="1"><span class="emo">🥛</span>Стакан<br>с водой</div>
+<div class="card" data-ok="1"><span class="emo">🎨</span>Краситель<br>(чернила)</div>
+<div class="card" data-ok="1"><span class="emo">🔪</span>Скальпель<br>(бритва)</div>
+<div class="card" data-ok="1"><span class="emo">🔍</span>Лупа</div>
+<div class="card" data-ok="0"><span class="emo">🪣</span>Большое ведро</div>
+<div class="card" data-ok="0"><span class="emo">🌵</span>Кактус<br>в горшке</div>
+<div class="card" data-ok="0"><span class="emo">🔧</span>Гаечный ключ</div>
+</div>
+<p id="equipMsg" class="hint noprint">Выбрано верных предметов: <b id="eqCount">0</b> из 5.</p>
+<div id="equipDone" class="ok" style="display:none">✅ Оборудование собрано! Переходите к опыту ниже.</div>
+</section>
+
+<section class="stembox">
+<h2>🧪 Опыт: побег в окрашенной воде</h2>
+<p>Поставим побег в стакан с водой, в которой растворён краситель. Прошло несколько дней. Выберите цвет красителя и «пройдите» дни опыта.</p>
+<div class="controls noprint">
+<label>Краситель: <select id="dye"><option value="#c62828">Красный (чернила)</option><option value="#1565c0">Синий</option><option value="#6a1b9a">Фиолетовый</option></select></label>
+<label style="flex:1;text-align:center">День опыта: <b id="dayLabel">1</b> <input type="range" id="day" min="1" max="7" value="1"></label>
+<button class="btn" onclick="makeCut()">🔪 Сделать срез</button>
+<button class="btn sec" onclick="resetExp()">↩ Начать заново</button>
+</div>
+<svg id="stem" width="220" height="360" viewBox="0 0 220 360">
+<rect x="40" y="20" width="30" height="300" rx="10" fill="#a5d6a7" stroke="#2e7d32" stroke-width="2"/>
+<rect id="col1" x="46" y="26" width="6" height="0" rx="3" fill="#c62828"/>
+<rect id="col2" x="58" y="26" width="6" height="0" rx="3" fill="#c62828"/>
+<path d="M70 60 Q120 30 150 55" stroke="#388e3c" stroke-width="5" fill="none"/>
+<path d="M70 100 Q125 80 160 100" stroke="#388e3c" stroke-width="5" fill="none"/>
+<path d="M70 140 Q120 125 150 145" stroke="#388e3c" stroke-width="5" fill="none"/>
+<ellipse cx="158" cy="52" rx="26" ry="13" fill="#66bb6a" stroke="#2e7d32"/>
+<ellipse cx="168" cy="98" rx="28" ry="14" fill="#66bb6a" stroke="#2e7d32"/>
+<ellipse cx="158" cy="142" rx="24" ry="12" fill="#66bb6a" stroke="#2e7d32"/>
+<rect x="20" y="318" width="70" height="40" rx="6" fill="#e1f5fe" stroke="#0288d1" stroke-width="2"/>
+<rect id="water" x="22" y="330" width="66" height="26" fill="#b3e5fc"/>
+<line id="cutline" x1="36" y1="0" x2="84" y2="0" stroke="#8d6e63" stroke-width="3" stroke-dasharray="6 4" opacity="0"/>
+<text x="110" y="350" font-size="13" fill="#455a64">стакан с водой</text>
+</svg>
+<p id="dyeLabel">Краситель пока не выбран — двигайте ползунок и сделайте срез!</p>
+<p id="obs" class="hint">Вода с красителем поступает в стебель через срез побега снизу.</p>
+</section>
+
+<section class="stembox">
+<h2>🔎 Поперечный срез стебля — изучим под лупой</h2>
+<p>Нажимайте на слои среза, чтобы узнать их название и роль. <b>Сосуды древесины окрасились</b> — значит, вода шла именно по ним!</p>
+<svg width="260" height="260" viewBox="0 0 260 260">
+<circle cx="130" cy="130" r="110" fill="#8d6e63" stroke="#5d4037" stroke-width="3" class="layer" data-l="cork"/>
+<circle cx="130" cy="130" r="92" fill="#a1887f" stroke="#5d4037" stroke-width="2" class="layer" data-l="bast"/>
+<circle cx="130" cy="130" r="72" fill="#fafafa" stroke="#5d4037" stroke-width="2" class="layer" data-l="cambium"/>
+<circle cx="130" cy="130" r="58" fill="#d7ccc8" stroke="#5d4037" stroke-width="2" class="layer" data-l="wood"/>
+<g class="layer" data-l="wood">
+<circle cx="130" cy="130" r="58" fill="none" stroke="transparent" pointer-events="all"/>
+<g id="vessels" fill="#c62828"></g>
+</g>
+<circle cx="130" cy="130" r="24" fill="#fffde7" stroke="#f9a825" stroke-width="2" class="layer" data-l="core"/>
+</svg>
+<div id="layerInfo" class="hint">👆 Выберите слой на срезе</div>
+<div id="layerName" style="font-weight:bold;text-align:center;color:#1b5e20"></div>
+</section>
+
+<section class="noprint">
+<h2>❓ Проверь себя</h2>
+<div class="quiz">
+<p class="q">1. По какой части стебля передвигается вода с минеральными веществами?</p>
+<div class="opts">
+<label><input type="radio" name="q1" value="a"> По коре</label>
+<label><input type="radio" name="q1" value="b"> По древесине (сосудам)</label>
+<label><input type="radio" name="q1" value="c"> По сердцевине</label>
+</div>
+</div>
+<div class="quiz">
+<p class="q">2. Почему срез стебля окрасился в цвет красителя?</p>
+<div class="opts">
+<label><input type="radio" name="q2" value="a"> Краситель окрасил воздух в стебле</label>
+<label><input type="radio" name="q2" value="b"> Краситель поднялся по сосудам древесины вместе с водой</label>
+<label><input type="radio" name="q2" value="c"> Краситель попал на поверхность коры</label>
+</div>
+</div>
+<div class="quiz">
+<p class="q">3. Куда вода с минеральными веществами попадает из корня?</p>
+<div class="opts">
+<label><input type="radio" name="q3" value="a"> В древесину стебля, а затем к листьям</label>
+<label><input type="radio" name="q3" value="b"> Только в кору</label>
+<label><input type="radio" name="q3" value="c"> Остаётся в корне</label>
+</div>
+</div>
+<div class="quiz">
+<p class="q">4. Какой процесс «поднимает» воду от корней к листьям?</p>
+<div class="opts">
+<label><input type="radio" name="q4" value="a"> Испарение воды листьями (транспирация) и корневое давление</label>
+<label><input type="radio" name="q4" value="b"> Фотосинтез</label>
+<label><input type="radio" name="q4" value="c"> Дыхание стебля</label>
+</div>
+</div>
+<div class="quiz">
+<p class="q">5. Вставьте слова в вывод: «Вода и минеральные вещества передвигаются по ______ стебля, по его ______».</p>
+<p>Вода и минеральные вещества передвигаются по <input type="text" class="fillin" id="f1" placeholder="слово 1"> стебля, по его <input type="text" class="fillin" id="f2" placeholder="слово 2">.</p>
+<p class="hint">Подсказка: вспоминаем толщину стебля (поперечный срез!) и проводящие элементы в древесине.</p>
+</div>
+<button class="btn" onclick="checkAll()">✔ Проверить ответы</button>
+<div id="result" style="display:none"></div>
+<div class="score" id="stars" style="display:none"></div>
+</section>
+
+<section>
+<h2>📝 Вывод (запишите в тетрадь)</h2>
+<div class="conclusion">
+<p><b>Что делали:</b> поставили побег растения в воду с красителем и через несколько дней сделали поперечный срез стебля.</p>
+<p><b>Что наблюдали:</b> срез окрасился в цвет красителя. Окрашенными оказались только <b>сосуды древесины</b>.</p>
+<p><b>Вывод:</b> вода и растворённые в ней минеральные вещества передвигаются по стеблю <b>снизу вверх</b> — от корня к листьям — по <b>сосудам древесины</b>. Движению воды способствуют испарение воды листьями и корневое давление.</p>
+</div>
+<button class="btn noprint" onclick="window.print()">🖨 Распечатать отчёт</button>
+</section>
+
+<footer>Интерактивная практическая работа по биологии • 6 класс</footer>
+</div>
+
+<script>
+// --- Оборудование ---
+let eqGood=0;
+document.querySelectorAll('#equip .card').forEach(c=>{
+ c.addEventListener('click',()=>{
+  if(c.dataset.ok==='1'){ if(!c.classList.contains('picked')){c.classList.add('picked');eqGood++;}
+   document.getElementById('eqCount').textContent=eqGood;
+   if(eqGood===5)document.getElementById('equipDone').style.display='block';
+  } else { c.classList.add('wrongpick'); setTimeout(()=>c.classList.remove('wrongpick'),1200);}
+ });
+});
+// --- Опыт ---
+const dayLabel=document.getElementById('dayLabel'),daySl=document.getElementById('day');
+daySl.addEventListener('input',()=>{dayLabel.textContent=daySl.value;});
+function makeCut(){
+ const d=+daySl.value,col=document.getElementById('dye').value;
+ document.getElementById('cutline').setAttribute('y1',320);document.getElementById('cutline').setAttribute('y2',320);document.getElementById('cutline').style.opacity=1;
+ const h=Math.min(290,40*d);
+ ['col1','col2'].forEach(id=>{const r=document.getElementById(id);r.setAttribute('fill',col);r.setAttribute('height',h);});
+ document.getElementById('water').setAttribute('fill',col);
+ document.getElementById('dyeLabel').textContent='Краситель поднялся по стеблю за '+d+' дн. (окрашена древесина до высоты ~'+h+' из 290 мм)';
+ document.getElementById('obs').innerHTML = d>=5
+  ? '<div class="ok">✅ Краситель дошёл до листьев: на большой высоте срез тоже окрашен — вода движется по всему побегу!</div>'
+  : '<div class="err">⏳ Краситель ещё не дошёл до листьев. Увеличьте «дни» опыта и сделайте срез выше.</div>';
+}
+function resetExp(){daySl.value=1;dayLabel.textContent='1';['col1','col2'].forEach(id=>{const r=document.getElementById(id);r.setAttribute('height',0);});document.getElementById('cutline').style.opacity=0;document.getElementById('water').setAttribute('fill','#b3e5fc');document.getElementById('dyeLabel').textContent='Краситель пока не выбран — двигайте ползунок и сделайте срез!';document.getElementById('obs').innerHTML='Вода с красителем поступает в стебель через срез побега снизу.';}
+// --- Сосуды на срезе ---
+(function(){const g=document.getElementById('vessels');let s='';
+ for(let ring=0;ring<3;ring++){const r=30+ring*14,n=14+ring*6;
+  for(let i=0;i<n;i++){const a=i/n*2*Math.PI+ring*0.3,x=130+r*Math.cos(a),y=130+r*Math.sin(a);
+   s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="4.5"/>';}}
+ g.innerHTML=s;})();
+const layers={
+ cork:{n:'Кора (пробка)',t:'Наружный покров стебля. Защищает внутренние ткани от повреждений и высыхания. Воду не проводит — она не окрашена.'},
+ bast:{n:'Луб',t:'Проводящая часть коры. По лубу передвигаются органические вещества (растворы сахаров) — сверху вниз, от листьев к корням.'},
+ cambium:{n:'Камбий',t:'Узкий слой образовательной ткани между корой и древесиной. Его клетки делятся и обеспечивают рост стебля в толщину.'},
+ wood:{n:'Древесина',t:'Главная проводящая часть стебля! По сосудам древесины вода и минеральные вещества идут снизу вверх — от корня к листьям. На срезе именно древесина окрасилась красителем.'},
+ core:{n:'Сердцевина',t:'Центральная часть стебля. Состоит из крупных клеток, запасает питательные вещества. Воду не проводит.'}};
+document.querySelectorAll('.layer').forEach(l=>{l.addEventListener('click',()=>{
+ const d=layers[l.dataset.l];
+ document.getElementById('layerName').textContent=d.n;
+ document.getElementById('layerInfo').innerHTML=d.t;
+});});
+// --- Проверка ---
+function checkAll(){
+ const ans={q1:'b',q2:'b',q3:'a',q4:'a'};
+ let sc=0,msg=[];
+ for(const k in ans){
+  const sel=document.querySelector('input[name='+k+']:checked');
+  if(sel&&sel.value===ans[k]){sc++;msg.push(k+': ✓');}else msg.push(k+': ✗');
+ }
+ const f1=document.getElementById('f1').value.trim().toLowerCase(),f2=document.getElementById('f2').value.trim().toLowerCase();
+ const f1ok=['поперечному','в длину','длину','вверх'].includes(f1)||f1.includes('поперечн')||f1.includes('длин')||f1.includes('вверх');
+ const f2ok=f2.includes('сосуд')||f2.includes('древесин');
+ if(f1ok)sc++;if(f2ok)sc++;
+ let t = sc>=6?'Отлично! 🌟 Вы молодец!':sc>=4?'Хорошо! Но загляните ещё раз в опыт.':'Проверьте работу ещё раз и пересмотрите срез стебля.';
+ const r=document.getElementById('result');r.style.display='block';
+ r.innerHTML='Правильных ответов: '+sc+' из 6. '+t;
+ const s=document.getElementById('stars');s.style.display='flex';s.innerHTML='⭐'.repeat(Math.round(sc/6*5))+'☆'.repeat(5-Math.round(sc/6*5));
+}
+</script>
+</body>
+</html>
