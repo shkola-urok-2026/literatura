@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Видоизменение корней — Биология 6 класс</title>
+<style>
+:root{--bg:#1c1710;--card:#2a2216;--accent:#d9a441;--text:#f2e8d5;--ok:#7ec96b;--bad:#e07a6b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:Georgia,'Times New Roman',serif;line-height:1.6;padding:16px;max-width:900px;margin:0 auto}
+h1{color:var(--accent);text-align:center;font-size:1.6em;margin:14px 0}
+h2{color:var(--accent);font-size:1.3em;margin:26px 0 10px;border-bottom:1px solid #5a4a2a;padding-bottom:6px}
+.card{background:var(--card);border:1px solid #5a4a2a;border-radius:12px;padding:16px;margin:12px 0}
+.time{color:#b9a98a;font-size:.9em}
+button{background:var(--accent);color:#1c1710;border:0;border-radius:8px;padding:10px 18px;font-size:1em;cursor:pointer;font-family:inherit;margin:4px}
+button:hover{filter:brightness(1.1)}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+td,th{border:1px solid #5a4a2a;padding:8px;text-align:left;font-size:.95em}
+th{color:var(--accent)}
+.chip{display:inline-block;background:#3a2f1d;border:1px solid var(--accent);border-radius:20px;padding:8px 16px;margin:5px;cursor:pointer;font-size:.95em}
+.chip.ok{background:#2e5b28;border-color:var(--ok)}
+.chip.err{background:#6b2c24;border-color:var(--bad)}
+.q{margin:14px 0}
+.q p{margin-bottom:6px}
+.inp{background:#3a2f1d;color:var(--text);border:1px solid #5a4a2a;border-radius:8px;padding:8px;width:100%;font-family:inherit}
+#res{font-size:1.2em;color:var(--accent);margin:14px 0;font-weight:bold}
+#out{margin-top:10px}
+.sm{text-align:center;font-size:2.5em;color:#5a4a2a}
+.hidden{display:none}
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin:10px 0}
+.map .card{margin:0;text-align:center}
+@media(max-width:600px){body{padding:10px}h1{font-size:1.3em}}
+</style></head><body>
+<h1>🌱 Видоизменение корней</h1>
+<div style="text-align:center" class="time">Биология • 6 класс • интерактивный урок</div>
+
+<div class="card"><h2 style="margin-top:0">🗺️ Карта урока</h2>
+<div class="map">
+<div class="card">1. Повторение<br><span class="time">4 мин</span></div>
+<div class="card">2. Задача урока<br><span class="time">2 мин</span></div>
+<div class="card">3. Новое знание<br><span class="time">10 мин</span></div>
+<div class="card">4. Лабораторная<br><span class="time">10 мин</span></div>
+<div class="card">5. Игра<br><span class="time">5 мин</span></div>
+<div class="card">6. Тест<br><span class="time">6 мин</span></div>
+<div class="card">7. Вывод<br><span class="time">4 мин</span></div>
+<div class="card">8. Домашнее задание<br><span class="time">2 мин</span></div>
+</div></div>
+
+<div class="card"><h2 style="margin-top:0">🔥 Повторение</h2>
+<p>Какие функции выполняет корень? Вспомните два типа корневых систем. Какой тип у пшеницы, а какой у одуванчика?</p>
+<p class="time">Подсказка: пшеница — мочковатая, одуванчик — стержневая.</p></div>
+
+<div class="card"><h2 style="margin-top:0">🎯 Задача урока</h2>
+<p><b>Узнать:</b> какие видоизменения бывают у корней.<br>
+<b>Научиться:</b> определять корнеплод и его части.<br>
+<b>Суметь:</b> объяснять, зачем растениям видоизменённые корни.</p></div>
+
+<div class="card"><h2 style="margin-top:0">📖 Новое знание: 7 видоизменений</h2>
+<table><tr><th>Видоизменение</th><th>Пример</th><th>Функция</th></tr>
+<tr><td>Корнеплод</td><td>морковь, свёкла, редис</td><td>запас питательных веществ</td></tr>
+<tr><td>Корневые клубни</td><td>георгин, батат</td><td>запас и размножение</td></tr>
+<tr><td>Корни-прицепки</td><td>плющ</td><td>прикрепление к опоре</td></tr>
+<tr><td>Корни-подпорки</td><td>баньян</td><td>опора огромной кроны</td></tr>
+<tr><td>Дыхательные корни</td><td>мангры</td><td>получение воздуха из илистой почвы</td></tr>
+<tr><td>Ходульные корни</td><td>панданус</td><td>опора и дыхание</td></tr>
+<tr><td>Корни-присоски</td><td>повилика</td><td>питание за счёт другого растения</td></tr></table>
+<p>🧐 Факт: баньян-великан в Индии разросся на площадь больше футбольного поля — его держат сотни корней-подпорок, и каждое из «деревьев» — часть одного растения!</p></div>
+
+<div class="card"><h2 style="margin-top:0">🔬 Лабораторная работа. Корнеплод моркови</h2>
+<p><b>Цель:</b> изучить внешнее и внутреннее строение корнеплода.<br>
+<b>Оборудование:</b> <span class="chip">морковь</span><span class="chip">лупа</span><span class="chip">скальпель</span><span class="chip">доска</span></p>
+<ol><li>Рассмотрите морковь: найдите <b>головку</b> (верх, где отходит листва), <b>собственно корнеплод</b> и <b>кончик</b> с тонкими корешками.</li>
+<li>Проведите поперечный срез, рассмотрите его через лупу.</li>
+<li>Найдите <b>кору</b> (мякоть) и <b>древесину</b> в центре.</li>
+<li>Обратите внимание: боковые корешки растут из середины корнеплода — так отличают корень от побега!</li>
+<li>Зарисуйте и подпишите части в тетради.</li></ol>
+<p class="time">Запись в тетрадь: «Корнеплод — видоизменённый корень, в котором запасаются питательные вещества».</p></div>
+
+<div class="card"><h2 style="margin-top:0">🎮 Игра «Определи видоизменение»</h2>
+<p>Кликните по верному ответу:</p>
+<div id="game"></div>
+<p id="gsc" class="time"></p></div>
+
+<div class="card"><h2 style="margin-top:0">📝 Тест — 8 вопросов</h2>
+<div id="test"></div>
+<button onclick="checkTest()">Проверить</button>
+<button onclick="location.reload()">Заново</button>
+<div id="res"></div><div id="out"></div></div>
+
+<div class="card"><h2 style="margin-top:0">✍️ Конструктор вывода</h2>
+<div id="verbs"></div>
+<p id="concl" class="card" style="background:#3a2f1d;min-height:40px"></p>
+<button onclick="copyT()">Скопировать</button></div>
+
+<div class="card"><h2 style="margin-top:0">🏠 Домашнее задание</h2>
+<p>1. Осмотрите корнеплоды на кухне: морковь, свёкла, редис, петрушка. Какие из них корнеплоды?<br>
+2. Если дома есть комнатная лиана (плющ, монстера) — найдите корни-прицепки.<br>
+3. Нарисуйте любое видоизменённое корня и подпишите его.</p></div>
+
+<script>
+const G=[["Корень георгина запасает питательные вещества — это...","Корнеплод|Корневой клубень|Ходульные корни",1],
+["Плющ ползёт по стене с помощью...","Корней-присосок|Корней-прицепок|Дыхательных корней",1],
+["Морковь, свёкла и редис образуют...","Корневые клубни|Корнеплоды|Корни-подпорки",1],
+["Повилика питается за счёт другого растения с помощью...","Корней-прицепок|Корней-присосок|Дыхательных корней",1],
+["Огромную крону баньяна держат...","Ходульные корни|Корни-подпорки|Корневые клубни",1],
+["Мангровые деревья дышат с помощью...","Корней-подпорок|Дыхательных корней|Корнеплодов",1],
+["Батат и георгин образуют...","Корнеплоды|Корневые клубни|Корни-присоски",1],
+["У пандануса для опоры служат...","Ходульные корни|Корни-прицепки|Дыхательные корни",1]];
+let s=0,d=0;
+G.forEach((q,i)=>{const d1=document.createElement("div");d1.className="q";
+d1.innerHTML="<p>"+(i+1)+". "+q[0]+"</p>";
+q[1].split("|").forEach((a,j)=>{const c=document.createElement("span");c.className="chip";c.textContent=a;
+c.onclick=()=>{if(d1.dataset.done)return;d1.dataset.done=1;
+if(j===q[2]){c.classList.add("ok");s++}else{c.classList.add("err");d++}
+[...d1.querySelectorAll(".chip")].forEach((cc,jj)=>{if(jj===q[2])cc.classList.add("ok")});
+document.getElementById("gsc").textContent="Счёт: "+s+" из 8";};
+d1.appendChild(c)});document.getElementById("game").appendChild(d1)});
+
+const T=[["Сколько типов видоизменённых корней рассматривается в уроке?","5","6","7",2],
+["Корнеплод — это видоизменённый...","побег","корень","лист",1],
+["Морковь запасает питательные вещества в...","листьях","корнеплоде","семенах",1],
+["Корни-прицепки нужны плющу для...","запаса веществ","прикрепления к опоре","дыхания",1],
+["Корни-подпорки можно увидеть у...","моркови","баньяна","плюща",1],
+["Повилика — растение...","автотрофное","паразитное","хищное",1],
+["Боковые корешки у корнеплода растут из...","головки","середины","кончика",1],
+["Корневые клубни есть у...","георгина","пшеницы","лука",0]];
+T.forEach((q,i)=>{const d1=document.createElement("div");d1.className="q";d1.id="q"+i;
+d1.innerHTML="<p>"+(i+1)+". "+q[0]+"</p>";
+q.slice(1,4).forEach((a,j)=>{const l=document.createElement("label");
+l.innerHTML='<input type="radio" name="t'+i+'" value="'+j+'"> '+a;d1.appendChild(l)});
+document.getElementById("test").appendChild(d1)});
+function checkTest(){let r=0;T.forEach((q,i)=>{const ch=document.querySelector('input[name="t'+i+'"]:checked');
+const ok=ch&&+ch.value===q[4];if(ok)r++;});
+document.getElementById("res").textContent="Результат: "+r+" из 8"+(r>=8?" — 5!":r>=7?" — 4":r>=5?" — 3":" — нужно повторить");
+document.getElementById("out").innerHTML="<p>Правильные ответы: "+T.map((q,i)=>(i+1)+" — "+["А","Б","В"][q[4]]).join(", ")+"</p>"}
+
+const V=["У корней растений есть видоизменения:","Они связаны с функциями:","Запас питательных веществ делают корнеплоды:","Прикрепляться к опоре помогают корни-прицепки у плюща.","Опору огромной кроне дают корни-подпорки баньяна.","Дышать в илистой почве помогают дыхательные корни мангров."];
+V.forEach(v=>{const b=document.createElement("button");b.textContent="+ "+v.slice(0,30)+"…";b.title=v;
+b.onclick=()=>{document.getElementById("concl").textContent+=v+" ";b.style.opacity=.5};
+document.getElementById("verbs").appendChild(b)});
+function copyT(){navigator.clipboard&&navigator.clipboard.writeText(document.getElementById("concl").textContent)}
+</script></body></html>
