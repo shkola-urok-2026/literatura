@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Биология 6 класс. Органы растений</title>
+<style>
+  :root{--bg:#0b1026;--bg2:#111a38;--card:#16204a;--gold:#e8c46a;--gold2:#f5dfa0;--txt:#eef1ff;--muted:#9aa6d0;--ok:#4caf87;--bad:#e06a6a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:radial-gradient(1200px 600px at 50% -10%,#1b2a5e 0%,var(--bg) 60%);color:var(--txt);font-family:Georgia,'Times New Roman',serif;line-height:1.55;padding:20px}
+  .wrap{max-width:900px;margin:0 auto}
+  header{text-align:center;padding:26px 10px 10px}
+  h1{color:var(--gold);font-size:1.9em;letter-spacing:.5px}
+  .sub{color:var(--muted);font-style:italic;margin-top:6px}
+  .divider{width:120px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:14px auto}
+  nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0}
+  nav button{background:var(--card);color:var(--txt);border:1px solid #2c3a78;border-radius:22px;padding:9px 16px;cursor:pointer;font-family:inherit;font-size:.95em}
+  nav button:hover{border-color:var(--gold)}
+  section{display:none;animation:fade .3s}
+  section.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+  .card{background:var(--card);border:1px solid #2c3a78;border-radius:14px;padding:18px 20px;margin:14px 0}
+  .card h2{color:var(--gold2);font-size:1.25em;margin-bottom:8px}
+  .tag{display:inline-block;background:#22306a;color:var(--gold2);border-radius:12px;padding:2px 12px;font-size:.85em;margin-bottom:8px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:10px}
+  .chip{background:#1a2450;border:1px solid #2c3a78;border-radius:10px;padding:12px}
+  .chip b{color:var(--gold2)}
+  .btn{background:linear-gradient(135deg,#8a6d2f,var(--gold));color:#141a35;border:none;border-radius:24px;padding:10px 20px;cursor:pointer;font-family:inherit;font-size:1em;font-weight:bold;margin:6px 6px 0 0}
+  .btn:hover{filter:brightness(1.1)}
+  .btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+  .check{display:flex;align-items:center;gap:10px;padding:9px 12px;background:#1a2450;border:1px solid #2c3a78;border-radius:10px;margin:6px 0;cursor:pointer}
+  .check input{width:18px;height:18px;accent-color:var(--gold)}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.95em}
+  th,td{border:1px solid #2c3a78;padding:8px 10px;text-align:left}
+  th{background:#1a2450;color:var(--gold2)}
+  input[type=number],input[type=text]{background:#1a2450;border:1px solid #2c3a78;color:var(--txt);border-radius:8px;padding:9px 12px;font-family:inherit;font-size:1em;width:100%}
+  .q{margin:16px 0;padding:14px;background:#1a2450;border-radius:12px}
+  .q p{margin-bottom:8px}
+  .opt{display:block;background:#16204a;border:1px solid #2c3a78;border-radius:10px;padding:9px 12px;margin:6px 0;cursor:pointer}
+  .opt.sel{border-color:var(--gold);background:#243064}
+  .opt.ok{border-color:var(--ok);background:rgba(76,175,135,.15)}
+  .opt.bad{border-color:var(--bad);background:rgba(224,106,106,.15)}
+  .msg{margin-top:10px;padding:10px 14px;border-radius:10px;display:none}
+  .msg.show{display:block}
+  .msg.good{background:rgba(76,175,135,.15);border:1px solid var(--ok)}
+  .msg.info{background:rgba(232,196,106,.12);border:1px solid var(--gold)}
+  .out{background:#0d1330;border:1px dashed var(--gold);border-radius:10px;padding:14px;margin-top:12px;color:var(--gold2);white-space:pre-wrap;display:none}
+  .progress{background:#0d1330;border-radius:8px;height:14px;overflow:hidden;margin:8px 0}
+  .progress div{height:100%;background:linear-gradient(90deg,#8a6d2f,var(--gold));width:0;transition:width .4s}
+  footer{text-align:center;color:var(--muted);padding:26px 0;font-size:.9em}
+  .num{color:var(--gold);font-weight:bold}
+  .small{font-size:.9em;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="sub">Биология • 6 класс • ФГОС</div>
+  <h1>🌱 Органы растений</h1>
+  <div class="sub">Лабораторная работа «Изучение внешнего строения травянистого цветкового растения»</div>
+  <div class="divider"></div>
+  <button class="btn ghost" onclick="show('map')">🗺 Карта урока</button>
+</header>
+
+<nav>
+  <button onclick="show('map')">🗺 Карта</button>
+  <button onclick="show('akt')">🔁 Повторим</button>
+  <button onclick="show('goal')">🎯 Задача</button>
+  <button onclick="show('new')">📖 Новый материал</button>
+  <button onclick="show('lab')">🔬 Лабораторная</button>
+  <button onclick="show('cmp')">🔍 Сравнение</button>
+  <button onclick="show('calc')">📏 Измерения</button>
+  <button onclick="show('test')">❓ Тест</button>
+  <button onclick="show('out')">✍️ Вывод</button>
+</nav>
+
+<div class="progress-wrap card">
+  <small class="small">Пройдено этапов: <span id="stageCount">0</span> из 9</small>
+  <div class="progress"><div id="stageBar"></div></div>
+</div>
+
+<section id="map" class="active">
+  <div class="card"><h2>🗺 Карта урока</h2>
+    <table>
+      <tr><th>Этап</th><th>Время</th></tr>
+      <tr><td>1. Организационный момент</td><td>1–2 мин</td></tr>
+      <tr><td>2. Актуализация знаний</td><td>5 мин</td></tr>
+      <tr><td>3. Постановка учебной задачи</td><td>2 мин</td></tr>
+      <tr><td>4. Открытие нового знания</td><td>10 мин</td></tr>
+      <tr><td>5. Лабораторная работа</td><td>12 мин</td></tr>
+      <tr><td>6. Сравнение растений</td><td>6 мин</td></tr>
+      <tr><td>7. Измерения и расчёты</td><td>4 мин</td></tr>
+      <tr><td>8. Тест</td><td>5 мин</td></tr>
+      <tr><td>9. Вывод и домашнее задание</td><td>3 мин</td></tr>
+    </table>
+    <p class="small" style="margin-top:10px">Учебник: Биология. 6 класс / под ред. В. И. Пономарёвой и др. Переходите по кнопкам меню сверху.</p>
+  </div>
+  <button class="btn" onclick="next('map')">Начать урок →</button>
+</section>
+
+<section id="akt">
+  <div class="card"><h2>🔁 Вспомним: из чего состоит растение</h2>
+    <p>Тело цветкового растения разделено на части — <b>органы</b>. Каждый орган выполняет свою работу, а вместе они образуют единый организм.</p>
+    <div class="grid">
+      <div class="chip"><b>Корень</b> — закрепляет растение в почве, всасывает воду и минеральные соли.</div>
+      <div class="chip"><b>Побег</b> — стебель с листьями и почками; проводит вещества и удерживает листья на свету.</div>
+      <div class="chip"><b>Лист</b> — орган питания: фотосинтез, испарение воды, газообмен.</div>
+      <div class="chip"><b>Цветок, плод, семя</b> — органы размножения.</div>
+    </div>
+    <p style="margin-top:12px"><b>Разминка:</b> какие органы вы видели у любого цветка из букета или грядки?</p>
+  </div>
+  <button class="btn" onclick="next('akt')">Дальше →</button>
+</section>
+
+<section id="goal">
+  <div class="card"><h2>🎯 Задача урока</h2>
+    <p><span class="tag">Сегодня мы</span></p>
+    <ul style="margin:8px 0 0 20px">
+      <li>узнаем, какие органы есть у цветкового растения и на какие группы они делятся;</li>
+      <li>научимся определять органы у живого или гербарного растения;</li>
+      <li>оформим результаты лабораторной работы в таблицу и сделаем вывод.</li>
+    </ul>
+  </div>
+  <button class="btn" onclick="next('goal')">Дальше →</button>
+</section>
+
+<section id="new">
+  <div class="card"><h2>📖 Новое знание: органы растения</h2>
+    <p>Все органы цветкового растения делятся на две группы:</p>
+    <div class="grid">
+      <div class="chip"><b>Вегетативные</b> — обеспечивают рост и питание: корень, стебель, лист, почки.</div>
+      <div class="chip"><b>Генеративные</b> — обеспечивают размножение: цветок, плод, семя.</div>
+    </div>
+    <p style="margin-top:12px"><b>Корень.</b> Главный, боковые и придаточные. У пастушьей сумки и лютика — стержневой корень с тонкими боковыми.</p>
+    <p style="margin-top:8px"><b>Стебель.</b> У травянистых растений он мягкий, зелёный или слегка одревесневший у основания. По стеблю вода идёт вверх, органические вещества — во все части.</p>
+    <p style="margin-top:8px"><b>Лист.</b> У пастушьей сумки — прикорневая розетка листьев и стеблевые листья; у лютика — пальчато-рассечённые листья.</p>
+    <p style="margin-top:8px"><b>Цветок, плод, семя.</b> Плод пастушьей сумки — стручочек, у редьки дикой — стручок с перетяжками.</p>
+    <p style="margin-top:12px">Проверьте себя: к какой группе относится <b>плод</b>? К какой — <b>лист</b>? Ответим вместе на этапе теста.</p>
+  </div>
+  <button class="btn" onclick="next('new')">К лабораторной →</button>
+</section>
+
+<section id="lab">
+  <div class="card"><h2>🔬 Лабораторная работа</h2>
+    <p><b>Цель:</b> изучить внешнее строение травянистого цветкового растения, научиться выделять его органы.</p>
+    <p><b>Оборудование:</b> живые или гербарные растения (пастушья сумка, редька дикая, лютик едкий), лупа, препаровальная игла, линейка.</p>
+    <p><b>Отметьте собранное оборудование:</b></p>
+    <label class="check"><input type="checkbox" onchange="eq(this)">Гербарий или живое растение</label>
+    <label class="check"><input type="checkbox" onchange="eq(this)">Лупа</label>
+    <label class="check"><input type="checkbox" onchange="eq(this)">Препаровальная игла</label>
+    <label class="check"><input type="checkbox" onchange="eq(this)">Линейка</label>
+    <p id="eqMsg" class="msg info" style="margin-top:10px">Готово к работе! Отметьте всё оборудование.</p>
+    <p style="margin-top:14px"><b>Ход работы:</b></p>
+    <ol style="margin:8px 0 0 20px">
+      <li>Рассмотрите растение целиком. Найдите корень и побег.</li>
+      <li>Рассмотрите корень: главный или мочковатый? Есть ли боковые корни?</li>
+      <li>Изучите стебель: прямой или лежачий, ветвистый или нет, как расположены листья?</li>
+      <li>Рассмотрите листья с помощью лупы: форма, жилкование, есть ли черешок.</li>
+      <li>Найдите цветки и плоды (у пастушьей сумки — трёхгранные стручочки).</li>
+    </ol>
+    <p style="margin-top:12px"><b>Таблица для тетради:</b> «Орган — Особенности строения — Функция». Зарисуйте растение и подпишите органы.</p>
+  </div>
+  <button class="btn" onclick="next('lab')">Дальше →</button>
+</section>
+
+<section id="cmp">
+  <div class="card"><h2>🔍 Сравним три растения</h2>
+    <table>
+      <tr><th>Признак</th><th>Пастушья сумка</th><th>Редька дикая</th><th>Лютик едкий</th></tr>
+      <tr><td>Корень</td><td>Стержневой</td><td>Стержневой</td><td>Мочковатый</td></tr>
+      <tr><td>Листья</td><td>Розетка + стеблевые</td><td>Очередные, лировидные</td><td>Пальчато-рассечённые</td></tr>
+      <tr><td>Цветок</td><td>Мелкий, белый</td><td>Жёлтый, 4 лепестка</td><td>Жёлтый, блестящий</td></tr>
+      <tr><td>Плод</td><td>Стручочек</td><td>Стручок</td><td>Многоорешек</td></tr>
+    </table>
+    <p class="small" style="margin-top:10px">💡 Лютик назвали едким, потому что его сок жжёт кожу и ядовит для скота. Пастушья сумка — космополит: растёт по всему свету, а её стручочки похожи на сумки пастухов.</p>
+  </div>
+  <button class="btn" onclick="next('cmp')">Дальше →</button>
+</section>
+
+<section id="calc">
+  <div class="card"><h2>📏 Измерим высоту растения</h2>
+    <p>Измерьте линейкой высоту трёх экземпляров (в см) и введите значения. Программа посчитает среднее.</p>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+      <div><small>Растение 1, см</small><input type="number" id="h1" placeholder="например 18"></div>
+      <div><small>Растение 2, см</small><input type="number" id="h2" placeholder="например 20"></div>
+      <div><small>Растение 3, см</small><input type="number" id="h3" placeholder="например 22"></div>
+    </div>
+    <button class="btn" onclick="calcH()">Рассчитать</button>
+    <div id="hOut" class="msg"></div>
+  </div>
+  <button class="btn" onclick="next('calc')">К тесту →</button>
+</section>
+
+<section id="test">
+  <div class="card"><h2>❓ Проверочный тест</h2><div id="quiz"></div>
+    <button class="btn" onclick="grade()">Проверить ответы</button>
+    <div id="tRes" class="msg"></div>
+  </div>
+  <button class="btn" onclick="next('test')">К выводу →</button>
+</section>
+
+<section id="out">
+  <div class="card"><h2>✍️ Конструктор вывода</h2>
+    <p>Нажимайте кнопки — вывод соберётся сам. Перепишите его в тетрадь.</p>
+    <button class="btn" onclick="add('Мы изучали внешнее строение травянистого цветкового растения. ')">Что делали</button>
+    <button class="btn" onclick="add('Мы рассмотрели корень, побег (стебель и листья), цветки и плоды. ')">Что наблюдали</button>
+    <button class="btn" onclick="add('У цветкового растения выделяют вегетативные (корень, стебель, лист) и генеративные (цветок, плод, семя) органы. ')">Что доказали</button>
+    <button class="btn" onclick="add('Разные растения имеют одинаковое строение органов, но различаются формой и размерами. ')">Общий вывод</button>
+    <div class="out" id="vOut"></div>
+    <button class="btn ghost" onclick="copyOut()" id="copyBtn">📋 Скопировать</button>
+    <p style="margin-top:16px"><b>🏠 Домашнее задание:</b> найдите во дворе или дома любое травянистое растение, определите его органы, зарисуйте и подпишите их в тетради.</p>
+  </div>
+</section>
+
+<footer>Интерактивный урок биологии • 6 класс • Работает офлайн</footer>
+</div>
+
+<script>
+const order=['map','akt','goal','new','lab','cmp','calc','test','out'];
+let done=new Set();
+function show(id){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');done.add(id);document.getElementById('stageCount').textContent=done.size;document.getElementById('stageBar').style.width=(done.size/9*100)+'%';window.scrollTo({top:0,behavior:'smooth'});}
+function next(id){show(order[Math.min(order.indexOf(id)+1,order.length-1)]);}
+function eq(el){const m=document.getElementById('eqMsg');const all=document.querySelectorAll('#lab .check input');const n=[...all].filter(x=>x.checked).length;m.textContent=n===4?'✅ Всё оборудование готово — можно начинать!':n>0?'Отмечено '+n+' из 4. Продолжайте.':'Готово к работе! Отметьте всё оборудование.';}
+function calcH(){const a=+document.getElementById('h1').value,b=+document.getElementById('h2').value,c=+document.getElementById('h3').value;const o=document.getElementById('hOut');if(!a||!b||!c){o.className='msg show info';o.textContent='Введите все три значения.';return;}const m=(a+b+c)/3;o.className='msg show good';o.textContent='📊 Средняя высота: '+m.toFixed(1)+' см. Если значения близки — измерения точные. Если сильно отличаются — повторите измерение.';}
+const quiz=[
+ {q:'К вегетативным органам относятся:',o:['корень, стебель, лист','цветок, плод, семя','только корень'],a:0},
+ {q:'Главный орган всасывания воды у растения:',o:['лист','корень','цветок'],a:1},
+ {q:'Плод пастушьей сумки называется:',o:['стручок','стручочек','многоорешек'],a:1},
+ {q:'Мочковатый корень имеет:',o:['редька дикая','пастушья сумка','лютик едкий'],a:2},
+ {q:'Побег состоит из:',o:['стебля, листьев и почек','только стебля','корня и листьев'],a:0},
+ {q:'Цветок — это орган:',o:['питания','размножения','дыхания'],a:1},
+ {q:'Жилкование листа изучают с помощью:',o:['микроскопа','лупы','телескопа'],a:1},
+ {q:'Семя развивается из:',o:['семязачатка','околоплодника','чашелистика'],a:0}];
+let sel={};
+function renderQuiz(){const box=document.getElementById('quiz');quiz.forEach((Q,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML='<p><span class="num">'+(i+1)+'.</span> '+Q.q+'</p>';Q.o.forEach((t,j)=>{const b=document.createElement('div');b.className='opt';b.textContent=t;b.onclick=()=>{d.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel[i]=j;};d.appendChild(b);});box.appendChild(d);});}
+function grade(){const r=document.getElementById('tRes');const n=Object.keys(sel).length;if(n<8){r.className='msg show info';r.textContent='Ответьте на все 8 вопросов ('+n+' из 8).';return;}let ok=0;document.querySelectorAll('.q').forEach((d,i)=>{d.querySelectorAll('.opt').forEach((b,j)=>{b.classList.remove('ok','bad');if(j===quiz[i].a)b.classList.add('ok');else if(sel[i]===j)b.classList.add('bad');});if(sel[i]===quiz[i].a)ok++;});r.className='msg show '+(ok>=6?'good':'info');r.textContent='✅ Правильных ответов: '+ok+' из 8.'+(ok>=7?' Отлично!':' Повторите материал и попробуйте снова.');}
+let out='';function add(t){out+=t;const o=document.getElementById('vOut');o.textContent=out;o.style.display='block';}
+function copyOut(){navigator.clipboard&&navigator.clipboard.writeText(out).then(()=>{document.getElementById('copyBtn').textContent='✔ Скопировано';});}
+renderQuiz();
+</script>
+</body>
+</html>
