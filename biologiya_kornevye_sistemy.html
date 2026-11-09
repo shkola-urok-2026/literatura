@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Биология 6 класс. Виды корней и типы корневых систем</title>
+<style>
+:root{--bg:#14110c;--card:#221d14;--card2:#2b2418;--gold:#e8c15a;--gold2:#c9a03e;--txt:#f3ecd9;--mut:#b8a984;--ok:#5fbf6e;--no:#d96a5c}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header{text-align:center;padding:28px 12px 8px}
+h1{color:var(--gold);font-size:1.5em}
+.sub{color:var(--mut);margin-top:6px;font-size:.95em}
+section{background:var(--card);border:1px solid #3a301c;border-radius:14px;padding:20px;margin:18px 0}
+h2{color:var(--gold);font-size:1.2em;margin-bottom:12px}
+h3{color:var(--gold2);margin:12px 0 8px;font-size:1.02em}
+.btn{background:var(--gold2);color:#1c1608;border:none;border-radius:10px;padding:10px 18px;font-weight:bold;cursor:pointer;font-size:.98em;margin:4px 6px 4px 0}
+.btn:hover{background:var(--gold)}
+.btn.ghost{background:transparent;color:var(--gold);border:1px solid var(--gold2)}
+.chip{display:inline-block;background:var(--card2);border:1px solid #4a3d22;border-radius:20px;padding:8px 16px;margin:5px;cursor:pointer;transition:.2s}
+.chip.ok{background:#1d3a22;border-color:var(--ok);color:var(--ok)}
+.chip.no{background:#3a1d1a;border-color:var(--no);color:var(--no)}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.94em}
+th,td{border:1px solid #4a3d22;padding:8px;text-align:left}
+th{background:var(--card2);color:var(--gold)}
+pre{background:var(--card2);border-radius:10px;padding:14px;overflow-x:auto;font-size:.85em;line-height:1.3;color:var(--gold)}
+.hint{color:var(--mut);font-size:.9em;margin-top:6px}
+.fdb{margin-top:10px;padding:10px;border-radius:10px;background:var(--card2)}
+.map li{margin:6px 0}
+input[type=text]{background:var(--card2);border:1px solid #4a3d22;color:var(--txt);border-radius:8px;padding:8px;width:100%;max-width:420px}
+.q{margin:14px 0;padding:14px;background:var(--card2);border-radius:10px}
+.q p{margin-bottom:8px}
+.opt{display:block;margin:6px 0;padding:8px 12px;background:var(--card);border:1px solid #4a3d22;border-radius:8px;cursor:pointer}
+.opt:hover{border-color:var(--gold2)}
+.score{font-size:1.3em;color:var(--gold);font-weight:bold}
+.out{background:var(--card2);border:1px dashed var(--gold2);border-radius:10px;padding:12px;margin-top:10px;min-height:40px}
+.small{font-size:.88em;color:var(--mut)}
+.mark{display:inline-block;width:16px;height:16px;border:1px solid var(--gold2);border-radius:4px;margin-right:8px;vertical-align:-3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>🌱 Виды корней и типы корневых систем</h1>
+<div class="sub">Биология · 6 класс · Лабораторные работы №1 и №2</div>
+<div class="sub">⏱ Урок 45 минут</div>
+</header>
+
+<section>
+<h2>🗺 Карта урока</h2>
+<ul class="map">
+<li>1. Повторение — <b>5 мин</b></li>
+<li>2. Задача урока — <b>3 мин</b></li>
+<li>3. Новые знания: виды корней и типы корневых систем — <b>12 мин</b></li>
+<li>4. Лабораторная работа №1: строение корневых систем — <b>10 мин</b></li>
+<li>5. Лабораторная работа №2: микропрепарат клеток корня — <b>8 мин</b></li>
+<li>6. Игра «Определи тип» — <b>4 мин</b></li>
+<li>7. Тест — <b>8 мин</b></li>
+<li>8. Вывод и домашнее задание — <b>5 мин</b></li>
+</ul>
+</section>
+
+<section>
+<h2>1️⃣ Повторение</h2>
+<p>Какую функцию выполняет корень?</p>
+<button class="btn" onclick="f1(this)">Удержание в почве</button>
+<button class="btn" onclick="f2(this)">Всасывание воды и минеральных солей</button>
+<button class="btn" onclick="f3(this)">Оба варианта верны</button>
+<div id="f1out" class="fdb"></div>
+</section>
+
+<section>
+<h2>2️⃣ Задача урока</h2>
+<p>Мы будем <b>узнавать</b> виды корней, <b>научимся</b> различать стержневую и мочковатую корневые системы и <b>рассмотрим</b> клетки корня под микроскопом.</p>
+</section>
+
+<section>
+<h2>3️⃣ Виды корней</h2>
+<table>
+<tr><th>Вид корня</th><th>Откуда развивается</th><th>Пример</th></tr>
+<tr><td><b>Главный</b></td><td>Из корешка зародыша семени</td><td>фасоль, редис</td></tr>
+<tr><td><b>Придаточные</b></td><td>От побега (стебля, листьев)</td><td>лук, пшеница</td></tr>
+<tr><td><b>Боковые</b></td><td>От главного и придаточных</td><td>все растения</td></tr>
+</table>
+<h3>Типы корневых систем</h3>
+<table>
+<tr><th></th><th>Стержневая</th><th>Мочковатая</th></tr>
+<tr><td>Главный корень</td><td>хорошо виден</td><td>не выделяется, отмирает рано</td></tr>
+<tr><td>Характер корней</td><td>один стержень + боковые</td><td>пучок придаточных и боковых</td></tr>
+<tr><td>Растения</td><td>двудольные: фасоль, подсолнечник, одуванчик</td><td>однодольные: пшеница, лук, кукуруза</td></tr>
+</table>
+<pre>   ОДУВАНЧИК                    ПШЕНИЦА
+      |                          | | |
+     \|/                        \|/|/|
+      |                        /\|/|/|/\
+      |                       / |  |  | \
+   главный корень            пучок придаточных корней
+   с боковыми                (мочковатая система)</pre>
+<p class="fdb">🤔 Вопрос: к какому типу относится корневая система лука? Подумайте, а ответ проверим в лаборатории.</p>
+</section>
+
+<section>
+<h2>4️⃣ Лабораторная работа №1. Строение корневых систем</h2>
+<p><b>Цель:</b> изучить внешнее строение стержневой и мочковатой корневых систем.</p>
+<h3>Оборудование — отметьте, что есть на вашем столе:</h3>
+<label><span class="mark"></span><input type="checkbox"> Гербарные экземпляры растений (одуванчик, пшеница)</label><br>
+<label><span class="mark"></span><input type="checkbox"> Живые проростки фасоли и пшеницы</label><br>
+<label><span class="mark"></span><input type="checkbox"> Лупа</label><br>
+<label><span class="mark"></span><input type="checkbox"> Вода в чашке Петри</label>
+<h3>Ход работы:</h3>
+<ol>
+<li>Рассмотрите гербарный (или живой) экземпляру одуванчика. Найдите главный корень и боковые. Какой это тип системы?</li>
+<li>Рассмотрите экземпляр пшеницы. Видите ли вы один главный корень? Как образовалась система?</li>
+<li>Зарисуйте обе корневые системы, подпишите названия типов.</li>
+<li>Сделайте вывод о связи типа корневой системы с числом семядоль.</li>
+</ol>
+<table>
+<tr><th>Растение</th><th>Тип корневой системы</th><th>Главный корень виден?</th></tr>
+<tr><td>Одуванчик</td><td></td><td></td></tr>
+<tr><td>Пшеница</td><td></td><td></td></tr>
+</table>
+<p class="hint">Подсказка для проверки: одуванчик — стержневая, пшеница — мочковатая.</p>
+</section>
+
+<section>
+<h2>5️⃣ Лабораторная работа №2. Микропрепарат клеток корня</h2>
+<p><b>Цель:</b> рассмотреть клетки корня на микропрепарате и найти корневые волоски.</p>
+<h3>Оборудование:</h3>
+<label><span class="mark"></span><input type="checkbox"> Микроскоп</label><br>
+<label><span class="mark"></span><input type="checkbox"> Микропрепарат «Корневой волосок»</label>
+<h3>Ход работы:</h3>
+<ol>
+<li>Поместите микропрепарат на предметный столик, включите нижний осветитель.</li>
+<li>Начните с малого увеличения, сфокусируйте изображение винтами.</li>
+<li>Перейдите на большое увеличение. Найдите корневой волосок — вырост клетки кожицы корня.</li>
+<li>Зарисуйте 2–3 клетки, подпишите: оболочка, цитоплазма, ядро, корневой волосок.</li>
+</ol>
+<p class="fdb">💡 Корневые волоски во много раз увеличивают всасывающую поверхность корня!</p>
+</section>
+
+<section>
+<h2>6️⃣ Игра «Определи тип корневой системы»</h2>
+<p>Нажмите на растение и выберите тип. Правильно — зелёный, ошиблись — красный.</p>
+<div id="garea"></div>
+<div class="score" id="gscore"></div>
+<button class="btn ghost" onclick="greset()">Начать заново</button>
+</section>
+
+<section>
+<h2>7️⃣ Тест</h2>
+<div id="test"></div>
+<button class="btn" onclick="checkTest()">Проверить</button>
+<button class="btn ghost" onclick="resetTest()">Начать заново</button>
+<div id="tres"></div>
+</section>
+
+<section>
+<h2>8️⃣ Вывод</h2>
+<p>Соберите вывод из готовых частей:</p>
+<button class="btn" onclick="addOut('Мы изучили')">Мы изучили</button>
+<button class="btn" onclick="addOut(' три вида корней')"> три вида корней</button>
+<button class="btn" onclick="addOut(': главный')">: главный</button>
+<button class="btn" onclick="addOut(', придаточные и боковые')">, придаточные и боковые</button>
+<button class="btn" onclick="addOut('. Различают стержневую и мочковатую корневые системы')">. Различают стержневую и мочковатую корневые системы</button>
+<button class="btn" onclick="addOut('. У двудольных — стержневая')">. У двудольных — стержневая</button>
+<button class="btn" onclick="addOut(', у однодольных — мочковатая')">, у однодольных — мочковатая</button>
+<button class="btn ghost" onclick="document.getElementById('cout').textContent='';localStorage.removeItem('bioKornOut')">Очистить</button>
+<button class="btn ghost" onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('cout').textContent)">Скопировать</button>
+<div class="out" id="cout"></div>
+</section>
+
+<section>
+<h2>9️⃣ Домашнее задание</h2>
+<p>1. Найдите дома репчатый лук и любую фасоль. Определите типы корневых систем растений, из которых они получились.</p>
+<p>2. Прорастите семечко фасоли во влажной вате и в течение недели наблюдайте: появится ли сначала главный корень, а потом боковые?</p>
+</section>
+
+<footer class="small" style="text-align:center;padding:20px">Биология · 6 класс · Интерактивная серия уроков</footer>
+</div>
+
+<script>
+function f1(b){document.getElementById('f1out').innerHTML='❌ Частично верно, но корень делает и это, и другое. Подумайте ещё.'}
+function f2(b){document.getElementById('f1out').innerHTML='❌ Тоже частично верно. Есть более полный ответ.'}
+function f3(b){document.getElementById('f1out').innerHTML='✅ Верно! Корень и удерживает растение, и всасывает воду с минеральными солями.'}
+const gplants=[['одуванчик','стержневая'],['пшеница','мочковатая'],['лук','мочковатая'],['редис','стержневая'],['подсолнечник','стержневая'],['кукуруза','мочковатая'],['фасоль','стержневая'],['рис','мочковатая']];
+let gi=0,gok=0,gans=0;
+function gshow(){if(gi>=gplants.length){document.getElementById('garea').innerHTML='<p>Игра пройдена! Результат: <span class="score">'+gok+' из '+gans+'</span></p>';return}
+const p=gplants[gi];document.getElementById('garea').innerHTML='<p style="font-size:1.2em">'+p[0]+' — это...</p><button class="btn" onclick="gansw(\'стержневая\')">Стержневая</button><button class="btn" onclick="gansw(\'мочковатая\')">Мочковатая</button>'}
+function gansw(a){gans++;if(a===gplants[gi][1]){gok++;document.getElementById('garea').innerHTML='<p class="score" style="color:var(--ok)">✅ Верно!</p>'}else{document.getElementById('garea').innerHTML='<p style="color:var(--no)">❌ Неверно. Правильно: '+gplants[gi][1]+'</p>'}
+gi++;setTimeout(gshow,1200)}
+function greset(){gi=0;gok=0;gans=0;document.getElementById('gscore').textContent='';gshow()}
+gshow();
+const test=[
+{q:'Какой корень развивается из корешка зародыша семени?',o:['Боковой','Главный','Придаточный'],a:1},
+{q:'Придаточные корни отрастают от...',o:['Главного корня','Стебля или листьев','Семядоль'],a:1},
+{q:'У одуванчика корневая система...',o:['Мочковатая','Стержневая','Воздушная'],a:1},
+{q:'У пшеницы корневая система...',o:['Стержневая','Мочковатая','Смешанная'],a:1},
+{q:'Мочковатая корневая система характерна для...',o:['Однодольных','Двудольных','Грибов'],a:0},
+{q:'Корневой волосок — это...',o:['Вырост клетки кожицы корня','Корень второго порядка','Мелкий корешок'],a:0},
+{q:'Главная функция корневого волоска — ...',o:['Опора растения','Всасывание воды и солей','Запасание веществ'],a:1},
+{q:'Боковые корни отрастают от...',o:['Только главного корня','Главного и придаточных','Только семядоль'],a:1}];
+function renderTest(){let h='';test.forEach((t,i)=>{h+='<div class="q"><p><b>'+(i+1)+'.</b> '+t.q+'</p>';t.o.forEach((o,j)=>{h+='<label class="opt"><input type="radio" name="q'+i+'" value="'+j+'"> '+o+'</label>'});h+='</div>'});document.getElementById('test').innerHTML=h}
+function checkTest(){let ok=0,miss=[];let h='<div class="fdb"><span class="score">';
+test.forEach((t,i)=>{const e=document.querySelector('input[name=q'+i+']:checked');
+if(e&&+e.value===t.a){ok++}else{miss.push(i+1)}});
+const pc=Math.round(ok/test.length*100);
+let mark=pc>=90?'5':pc>=75?'4':pc>=55?'3':'2';
+h+='Результат: '+ok+' из '+test.length+' ('+pc+'%). Оценка: '+mark+'</span><br>';
+h+=miss.length? 'Ошибки в вопросах: '+miss.join(', ')+'.<br><br>Правильные ответы: ':'Все ответы верные! Отличная работа 🎉';
+if(miss.length)test.forEach((t,i)=>{h+=(i+1)+') '+t.o[t.a].toLowerCase()+(i<test.length-1?'; ':'.')});
+h+='</div>';document.getElementById('tres').innerHTML=h}
+function resetTest(){renderTest();document.getElementById('tres').innerHTML=''}
+renderTest();
+function addOut(t){const el=document.getElementById('cout');el.textContent+=t;try{localStorage.setItem('bioKornOut',el.textContent)}catch(e){}}
+try{const s=localStorage.getItem('bioKornOut');if(s)document.getElementById('cout').textContent=s}catch(e){}
+</script>
+</body>
+</html>
