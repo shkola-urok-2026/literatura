@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Акробатические комбинации — интерактивный урок, 6 класс</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0d1b2a;color:#e0e6f0;line-height:1.55}
+.wrap{max-width:880px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#1b263b,#415a77);padding:26px 18px;border-radius:0 0 18px 18px;text-align:center}
+header h1{font-size:1.7em;color:#ffd166}
+header p{color:#cfe3ff;margin-top:6px}
+.badge{display:inline-block;background:#ef476f;color:#fff;border-radius:20px;padding:3px 14px;font-size:.85em;margin-top:8px}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:14px 0}
+nav a{background:#1b496b;color:#fff;text-decoration:none;padding:8px 14px;border-radius:10px;font-size:.9em;border:1px solid #5fa8d3}
+nav a:hover{background:#5fa8d3;color:#0d1b2a}
+section{background:#14273f;border:1px solid #2c4a6e;border-radius:14px;padding:20px;margin:16px 0}
+section h2{color:#ffd166;margin-bottom:12px;font-size:1.35em}
+.btn{display:inline-block;background:#2a9d8f;color:#fff;border:none;padding:10px 20px;border-radius:10px;font-size:1em;cursor:pointer;margin:4px 6px 4px 0;text-decoration:none}
+.btn:hover{filter:brightness(1.15)}
+.btn.gray{background:#415a77}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{border:1px solid #2c4a6e;padding:8px;text-align:left;font-size:.95em}
+th{background:#1b496b;color:#ffd166}
+.station{margin:12px 0;padding:12px;background:#1b3350;border-radius:10px;display:flex;align-items:center;gap:10px}
+.station a{color:#8ecae6;font-weight:bold;text-decoration:none}
+.card{background:#1b3350;border-left:4px solid #2a9d8f;border-radius:8px;padding:12px 14px;margin:10px 0}
+.warn{background:#3d1f24;border-left:4px solid #ef476f;border-radius:8px;padding:12px 14px;margin:10px 0}
+.tip{background:#263a1f;border-left:4px solid #95d5b2;border-radius:8px;padding:12px 14px;margin:10px 0}
+.q{background:#1b3350;border-radius:10px;padding:14px;margin:12px 0}
+.q h3{color:#8ecae6;margin-bottom:10px;font-size:1.05em}
+.opt{display:block;width:100%;text-align:left;background:#14273f;color:#e0e6f0;border:1px solid #2c4a6e;padding:10px 12px;border-radius:8px;margin:6px 0;cursor:pointer;font-size:.95em}
+.opt:hover{border-color:#ffd166}
+.opt.ok{background:#1f4d33;border-color:#2a9d8f}
+.opt.no{background:#4d1f24;border-color:#ef476f}
+.exp{display:none;margin-top:8px;padding:8px 12px;background:#263a1f;border-radius:8px;font-size:.9em}
+.phase{background:#1b3350;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:4px solid #ffd166}
+#slot{min-height:52px;background:#14273f;border:2px dashed #2c4a6e;border-radius:10px;padding:8px;margin:10px 0}
+#pool{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.piece{background:#1b496b;border:1px solid #5fa8d3;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:.9em}
+.piece:hover{border-color:#ffd166}
+textarea{width:100%;min-height:120px;background:#14273f;color:#e0e6f0;border:1px solid #2c4a6e;border-radius:10px;padding:10px;font-family:inherit}
+#map{position:relative;background:linear-gradient(160deg,#17324d,#0f2036);border:2px solid #2c4a6e;border-radius:14px;padding:22px;margin:12px 0}
+.snode{display:block;background:#1b496b;border:1px solid #5fa8d3;color:#fff;text-decoration:none;padding:9px 12px;border-radius:10px;margin:7px 0;font-size:.95em}
+.snode:hover{background:#2a5f8f}
+.done{border-color:#2a9d8f}
+.done::after{content:" \2713";color:#95d5b2;font-weight:bold}
+#banner{display:none;background:#1f4d33;color:#95d5b2;text-align:center;padding:12px;border-radius:10px;font-weight:bold;margin:10px 0}
+.node{display:inline-block;background:#1b496b;border:1px solid #5fa8d3;border-radius:10px;padding:8px 12px;margin:5px;cursor:pointer;font-size:.9em;color:#fff}
+.node:hover{border-color:#ffd166}
+.ndetail{display:none;margin-top:8px;padding:10px 14px;background:#1b3350;border-radius:10px;font-size:.95em}
+footer{text-align:center;color:#7f95ad;padding:20px;font-size:.85em}
+a.back{display:inline-block;margin-top:10px;color:#8ecae6;text-decoration:none;font-size:.9em}
+</style>
+</head>
+<body>
+<header>
+<h1>🤸 Акробатические комбинации</h1>
+<p>Интерактивный урок физической культуры • 6 класс</p>
+<span class="badge">Тема: кувырки, перекаты, «мост», стойки</span>
+</header>
+<div class="wrap">
+
+<nav>
+<a href="#map-sec">🗺 Карта зала</a>
+<a href="#tb">🔥 Разведка</a>
+<a href="#abc">🧩 Азбука</a>
+<a href="#mech">⚙️ Кувырок</a>
+<a href="#combo">🎨 Комбинация</a>
+<a href="#spot">🛟 Страховка</a>
+<a href="#quiz">🏅 Тренажёр</a>
+<a href="#build">🧵 Конструктор</a>
+<a href="#diary">✍️ Дневник</a>
+<a href="#podium">🏆 Пьедестал</a>
+</nav>
+
+<section id="map-sec">
+<h2>🗺 Карта тренировочного зала</h2>
+<p>Пройдите все станции: открывайте разделы, изучайте, отвечайте. Отметки о прохождении ставятся автоматически.</p>
+<div id="banner">🏆 Допуск к тренировке получен! Все станции пройдены!</div>
+<div id="map">
+<a class="snode" href="#tb">🔥 Станция 1. Разведка зала: техника безопасности и разминка</a>
+<a class="snode" href="#abc">🧩 Станция 2. Азбука акробатики: 7 ключевых терминов</a>
+<a class="snode" href="#mech">⚙️ Станция 3. Механика кувырка: вперёд и назад</a>
+<a class="snode" href="#combo">🎨 Станция 4. Комбинируем: образец и критерии</a>
+<a class="snode" href="#spot">🛟 Станция 5. Страховка и самостраховка</a>
+<a class="snode" href="#quiz">🏅 Станция 6. Судейская коллегия: тренажёр</a>
+<a class="snode" href="#build">🧵 Станция 7. Конструктор комбинации</a>
+<a class="snode" href="#diary">✍️ Станция 8. Дневник спортсмена</a>
+<a class="snode" href="#podium">🏆 Станция 9. Пьедестал: схема, ДЗ, рефлексия</a>
+</div>
+</section>
+
+<section id="tb">
+<h2>🔥 Разведка зала</h2>
+<div class="warn"><b>Техника безопасности — без вариантов:</b> занимаемся только на матах и в спортивной форме без застёжек и молний; снимаем украшения и часы; волосы убираем; выполняем элементы только по команде учителя и со страховкой при первом разучивании.</div>
+<div class="card"><b>Разминка (5–7 минут):</b> ходьба и лёгкий бег по кругу, наклоны и повороты туловища, круги руками, вращения кистями и головой, растяжка ног. Размятый кувырок — безопасный кувырок.</div>
+<div class="tip"><b>Зачем это нужно?</b> Акробатика развивает координацию, ловкость, гибкость и умение владеть своим телом — качества, которые пригодятся в любом виде спорта и в жизни.</div>
+<a class="back" href="#map-sec">← К карте зала</a>
+</section>
+
+<section id="abc">
+<h2>🧩 Азбука акробатики</h2>
+<table>
+<tr><th>Термин</th><th>Что это</th></tr>
+<tr><td><b>Группировка</b></td><td>Положение сидя или лёжа: колени к груди, обхватить их руками, спина округлена, подбородок к груди</td></tr>
+<tr><td><b>Перекат</b></td><td>Плавное перекатывание на спине из группировки и обратно, без переворота через голову</td></tr>
+<tr><td><b>Кувырок вперёд</b></td><td>Переворот через голову с опорой руками о мат, из упора присев в упор присев</td></tr>
+<tr><td><b>Кувырок назад</b></td><td>Перекат назад через плечи с последующим выходом в упор присев</td></tr>
+<tr><td><b>«Берёзка» (стойка на лопатках)</b></td><td>Стойка на лопатках с поддержкой спины руками, тело прямое, носки вытянуты</td></tr>
+<tr><td><b>«Мост»</b></td><td>Прогиб спины с опорой на ладони и стопы</td></tr>
+<tr><td><b>Стойка на голове</b></td><td>Перевёрнутое положение с опорой на голову и ладони (треугольник рук)</td></tr>
+</table>
+<a class="back" href="#map-sec">← К карте зала</a>
+</section>
+
+<section id="mech">
+<h2>⚙️ Механика кувырка вперёд — по фазам</h2>
+<div class="phase"><b>1. Упор присев.</b> Ноги на ширине плеч, руки упираются перед собой, голова между рук.</div>
+<div class="phase"><b>2. Толчок.</b> Оттолкнуться ногами, перенести вес вперёд, округлить спину.</div>
+<div class="phase"><b>3. Перекат.</b> Затылок — лопатки — спина последовательно касаются мата. Группировку не теряем!</div>
+<div class="phase"><b>4. Выход.</b> Руки обхватывают колени, перекат до упора присев.</div>
+<div class="phase"><b>5. Финиш.</b> Встать в основную стойку, руки вверх — «выпрыгнуть» красиво!</div>
+<h2 style="margin-top:16px">Кувырок назад</h2>
+<div class="card">Из упора присев — перекат назад на спину, ладони у плеч пальцами к себе — толчок руками — выход в упор присев. Ключ: держать группировку и не запрокидывать голову.</div>
+<div class="warn"><b>Три категорических «нельзя»:</b> нельзя кувыркаться на твёрдой поверхности; нельзя выполнять элемент без страховки в первый раз; нельзя запрокидывать голову — работает затылок и шея защищена.</div>
+<a class="back" href="#map-sec">← К карте зала</a>
+</section>
+
+<section id="combo">
+<h2>🎨 Комбинируем!</h2>
+<div class="card"><b>Образец комбинации (7 элементов):</b> основная стойка → упор присев → кувырок вперёд → кувырок назад → «берёзка» → «мост» → стойка на голове (у стены) → финальная поза.</div>
+<table>
+<tr><th>Критерий</th><th>Что оцениваем</th></tr>
+<tr><td>Чёткость</td><td>Каждый элемент выполнен чисто, без «полукувырков»</td></tr>
+<tr><td>Слитность</td><td>Переходы между элементами без пауз</td></tr>
+<tr><td>Красота</td><td>Ровная спина, вытянутые носки, уверенный финал</td></tr>
+<tr><td>Безопасность</td><td>Нет нарушений техники, есть страховка</td></tr>
+</table>
+<a class="back" href="#map-sec">← К карте зала</a>
+</section>
+
+<section id="spot">
+<h2>🛟 Страховка и самостраховка</h2>
+<div class="tip"><b>Как страховать кувырок вперёд:</b> стоять сбоку, одной рукой поддерживать под плечо, другой — помогать группировке под бедро.</div>
+<div class="tip"><b>Как страховать «берёзку»:</b> поддерживать за поясницу и ноги, пока ученик не найдёт равновесие.</div>
+<div class="tip"><b>Как страховать «мост»:</b> стоять сбоку и придерживать под спину двумя руками.</div>
+<div class="card"><b>Самостраховка:</b> при потере равновесия — сгруппироваться, округлить спину, перекатиться; никогда не выставлять прямые руки назад.</div>
+<a class="back" href="#map-sec">← К карте зала</a>
+</section>
+
+<section id="quiz">
+<h2>🏅 Судейская коллегия: тренажёр</h2>
+<p>7 вопросов. Отвечайте — судья объяснит каждый верный ответ.</p>
+<div id="q1" class="q"><h3>1. Что такое группировка?</h3>
+<button class="opt">Положение сидя: колени к груди, обхватить их руками, спина округлена</button>
+<button class="opt">Прыжок с поворотом на 360°</button>
+<button class="opt">Стойка на двух руках</button>
+<div class="exp">✅ Верно! Группировка — основа безопасности: округлая спина катится как колесо.</div></div>
+<div id="q2" class="q"><h3>2. С чего начинается кувырок вперёд?</h3>
+<button class="opt">С прыжка вверх</button>
+<button class="opt">С упора присев и толчка ногами</button>
+<button class="opt">С наклона назад</button>
+<div class="exp">✅ Верно! Сначала упор присев, толчок — и перекат по спине.</div></div>
+<div id="q3" class="q"><h3>3. Какая часть тела первой касается мата при кувырке вперёд?</h3>
+<button class="opt">Лоб</button>
+<button class="opt">Ладони</button>
+<button class="opt">Затылок</button>
+<div class="exp">✅ Верно! Затылок — поэтому голову не запрокидываем.</div></div>
+<div id="q4" class="q"><h3>4. «Берёзка» — это…</h3>
+<button class="opt">Стойка на лопатках с поддержкой спины руками</button>
+<button class="opt">Прыжок в глубину</button>
+<button class="opt">Прогиб стоя на коленях</button>
+<div class="exp">✅ Верно! Тело прямое, носки вытянуты, лопатки на мате.</div></div>
+<div id="q5" class="q"><h3>5. Что категорически запрещено при кувырках?</h3>
+<button class="opt">Держать группировку</button>
+<button class="opt">Выполнять кувырок на твёрдой поверхности</button>
+<button class="opt">Округлять спину</button>
+<div class="exp">✅ Верно! Только мягкий мат — иначе опасно для позвоночника.</div></div>
+<div id="q6" class="q"><h3>6. Что делает страхующий при первом выполнении «моста»?</h3>
+<button class="opt">Стоит в стороне и смотрит</button>
+<button class="opt">Придерживает под спину двумя руками сбоку</button>
+<button class="opt">Толкает ученика вперёд</button>
+<div class="exp">✅ Верно! Страховка сбоку с поддержкой спины — страховка новичка обязательна.</div></div>
+<div id="q7" class="q"><h3>7. Зачем перед акробатикой нужна разминка?</h3>
+<button class="opt">Чтобы разогреть мышцы и подготовить суставы — снижается риск травмы</button>
+<button class="opt">Чтобы потратить время до основного урока</button>
+<button class="opt">Чтобы больше устать и лучше спать</button>
+<div class="exp">✅ Верно! Разогретые мышцы и суставы — главный щит от травм.</div></div>
+<p id="score">Правильных ответов: 0 из 7</p>
+<a class="back" href="#map-sec">← К карте зала</a>
+</section>
+
+<section id="build">
+<h2>🧵 Конструктор комбинации</h2>
+<p>Соберите комбинацию из 5 элементов в правильном порядке. Кликайте по элементам слева направо.</p>
+<div id="pool"></div>
+<div id="slot"></div>
+<button class="btn" onclick="checkCombo()">Проверить</button>
+<button class="btn gray" onclick="resetCombo()">Заново</button>
+<p id="cres"></p>
+<a class="back" href="#map-sec">← К карте зала</a>
+</section>
+
+<section id="diary">
+<h2>✍️ Дневник спортсмена</h2>
+<p>Ты — тренер! Составь комбинацию из 4 элементов для своего подопечного и запиши замечания по технике.</p>
+<textarea id="dtext" placeholder="Моя комбинация:&#10;1. ...&#10;2. ...&#10;3. ...&#10;4. ...&#10;Замечания по технике: ..."></textarea>
+<button class="btn" onclick="saveDiary()">Скачать дневник</button>
+<a class="back" href="#map-sec">← К карте зала</a>
+</section>
+
+<section id="podium">
+<h2>🏆 Пьедестал: опорная схема</h2>
+<p>Кликните по узлу — увидите краткое пояснение.</p>
+<div>
+<span class="node" onclick="tn(0)">1. Разминка</span>
+<span class="node" onclick="tn(1)">2. Группировка</span>
+<span class="node" onclick="tn(2)">3. Кувырок вперёд</span>
+<span class="node" onclick="tn(3)">4. Кувырок назад</span>
+<span class="node" onclick="tn(4)">5. «Берёзка» и «мост»</span>
+<span class="node" onclick="tn(5)">6. Своя комбинация</span>
+</div>
+<div class="ndetail" id="n0">Разминка готовит мышцы и суставы — без неё к матам не подходим.</div>
+<div class="ndetail" id="n1">Группировка — «колесо» тела: округлая спина делает перекат безопасным.</div>
+<div class="ndetail" id="n2">Кувырок вперёд: упор присев → толчок → затылок → перекат → выход в стойку.</div>
+<div class="ndetail" id="n3">Кувырок назад: перекат на спину → ладони у плеч → толчок руками → упор присев.</div>
+<div class="ndetail" id="n4">«Берёзка» и «мост» — элементы силы и гибкости, идут после кувырков.</div>
+<div class="ndetail" id="n5">Финал урока: своя комбинация из 4 элементов — записать в дневник и показать классу.</div>
+<h2 style="margin-top:16px">📋 Домашнее задание</h2>
+<div class="card">Отработать группировку и перекаты (5 минут в день). Составить письменную комбинацию из 4 элементов с описанием техники безопасности.</div>
+<h2>🪞 Рефлексия</h2>
+<div class="card">1. Какой элемент у меня получился лучше всего? 2. Что было сложнее всего и почему? 3. Какой совет я дал бы новичку?</div>
+<a class="back" href="#map-sec">← К карте зала</a>
+</section>
+
+<footer>Интерактивный урок физической культуры, 6 класс • Тема «Акробатические комбинации»</footer>
+</div>
+<script>
+var visited={};
+function mark(id){if(!visited[id]){visited[id]=1;var links=document.querySelectorAll('.snode');var n=0;links.forEach(function(l){var t=l.getAttribute('href').slice(1);if(visited[t]){l.classList.add('done');n++;}});if(n>=9){document.getElementById('banner').style.display='block';}}}
+document.querySelectorAll('section').forEach(function(s){var o=new MutationObserver(function(){if(s.offsetParent){mark(s.id);o.disconnect();}});o.observe(s,{attributes:true});});
+window.addEventListener('hashchange',function(){var id=location.hash.slice(1);if(id)mark(id);});
+window.addEventListener('load',function(){var id=location.hash.slice(1);if(id)mark(id);});
+
+var correct={q1:0,q2:1,q3:2,q4:0,q5:1,q6:1,q7:0},score=0,answered={};
+document.querySelectorAll('.q').forEach(function(q){var id=q.id;var opts=q.querySelectorAll('.opt');opts.forEach(function(b,i){b.onclick=function(){if(answered[id])return;answered[id]=1;opts.forEach(function(x){x.disabled=true});if(i===correct[id]){b.classList.add('ok');score++;}else{b.classList.add('no');opts[correct[id]].classList.add('ok');}q.querySelector('.exp').style.display='block';document.getElementById('score').textContent='Правильных ответов: '+score+' из 7';if(score>=7)mark('podium');};});});
+
+var order=['Упор присев','Кувырок вперёд','Кувырок назад','«Берёзка»','Финальная поза'],chosen=[];
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function resetCombo(){chosen=[];var p=document.getElementById('pool');p.innerHTML='';var s=document.getElementById('slot');s.innerHTML='';document.getElementById('cres').textContent='';shuffle(order.slice()).forEach(function(v){var b=document.createElement('button');b.className='piece';b.textContent=v;b.onclick=function(){if(chosen.length<5){chosen.push(v);b.disabled=true;b.style.opacity=.4;render();}};p.appendChild(b);});render();}
+function render(){var s=document.getElementById('slot');s.innerHTML='';chosen.forEach(function(v){var d=document.createElement('span');d.className='piece';d.textContent=v;s.appendChild(d);});}
+function checkCombo(){var r=document.getElementById('cres');var ok=chosen.length===5&&chosen.every(function(v,i){return v===order[i];});if(ok){r.textContent='✅ Отлично! Комбинация собрана верно!';r.style.color='#95d5b2';mark('diary');}else{r.textContent='❌ Пока не то. Верный порядок: упор присев → кувырок вперёд → кувырок назад → «берёзка» → финальная поза.';r.style.color='#ef476f';}}
+resetCombo();
+
+function tn(i){document.querySelectorAll('.ndetail').forEach(function(d,k){d.style.display=(k===i&&d.style.display!=='block')?'block':'none';});mark('podium');}
+
+function saveDiary(){var t=document.getElementById('dtext').value||'(пусто)';var blob=new Blob(['Дневник спортсмена — акробатические комбинации, 6 класс\n\n'+t],{type:'text/plain;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='dnevnik_sportsmena.txt';a.click();mark('podium');}
+</script>
+</body>
+</html>
