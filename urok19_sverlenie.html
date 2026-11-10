@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок №19 — Технологии получения отверстий в заготовках из металла. Сверление</title>
+<style>
+  :root{
+    --navy:#0d2145; --blue:#1565c0; --accent:#ff9800; --ok:#2e7d32;
+    --bg:#f2f6fb; --card:#ffffff; --red:#c62828;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif; background:var(--bg); color:#1c2b3a; line-height:1.55;}
+  .wrap{max-width:900px; margin:0 auto; padding:16px;}
+
+  /* Шапка */
+  header{background:linear-gradient(135deg,#0d2145 0%,#1565c0 100%); color:#fff;
+    padding:26px 20px; border-radius:0 0 24px 24px; text-align:center;}
+  .badge{display:inline-block; background:#ff9800; color:#0d2145; font-weight:800;
+    padding:6px 18px; border-radius:20px; letter-spacing:1px; font-size:15px; margin-bottom:10px;}
+  .klass{display:inline-block; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.5);
+    padding:4px 14px; border-radius:16px; font-size:14px; margin-left:8px;}
+  header h1{font-size:26px; margin:10px 0 6px;}
+  header p{opacity:.9; font-size:15px;}
+  .urok-num{font-size:34px; font-weight:900; letter-spacing:2px; margin:6px 0;}
+
+  section{background:var(--card); border-radius:16px; padding:22px; margin-top:18px;
+    box-shadow:0 2px 10px rgba(13,33,69,.08);}
+  h2{color:var(--navy); font-size:21px; margin-bottom:12px; border-left:5px solid var(--accent);
+    padding-left:10px;}
+  h3{color:var(--blue); font-size:17px; margin:14px 0 8px;}
+
+  table{width:100%; border-collapse:collapse; margin:10px 0; font-size:14px;}
+  th{background:var(--navy); color:#fff; padding:8px; text-align:left;}
+  td{border-bottom:1px solid #dde5ef; padding:8px;}
+
+  .goal{background:#e3f2fd; border-left:4px solid var(--blue); padding:12px 14px;
+    border-radius:8px; margin:8px 0; font-size:15px;}
+
+  /* Карточки инструментов */
+  .tool{border:1.5px solid #cfe0f5; border-radius:12px; margin:10px 0; overflow:hidden; background:#fff;}
+  .tool summary{cursor:pointer; padding:13px 16px; font-weight:700; color:var(--navy);
+    background:#eef4fc; list-style:none; display:flex; justify-content:space-between; align-items:center;}
+  .tool summary::-webkit-details-marker{display:none;}
+  .tool summary::after{content:"+"; font-size:22px; color:var(--accent); font-weight:900;}
+  .tool[open] summary::after{content:"–";}
+  .tool .body{padding:12px 16px; font-size:14.5px;}
+
+  /* Шаги */
+  .step{display:flex; gap:12px; margin:12px 0; align-items:flex-start;}
+  .stepnum{background:var(--accent); color:#0d2145; font-weight:900; min-width:34px; height:34px;
+    border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px;}
+  .warn{background:#fdecea; border-left:4px solid var(--red); padding:10px 14px;
+    border-radius:8px; margin:12px 0; font-weight:600;}
+  .tip{background:#e8f5e9; border-left:4px solid var(--ok); padding:10px 14px;
+    border-radius:8px; margin:12px 0;}
+
+  /* Схема станка */
+  .scheme{background:#12325e; border-radius:14px; padding:18px; margin:14px 0;}
+  .scheme svg{width:100%; height:auto; display:block;}
+  .parts{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px; margin-top:10px;}
+  .part{background:#1c4a8a; color:#fff; padding:8px 10px; border-radius:8px; font-size:13px;
+    cursor:pointer; text-align:center; border:2px solid transparent;}
+  .part:hover{border-color:var(--accent);}
+  .part.active{border-color:var(--accent); background:#ff9800; color:#0d2145;}
+  .part-info{background:#fff; border-radius:10px; padding:12px 14px; margin-top:10px; font-size:14.5px; display:none;}
+  .part-info.show{display:block;}
+
+  /* Чек-лист */
+  .chk label{display:flex; gap:10px; align-items:center; background:#f6f9fd; border:1px solid #dbe6f3;
+    border-radius:10px; padding:10px 14px; margin:8px 0; cursor:pointer; font-size:14.5px;}
+  .chk input{transform:scale(1.3); accent-color:var(--ok);}
+  .chk label.done{background:#e8f5e9; border-color:var(--ok); text-decoration:line-through; color:#2e7d32;}
+  .bar{background:#dbe6f3; border-radius:20px; height:18px; overflow:hidden; margin:12px 0;}
+  .bar div{background:linear-gradient(90deg,#2e7d32,#66bb6a); height:100%; width:0%;
+    transition:width .4s; border-radius:20px;}
+  .congrat{display:none; background:#e8f5e9; border:2px solid var(--ok); border-radius:12px;
+    padding:14px; text-align:center; font-weight:800; color:var(--ok); font-size:17px;}
+  .congrat.show{display:block;}
+
+  /* Тест */
+  .q{margin:16px 0;}
+  .q p{font-weight:700; margin-bottom:8px;}
+  .ans{display:block; width:100%; text-align:left; background:#f6f9fd; border:1.5px solid #dbe6f3;
+    border-radius:10px; padding:10px 14px; margin:6px 0; cursor:pointer; font-size:14.5px; font-family:inherit;}
+  .ans:hover{border-color:var(--blue);}
+  .ans.correct{background:#e8f5e9; border-color:var(--ok); font-weight:700;}
+  .ans.wrong{background:#fdecea; border-color:var(--red);}
+  .result{display:none; margin-top:14px; padding:14px; border-radius:12px; font-weight:800;
+    text-align:center; font-size:17px;}
+  .result.good{background:#e8f5e9; color:var(--ok); display:block;}
+  .result.mid{background:#fff8e1; color:#b26a00; display:block;}
+  .result.bad{background:#fdecea; color:var(--red); display:block;}
+  button.main{background:var(--accent); color:#0d2145; font-weight:800; border:none;
+    padding:12px 28px; border-radius:24px; cursor:pointer; font-size:15px; margin-top:10px;}
+
+  footer{background:var(--navy); color:#fff; text-align:center; padding:20px;
+    border-radius:16px; margin:20px 0 8px; font-size:14px;}
+  footer .big{font-weight:900; font-size:18px; letter-spacing:1px;}
+</style>
+</head>
+<body>
+<header>
+  <span class="badge">Шестой — на связи!</span><span class="klass">6 класс</span>
+  <div class="urok-num">УРОК № 19</div>
+  <h1>Технологии получения отверстий в заготовках из металла. Сверление</h1>
+  <p>Раздел 3. Технологии обработки материалов и пищевых продуктов</p>
+</header>
+
+<div class="wrap">
+
+<section>
+  <h2>🎯 Цели урока</h2>
+  <div class="goal">📍 <b>Повторить</b> правила безопасной работы с инструментами по металлу</div>
+  <div class="goal">📍 <b>Научиться</b> готовить заготовку к сверлению: разметка и кернение</div>
+  <div class="goal">📍 <b>Узнать</b> устройство сверлильного станка и порядок получения отверстий</div>
+</section>
+
+<section>
+  <h2>📚 Что такое сверление</h2>
+  <p><b>Сверление</b> — операция получения круглых отверстий в заготовке с помощью специального инструмента — <b>сверла</b>, которое вращается и врезается в металл своей режущей частью.</p>
+  <p>Чтобы отверстие получилось точно в нужном месте, сначала делают <b>разметку</b>, а затем <b>кернят</b> центр будущего отверстия — небольшую лунку. Лунка не даёт сверлу «съехать» с места в начале работы.</p>
+</section>
+
+<section>
+  <h2>🔧 Инструменты и приспособления</h2>
+  <details class="tool"><summary>🛠 Сверлильный станок</summary>
+    <div class="body">Главный станок для сверления. Сверло закрепляется в <b>патроне</b>, заготовка — в тисках на столе. Включение кнопкой <b>«Пуск»</b>, выключение — <b>«Стоп»</b>. Работать на станке можно только с разрешения учителя!</div></details>
+  <details class="tool"><summary>🔩 Сверло</summary>
+    <div class="body">Режущий инструмент из быстрорежущей стали. Диаметр сверла подбирают <b>по диаметру отверстия</b>. Спиральные канавки отводят стружку из зоны резания.</div></details>
+  <details class="tool"><summary>🔺 Кернер</summary>
+    <div class="body">Стальной стержень с острым концом. По нему ударяют молотком, чтобы сделать лунку-метку в центре будущего отверстия. Без кернения сверло может уйти в сторону.</div></details>
+  <details class="tool"><summary>🗜 Тиски</summary>
+    <div class="body">Приспособление для надёжного закрепления заготовки. Деталь, которую сверлят, обязательно зажимают в тисках или закрепляют на столе станка — держать её в руках <b>запрещено</b>!</div></details>
+  <details class="tool"><summary>📏 Штангенциркуль и чертилка</summary>
+    <div class="body">Штангенциркуль отмеряет точные размеры, чертилка наносит риски на металл — так делают разметку центра будущего отверстия.</div></details>
+</section>
+
+<section>
+  <h2>🏭 Устройство сверлильного станка</h2>
+  <p>Нажмите на название части станка — узнаете, зачем она нужна:</p>
+  <div class="scheme">
+    <svg viewBox="0 0 400 300">
+      <rect x="20" y="250" width="360" height="30" rx="6" fill="#0a1a38"/>
+      <rect x="60" y="40" width="46" height="210" rx="6" fill="#2c5aa0"/>
+      <rect x="50" y="25" width="66" height="22" rx="5" fill="#f0a020"/>
+      <rect x="106" y="55" width="120" height="34" rx="6" fill="#3a6ec2"/>
+      <rect x="200" y="70" width="16" height="52" rx="3" fill="#9fb8d8"/>
+      <rect x="184" y="112" width="48" height="26" rx="4" fill="#e0e8f2"/>
+      <polygon points="198,138 218,138 213,152 203,152" fill="#7a8aa0"/>
+      <rect x="150" y="200" width="200" height="20" rx="4" fill="#c8d6e8"/>
+      <rect x="240" y="180" width="70" height="22" rx="4" fill="#b8c6da" stroke="#5a6a80"/>
+      <circle cx="275" cy="191" r="4" fill="#334455"/>
+      <rect x="320" y="150" width="14" height="42" rx="3" fill="#d84a2a"/>
+      <rect x="318" y="196" width="18" height="10" rx="2" fill="#2e7d32"/>
+      <rect x="318" y="210" width="18" height="10" rx="2" fill="#c62828"/>
+      <text x="83" y="150" fill="#fff" font-size="11" transform="rotate(-90 83 150)" text-anchor="middle">КОЛОННА</text>
+      <text x="166" y="76" fill="#fff" font-size="10">БАБКА</text>
+      <text x="208" y="132" fill="#223" font-size="9">ПАТРОН</text>
+      <text x="252" y="174" fill="#223" font-size="9">ТИСКИ</text>
+      <text x="300" y="196" fill="#fff" font-size="9">СТОЛ</text>
+    </svg>
+    <div class="parts">
+      <div class="part" onclick="showPart(0)">Колонна</div>
+      <div class="part" onclick="showPart(1)">Бабка</div>
+      <div class="part" onclick="showPart(2)">Патрон</div>
+      <div class="part" onclick="showPart(3)">Стол</div>
+      <div class="part" onclick="showPart(4)">Тиски</div>
+      <div class="part" onclick="showPart(5)">Пульт</div>
+    </div>
+    <div class="part-info" id="partInfo"></div>
+  </div>
+</section>
+
+<section>
+  <h2>📋 Подготовка заготовки: 7 шагов</h2>
+  <div class="step"><div class="stepnum">1</div><div><b>Осмотр заготовки.</b> Проверьте: нет ли заусенцев, трещин, ржавчины. При необходимости зачистите края напильником.</div></div>
+  <div class="step"><div class="stepnum">2</div><div><b>Изучение чертежа.</b> Найдите размеры: где и какого диаметра должно быть отверстие.</div></div>
+  <div class="step"><div class="stepnum">3</div><div><b>Разметка.</b> Штангенциркулем отмерьте место отверстия, чертилкой нанесите риски — пересечение линий и есть центр.</div></div>
+  <div class="step"><div class="stepnum">4</div><div><b>Кернение.</b> Поставьте кернер в центр и лёгким ударом молотка сделайте лунку. Она удержит сверло на месте.</div></div>
+  <div class="step"><div class="stepnum">5</div><div><b>Подбор сверла.</b> Возьмите сверло нужного диаметра и закрепите его в патроне станка.</div></div>
+  <div class="step"><div class="stepnum">6</div><div><b>Закрепление заготовки.</b> Надёжно зажмите деталь в тисках на столе станка.</div></div>
+  <div class="step"><div class="stepnum">7</div><div><b>Сверление.</b> Плавно подайте сверло к лунке, включите станок, сверлите с умеренным нажимом. В конце снизьте нажим.</div></div>
+  <div class="warn">⚠️ Запрещено сверлить деталь, держа её в руках! Только надёжное закрепление в тисках.</div>
+  <div class="tip">💡 Совет мастера: капните каплю масла на место сверления — сверло будет резать легче и не перегреется.</div>
+</section>
+
+<section>
+  <h2>✅ Чек-лист: правила безопасной работы</h2>
+  <p>Отметьте пункты, которые будете соблюдать в мастерской:</p>
+  <div class="chk" id="checklist">
+    <label><input type="checkbox" onchange="upd()"><span>Работаю в спецодежде: халат, очки, волосы убраны</span></label>
+    <label><input type="checkbox" onchange="upd()"><span>Заготовка надёжно закреплена в тисках</span></label>
+    <label><input type="checkbox" onchange="upd()"><span>Проверил крепление сверла в патроне</span></label>
+    <label><input type="checkbox" onchange="upd()"><span>Станок включаю только с разрешения учителя</span></label>
+    <label><input type="checkbox" onchange="upd()"><span>Не отвлекаюсь и не разговариваю во время работы</span></label>
+    <label><input type="checkbox" onchange="upd()"><span>Стружку убираю щёткой-сметкой, не рукой!</span></label>
+    <label><input type="checkbox" onchange="upd()"><span>По окончании работы — станок выключен, рабочее место убрано</span></label>
+  </div>
+  <div class="bar"><div id="barFill"></div></div>
+  <div class="congrat" id="congrat">🎉 Отлично! Все правила повторены — можно идти в мастерскую!</div>
+</section>
+
+<section>
+  <h2>🧠 Мини-тест: проверь себя</h2>
+  <div class="q"><p>1. Зачем делают кернение перед сверлением?</p>
+    <button class="ans" onclick="answer(this,0)">Чтобы украсить заготовку</button>
+    <button class="ans" onclick="answer(this,0,1)">Чтобы сверло не съехало с места</button>
+    <button class="ans" onclick="answer(this,0)">Чтобы металл стал мягче</button></div>
+  <div class="q"><p>2. Как закрепляют заготовку при сверлении?</p>
+    <button class="ans" onclick="answer(this,1,1)">Держат в руке</button>
+    <button class="ans" onclick="answer(this,1)">Зажимают в тисках на столе станка</button>
+    <button class="ans" onclick="answer(this,1)">Придерживают пальцем</button></div>
+  <div class="q"><p>3. Что закрепляют в патроне станка?</p>
+    <button class="ans" onclick="answer(this,2,1)">Заготовку</button>
+    <button class="ans" onclick="answer(this,2)">Кернер</button>
+    <button class="ans" onclick="answer(this,2,1)">Сверло</button></div>
+  <div class="q"><p>4. Как убирают стружку после сверления?</p>
+    <button class="ans" onclick="answer(this,3)">Рукой</button>
+    <button class="ans" onclick="answer(this,3,1)">Щёткой-сметкой</button>
+    <button class="ans" onclick="answer(this,3)">Сдувают</button></div>
+  <div class="q"><p>5. Можно ли включать станок без разрешения учителя?</p>
+    <button class="ans" onclick="answer(this,4)">Да, если умеешь</button>
+    <button class="ans" onclick="answer(this,4,1)">Нет, только с разрешения учителя</button>
+    <button class="ans" onclick="answer(this,4)">Да, если рядом одноклассники</button></div>
+  <button class="main" onclick="finish()">Проверить результат</button>
+  <div class="result" id="result"></div>
+</section>
+
+<section>
+  <h2>🔐 Запомни главное</h2>
+  <details class="tool"><summary>Зачем сверлу спиральные канавки?</summary><div class="body">Они отводят стружку из зоны резания — иначе сверло забьётся и перегреется.</div></details>
+  <details class="tool"><summary>Почему нельзя держать деталь рукой?</summary><div class="body">Сверло может зацепить деталь и провернуть её вместе с рукой — это травмоопасно.</div></details>
+  <details class="tool"><summary>Что такое кернер?</summary><div class="body">Инструмент для нанесения лунки-метки в центре будущего отверстия, чтобы сверло не ушло в сторону.</div></details>
+  <details class="tool"><summary>Как подобрать сверло?</summary><div class="body">По диаметру отверстия на чертеже. Диаметр сверла = диаметру нужного отверстия.</div></details>
+  <details class="tool"><summary>Что сделать в конце работы?</summary><div class="body">Выключить станок, убрать стружку щёткой, снять заготовку из тисков, привести рабочее место в порядок.</div></details>
+</section>
+
+<section>
+  <h2>🏠 Домашнее задание</h2>
+  <p>📌 Повторить правила безопасной работы с инструментами по металлу.</p>
+  <p>📌 Подготовить заготовку: проверить состояние, при необходимости зачистить.</p>
+  <p>📌 Записать в тетрадь последовательность операций подготовки заготовки к сверлению.</p>
+</section>
+
+<footer>
+  <div class="big">📡 ШЕСТОЙ — НА СВЯЗИ!</div>
+  <p>Урок №19 · 6 класс · Технологии обработки материалов</p>
+</footer>
+
+</div>
+
+<script>
+var parts=[
+ "Колонна — вертикальная стойка станка, на которой крепятся все механизмы. Основа конструкции.",
+ "Бабка — узел, в котором установлен электродвигатель и шпиндель: он вращает сверло.",
+ "Патрон — зажимное устройство, в которое вставляют и закрепляют сверло.",
+ "Стол — горизонтальная поверхность, на которой устанавливают тиски с заготовкой. Его можно поднимать и опускать.",
+ "Тиски — зажимное приспособление для надёжного закрепления заготовки. Держать деталь в руках запрещено!",
+ "Пульт — кнопки «Пуск» и «Стоп» для включения и выключения станка. Зелёная — пуск, красная — стоп."
+];
+function showPart(i){
+  var el=document.getElementById('partInfo');
+  el.textContent=parts[i]; el.classList.add('show');
+  var ps=document.querySelectorAll('.part');
+  ps.forEach(function(p,j){p.classList.toggle('active',j===i);});
+}
+function upd(){
+  var boxes=document.querySelectorAll('#checklist input');
+  var n=0; boxes.forEach(function(b){ if(b.checked)n++; b.parentNode.classList.toggle('done',b.checked); });
+  document.getElementById('barFill').style.width=(n/boxes.length*100)+'%';
+  if(n===boxes.length) document.getElementById('congrat').classList.add('show');
+}
+var correct=0, answered=0;
+function answer(btn,qi,isRight){
+  var q=btn.parentNode, btns=q.querySelectorAll('.ans');
+  if(q.dataset.done) return;
+  q.dataset.done="1";
+  btns.forEach(function(b,i){ if(i===1) b.classList.add('correct'); });
+  if(isRight){ btn.classList.add('correct'); correct++; } else { btn.classList.add('wrong'); }
+  answered++;
+}
+function finish(){
+  var r=document.getElementById('result');
+  if(answered<5){ r.className='result mid'; r.textContent='Ответьте на все 5 вопросов! ('+answered+'/5)'; return; }
+  if(correct>=4){ r.className='result good'; r.textContent='🎉 Отлично! '+correct+' из 5 — вы готовы к мастерской!'; }
+  else if(correct>=3){ r.className='result mid'; r.textContent='🙂 Неплохо! '+correct+' из 5 — повторите теорию ещё раз.'; }
+  else { r.className='result bad'; r.textContent='📖 '+correct+' из 5 — перечитайте урок и попробуйте снова!'; }
+}
+</script>
+</body>
+</html>
