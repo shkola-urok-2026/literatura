@@ -5,476 +5,319 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Есть такая профессия — Родину защищать</title>
 <style>
-:root{
-  --bg:#131a12; --panel:#1d2619; --panel2:#243020; --gold:#d9b35c; --gold2:#f0d089;
-  --text:#e8e4d8; --dim:#a8a492; --green:#7a9a5a; --red:#c25b4a; --line:#3a4530;
-}
+:root{--gold:#d4a94e;--gold2:#f0d9a8;--navy:#0d1b2a;--navy2:#13263b;--navy3:#1b3450;--text:#e8e2d4;--dim:#a8b4c4;}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Georgia','Times New Roman',serif;line-height:1.65}
-.sans{font-family:'Segoe UI',Arial,sans-serif}
-#bar{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,var(--gold),#8a6d2f);z-index:100;width:0%}
-header.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
- background:radial-gradient(ellipse at 50% 20%,#2c3a22 0%,#131a12 70%);padding:40px 20px;position:relative;overflow:hidden}
-.hero .star{font-size:52px;color:var(--gold);margin-bottom:14px;text-shadow:0 0 30px rgba(217,179,92,.5)}
-.hero h1{font-size:clamp(28px,5vw,52px);color:var(--gold2);letter-spacing:1px;max-width:900px}
-.hero .sub{margin-top:18px;color:var(--dim);max-width:640px;font-size:17px}
-.hero .meta{margin-top:26px;font-size:14px;color:var(--green);letter-spacing:2px;text-transform:uppercase}
-.scrollhint{position:absolute;bottom:26px;color:var(--gold);font-size:26px;animation:bn 1.6s infinite}
-@keyframes bn{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-nav.toc{max-width:960px;margin:0 auto;padding:50px 20px}
-nav.toc h2{color:var(--gold2);text-align:center;font-size:30px;margin-bottom:34px}
-.tocgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
-.toccard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;cursor:pointer;transition:.25s}
-.toccard:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 8px 24px rgba(0,0,0,.4)}
-.toccard .num{color:var(--gold);font-size:13px;letter-spacing:2px}
-.toccard .ttl{font-size:19px;margin-top:6px;color:var(--text)}
-.toccard .dsc{font-size:14px;color:var(--dim);margin-top:6px}
-section.chapter{max-width:960px;margin:0 auto;padding:60px 20px;display:none;animation:fin .4s}
-section.chapter.active{display:block}
-@keyframes fin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.chnum{color:var(--gold);letter-spacing:3px;font-size:13px;text-transform:uppercase}
-h2.cht{font-size:clamp(24px,4vw,36px);color:var(--gold2);margin:8px 0 22px;border-bottom:1px solid var(--line);padding-bottom:14px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
-.card h3{color:var(--gold2);font-size:20px;margin-bottom:10px}
-.card p{margin:8px 0;color:var(--text)}
-.muted{color:var(--dim)}
-.hl{color:var(--gold2);font-weight:bold}
-ul.tick{list-style:none;margin:10px 0}
-ul.tick li{padding:6px 0 6px 28px;position:relative}
-ul.tick li:before{content:'★';position:absolute;left:2px;color:var(--gold)}
-.qbtn{display:flex;justify-content:space-between;align-items:center;background:var(--panel);border:1px solid var(--line);
- border-radius:10px;padding:15px 18px;margin:10px 0;cursor:pointer;color:var(--text);font-size:16px;font-family:inherit;text-align:left;width:100%;transition:.2s}
-.qbtn:hover{border-color:var(--gold)}
-.qbtn:after{content:'+';color:var(--gold);font-size:22px}
-.qbtn.open:after{content:'−'}
-.qans{display:none;background:var(--panel2);border-radius:0 0 10px 10px;border:1px solid var(--line);border-top:none;padding:14px 18px;margin:-10px 0 10px;font-size:15px}
-.qans.show{display:block}
-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
-th{background:var(--panel2);color:var(--gold2);padding:10px;border:1px solid var(--line);text-align:left}
-td{padding:9px 10px;border:1px solid var(--line)}
-tr:nth-child(even) td{background:rgba(255,255,255,.02)}
-.steps{counter-reset:st;margin:16px 0}
-.step{position:relative;padding:14px 16px 14px 60px;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0}
-.step:before{counter-increment:st;content:counter(st);position:absolute;left:14px;top:14px;width:32px;height:32px;
- border-radius:50%;background:var(--gold);color:#1a1a10;font-weight:bold;display:flex;align-items:center;justify-content:center;font-family:'Segoe UI',sans-serif}
-.step b{color:var(--gold2)}
-.vusearch{width:100%;padding:13px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;
- color:var(--text);font-size:16px;font-family:inherit;margin:8px 0}
-.vusearch:focus{outline:none;border-color:var(--gold)}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-.fbtn{padding:7px 14px;border-radius:20px;border:1px solid var(--line);background:var(--panel);color:var(--dim);cursor:pointer;font-size:14px;font-family:inherit;transition:.2s}
-.fbtn.on{background:var(--gold);color:#1a1a10;border-color:var(--gold);font-weight:bold}
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;margin-top:14px}
-.vcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;transition:.2s}
-.vcard:hover{border-color:var(--gold);transform:translateY(-3px)}
-.vcard .cat{font-size:12px;color:var(--green);text-transform:uppercase;letter-spacing:1px}
-.vcard h4{color:var(--gold2);font-size:16px;margin:6px 0}
-.vcard .city{color:var(--text);font-size:15px;margin:4px 0}
-.vcard .adr{color:var(--dim);font-size:13px;margin:4px 0}
-.vcard .prof{color:var(--dim);font-size:13px;font-style:italic;margin-top:6px}
-.tq{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:16px 0}
-.tq .qq{font-size:17px;margin-bottom:12px}
-.opt{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);color:var(--text);
- padding:11px 14px;border-radius:9px;margin:7px 0;cursor:pointer;font-family:inherit;font-size:15px;transition:.15s}
-.opt:hover{border-color:var(--gold)}
-.opt.ok{background:rgba(122,154,90,.25);border-color:var(--green)}
-.opt.bad{background:rgba(194,91,74,.2);border-color:var(--red)}
-.res{display:none;text-align:center;background:var(--panel2);border:1px solid var(--gold);border-radius:14px;padding:26px;margin:18px 0}
-.res.show{display:block}
-.res .big{font-size:44px;color:var(--gold)}
-.backtop{display:inline-block;margin-top:30px;padding:10px 22px;border-radius:24px;border:1px solid var(--gold);
- color:var(--gold);background:transparent;cursor:pointer;font-family:inherit;font-size:15px}
-.backtop:hover{background:var(--gold);color:#1a1a10}
-.fact{background:linear-gradient(135deg,rgba(217,179,92,.1),rgba(217,179,92,.03));border-left:4px solid var(--gold);
- border-radius:0 10px 10px 0;padding:14px 18px;margin:14px 0;font-size:15px}
-.fact b{color:var(--gold2)}
-.timeline{position:relative;margin:20px 0;padding-left:30px;border-left:2px solid var(--line)}
-.tlitem{padding:10px 0 10px 10px;position:relative}
-.tlitem:before{content:'';position:absolute;left:-37px;top:18px;width:12px;height:12px;border-radius:50%;background:var(--gold)}
-.tlitem .tld{color:var(--gold2);font-weight:bold}
-footer{border-top:1px solid var(--line);margin-top:40px;padding:30px 20px;text-align:center;color:var(--dim);font-size:14px}
-@media(max-width:640px){.step{padding-left:52px}}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--navy);color:var(--text);line-height:1.6}
+#app{max-width:860px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+.page{display:none;flex:1;padding:34px 26px 60px;animation:fade .45s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+h1,h2,h3{font-weight:normal;color:var(--gold2)}
+h2{font-size:1.7em;border-bottom:2px solid var(--gold);padding-bottom:10px;margin-bottom:20px}
+h3{font-size:1.25em;color:var(--gold);margin:26px 0 10px}
+p{margin:10px 0}
+.gold{color:var(--gold)}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 26px;background:var(--navy2);border-bottom:1px solid rgba(212,169,78,.35);position:sticky;top:0;z-index:5}
+.topbar .brand{color:var(--gold);letter-spacing:.12em;font-size:.8em;text-transform:uppercase}
+.topbar button{background:none;border:1px solid var(--gold);color:var(--gold2);padding:6px 16px;cursor:pointer;border-radius:4px;font-family:inherit;font-size:.85em}
+.topbar button:hover{background:var(--gold);color:var(--navy)}
+.bottomnav{display:flex;justify-content:space-between;gap:12px;margin-top:34px;border-top:1px solid rgba(212,169,78,.3);padding-top:16px}
+.bottomnav button{flex:1;background:var(--navy3);border:1px solid var(--gold);color:var(--gold2);padding:11px 14px;border-radius:6px;cursor:pointer;font-family:inherit;font-size:.9em}
+.bottomnav button:hover{background:var(--gold);color:var(--navy)}
+.card{background:var(--navy2);border:1px solid rgba(212,169,78,.28);border-left:4px solid var(--gold);border-radius:8px;padding:16px 20px;margin:14px 0}
+.card h4{color:var(--gold2);margin-bottom:6px;font-weight:normal}
+.fact{background:rgba(212,169,78,.09);border:1px dashed var(--gold);border-radius:8px;padding:12px 18px;margin:14px 0;font-size:.95em}
+.fact b{color:var(--gold)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92em}
+th{background:var(--navy3);color:var(--gold2);padding:9px 10px;border:1px solid rgba(212,169,78,.4);text-align:left}
+td{padding:8px 10px;border:1px solid rgba(212,169,78,.22)}
+tr:nth-child(even) td{background:rgba(255,255,255,.03)}
+ul{margin:8px 0 8px 22px}
+li{margin:5px 0}
+.steps{counter-reset:st}
+.step{position:relative;padding-left:56px;margin:18px 0}
+.step:before{counter-increment:st;content:counter(st);position:absolute;left:0;top:2px;width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--navy);font-weight:bold;display:flex;align-items:center;justify-content:center;font-size:1.1em}
+.star{color:var(--gold);text-align:center;letter-spacing:14px;margin:16px 0;font-size:1.1em}
+.divider{text-align:center;color:var(--gold);margin:22px 0}
+.divider:before{content:"★ ★ ★";letter-spacing:10px}
+/* обложка */
+.cover{text-align:center;padding-top:6vh}
+.cover .emblem{font-size:3.2em;color:var(--gold)}
+.cover h1{font-size:2.5em;margin:16px 0 8px;letter-spacing:.03em}
+.cover .sub{color:var(--dim);max-width:560px;margin:0 auto;font-size:1.05em}
+.cover .edition{color:var(--gold2);margin-top:16px;font-size:.95em}
+.board{border:1px solid var(--gold);border-radius:10px;max-width:640px;margin:26px auto 0;padding:16px 22px;background:rgba(212,169,78,.07);font-size:.86em;line-height:1.55}
+.board .bt{color:var(--gold);letter-spacing:.1em;text-transform:uppercase;font-size:.85em;margin-bottom:8px}
+.btnmain{display:inline-block;margin-top:28px;background:var(--gold);color:var(--navy);padding:14px 44px;border:none;border-radius:6px;font-family:inherit;font-size:1.05em;cursor:pointer;letter-spacing:.06em}
+.btnmain:hover{background:var(--gold2)}
+/* коллегия */
+.person{background:var(--navy2);border:1px solid rgba(212,169,78,.35);border-radius:10px;padding:20px 24px;margin:16px 0;text-align:center}
+.person .rank{color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-size:.8em}
+.person .name{font-size:1.25em;color:var(--gold2);margin:8px 0 4px}
+.person .role{color:var(--dim);font-size:.93em}
+.person .region{margin-top:10px;color:var(--gold2);font-size:.95em}
+/* каталог */
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}
+.tools input{flex:1;min-width:220px;background:var(--navy2);border:1px solid var(--gold);color:var(--text);padding:10px 14px;border-radius:6px;font-family:inherit;font-size:.95em}
+.filt{background:var(--navy3);border:1px solid rgba(212,169,78,.4);color:var(--gold2);padding:7px 14px;border-radius:20px;cursor:pointer;font-family:inherit;font-size:.82em}
+.filt.on{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+#ulist{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}
+.u{background:var(--navy2);border:1px solid rgba(212,169,78,.25);border-radius:8px;padding:14px 16px}
+.u .k{display:inline-block;font-size:.72em;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);background:var(--gold);border-radius:3px;padding:2px 8px;margin-bottom:8px}
+.u .k.vuc{background:var(--gold2)}
+.u b{color:var(--gold2);font-weight:normal;display:block;margin-bottom:6px;font-size:.98em}
+.u .meta{color:var(--dim);font-size:.85em}
+.counter{color:var(--dim);font-size:.85em;margin:10px 0}
+/* тест */
+.q{background:var(--navy2);border:1px solid rgba(212,169,78,.28);border-radius:8px;padding:18px 20px;margin:16px 0}
+.q .qq{margin-bottom:12px}
+.q label{display:block;padding:10px 14px;border:1px solid rgba(212,169,78,.3);border-radius:6px;margin:8px 0;cursor:pointer}
+.q label:hover{background:rgba(212,169,78,.1)}
+.q .exp{display:none;margin-top:12px;padding:12px 16px;background:rgba(212,169,78,.1);border-left:3px solid var(--gold);font-size:.9em}
+.q .exp.show{display:block}
+#result{display:none;text-align:center;padding:26px;border:2px solid var(--gold);border-radius:12px;margin-top:22px;background:rgba(212,169,78,.08)}
+#result .grade{font-size:2.6em;color:var(--gold)}
+@media(max-width:640px){.cover h1{font-size:1.8em}.page{padding:24px 16px 50px}h2{font-size:1.35em}}
 </style>
 </head>
 <body>
-<div id="bar"></div>
+<div class="topbar"><span class="brand">Есть такая профессия — Родину защищать</span><button onclick="go('cover')">Обложка</button></div>
+<div id="app">
 
-<header class="hero">
-  <div class="star">★</div>
-  <h1>ЕСТЬ ТАКАЯ ПРОФЕССИЯ —<br>РОДИНУ ЗАЩИЩАТЬ</h1>
-  <div class="sub">Интерактивная книга-путеводитель по справочнику Минобороны России для поступающих в высшие военно-учебные заведения и военные учебные центры.</div>
-  <div class="meta">По материалам 10-го издания • Москва • 2026</div>
-  <div class="scrollhint">▾</div>
-</header>
-
-<nav class="toc" id="toc">
-  <h2>Содержание книги</h2>
-  <div class="tocgrid">
-    <div class="toccard" onclick="go(1)"><div class="num">ГЛАВА 1</div><div class="ttl">Профессия — Родину защищать</div><div class="dsc">Престиж офицера, денежное довольствие, гарантии, отпуска, пенсия</div></div>
-    <div class="toccard" onclick="go(2)"><div class="num">ГЛАВА 2</div><div class="ttl">Жизнь курсанта</div><div class="dsc">Обучение, быт, увольнения, каникулы, звания, наряды</div></div>
-    <div class="toccard" onclick="go(3)"><div class="num">ГЛАВА 3</div><div class="ttl">Как поступить</div><div class="dsc">Кто может, ЕГЭ, физподготовка, профотбор, льготы</div></div>
-    <div class="toccard" onclick="go(4)"><div class="num">ГЛАВА 4</div><div class="ttl">Военный учебный центр</div><div class="dsc">Офицер с гражданской скамьи вуза</div></div>
-    <div class="toccard" onclick="go(5)"><div class="num">ГЛАВА 5</div><div class="ttl">Справочник вузов</div><div class="dsc">Интерактивный каталог: поиск и фильтры по 40 вузам</div></div>
-    <div class="toccard" onclick="go(6)"><div class="num">ФИНАЛ</div><div class="ttl">Проверь себя</div><div class="dsc">Тест из 10 вопросов и дорожная карта поступления</div></div>
+<!-- ОБОЛОЧКА-1: ОБЛОЖКА -->
+<section class="page active" id="cover">
+ <div class="cover">
+  <div class="emblem">★</div>
+  <h1>Есть такая профессия —<br>Родину защищать</h1>
+  <div class="sub">Поступающим в высшие военно-учебные заведения Министерства обороны Российской Федерации и в военные учебные центры при федеральных государственных образовательных организациях высшего образования</div>
+  <div class="edition">10-е издание, дополненное и переработанное · Москва · 2026<br>Под общей редакцией заместителя Министра обороны Российской Федерации — начальника Главного военно-политического управления Вооружённых Сил Российской Федерации генерала армии В.П. Горемыкина</div>
+  <div class="board">
+   <div class="bt">Редакционная коллегия</div>
+   майор Кравец Вячеслав Викторович — начальник отделения подготовки и призыва граждан на военную службу; Петриляк Николай Николаевич — помощник начальника отделения подготовки и призыва граждан на военную службу. Херсонская область.<br>Техническая поддержка — педагоги ГБОУ ХО «Подо-Калиновская школа Алешкинского района».
   </div>
-</nav>
-
-<section class="chapter" id="ch1">
-  <div class="chnum">Глава 1</div>
-  <h2 class="cht">Профессия — Родину защищать</h2>
-
-  <div class="card">
-    <h3>Почему профессия офицера популярна</h3>
-    <p>Уровень популярности профессии офицера в последние годы вырос — в том числе благодаря усилению материальных и социальных стимулов службы. Офицер современных Вооружённых Сил — это материальная стабильность, возможности карьерного роста и повышение социального статуса.</p>
-    <ul class="tick">
-      <li>Стабильное и высокое денежное довольствие</li>
-      <li>Социальная защищённость, забота о членах семьи</li>
-      <li>Бесплатное престижное образование</li>
-      <li>Профессиональный и карьерный рост</li>
-      <li>Государственные награды и ведомственные знаки отличия</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h3>Сколько получает офицер</h3>
-    <p>Средний размер денежного довольствия офицера — <span class="hl">от 78 до 135 тысяч рублей в месяц</span>. Конкретный размер зависит от звания, выслуги лет, должности, физической подготовленности, работы со секретными сведениями, квалификации, места службы и сложности задач.</p>
-    <p class="muted">Довольствие складывается из оклада денежного содержания (оклад по должности + оклад по званию) и дополнительных выплат: за выслугу лет (от 10% до 40%), классность (5–30%), секретность, особые условия, риск в мирное время, премию до трёх окладов в год и материальную помощь.</p>
-    <table>
-      <tr><th>Звание</th><th>Оклад по званию</th></tr>
-      <tr><td>Лейтенант</td><td>14 331 ₽</td></tr>
-      <tr><td>Старший лейтенант</td><td>15 046 ₽</td></tr>
-      <tr><td>Капитан</td><td>15 761 ₽</td></tr>
-      <tr><td>Майор</td><td>16 481 ₽</td></tr>
-      <tr><td>Подполковник</td><td>17 196 ₽</td></tr>
-      <tr><td>Полковник</td><td>18 629 ₽</td></tr>
-    </table>
-    <p class="muted">Оклады по должности: от 28 655 ₽ (10 тыс. тарифного разряда) до 64 473 ₽ (50 тыс.).</p>
-  </div>
-
-  <div class="card">
-    <h3>Социальные гарантии</h3>
-    <p>Единая система правовой и социальной защиты военнослужащих и их семей установлена Федеральным законом «О статусе военнослужащих»:</p>
-    <ul class="tick">
-      <li>Служебное жильё или общежитие по прибытии к новому месту службы, компенсация за наём при отсутствии жилья</li>
-      <li>Накопительно-ипотечная система жилищного обеспечения</li>
-      <li>Бесплатная медицинская помощь в военно-медицинских организациях</li>
-      <li>Санаторно-курортное лечение</li>
-      <li>Бесплатный проезд для военнослужащего и членов семьи в установленных случаях</li>
-      <li>Льготное пенсионное обеспечение</li>
-    </ul>
-    <div class="fact">Военные госпитали оказывают более <b>111 видов высокотехнологичной медицинской помощи</b> — в госпиталях им. Н.Н. Бурденко, им. П.В. Мандрыка, им. А.А. Вишневского и Военно-медицинской академии им. С.М. Кирова.</div>
-  </div>
-
-  <div class="card">
-    <h3>Отпуска</h3>
-    <p>Основной отпуск по контракту зависит от выслуги:</p>
-    <table>
-      <tr><th>Выслуга</th><th>Отпуск</th></tr>
-      <tr><td>менее 10 лет</td><td>30 суток</td></tr>
-      <tr><td>10–15 лет</td><td>35 суток</td></tr>
-      <tr><td>15–20 лет</td><td>40 суток</td></tr>
-      <tr><td>20 лет и более</td><td>45 суток</td></tr>
-    </table>
-    <p class="muted">Дополнительно: ветеранам боевых действий — +15 суток, Крайний Север — +15, приравненные местности — +10, должности с повышенной опасностью — +15. Супруги-военнослужащие могут брать отпуск одновременно.</p>
-  </div>
-
-  <div class="card">
-    <h3>Пенсия и предельный возраст</h3>
-    <ul class="tick">
-      <li>Право на пенсию за выслугу — при <span class="hl">20 годах военной службы</span> и более</li>
-      <li>Предельный возраст: полковник и капитан 1 ранга — 55 лет; генерал-майор и генерал-лейтенант — 60; высшие звания — 65 лет</li>
-      <li>Для военнослужащих женского пола предельный возраст — 45 лет</li>
-      <li>После достижения предельного возраста возможен новый контракт (до 65 лет для большинства званий)</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h3>Начало карьеры выпускника</h3>
-    <ul class="tick">
-      <li>Предназначение определяется по итогам итоговой аттестации и служебной характеристике, с учётом семьи и здоровья</li>
-      <li>Выпускники с золотой медалью или дипломом с отличием имеют <span class="hl">преимущественное право выбора места службы</span></li>
-      <li>Если меняется место службы, семья военнослужащего-выпускника не остаётся «за бортом» — решается вопрос о переводе супруга(-и) в тот же гарнизон</li>
-      <li>Выпускники назначаются на должности приказом Министра обороны — назначение гарантировано</li>
-      <li>Женщины-выпускницы назначаются на должности командного, инженерного, технического, военно-гуманитарного, педагогического и медицинского профилей</li>
-    </ul>
-    <div class="fact">Офицер может расти и в науке: защита диссертаций, военно-теоретические труды, рационализаторская и изобретательская работа, а также заочное обучение в гражданских вузах на подготовительных отделениях.</div>
-  </div>
-  <button class="backtop" onclick="go(0)">← К оглавлению</button>
+  <button class="btnmain" onclick="go('koll')">Открыть книгу</button>
+ </div>
 </section>
 
-<section class="chapter" id="ch2">
-  <div class="chnum">Глава 2</div>
-  <h2 class="cht">Жизнь курсанта</h2>
-
-  <div class="card">
-    <h3>Обучение в вузе Минобороны</h3>
-    <ul class="tick">
-      <li>Срок обучения по программам с полной военно-специальной подготовкой — <span class="hl">5 лет</span> (в гражданских вузах — как правило, 4): это объясняется параллельным освоением военной программы и службы</li>
-      <li>Обучение бесплатное, по государственному заказу</li>
-      <li>Есть доступ к Интернету и вычислительной технике в установленном порядке</li>
-      <li>Осваивается иностранный язык; часть вузов готовит по двум</li>
-      <li>Выпускник получает государственный диплом и присвоенное воинское звание «лейтенант»</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h3>Спорт, наука и творчество</h3>
-    <ul class="tick">
-      <li>Развитая спортивная база: залы, стадионы, бассейны, тренажёрные комплексы</li>
-      <li>Курсанты могут получать спортивные разряды, участвовать в первенствах и соревнованиях</li>
-      <li>Научно-исследовательская работа, в том числе за пределами вуза</li>
-      <li>Олимпиады, КВН, музыкальные и песенные фестивали</li>
-      <li>Возможность участвовать в Параде на Красной площади</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h3>Быт и служба</h3>
-    <div class="steps">
-      <div class="step"><b>Казарма.</b> Весь срок обучения курсант проживает на территории вуза (жить дома или снимать квартиру нельзя — за исключением отдельных категорий, определяемых вузом).</div>
-      <div class="step"><b>Увольнения.</b> Курсанты ходят в увольнение по расписанию: выходные и праздничные дни — в соответствии с распорядком и успеваемостью.</div>
-      <div class="step"><b>Наряды.</b> Курсанты заступают в внутренний и гарнизонный наряд — это часть обучения.</div>
-      <div class="step"><b>Звания.</b> Воинские звания присваиваются в период обучения в установленном порядке. Звание, полученное ранее (призыв, контракт), сохраняется.</div>
-      <div class="step"><b>Каникулы.</b> Предусмотрены каникулярные отпуска — зимние и летние, продолжительность устанавливается распорядком вуза.</div>
-      <div class="step"><b>Контракт.</b> Контракт о прохождении военной службы заключается с курсантом в период обучения (с первого курса — в порядке, определённом законодательством).</div>
-    </div>
-    <div class="fact">Курсантам предоставляются <b>бесплатные средства связи</b> для звонков родственникам, а в период обучения возможны зарубежные стажировки. Жениться (выйти замуж) в период обучения можно; при заключении брака решается вопрос о жилье.</div>
-  </div>
-
-  <div class="card">
-    <h3>Денежное довольствие курсанта</h3>
-    <p>Курсанты получают денежное довольствие, размер которого растёт от курса к курсу. Предусмотрены стимулирующие надбавки за отличную успеваемость и другие заслуги.</p>
-  </div>
-
-  <div class="card">
-    <h3>Чему научат</h3>
-    <ul class="tick">
-      <li>Выживанию в экстремальных условиях</li>
-      <li>Стрельбе из разных видов оружия</li>
-      <li>Вождению боевых машин (и получению водительского удостоверения)</li>
-      <li>Тактике, топографии, инженерной и огневой подготовке</li>
-    </ul>
-    <p class="muted">Перевестись из вуза Минобороны в гражданский вуз можно — процедура предусмотрена правилами; также доступно обучение экстерном и заочно по отдельным программам.</p>
-  </div>
-  <button class="backtop" onclick="go(0)">← К оглавлению</button>
+<!-- КОЛЛЕГИЯ -->
+<section class="page" id="koll">
+ <h2 style="text-align:center">Редакционная коллегия</h2>
+ <div class="divider"></div>
+ <p style="text-align:center;color:var(--dim)">В подготовке интерактивной книги на основе справочника «Есть такая профессия — Родину защищать» (10-е издание, дополненное и переработанное, Москва, 2026) принимали участие:</p>
+ <div class="person">
+  <div class="rank">Майор</div>
+  <div class="name">Кравец Вячеслав Викторович</div>
+  <div class="role">Начальник отделения подготовки и призыва граждан на военную службу</div>
+ </div>
+ <div class="person">
+  <div class="rank">Участник коллегии</div>
+  <div class="name">Петриляк Николай Николаевич</div>
+  <div class="role">Помощник начальника отделения подготовки и призыва граждан на военную службу</div>
+ </div>
+ <div class="fact" style="text-align:center"><b>Херсонская область</b></div>
+ <div class="card" style="text-align:center"><h4>Техническая поддержка</h4><p style="margin:0">Педагоги ГБОУ ХО «Подо-Калиновская школа Алешкинского района»</p></div>
+ <div class="divider"></div>
+ <div class="bottomnav"><button onclick="go('cover')">← Обложка</button><button onclick="go('toc')">Содержание →</button></div>
 </section>
 
-<section class="chapter" id="ch3">
-  <div class="chnum">Глава 3</div>
-  <h2 class="cht">Как поступить</h2>
-
-  <div class="card">
-    <h3>Кто может поступать</h3>
-    <ul class="tick">
-      <li>Граждане с средним общим образованием <span class="hl">от 16 до 22 лет</span>, не проходившие военную службу</li>
-      <li>Прошедшие военную службу (призыв) — до 24 лет</li>
-      <li>Военнослужащие по контракту (кроме офицеров) — до 27 лет</li>
-      <li>На программы со средней военно-специальной подготовкой — до 30 лет</li>
-    </ul>
-    <p class="muted">Не могут поступать лица, признанные негодными по здоровью, имеющие неснятую судимость и другие категории, установленные законом.</p>
-  </div>
-
-  <div class="card">
-    <h3>Дорожная карта поступления</h3>
-    <div class="timeline">
-      <div class="tlitem"><div class="tld">Шаг 1. Заявление в военкомат</div><div class="muted">Подайте заявление о желании поступать в военный комиссариат по месту жительства — там формируется личное дело кандидата. В заявлении: ФИО, дата рождения, гражданство, паспортные данные.</div></div>
-      <div class="tlitem"><div class="tld">Шаг 2. Предварительный отбор</div><div class="muted">Медицинское освидетельствование, проверка психологических качеств, документов. Уточните сроки подачи — обычно до 20 мая года поступления.</div></div>
-      <div class="tlitem"><div class="tld">Шаг 3. Профессиональный отбор в вузе</div><div class="muted">Включает: оценку общеобразовательной подготовленности (ЕГЭ или экзамены вуза), физическую подготовку, профессиональную психологическую пригодность, медицинскую комиссию.</div></div>
-      <div class="tlitem"><div class="tld">Шаг 4. Конкурс и зачисление</div><div class="muted">Результаты сводятся в конкурсный список. При равных результатах преимущество у суворовцев, нахимовцев и кадет. О зачислении военкомат узнаёт официально.</div></div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h3>Вступительные испытания</h3>
-    <p>Профессиональный отбор включает <span class="hl">три элемента</span>: общеобразовательную подготовку (ЕГЭ или испытания вуза), физическую подготовку и определение профессиональной психологической пригодности. Типичные предметы: русский язык, математика + физика, информатика, обществознание, история или химия — в зависимости от специальности.</p>
-    <p class="muted">Минимальные баллы приравниваются к минимуму ЕГЭ и не могут быть изменены в ходе приёма. Во время экзаменов вуза запрещено пользоваться средствами связи.</p>
-  </div>
-
-  <div class="card">
-    <h3>Физическая подготовка</h3>
-    <p>Кандидаты до 25 лет (мужчины) сдают 3–4 упражнения на выбор: сила (подтягивание, подъём переворотом, рывок гири), быстрота (бег 60 или 100 м, челночный бег), выносливость (бег 1 или 3 км). Кандидаты-женщины сдают по одному упражнению той же триады.</p>
-    <table>
-      <tr><th>Категория</th><th>Минимум баллов в упражнении</th><th>Оценка «уд.» (3 упр.)</th></tr>
-      <tr><td>Мужчины до 25 лет</td><td>30</td><td>180 баллов</td></tr>
-      <tr><td>Мужчины старше 25</td><td>28</td><td>160 баллов</td></tr>
-      <tr><td>Женщины до 25 лет</td><td>8</td><td>—</td></tr>
-    </table>
-    <p class="muted">Перевод в 100-балльную шкалу: 3 упражнения — 170 баллов и выше дают 75–100 из 100; 4 упражнения — 230 баллов и выше.</p>
-  </div>
-
-  <div class="card">
-    <h3>Льготы при поступлении</h3>
-    <ul class="tick">
-      <li><span class="hl">Юнармия</span> — членство не менее одного года даёт <span class="hl">+3 балла</span> к результатам вступительных испытаний</li>
-      <li>Суворовцы, нахимовцы и кадеты имеют особые права и льготы</li>
-      <li>Победители и призёры олимпиад школьников учитываются по правилам приёма</li>
-      <li>Льготы для детей-сирот и иных категорий, установленных законом, с подтверждением документами</li>
-    </ul>
-    <div class="fact">Можно участвовать одновременно в приёмных испытаниях в вуз Минобороны и в гражданский вуз — порядок установлен правилами приёма. Также допускается поступление, имея уже высшее образование.</div>
-  </div>
-
-  <div class="card">
-    <h3>Здоровье и допуск</h3>
-    <ul class="tick">
-      <li>Медицинское освидетельствование проводится по установленному перечню врачей-специалистов</li>
-      <li>Есть антропометрические требования (рост и др.) для отдельных вузов</li>
-      <li>Повышенные требования к зрению — для ВДВ, плавсостава ВМФ и танковых специальностей</li>
-      <li>Результат сообщают не позднее одного дня после заключения комиссии</li>
-    </ul>
-    <p class="muted">Если кандидат не зачислен — документы возвращаются, а военкомат информируется. Решения можно обжаловать через апелляцию приёмной комиссии.</p>
-  </div>
-  <button class="backtop" onclick="go(0)">← К оглавлению</button>
+<!-- СОДЕРЖАНИЕ -->
+<section class="page" id="toc">
+ <h2>Содержание</h2>
+ <div class="card" onclick="go('ch1')" style="cursor:pointer"><h4>Глава 1. Профессия — Родину защищать</h4><p style="margin:0;color:var(--dim)">Престиж, денежное довольствие, социальные гарантии, карьера</p></div>
+ <div class="card" onclick="go('ch2')" style="cursor:pointer"><h4>Глава 2. Жизнь курсанта</h4><p style="margin:0;color:var(--dim)">Пять лет обучения, быт, наряды, увольнения, контракт</p></div>
+ <div class="card" onclick="go('ch3')" style="cursor:pointer"><h4>Глава 3. Как поступить</h4><p style="margin:0;color:var(--dim)">Дорожная карта поступления, возраст, льготы, физподготовка</p></div>
+ <div class="card" onclick="go('ch4')" style="cursor:pointer"><h4>Глава 4. Военные учебные центры</h4><p style="margin:0;color:var(--dim)">Офицерская подготовка в гражданском вузе</p></div>
+ <div class="card" onclick="go('ch5')" style="cursor:pointer"><h4>Глава 5. Справочник учебных заведений</h4><p style="margin:0;color:var(--dim)">82 организации с поиском и фильтрами</p></div>
+ <div class="card" onclick="go('fin')" style="cursor:pointer"><h4>Проверь себя</h4><p style="margin:0;color:var(--dim)">Тест на 10 вопросов и шпаргалка «Запомнить главное»</p></div>
+ <div class="bottomnav"><button onclick="go('koll')">← Коллегия</button><button onclick="go('ch1')">Глава 1 →</button></div>
 </section>
 
-<section class="chapter" id="ch4">
-  <div class="chnum">Глава 4</div>
-  <h2 class="cht">Военный учебный центр при гражданском вузе</h2>
-
-  <div class="card">
-    <h3>Что это такое</h3>
-    <p>Военный учебный центр (ВУЦ) — подразделение при федеральной государственной образовательной организации высшего образования. Студент учится в гражданском вузе по своей специальности и параллельно проходит военную подготовку в ВУЦ, а по выпуску получает звание офицера.</p>
-    <ul class="tick">
-      <li>Отбор в ВУЦ включает оценку успеваемости, здоровья, физподготовки и психологических качеств</li>
-      <li>Есть отдельные особенности отбора для граждан женского пола</li>
-      <li>Проводятся учебные сборы — практическая часть подготовки</li>
-      <li>Итоговая аттестация завершается присвоением воинского звания «лейтенант»</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h3>Лейтенант из ВУЦ vs выпускник военного вуза</h3>
-    <p>Статус лейтенантов, окончивших военный вуз и ВУЦ, одинаков — звание одно и то же, выслуга лет исчисляется с установленного момента. Различия — в интенсивности военной подготовки: в вузе Минобороны она полная и круглогодичная, в ВУЦ — параллельно с гражданским образованием.</p>
-    <div class="fact">Если студент ВУЦ или офицер-выпускник увольняется со службы ранее срока, указанного в контракте, он <b>возмещает средства бюджета</b>, затраченные на его военную подготовку. ВУЦ-выпускник тоже может повышать квалификацию: магистратура, адъюнктура, курсы переподготовки.</div>
-  </div>
-  <button class="backtop" onclick="go(0)">← К оглавлению</button>
+<!-- ГЛАВА 1 -->
+<section class="page" id="ch1">
+ <h2>Глава 1. Профессия — Родину защищать</h2>
+ <p>Офицерский корпус во все времена был опорой государства и носителем высокого морально-боевого духа. Сегодня Вооружённые Силы Российской Федерации — для энергичных, упорных и грамотных молодых людей.</p>
+ <h3>Почему профессия офицера популярна</h3>
+ <ul>
+  <li>стабильное и высокое денежное довольствие;</li>
+  <li>социальная защищённость и забота о членах семьи;</li>
+  <li>профессиональный и карьерный рост;</li>
+  <li>бесплатное престижное образование;</li>
+  <li>государственные награды и ведомственные знаки отличия.</li>
+ </ul>
+ <h3>Сколько получает офицер</h3>
+ <p>Средний размер денежного довольствия — <b class="gold">от 78 000 до 135 000 рублей</b> в месяц. Размер зависит от звания, выслуги, должности, уровня физподготовки, работы со секретными сведениями и других факторов.</p>
+ <table>
+  <tr><th>Воинское звание</th><th>Оклад по званию</th></tr>
+  <tr><td>Лейтенант</td><td>14 331 руб.</td></tr>
+  <tr><td>Старший лейтенант</td><td>15 046 руб.</td></tr>
+  <tr><td>Капитан</td><td>15 761 руб.</td></tr>
+  <tr><td>Майор</td><td>16 481 руб.</td></tr>
+  <tr><td>Подполковник</td><td>17 196 руб.</td></tr>
+  <tr><td>Полковник</td><td>18 629 руб.</td></tr>
+ </table>
+ <p>Довольствие складывается из оклада денежного содержания (оклад по должности плюс оклад по званию) и дополнительных выплат: за выслугу лет — от 10% до 40%, за классность — от 5% до 30%, за особые условия — от 10% до 100%, за уровень физподготовки — от 15% до 100%, плюс ежемесячные и иные выплаты, ежегодная материальная помощь (1 ОДС) и премии (до 3 ОДС в год).</p>
+ <h3>Социальные гарантии</h3>
+ <ul>
+  <li>жилищное обеспечение: служебные квартиры, компенсация за наём, накопительно-ипотечная система;</li>
+  <li>бесплатная медицинская помощь в военно-медицинских организациях;</li>
+  <li>санаторно-курортное лечение и реабилитация;</li>
+  <li>льготы членам семьи: бесплатный проезд, первоочередной приём детей в дошкольные и школьные организации, путёвки в оздоровительные лагеря;</li>
+  <li>льготное пенсионное обеспечение.</li>
+ </ul>
+ <h3>Отпуска и пенсия</h3>
+ <p>Основной отпуск по выслуге: до 10 лет службы — 30 суток, от 10 до 15 — 35 суток, от 15 до 20 — 40 суток, от 20 лет и более — 45 суток. Плюс дополнительные сутки ветеранам боевых действий и тем, кто служит на Крайнем Севере.</p>
+ <p>Право на пенсию за выслугу лет — при 20 годах службы. С 1 октября 2025 года военные пенсии увеличены на 7,6%, денежное довольствие, учитываемое при исчислении пенсии, — 93,59%.</p>
+ <div class="fact">Офицер, окончивший вуз с золотой медалью или дипломом с отличием, имеет <b>преимущественное право выбора места военной службы</b>.</div>
+ <div class="bottomnav"><button onclick="go('toc')">← Содержание</button><button onclick="go('ch2')">Глава 2 →</button></div>
 </section>
 
-<section class="chapter" id="ch5">
-  <div class="chnum">Глава 5</div>
-  <h2 class="cht">Справочник вузов Минобороны России</h2>
-  <p class="muted sans" style="font-size:14px">Наберите название или город — и найдите свой вуз. Полные адреса, телефоны и приёмные комиссии — на сайте <span class="hl">mil.ru</span> в разделе «Образование → Высшее».</p>
-
-  <input class="vusearch" id="vq" placeholder="Поиск: «связь», «Калининград», «летчиков»…" oninput="renderV()">
-  <div class="filters" id="filters"></div>
-  <div class="vgrid" id="vgrid"></div>
-  <p id="vnone" class="muted" style="display:none;text-align:center;margin:20px">Ничего не найдено — попробуйте другой запрос.</p>
-  <button class="backtop" onclick="go(0)">← К оглавлению</button>
+<!-- ГЛАВА 2 -->
+<section class="page" id="ch2">
+ <h2>Глава 2. Жизнь курсанта</h2>
+ <h3>Пять лет полной подготовки</h3>
+ <p>Обучение в высшем военно-учебном заведении идёт пять лет (в отличие от четырёх лет в гражданском вузе). Столько времени нужно, чтобы дать будущему офицеру и фундаментальное образование, и командирскую подготовку, и физическую закалку. Курсанты — военнослужащие: при зачислении граждане, не проходившие службу, приобретают статус военнослужащих, проходящих военную службу по призыву, и заключают контракт по достижении 18 лет, но не ранее окончания первого курса и до окончания второго курса обучения.</p>
+ <h3>Быт и распорядок</h3>
+ <ul>
+  <li>проживание в казарме, полное государственное обеспечение;</li>
+  <li>два увольнения в неделю (при отличном и хорошем поведении — в увольнение в выходные и праздничные дни);</li>
+  <li>исполнение обязанностей службы во внутреннем и гарнизонном нарядах;</li>
+  <li>свободное время для самоподготовки, спорта и личных дел;</li>
+  <li>каникулярные отпуска: зимний — 15 суток, летний — 30 суток (с дорогой в обе стороны — до 15 и 60 суток соответственно).</li>
+ </ul>
+ <h3>Спорт, наука, творчество</h3>
+ <p>Курсанты занимаются спортом в спортивных командах вуза и могут получить спортивный разряд, участвуют в олимпиадах, КВН и фестивалях, ведут научно-исследовательскую работу. Научат и выживанию в экстремальных условиях, и стрельбе из разных видов оружия.</p>
+ <h3>Связь с родными</h3>
+ <div class="fact">В период обучения курсантам <b>бесплатно предоставляются средства связи</b> для звонков родственникам.</div>
+ <p>Курсанты имеют право вступать в брак — это не запрещено. Жилищный вопрос для семейных курсантов решается после заключения брака в установленном порядке.</p>
+ <div class="fact">Денежное довольствие курсанта растёт с каждого курса: с 2000 до 5000 рублей ежемесячно по курсам обучения — это только <b>надбавка</b> к довольствию, а не весь оклад.</div>
+ <div class="bottomnav"><button onclick="go('ch1')">← Глава 1</button><button onclick="go('ch3')">Глава 3 →</button></div>
 </section>
 
-<section class="chapter" id="ch6">
-  <div class="chnum">Финал</div>
-  <h2 class="cht">Проверь себя</h2>
-
-  <div id="tzone"></div>
-  <div class="res" id="tres">
-    <div class="big" id="tbig"></div>
-    <p id="tmsg" style="margin-top:10px"></p>
-    <button class="backtop" onclick="startTest()">Пройти заново</button>
-  </div>
-
-  <div class="card" style="margin-top:26px">
-    <h3>Запомнить главное</h3>
-    <ul class="tick">
-      <li>Возраст подачи документов — 16–22 года (не служившие)</li>
-      <li>Физподготовка — 3–4 упражнения: сила, быстрота, выносливость</li>
-      <li>Юнармеец со стажем от года получает +3 балла</li>
-      <li>Срок обучения с полной военно-специальной подготовкой — 5 лет</li>
-      <li>Выпускник получает диплом и звание «лейтенант», распределение — приказом Министра обороны</li>
-    </ul>
-  </div>
-  <button class="backtop" onclick="go(0)">← К оглавлению</button>
+<!-- ГЛАВА 3 -->
+<section class="page" id="ch3">
+ <h2>Глава 3. Как поступить</h2>
+ <p>Порядок и условия приёма определяет Минобороны России. Информация размещается на сайте Минобороны в разделе «Образование» → «Документы», в газете «Красная Звезда» и других военных СМИ.</p>
+ <h3>Кто может поступать</h3>
+ <ul>
+  <li>граждане от <b class="gold">16 до 22 лет</b>, не проходившие военную службу;</li>
+  <li>прошедшие военную службу и военнослужащие по призыву — до 24 лет;</li>
+  <li>военнослужащие по контракту (кроме офицеров) — до 27 лет.</li>
+ </ul>
+ <h3>Дорожная карта</h3>
+ <div class="steps">
+  <div class="step"><b>Заявление в военкомат.</b> Подайте заявление о желании поступать в отдел военного комиссариата по месту жительства (военнослужащие — рапорт на имя командира части). В заявлении указываются: воинская должность и гражданская специальность, по которой хотите обучаться.</div>
+  <div class="step"><b>Предварительный отбор.</b> Военный комиссариат формирует личное дело: медицинское освидетельствование, психологические качества, справки, допуск к сведениям, составляющим государственную тайну.</div>
+  <div class="step"><b>Профессиональный отбор в вузе.</b> Оценка общеобразовательной подготовленности (ЕГЭ или испытания по материалам вуза), физической подготовленности, профессиональной пригодности.</div>
+  <div class="step"><b>Зачисление.</b> Кандидаты, прошедшие профессиональный отбор и отнесённые к первой категории профессиональной пригодности, зачисляются курсантами приказом начальника вуза.</div>
+ </div>
+ <h3>Льготы</h3>
+ <ul>
+  <li>книжка юнармейца (участие в движении не менее года) — <b class="gold">+3 балла</b> к результатам вступительных испытаний;</li>
+  <li>выпускники суворовских, нахимовских училищ и кадетских корпусов — преимущественное право при равных результатах;</li>
+  <li>победители и призёры всероссийской олимпиады и олимпиад школьников — зачисление без испытаний или 100 баллов за соответствующий предмет;</li>
+  <li>дети военнослужащих и другие категории — по установленному перечню.</li>
+ </ul>
+ <h3>Физическая подготовка</h3>
+ <p>Минимальные требования по физподготовке оцениваются по трем упражнениям: бег 100 м, бег 3 км (1 км для женщин), подтягивание на перекладине (сгибание-разгибание рук в упоре лёжа для женщин). Баллы начисляются от «удовлетворительно» и выше; за высокие результаты баллы прибавляются к конкурсу.</p>
+ <div class="fact">Можно одновременно участвовать в приёме в военно-учебное заведение и в гражданский вуз: сдаёте ЕГЭ один раз — результаты учитываются в обеих организациях.</div>
+ <div class="bottomnav"><button onclick="go('ch2')">← Глава 2</button><button onclick="go('ch4')">Глава 4 →</button></div>
 </section>
 
-<footer>
-  Составлено по справочнику «Есть такая профессия — Родину защищать», 10-е издание, дополненное и переработанное • Москва, 2026<br>
-  Актуальные правила приёма уточняйте на официальном сайте Минобороны России — mil.ru
-</footer>
+<!-- ГЛАВА 4 -->
+<section class="page" id="ch4">
+ <h2>Глава 4. Военные учебные центры</h2>
+ <p>Военный учебный центр (ВУЦ) при гражданском вузе — путь к офицерскому званию без переезда в казарму: вы учились по выбранной гражданской специальности и параллельно проходите военную подготовку.</p>
+ <ul>
+  <li>студент осваивает гражданскую специальность в вузе и военную программу в ВУЦ;</li>
+  <li>после итоговой аттестации — присвоение воинского звания «лейтенант»;</li>
+  <li>выслуга лет у выпускников ВУЦ исчисляется с момента присвоения звания;</li>
+  <li>учебные сборы со студентами ВУЦ проводятся по особому порядку;</li>
+  <li>есть дополнительные социальные гарантии: отчисление от военной подготовки и выплата студенческой стипендии с надбавкой за военную подготовку;</li>
+  <li>женщины могут поступать в ВУЦ — перечень специальностей определяется отдельно.</li>
+ </ul>
+ <div class="fact">Разницы в статусе между лейтенантами, окончившими военный вуз и ВУЦ, <b>нет</b>: оба становятся офицерами Вооружённых Сил Российской Федерации.</div>
+ <div class="bottomnav"><button onclick="go('ch3')">← Глава 3</button><button onclick="go('ch5')">Глава 5 →</button></div>
+</section>
 
+<!-- ГЛАВА 5 -->
+<section class="page" id="ch5">
+ <h2>Глава 5. Справочник учебных заведений</h2>
+ <p>Всего в справочнике — <b class="gold">82 организации</b>: 34 высших военно-учебных заведения Минобороны России и 48 военных учебных центров при гражданских вузах.</p>
+ <div class="tools">
+  <input id="q" type="text" placeholder="Поиск: город, название, направление…" oninput="render()">
+  <button class="filt on" data-f="all" onclick="setF(this)">Все</button>
+  <button class="filt" data-f="ВВУЗ" onclick="setF(this)">Вузы Минобороны</button>
+  <button class="filt" data-f="ВУЦ" onclick="setF(this)">ВУЦ при вузах</button>
+  <button class="filt" data-f="ВКС" onclick="setF(this)">ВКС и авиация</button>
+  <button class="filt" data-f="ВМФ" onclick="setF(this)">ВМФ</button>
+  <button class="filt" data-f="РВСН" onclick="setF(this)">РВСН</button>
+  <button class="filt" data-f="Сухопутные войска" onclick="setF(this)">Сухопутные войска</button>
+  <button class="filt" data-f="Связь" onclick="setF(this)">Связь</button>
+  <button class="filt" data-f="Инженерные войска" onclick="setF(this)">Инженерные</button>
+  <button class="filt" data-f="Медицина" onclick="setF(this)">Медицина</button>
+ </div>
+ <div class="counter" id="cnt"></div>
+ <div id="ulist"></div>
+ <div class="bottomnav"><button onclick="go('ch4')">← Глава 4</button><button onclick="go('fin')">Проверь себя →</button></div>
+</section>
+
+<!-- ФИНАЛ -->
+<section class="page" id="fin">
+ <h2>Проверь себя</h2>
+ <div id="quiz"></div>
+ <div id="result"><div class="grade" id="grade"></div><div id="gradetxt"></div></div>
+ <button class="btnmain" onclick="checkQuiz()">Завершить тест</button>
+ <h3 style="margin-top:34px">Шпаргалка: запомнить главное</h3>
+ <ul>
+  <li>поступать можно в 16–22 года (после службы — до 24, по контракту — до 27);</li>
+  <li>обучение в военном вузе — 5 лет, полное государственное обеспечение;</li>
+  <li>контракт курсант заключает после 1-го курса и до окончания 2-го курса;</li>
+  <li>юнармейцам — +3 балла к вступительным испытаниям;</li>
+  <li>оклад лейтенанта — 14 331 рубля, полковника — 18 629 рублей, среднее довольствие — до 135 тысяч;</li>
+  <li>пенсия за выслугу — при 20 годах службы;</li>
+  <li>лейтенантский диплом можно получить и через ВУЦ при гражданском вузе.</li>
+ </ul>
+ <div class="divider"></div>
+ <p style="text-align:center;color:var(--dim);font-size:.9em">Редакционная коллегия: майор Кравец Вячеслав Викторович и Петриляк Николай Николаевич. Херсонская область. Техническая поддержка — педагоги ГБОУ ХО «Подо-Калиновская школа Алешкинского района».</p>
+ <div class="bottomnav"><button onclick="go('ch5')">← Справочник</button><button onclick="go('cover')">На обложку</button></div>
+</section>
+
+</div>
 <script>
-const cats={'all':'Все','СВ':'Сухопутные войска','ВКС':'ВКС','ВМФ':'ВМФ','РВСН':'РВСН','СВЯЗЬ':'Связь и РЭБ','ИНЖ':'Инженерия и РХБЗ','ТЫЛ':'Тыл, мед, прочее'};
-const vuses=[
- {n:'Дальневосточное гвардейское высшее общевойсковое командное училище',g:'Благовещенск',c:'СВ',a:'675021, г. Благовещенск, ул. Ленина, д. 158',e:'dvvky@mil.ru',p:'Военное управление (56.05.04). Русский язык, математика, обществознание.'},
- {n:'Донецкое высшее общевойсковое командное училище',g:'Донецк',c:'СВ',a:'420059, г. Донецк, ул. Куприна, д. 1',p:'Военное управление.'},
- {n:'Московское гвардейское высшее общевойсковое командное училище',g:'Москва',c:'СВ',a:'109380, г. Москва, ул. Головачева, д. 2',e:'mvvku@mil.ru',p:'Управление персоналом (56.05.04). Русский язык, обществознание + по выбору математика, информатика или география.'},
- {n:'Новосибирское гвардейское высшее военное командное училище',g:'Новосибирск',c:'СВ',a:'630117, г. Новосибирск, ул. Иванова, д. 49',e:'nvvku@mil.ru',p:'Военное управление.'},
- {n:'Казанское высшее танковое командное училище',g:'Казань',c:'СВ',p:'Танковые войска. Повышенные требования к зрению.'},
- {n:'Челябинское высшее танковое командное училище',g:'Челябинск',c:'СВ',p:'Танковые войска. Повышенные требования к зрению.'},
- {n:'Михайловская военная артиллерийская академия',g:'Санкт-Петербург',c:'СВ',a:'195009, г. Санкт-Петербург, ул. Комсомола, д. 22',e:'mvaa@mil.ru',p:'Артиллерия, ракетные войска.'},
- {n:'Саратовское высшее артиллерийское командное училище',g:'Саратов',c:'СВ',p:'Артиллерия.'},
- {n:'Военная академия войсковой противовоздушной обороны ВС РФ',g:'Смоленск',c:'СВ',a:'214027, г. Смоленск, ул. Котовского, д. 2',e:'vavpvo-na@mil.ru',p:'Информатика и вычислительная техника, электроника, радиотехника и системы связи.'},
- {n:'ВУНЦ ВВС «Военно-воздушная академия»',g:'Воронеж',c:'ВКС',a:'394064, г. Воронеж, ул. Старых Большевиков, д. 54А',e:'vva@mil.ru',p:'Авиация: инженеры и командиры ВВС.'},
- {n:'Краснодарское высшее военное авиационное училище летчиков',g:'Краснодар',c:'ВКС',a:'350090, г. Краснодар, ул. Дзержинского, д. 135',e:'kvvaul@mil.ru',p:'Летная эксплуатация и применение авиационных комплексов (25.05.04). Русский, математика, физика.'},
- {n:'Сызранское высшее военное авиационное училище летчиков',g:'Сызрань',c:'ВКС',a:'446007, Самарская обл., г. Сызрань-7, ул. Маршала Жукова, зд. 36',e:'vunc-vvs-syzran@mil.ru',p:'Летная эксплуатация и применение авиационных комплексов. Русский, математика, физика.'},
- {n:'Ульяновское высшее военное авиационное училище летчиков',g:'Ульяновск',c:'ВКС',p:'Лётная подготовка.'},
- {n:'Челябинское высшее военное авиационное училище штурманов',g:'Челябинск',c:'ВКС',p:'Штурманская подготовка.'},
- {n:'Военно-космическая академия им. А.Ф. Можайского',g:'Санкт-Петербург',c:'РВСН',p:'Космические войска, запуск и управление космическими аппаратами.'},
- {n:'Военная академия воздушно-космической обороны',g:'Тверь',c:'РВСН',p:'ПВО и противоракетная оборона, воздушно-космическая оборона.'},
- {n:'Ярославское высшее военное училище противовоздушной обороны',g:'Ярославль',c:'СВ',a:'150001, г. Ярославль, Московский пр-т, д. 28',e:'yavvu_umo@mil.ru',p:'Применение и эксплуатация автоматизированных систем специального назначения (09.05.01); специальные радиотехнические системы (11.05.02).'},
- {n:'ВУНЦ ВМФ «Военно-морская академия» — Военный институт (военно-морской политехнический)',g:'Санкт-Петербург, Пушкин',c:'ВМФ',a:'196602, г. Санкт-Петербург, г. Пушкин, Кадетский б-р, д. 1',p:'Инженерные специальности флота.'},
- {n:'Высшее военно-морское училище им. М.В. Фрунзе',g:'Санкт-Петербург',c:'ВМФ',a:'199034, г. Санкт-Петербург, наб. лейтенанта Шмидта, д. 17',e:'vvmu@mil.ru',p:'Строительство, ремонт и поисково-спасательное обеспечение кораблей (26.05.03); судовые энергетические установки (26.05.06); судовое электрооборудование (26.05.07); РХБЗ (56.05.02). Есть программы СПО (сетевое и системное администрирование 09.02.06).'},
- {n:'Балтийское высшее военно-морское училище',g:'Калининград',c:'ВМФ',p:'Флот, надводные корабли.'},
- {n:'Тихоокеанское высшее военно-морское училище',g:'Владивосток',c:'ВМФ',p:'Флот Тихоокеанского региона.'},
- {n:'Черноморское высшее военно-морское училище',g:'Севастополь',c:'ВМФ',p:'Флот Черноморского региона.'},
- {n:'Военная академия Ракетных войск стратегического назначения',g:'Балашиха (Московская обл.)',c:'РВСН',p:'Ракетные войска стратегического назначения.'},
- {n:'Военная академия РВСН (филиал)',g:'Серпухов (Московская обл.)',c:'РВСН',p:'Ракетные войска стратегического назначения.'},
- {n:'Рязанское гвардейское высшее воздушно-десантное командное училище',g:'Рязань',c:'СВ',p:'Воздушно-десантные войска. Повышенные требования к здоровью и зрению.'},
- {n:'Военно-инженерная академия',g:'Нахабино (Московская обл.)',c:'ИНЖ',a:'Московская обл., г.о. Красногорск, пгт Нахабино, ул. Карбышева, д. 2',e:'via_sto@mil.ru',p:'Военно-инженерные специальности.'},
- {n:'Нижегородское высшее военно-инженерное командное училище',g:'Кстово (Нижегородская обл.)',c:'ИНЖ',a:'607654, г. Кстово, пер. Энтузиастов, д. 17',p:'Инженерные войска. Есть подготовка по направлению «Военно-политическая работа» (56.05.08): русский язык, история, обществознание.'},
- {n:'Тюменское высшее военно-инженерное командное училище',g:'Тюмень',c:'ИНЖ',p:'Инженерные войска.'},
- {n:'Военная академия радиационной, химической и биологической защиты',g:'Кострома',c:'ИНЖ',p:'РХБ защита.'},
- {n:'Саратовское высшее военное инженерное училище РХБ защиты',g:'Саратов',c:'ИНЖ',p:'РХБ защита, инженерные системы.'},
- {n:'Военная академия связи',g:'Санкт-Петербург',c:'СВЯЗЬ',a:'195009, г. Санкт-Петербург, ул. Комсомола, д. 22',p:'Связь ВС РФ, радиотехника, инфокоммуникации.'},
- {n:'Новочеркасское высшее военное командное училище связи',g:'Новочеркасск',c:'СВЯЗЬ',p:'Связь ВС РФ.'},
- {n:'Военная академия защиты информации',g:'Краснодар',c:'СВЯЗЬ',p:'Защита информации, информационная безопасность.'},
- {n:'Военный университет радиоэлектроники',g:'Череповец',c:'СВЯЗЬ',p:'Радиоэлектроника, борьба с техническими средствами разведки.'},
- {n:'Военный университет',g:'Москва',c:'ТЫЛ',a:'123001, г. Москва, ул. Большая Садовая, д. 14',e:'vu-nu@mil.ru',p:'Гуманитарные и педагогические специальности, военно-политическая работа, переводчик. Есть программы СПО (09.02.01, 11.02.02).'},
- {n:'Военный инженерно-технический университет',g:'Санкт-Петербург',c:'ТЫЛ',p:'Военно-инженерно-техническое обеспечение.'},
- {n:'Военная академия материально-технического обеспечения',g:'Санкт-Петербург (+ филиалы Вольск, Омск, Пенза)',c:'ТЫЛ',a:'Филиалы: г. Вольск (ул. Максима Горького, д. 3, vatt-v@mil.ru), г. Омск (п. Черемушки, otiu@mil.ru), г. Пенза',p:'Тыловое обеспечение (56.05.01), техника и технологии наземного транспорта. Филиал СПб ведёт железнодорожные специальности — инженер путей сообщения.'},
- {n:'Военный институт (железнодорожных войск и военных сообщений)',g:'Санкт-Петербург',c:'ТЫЛ',p:'Системы обеспечения движения поездов. Инженер путей сообщения. Русский, математика, по выбору физика или информатика.'},
- {n:'Военно-медицинская академия им. С.М. Кирова',g:'Санкт-Петербург',c:'ТЫЛ',p:'Военные врачи, лечебное дело.'},
- {n:'Военный институт физической культуры',g:'Санкт-Петербург',c:'ТЫЛ',p:'Спорт и физподготовка войск. Преподаватели физической культуры и спорта.'}
+var PAGES=["cover","koll","toc","ch1","ch2","ch3","ch4","ch5","fin"];
+function go(id){document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});document.getElementById(id).classList.add("active");window.scrollTo(0,0);}
+var UNIS=[{"name": "Краснодарское высшее военное авиационное училище летчиков", "kind": "ВВУЗ", "city": "Краснодар", "branch": "ВКС"}, {"name": "Сызранское высшее военное авиационное училище летчиков", "kind": "ВВУЗ", "city": "Сызрань", "branch": "ВКС"}, {"name": "Ульяновское высшее военное авиационное училище летчиков", "kind": "ВВУЗ", "city": "Ульяновск", "branch": "ВКС"}, {"name": "Челябинское высшее военное авиационное училище штурманов", "kind": "ВВУЗ", "city": "Челябинск", "branch": "ВКС"}, {"name": "Военно-космическая академия имени А.Ф. Можайского", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "ВКС"}, {"name": "Военная академия воздушно-космической обороны", "kind": "ВВУЗ", "city": "Тверь", "branch": "ВКС"}, {"name": "Ярославское высшее военное училище противовоздушной обороны", "kind": "ВВУЗ", "city": "Ярославль", "branch": "ВКС"}, {"name": "Военный институт (военно-морской политехнический) ВУНЦ ВМФ «Военно-морская академия»", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "ВМФ"}, {"name": "Высшее военно-морское училище имени М.В. Фрунзе", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "ВМФ"}, {"name": "Балтийское высшее военно-морское училище имени адмирала Ф.Ф. Ушакова", "kind": "ВВУЗ", "city": "Калининград", "branch": "ВМФ"}, {"name": "Тихоокеанское высшее военно-морское училище", "kind": "ВВУЗ", "city": "Владивосток", "branch": "ВМФ"}, {"name": "Черноморское высшее военно-морское училище", "kind": "ВВУЗ", "city": "Севастополь", "branch": "ВМФ"}, {"name": "Военная академия Ракетных войск стратегического назначения", "kind": "ВВУЗ", "city": "Балашиха", "branch": "РВСН"}, {"name": "Военная академия РВСН (филиал)", "kind": "ВВУЗ", "city": "Серпухов", "branch": "РВСН"}, {"name": "Рязанское гвардейское высшее воздушно-десантное командное училище", "kind": "ВВУЗ", "city": "Рязань", "branch": "Сухопутные войска"}, {"name": "Военно-инженерная академия", "kind": "ВВУЗ", "city": "Нахабино", "branch": "Инженерные войска"}, {"name": "Нижегородское высшее военно-инженерное командное училище", "kind": "ВВУЗ", "city": "Нижний Новгород", "branch": "Инженерные войска"}, {"name": "Тюменское высшее военно-инженерное командное училище", "kind": "ВВУЗ", "city": "Тюмень", "branch": "Инженерные войска"}, {"name": "Военная академия радиационной, химической и биологической защиты", "kind": "ВВУЗ", "city": "Кострома", "branch": "РХБЗ"}, {"name": "Саратовское высшее военное инженерное училище радиационной, химической и биологической защиты", "kind": "ВВУЗ", "city": "Саратов", "branch": "РХБЗ"}, {"name": "Военная академия связи", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "Связь"}, {"name": "Новочеркасское высшее военное командное училище связи", "kind": "ВВУЗ", "city": "Новочеркасск", "branch": "Связь"}, {"name": "Военный университет радиоэлектроники", "kind": "ВВУЗ", "city": "Череповец", "branch": "Связь"}, {"name": "Военная академия защиты информации", "kind": "ВВУЗ", "city": "Краснодар", "branch": "Связь"}, {"name": "Военный университет", "kind": "ВВУЗ", "city": "Москва", "branch": "Гуманитарное"}, {"name": "Военно-морская академия журналистики", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "Гуманитарное"}, {"name": "Военный инженерно-технический университет", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "Инженерные войска"}, {"name": "Военная академия материально-технического обеспечения", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "Тыл"}, {"name": "Военная академия МТО — военный институт железных дорог и военных сообщений", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "Тыл"}, {"name": "Военная академия МТО (филиал)", "kind": "ВВУЗ", "city": "Вольск", "branch": "Тыл"}, {"name": "Военная академия МТО (филиал)", "kind": "ВВУЗ", "city": "Омск", "branch": "Тыл"}, {"name": "Военная академия МТО (филиал)", "kind": "ВВУЗ", "city": "Пенза", "branch": "Тыл"}, {"name": "Военно-медицинская академия имени С.М. Кирова", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "Медицина"}, {"name": "Военный институт физической культуры", "kind": "ВВУЗ", "city": "Санкт-Петербург", "branch": "Физкультура"}, {"name": "Военный учебный центр при Балтийском государственном техническом университете «ВОЕНМЕХ» имени Д.Ф. Устинова", "kind": "ВУЦ", "city": "Санкт-Петербург", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Белгородском государственном технологическом университете имени В.Г. Шухова", "kind": "ВУЦ", "city": "Белгород", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Воронежском государственном техническом университете", "kind": "ВУЦ", "city": "Воронеж", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Воронежском государственном университете", "kind": "ВУЦ", "city": "Воронеж", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Дальневосточном государственном университете путей сообщения", "kind": "ВУЦ", "city": "Хабаровск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Дальневосточном федеральном университете", "kind": "ВУЦ", "city": "Владивосток", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Донском государственном техническом университете", "kind": "ВУЦ", "city": "Ростов-на-Дону", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Ивановском государственном энергетическом университете имени В.И. Ленина", "kind": "ВУЦ", "city": "Иваново", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Иркутском национальном исследовательском техническом университете", "kind": "ВУЦ", "city": "Иркутск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Костромском государственном университете", "kind": "ВУЦ", "city": "Кострома", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Кабардино-Балкарском государственном университете", "kind": "ВУЦ", "city": "Нальчик", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Кубанском государственном аграрном университете имени И.Т. Трубилина", "kind": "ВУЦ", "city": "Краснодар", "branch": "ВУЦ"}, {"name": "Военный учебный центр при «МИРЭА — Российском технологическом университете»", "kind": "ВУЦ", "city": "Москва", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Морском государственном университете имени адмирала Г.И. Невельского", "kind": "ВУЦ", "city": "Владивосток", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Московском авиационном институте (национальном исследовательском университете)", "kind": "ВУЦ", "city": "Москва", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Московском государственном техническом университете имени Н.Э. Баумана (национальном исследовательском университете)", "kind": "ВУЦ", "city": "Москва", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Московском государственном университете геодезии и картографии (МИИГАиК)", "kind": "ВУЦ", "city": "Москва", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Национальном исследовательском Нижегородском государственном университете имени Н.И. Лобачевского", "kind": "ВУЦ", "city": "Нижний Новгород", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Национальном исследовательском Томском государственном университете", "kind": "ВУЦ", "city": "Томск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Национальном исследовательском университете «Московский институт электронной техники»", "kind": "ВУЦ", "city": "Москва", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Национальном исследовательском университете «МЭИ»", "kind": "ВУЦ", "city": "Москва", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Омском государственном техническом университете", "kind": "ВУЦ", "city": "Омск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Оренбургском государственном университете", "kind": "ВУЦ", "city": "Оренбург", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Пензенском государственном университете", "kind": "ВУЦ", "city": "Пенза", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Первом Московском государственном медицинском университете имени И.М. Сеченова (Сеченовском университете)", "kind": "ВУЦ", "city": "Москва", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Российском государственном университете нефти и газа (национальном исследовательском университете) имени И.М. Губкина", "kind": "ВУЦ", "city": "Москва", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Российском университете медицины", "kind": "ВУЦ", "city": "Москва", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Ростовском государственном медицинском университете", "kind": "ВУЦ", "city": "Ростов-на-Дону", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Ростовском государственном университете путей сообщения", "kind": "ВУЦ", "city": "Ростов-на-Дону", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Рязанском государственном радиотехническом университете имени В.Ф. Уткина", "kind": "ВУЦ", "city": "Рязань", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Самарском национальном исследовательском университете имени академика С.П. Королёва", "kind": "ВУЦ", "city": "Самара", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Санкт-Петербургском государственном морском техническом университете", "kind": "ВУЦ", "city": "Санкт-Петербург", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Санкт-Петербургском государственном университете аэрокосмического приборостроения", "kind": "ВУЦ", "city": "Санкт-Петербург", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Санкт-Петербургском государственном университете телекоммуникаций имени профессора М.А. Бонч-Бруевича", "kind": "ВУЦ", "city": "Санкт-Петербург", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Саратовском государственном техническом университете имени Гагарина Ю.А.", "kind": "ВУЦ", "city": "Саратов", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Северо-Кавказской государственной академии", "kind": "ВУЦ", "city": "Черкесск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Сибирском государственном университете науки и технологий имени академика М.Ф. Решетнёва", "kind": "ВУЦ", "city": "Красноярск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Сибирском государственном университете телекоммуникаций и информатики", "kind": "ВУЦ", "city": "Новосибирск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Сибирском федеральном университете", "kind": "ВУЦ", "city": "Красноярск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Тамбовском государственном университете имени Г.Р. Державина", "kind": "ВУЦ", "city": "Тамбов", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Тихоокеанском государственном медицинском университете", "kind": "ВУЦ", "city": "Владивосток", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Тольяттинском государственном университете", "kind": "ВУЦ", "city": "Тольятти", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Тюменском государственном университете", "kind": "ВУЦ", "city": "Тюмень", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Уральском федеральном университете имени первого Президента России Б.Н. Ельцина", "kind": "ВУЦ", "city": "Екатеринбург", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Уфимском университете науки и технологий", "kind": "ВУЦ", "city": "Уфа", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Южно-Российском государственном политехническом университете (НПИ) имени М.И. Платова", "kind": "ВУЦ", "city": "Новочеркасск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Южно-Уральском государственном университете (национальном исследовательском институте)", "kind": "ВУЦ", "city": "Челябинск", "branch": "ВУЦ"}, {"name": "Военный учебный центр при Южном федеральном университете", "kind": "ВУЦ", "city": "Ростов-на-Дону", "branch": "ВУЦ"}];
+var filter="all";
+function setF(btn){document.querySelectorAll(".filt").forEach(function(b){b.classList.remove("on")});btn.classList.add("on");filter=btn.getAttribute("data-f");render();}
+function render(){
+ var q=document.getElementById("q").value.toLowerCase().trim();
+ var out="";
+ var n=0;
+ UNIS.forEach(function(u){
+  var s=(u.name+" "+u.city+" "+u.branch).toLowerCase();
+  var ok=(filter==="all"||u.kind===filter||u.branch===filter)&&(!q||s.indexOf(q)>=0);
+  if(ok){n++;out+='<div class="u"><span class="k'+(u.kind==="ВУЦ"?" vuc":"")+'">'+(u.kind==="ВВУЗ"?"Вуз Минобороны":"ВУЦ")+'</span><b>'+u.name+'</b><div class="meta">'+u.city+(u.branch!=="ВУЦ"&&u.branch!=="ВУЦ"?" · "+u.branch:"")+'</div></div>';}
+ });
+ document.getElementById("ulist").innerHTML=out||"<p style='color:var(--dim)'>Ничего не найдено — попробуйте другой запрос.</p>";
+ document.getElementById("cnt").textContent="Найдено организаций: "+n;
+}
+var QUIZ=[
+ {q:"С какого возраста можно поступать в высшее военно-учебное заведение?",a:["с 14 лет","с 16 до 22 лет","с 18 лет"],c:1,e:"Кандидаты — граждане от 16 до 22 лет, не проходившие военную службу; после службы — до 24 лет, по контракту — до 27 лет."},
+ {q:"Сколько лет длится обучение в высшем военно-учебном заведении?",a:["4 года","5 лет","6 лет"],c:1,e:"Пять лет: военный вуз даёт и высшее образование, и командирскую подготовку."},
+ {q:"Когда курсант заключает контракт о прохождении военной службы?",a:["сразу при зачислении","по достижении 18 лет, после 1-го курса","на 5-м курсе"],c:1,e:"Контракт заключается по достижении 18 лет, но не ранее окончания первого курса и до окончания второго курса обучения."},
+ {q:"Что даёт юнармейцу книжка юнармейца при поступлении?",a:["зачисление без испытаний","+3 балла к результатам испытаний","ничего"],c:1,e:"Участие в движении «ЮНАРМИЯ» не менее одного года даёт право на начисление дополнительных 3 баллов."},
+ {q:"Каков оклад по воинскому званию «майор»?",a:["15 761 руб.","16 481 руб.","18 629 руб."],c:1,e:"Майор — 16 481 руб.; капитан — 15 761, подполковник — 17 196, полковник — 18 629 руб."},
+ {q:"При какой выслуге офицер получает право на пенсию за выслугу лет?",a:["10 лет","15 лет","20 лет"],c:2,e:"Право на пенсию за выслугу лет имеют офицеры, имеющие на день увольнения выслугу 20 лет и более."},
+ {q:"Какой основной отпуск у офицера с выслугой менее 10 лет?",a:["30 суток","45 суток","60 суток"],c:0,e:"До 10 лет службы — 30 суток, далее с ростом выслуги — до 45 суток."},
+ {q:"Что означает ВУЦ?",a:["военное училище связи","военный учебный центр при гражданском вузе","войсковое учебное формирование"],c:1,e:"Военный учебный центр — подразделение военной подготовки при гражданском вузе."},
+ {q:"Что даёт выпускнику золотая медаль или диплом с отличием?",a:["преимущественное право выбора места службы","направление в Москву","звание старшего лейтенанта"],c:0,e:"Отличники пользуются преимущественным правом выбора места военной службы в пределах разнарядки вуза."},
+ {q:"Кто руководил подготовкой справочника?",a:["Министр обороны лично","под общей редакцией генерала армии В.П. Горемыкина","Приказ Президента РФ"],c:1,e:"Справочник подготовлен под общей редакцией заместителя Министра обороны — начальника Главного военно-политического управления генерала армии В.П. Горемыкина."}
 ];
-let curCat='all';
-const fl=document.getElementById('filters');
-Object.entries(cats).forEach(([k,v])=>{const b=document.createElement('button');b.className='fbtn'+(k==='all'?' on':'');b.textContent=v;b.onclick=()=>{curCat=k;[...fl.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');renderV();};fl.appendChild(b);});
-function renderV(){const q=document.getElementById('vq').value.toLowerCase().trim();const g=document.getElementById('vgrid');g.innerHTML='';let n=0;
- vuses.forEach(v=>{const s=(v.n+' '+v.g+' '+v.c+' '+cats[v.c]+' '+(v.p||'')+' '+(v.a||'')).toLowerCase();
-  if(curCat!=='all'&&v.c!==curCat)return; if(q&&!s.includes(q))return; n++;
-  g.insertAdjacentHTML('beforeend',`<div class="vcard"><div class="cat">${cats[v.c]}</div><h4>${v.n}</h4><div class="city">📍 ${v.g}</div>${v.a?`<div class="adr">${v.a}</div>`:''}${v.e?`<div class="adr">✉ ${v.e}</div>`:''}${v.p?`<div class="prof">${v.p}</div>`:''}</div>`);});
- document.getElementById('vnone').style.display=n?'none':'block';}
-renderV();
-
-const TEST=[
- {q:'Кто может поступать в вуз Минобороны среди граждан, не проходивших военную службу?',o:['от 14 до 20 лет','от 16 до 22 лет','от 18 до 30 лет'],a:1,e:'Граждане со средним общим образованием, не проходившие военную службу, — в возрасте от 16 до 22 лет.'},
- {q:'Из чего складывается денежное довольствие офицера?',o:['Только из оклада по званию','Оклад по должности + оклад по званию + дополнительные выплаты','Только из премии'],a:1,e:'ОДС = оклад по воинской должности + оклад по воинскому званию + ежемесячные и иные дополнительные выплаты.'},
- {q:'Какой оклад по воинскому званию у лейтенанта?',o:['14 331 ₽','15 761 ₽','18 629 ₽'],a:0,e:'Лейтенант — 14 331 ₽, капитан — 15 761 ₽, полковник — 18 629 ₽.'},
- {q:'Основной отпуск военнослужащего по контракту с выслугой менее 10 лет?',o:['30 суток','45 суток','20 суток'],a:0,e:'До 10 лет — 30 суток; с ростом выслуги отпуск увеличивается до 45 суток.'},
- {q:'Сколько баллов добавляет Юнармеец со стажем не менее года при поступлении?',o:['+1 балл','+3 балла','+10 баллов'],a:1,e:'Книжка юнармейца даёт право на дополнительные 3 балла к результатам вступительных испытаний.'},
- {q:'Сколько упражнений сдают кандидаты на экзамене по физподготовке?',o:['По 3–4 упражнениям на силу, быстроту и выносливость','Только бег на 3 км','Только подтягивание'],a:0,e:'По НФП-2023 сдают по одному упражнению на «силу», «быстроту» и «выносливость» — всего 3–4 упражнения.'},
- {q:'Предельный возраст службы полковника?',o:['50 лет','55 лет','60 лет'],a:1,e:'Полковник и капитан 1 ранга — 55 лет; генерал-майор — 60; высшие звания — 65.'},
- {q:'Какие предметы обычно сдают на летные училища?',o:['Русский язык, математика, физика','Русский язык, история, обществознание','Русский язык, биология, химия'],a:0,e:'Пример Краснодарского ВВАУЛ: русский язык, математика, физика.'},
- {q:'При какой выслуге офицер имеет право на пенсию за выслугу лет?',o:['15 лет','20 лет и более','25 лет и более'],a:1,e:'Право на пенсию за выслугу лет — при 20 годах и более военной службы на день увольнения.'},
- {q:'Срок обучения по программам с полной военно-специальной подготовкой?',o:['4 года','5 лет','6 лет'],a:1,e:'В вузе Минобороны — 5 лет, что объясняется совмещением гражданской образовательной программы и военной службы.'}
-];
-let tAns=[];
-function startTest(){tAns=Array(TEST.length).fill(-1);document.getElementById('tres').classList.remove('show');const z=document.getElementById('tzone');z.innerHTML='';
- TEST.forEach((t,i)=>{let h=`<div class="tq"><div class="qq">${i+1}. ${t.q}</div>`;
-  t.o.forEach((o,j)=>{h+=`<button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">${o}</button>`;});
-  h+=`<div class="muted sans" style="display:none;font-size:14px;margin-top:8px" id="e${i}">💡 ${t.e}</div></div>`;
-  z.insertAdjacentHTML('beforeend',h);});}
-function pick(i,j){if(tAns[i]!==-1)return;tAns[i]=j;TEST[i].o.forEach((_,k)=>{const b=document.getElementById(`o${i}_${k}`);
- if(k===j)b.classList.add(k===TEST[i].a?'ok':'bad');else if(k===TEST[i].a)b.classList.add('ok');b.style.pointerEvents='none';});
- document.getElementById(`e${i}`).style.display='block';
- if(tAns.every(x=>x!==-1)){const s=tAns.filter((v,k)=>v===TEST[k].a).length;const p=Math.round(s/TEST.length*100);
-  document.getElementById('tbig').textContent=`${s} из ${TEST.length} — ${p}%`;
-  document.getElementById('tmsg').textContent=p>=90?'Отличный результат! Вы отлично знаете путь в военный вуз.':p>=60?'Хорошо! Перечитайте главы, где были ошибки.':'Стоит вернуться к главам 1 и 3 — там самые важные правила.';
-  document.getElementById('tres').classList.add('show');document.getElementById('tres').scrollIntoView({behavior:'smooth'});}}
-startTest();
-
-function go(n){document.querySelectorAll('section.chapter').forEach((s,i)=>s.classList.toggle('active',i+1===n));
- document.getElementById('toc').style.display=n===0?'block':'none';
- window.scrollTo({top:0,behavior:'smooth'});}
-window.addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('bar').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';});
+var ANSWERS={};
+function buildQuiz(){var h="";QUIZ.forEach(function(q,i){h+='<div class="q"><div class="qq"><b class="gold">Вопрос '+(i+1)+'.</b> '+q.q+'</div>';q.a.forEach(function(a,j){h+='<label><input type="radio" name="q'+i+'" value="'+j+'" onchange="ANSWERS['+i+']='+j+'"> '+a+'</label>';});h+='<div class="exp" id="exp'+i+'">'+q.e+'</div></div>';});document.getElementById("quiz").innerHTML=h;}
+function checkQuiz(){var score=0;QUIZ.forEach(function(q,i){var exp=document.getElementById("exp"+i);exp.classList.add("show");if(ANSWERS[i]===q.c)score++;});document.getElementById("result").style.display="block";var g=score>=9?5:(score>=7?4:(score>=5?3:2));document.getElementById("grade").textContent=score+"/10";document.getElementById("gradetxt").textContent=score>=9?"Отлично! Оценка 5 — готов к поступлению!":(score>=7?"Хорошо! Оценка 4 — почти всё запомнил":(score>=5?"Удовлетворительно! Оценка 3 — перечитай главу 3":"Стоит вернуться к началу книги и перечитать главы"));document.getElementById("result").scrollIntoView({behavior:"smooth"});}
+render();
+buildQuiz();
 </script>
 </body>
 </html>
