@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Памятка: Молодёжь против коррупции</title>
+<style>
+:root{--red:#c62828;--dark:#1a1a2e;--gold:#f9a825;--light:#f5f5f5;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;}
+body{background:var(--light);color:#222;}
+.wrap{max-width:900px;margin:0 auto;padding:20px;}
+header{background:linear-gradient(135deg,var(--red),var(--dark));color:#fff;border-radius:0 0 24px 24px;padding:40px 30px;text-align:center;}
+header h1{font-size:2em;margin-bottom:8px;}
+header p{opacity:.9;}
+.card{background:#fff;border-radius:16px;box-shadow:0 3px 12px rgba(0,0,0,.08);padding:24px;margin:18px 0;}
+h2{color:var(--red);margin-bottom:12px;font-size:1.3em;}
+.tabs{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.tab{padding:10px 18px;border-radius:20px;border:2px solid var(--red);background:#fff;color:var(--red);cursor:pointer;font-weight:600;}
+.tab.active{background:var(--red);color:#fff;}
+.tabpane{display:none;}
+.tabpane.show{display:block;}
+ul{margin:10px 0 0 20px;}
+li{margin:6px 0;}
+.badge{display:inline-block;background:#ffe082;color:#5d4037;border-radius:12px;padding:3px 12px;font-size:.85em;font-weight:600;margin-left:6px;}
+.dates{background:linear-gradient(135deg,#1a1a2e,#37474f);color:#fff;border-radius:16px;padding:20px 24px;margin:18px 0;}
+.dates b{color:var(--gold);}
+.crit{width:100%;border-collapse:collapse;margin-top:10px;}
+.crit th,.crit td{border-bottom:1px solid #eee;padding:8px 10px;text-align:left;}
+.crit th{background:#fce8e6;color:var(--red);}
+.check{display:flex;align-items:flex-start;gap:10px;padding:10px;border-bottom:1px solid #f0f0f0;cursor:pointer;}
+.check input{transform:scale(1.4);margin-top:3px;accent-color:var(--red);}
+.bar{height:14px;background:#eee;border-radius:7px;overflow:hidden;margin:12px 0;}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold));transition:.4s;border-radius:7px;}
+.done-msg{display:none;text-align:center;color:#2e7d32;font-weight:700;font-size:1.1em;padding:10px;}
+.q{margin:14px 0;padding:14px;border:1px solid #eee;border-radius:12px;}
+.q p{font-weight:600;margin-bottom:8px;}
+.opt{display:block;padding:8px 12px;border:1px solid #ddd;border-radius:8px;margin:6px 0;cursor:pointer;}
+.opt:hover{background:#fff8e1;}
+.opt.ok{background:#c8e6c9;border-color:#2e7d32;}
+.opt.bad{background:#ffcdd2;border-color:#c62828;}
+#score{display:none;text-align:center;font-size:1.2em;font-weight:700;padding:14px;border-radius:12px;}
+details{border:1px solid #eee;border-radius:10px;padding:12px;margin:8px 0;background:#fafafa;}
+summary{font-weight:700;cursor:pointer;color:var(--red);}
+footer{text-align:center;padding:24px;color:#666;font-size:.9em;}
+</style>
+</head>
+<body>
+<header>
+<h1>МОЛОДЁЖЬ ПРОТИВ КОРРУПЦИИ</h1>
+<p>Школьный конкурс плакатов и буклетов — памятка участника</p>
+</header>
+<div class="wrap">
+
+<div class="card"><h2>Цель конкурса</h2>
+<p>Формирование антикоррупционного мировоззрения и активной гражданской позиции среди школьников. Формат — творческая работа (плакат или буклет) с последующей выставкой в канале школы.</p></div>
+
+<div class="card"><h2>Номинации</h2>
+<div class="tabs">
+<button class="tab active" onclick="showTab(0,this)">Социальный плакат</button>
+<button class="tab" onclick="showTab(1,this)">Информационный буклет</button>
+</div>
+<div class="tabpane show" id="t0">
+<ul>
+<li><b>Формат:</b> вертикальная или горизонтальная ориентация.</li>
+<li><b>Визуальный ряд:</b> читаемое изображение, крупные планы, контрастные цвета — красный, чёрный, белый.</li>
+<li><b>Слоган:</b> не более 5–7 слов, крупный рубленый шрифт без засечек, без сложных курсивов.</li>
+<li><b>Смысл:</b> вызвать эмоцию (гнев, надежду, решимость) и чёткий призыв к действию или осуждение явления.</li>
+<li><b>Материалы:</b> гуашь, акварель, тушь, карандаши, маркеры, коллаж или цифровая графика. <span class="badge">оценка: сила воздействия</span></li>
+</ul></div>
+<div class="tabpane" id="t1">
+<ul>
+<li><b>Формат:</b> лист, сложенный втрое (евробуклет) или вдвое.</li>
+<li><b>Обложка:</b> яркий заголовок и картинка.</li>
+<li><b>Развороты:</b> определение коррупции простыми словами, примеры («взятка врачу — это коррупция», «покупка оценки — это коррупция»), ст. 290 и 291 УК РФ — упоминание о наказании.</li>
+<li><b>Полезная информация:</b> телефоны доверия (региональные и федеральные), куда сообщать о фактах коррупции.</li>
+<li><b>Читаемость:</b> шрифт не менее 12–14 пт, фон не «съедает» текст. <span class="badge">оценка: информативность</span></li>
+</ul></div></div>
+
+<div class="card"><h2>Общие требования ко всем работам</h2>
+<ul>
+<li><b>Выходные данные:</b> название работы, класс, школа — ГБОУ ХО «Подо-Калиновская школа Алешкинского района».</li>
+<li><b>Аккуратность:</b> работы с разводами краски, кривыми линиями, следами клея и помятостями к выставке не допускаются.</li></ul></div>
+
+<div class="card"><h2>Содержание и этика</h2>
+<ul>
+<li><b>Запрещено:</b> нецензурная лексика, сцены насилия, алкоголь, табак, оскорбление достоинства лиц или национальностей.</li>
+<li><b>Рекомендуется:</b> избегать штампов («мужчина в костюме с мешком денег») — показывайте коррупцию через школьные ситуации: «Решил задачу за шоколадку?», «Папа договорился о медали?».</li>
+<li><b>Позитив:</b> приветствуются работы с решением — «Честный труд — твоя репутация», «Закон един для всех».</li></ul></div>
+
+<div class="dates"><h2 style="color:#fff">Сроки и сдача</h2>
+<ul style="margin-left:20px">
+<li>Приём работ — в группе МАХ «Ученическое самоуправление»</li>
+<li>Последний день сдачи — <b>18 ноября</b></li>
+<li>Открытие выставки — <b>20 ноября</b></li>
+<li>После срока работы не допускаются к конкурсу, но могут быть вывешены вне конкурса</li>
+<li>Участие = согласие на демонстрацию работы на выставке и в школьных СМИ (сайт, соцсети)</li></ul></div>
+
+<div class="card"><h2>Критерии жюри — максимум 50 баллов</h2>
+<table class="crit"><tr><th>Критерий</th><th>Баллы</th></tr>
+<tr><td>Соответствие теме: насколько ясно раскрыта проблема</td><td>0–10</td></tr>
+<tr><td>Оригинальность идеи: нестандартный взгляд</td><td>0–10</td></tr>
+<tr><td>Качество исполнения: техника, аккуратность, композиция</td><td>0–10</td></tr>
+<tr><td>Информативность (для буклетов)</td><td>0–10</td></tr>
+<tr><td>Сила воздействия (для плакатов)</td><td>0–10</td></tr></table></div>
+
+<div class="card"><h2>Чек-лист: работа готова?</h2>
+<div id="cl">
+<label class="check"><input type="checkbox" onchange="prog()"> Я выбрал(а) номинацию: плакат или буклет</label>
+<label class="check"><input type="checkbox" onchange="prog()"> Я изучил(а) требования к своей номинации</label>
+<label class="check"><input type="checkbox" onchange="prog()"> В работе нет запрещённых элементов (насилие, алкоголь, табак, оскорбления)</label>
+<label class="check"><input type="checkbox" onchange="prog()"> Есть выходные данные: название, класс, школа</label>
+<label class="check"><input type="checkbox" onchange="prog()"> Слоган/заголовок — короткие и крупные</label>
+<label class="check"><input type="checkbox" onchange="prog()"> Для буклета: есть ст. 290, 291 УК РФ и телефоны доверия</label>
+<label class="check"><input type="checkbox" onchange="prog()"> Работа аккуратная — без разводов и помятостей</label>
+<label class="check"><input type="checkbox" onchange="prog()"> Я готов(а) сдать работу до 18 ноября в группу МАХ</label>
+</div>
+<div class="bar"><div class="fill" id="fill"></div></div>
+<div class="done-msg" id="doneMsg">Работа готова к сдаче! 🎉</div></div>
+
+<div class="card"><h2>Мини-тест: проверь себя</h2>
+<div class="q"><p>1. До какого числа принимаются работы?</p>
+<span class="opt" onclick="ans(this,1,0)">до 20 ноября</span><span class="opt ok-a" data-ok="1" onclick="ans(this,1,1)">до 18 ноября</span><span class="opt" onclick="ans(this,1,0)">до 25 ноября</span></div>
+<div class="q"><p>2. Сколько слов может быть в слогане плаката?</p>
+<span class="opt" onclick="ans(this,2,0)">до 3</span><span class="opt" onclick="ans(this,2,0)">до 10</span><span class="opt" data-ok="1" onclick="ans(this,2,1)">не более 5–7</span></div>
+<div class="q"><p>3. Какие статьи УК РФ упомянуть в буклете?</p>
+<span class="opt" data-ok="1" onclick="ans(this,3,1)">ст. 290 и 291</span><span class="opt" onclick="ans(this,3,0)">ст. 158 и 160</span><span class="opt" onclick="ans(this,3,0)">ст. 105 и 111</span></div>
+<div class="q"><p>4. Где принимают работы?</p>
+<span class="opt" onclick="ans(this,4,0)">в кабинете директора</span><span class="opt" data-ok="1" onclick="ans(this,4,1)">в группе МАХ «Ученическое самоуправление»</span><span class="opt" onclick="ans(this,4,0)">по почте</span></div>
+<div class="q"><p>5. Какая работа со штампом «мужчина с мешком денег»?</p>
+<span class="opt" onclick="ans(this,5,1)">рекомендуется</span><span class="opt" data-ok="1" onclick="ans(this,5,0)">не рекомендуется — покажите школьные ситуации</span></div>
+<div id="score"></div></div>
+
+<div class="card"><h2>Запомни главное</h2>
+<details><summary>Что обязательно указать на работе?</summary><p>Название работы, свой класс и название школы: ГБОУ ХО «Подо-Калиновская школа Алешкинского района».</p></details>
+<details><summary>Куда и когда сдавать?</summary><p>В группу МАХ «Ученическое самоуправление» до 18 ноября. Выставка откроется 20 ноября.</p></details>
+<details><summary>Что покажут на выставке и в СМИ?</summary><p>Принимая участие, ты соглашаешься на демонстрацию работы на выставке и использование её изображений на сайте и в соцсетях школы.</p></details>
+<details><summary>Почему коррупция — это плохо?</summary><p>Коррупция начинается с малого — с маленькой лжи или мелкой выгоды. Честность — это твоя репутация, а закон един для всех. Остановим её вместе!</p></details></div>
+
+<footer>Удачи и творческого вдохновения! Памятка по Положению о конкурсе «Молодёжь против коррупции».</footer>
+</div>
+
+<script>
+function showTab(i,btn){document.querySelectorAll('.tabpane').forEach((p,k)=>p.classList.toggle('show',k===i));document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function prog(){const all=document.querySelectorAll('#cl input');const done=[...all].filter(c=>c.checked).length;document.getElementById('fill').style.width=(done/all.length*100)+'%';document.getElementById('doneMsg').style.display=done===all.length?'block':'none';}
+const answered={};
+function ans(el,qid,val){const ok=el.dataset.ok==='1';const q=el.parentElement;const right=q.querySelector('[data-ok="1"]');if(ok){el.classList.add('ok');}else{el.classList.add('bad');right.classList.add('ok');}answered[qid]=ok;const total=5,done=Object.keys(answered).length;if(done===total){const s=Object.values(answered).filter(Boolean).length;const sc=document.getElementById('score');sc.style.display='block';sc.style.background=s>=4?'#c8e6c9':'#ffcdd2';sc.textContent='Твой результат: '+s+' из 5. '+(s===5?'Ты готов к конкурсу! 🎉':'Перечитай памятку ещё раз — всё получится!');}}
+</script>
+</body>
+</html>
