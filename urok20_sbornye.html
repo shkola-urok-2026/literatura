@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок №20. Технологии сборки изделий из тонколистового металла и проволоки</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{background:#f0f4f8;color:#1f2d3d;line-height:1.6;padding-bottom:40px}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+.header{background:linear-gradient(135deg,#0b3d91,#1565c0);color:#fff;border-radius:0 0 20px 20px;padding:26px 20px;text-align:center}
+.badge{display:inline-block;background:#ffd600;color:#0b3d91;font-weight:800;padding:6px 16px;border-radius:20px;font-size:14px;letter-spacing:1px}
+h1{margin:14px 0 8px;font-size:26px}
+.sub{opacity:.9;font-size:15px}
+.card{background:#fff;border-radius:16px;padding:22px;margin-top:18px;box-shadow:0 2px 8px rgba(16,42,67,.08)}
+h2{color:#0b3d91;font-size:20px;margin-bottom:12px}
+h2 .n{display:inline-block;background:#0b3d91;color:#fff;border-radius:8px;padding:2px 10px;margin-right:8px;font-size:16px}
+.goals li{margin:6px 0 6px 18px}
+.tool{border:2px solid #dbe6f0;border-radius:12px;margin:10px 0;overflow:hidden}
+.tool-h{padding:12px 16px;background:#eef4fb;font-weight:700;cursor:pointer;display:flex;justify-content:space-between}
+.tool-b{display:none;padding:12px 16px;background:#fbfdff}
+.tool.open .tool-b{display:block}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+th{background:#0b3d91;color:#fff;padding:8px;text-align:left}
+td{border:1px solid #dbe6f0;padding:8px}
+.step{display:flex;gap:12px;margin:10px 0;align-items:flex-start}
+.step .num{min-width:34px;height:34px;background:#ffd600;color:#0b3d91;font-weight:800;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.warn{background:#fdecec;border-left:5px solid #e53935;padding:12px 14px;border-radius:8px;margin:12px 0;font-weight:600}
+.tip{background:#e8f5e9;border-left:5px solid #43a047;padding:12px 14px;border-radius:8px;margin:12px 0}
+.check{display:flex;gap:10px;align-items:center;background:#fbfdff;border:1px solid #dbe6f0;border-radius:10px;padding:10px 14px;margin:8px 0;cursor:pointer}
+.check input{width:18px;height:18px}
+#bar{height:14px;background:#e3ecf5;border-radius:8px;overflow:hidden;margin:10px 0}
+#barfill{height:100%;width:0;background:linear-gradient(90deg,#43a047,#66bb6a);transition:.3s}
+.q{border:2px solid #dbe6f0;border-radius:12px;padding:14px;margin:12px 0}
+.q p{font-weight:700;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;padding:10px 12px;border:2px solid #dbe6f0;border-radius:10px;margin:6px 0;background:#fff;cursor:pointer;font-size:15px}
+.opt.correct{border-color:#43a047;background:#e8f5e9}
+.opt.wrong{border-color:#e53935;background:#fdecec}
+#res{font-size:18px;font-weight:800;color:#0b3d91;margin-top:10px}
+details{background:#fbfdff;border:1px solid #dbe6f0;border-radius:10px;padding:10px 14px;margin:8px 0}
+summary{font-weight:700;cursor:pointer}
+.footer{text-align:center;margin-top:22px;color:#5b7290;font-size:14px}
+.kviz-item{margin:8px 0}
+</style>
+</head>
+<body>
+<div class="header">
+<div class="badge">ШЕСТОЙ — НА СВЯЗИ!</div>
+<h1>Урок №20. Сборка изделий из тонколистового металла и проволоки</h1>
+<div class="sub">Технология • 6 класс • Проект «Изделие из металла»</div>
+</div>
+<div class="wrap">
+
+<div class="card">
+<h2><span class="n">1</span>Цели урока</h2>
+<ul class="goals">
+<li>узнать способы соединения деталей из тонколистового металла и проволоки;</li>
+<li>научиться выполнять гибку, соединение внахлёстку, фальц и клёпку;</li>
+<li>повторить правила безопасной работы с инструментами и на верстаке.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2><span class="n">2</span>Теория: как соединяют детали из металла</h2>
+<p>Готовые детали нужно <b>собрать в изделие</b>. С тонколистовым металлом и проволокой это делают <b>без сварки</b> — механическими способами:</p>
+<table>
+<tr><th>Способ</th><th>Как выполняют</th><th>Инструменты</th></tr>
+<tr><td><b>Гибка</b></td><td>краю или проволоке придают нужную форму</td><td>тиски, плоскогубцы, киянка</td></tr>
+<tr><td><b>Внахлёстку</b></td><td>края загибают и накладывают друг на друга</td><td>тиски, молоток</td></tr>
+<tr><td><b>Фальц</b></td><td>«замок» из двойных загнутых краёв</td><td>тиски, молоток, оправка</td></tr>
+<tr><td><b>Клёпка</b></td><td>заклёпка скрепляет детали</td><td>молоток, бородок, поддержка</td></tr>
+<tr><td><b>Скручивание</b></td><td>проволоку соединяют петлями и скрутками</td><td>плоскогубцы, круглогубцы</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2><span class="n">3</span>Инструменты — нажми и узнай</h2>
+<div class="tool" onclick="this.classList.toggle('open')"><div class="tool-h">🛠 Верстак с тисками<span>▾</span></div><div class="tool-b">Рабочее место мастера. В тисках зажимают заготовку для гибки и клёпки — иначе деталь выскользнет.</div></div>
+<div class="tool" onclick="this.classList.toggle('open')"><div class="tool-h">🔧 Плоскогубцы и круглогубцы<span>▾</span></div><div class="tool-b">Плоскогубцы держат и изгибают проволоку, круглогубцы делают аккуратные петли и кольца.</div></div>
+<div class="tool" onclick="this.classList.toggle('open')"><div class="tool-h">🔨 Молоток и киянка<span>▾</span></div><div class="tool-b">Молотком выполняют клёпку и уплотнение фальца. Киянкой (молоток с мягкой головкой) гнут лист, не портя поверхность.</div></div>
+<div class="tool" onclick="this.classList.toggle('open')"><div class="tool-h">🔩 Бородок и поддержка<span>▾</span></div><div class="tool-b">Бородок расклёпывает стержень заклёпки, поддержка (с отверстием) подставляется снизу и держит закладную головку.</div></div>
+<div class="tool" onclick="this.classList.toggle('open')"><div class="tool-h">📐 Чертилка и штангенциркуль<span>▾</span></div><div class="tool-b">Чертилкой наносят линии разметки, штангенциркулем проверяют размеры деталей перед сборкой.</div></div>
+</div>
+
+<div class="card">
+<h2><span class="n">4</span>Схема клёпки</h2>
+<svg viewBox="0 0 700 180" width="100%">
+<rect x="60" y="80" width="180" height="24" fill="#9fb8d0" stroke="#4a6785"/>
+<rect x="460" y="80" width="180" height="24" fill="#9fb8d0" stroke="#4a6785"/>
+<rect x="240" y="70" width="220" height="44" fill="#c6d8e8" stroke="#4a6785"/>
+<text x="350" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#0b3d91">Заклёпка скрепляет две пластины</text>
+<circle cx="250" cy="92" r="14" fill="#ffb300" stroke="#b26a00"/>
+<rect x="468" y="92" width="60" height="8" fill="#ffd600" stroke="#b26a00" transform="rotate(-8 468 92)"/>
+<text x="250" y="140" text-anchor="middle" font-size="13" fill="#37474f">закладная головка</text>
+<text x="490" y="140" text-anchor="middle" font-size="13" fill="#37474f">расклёпанная часть</text>
+</svg>
+<div class="tip">💡 Совет мастера: перед клёпкой детали надёжно соединяют в тисках, а отверстия под заклёпку сверлят или пробивают заранее.</div>
+</div>
+
+<div class="card">
+<h2><span class="n">5</span>Порядок сборки изделия по технологической карте</h2>
+<div class="step"><div class="num">1</div><div><b>Прочитай карту.</b> Найди номер операции, инструмент и результат каждого шага.</div></div>
+<div class="step"><div class="num">2</div><div><b>Проверь детали.</b> Все заготовки должны быть размечены и вырезаны по размерам.</div></div>
+<div class="step"><div class="num">3</div><div><b>Подготовь место.</b> Наведи порядок на верстаке, разложи инструменты по порядку.</div></div>
+<div class="step"><div class="num">4</div><div><b>Согни края.</b> Разметь линии сгиба, зажми деталь в тисках и гни осторожно.</div></div>
+<div class="step"><div class="num">5</div><div><b>Соедини детали.</b> Выполни фальц или наложи детали внахлёстку и скрепи.</div></div>
+<div class="step"><div class="num">6</div><div><b>Поставь заклёпки.</b> Вставь заклёпку, расклепай стержень молотком через бородок.</div></div>
+<div class="step"><div class="num">7</div><div><b>Проверь изделие.</b> Сверь с эскизом: размеры, прочность соединений, отсутствие заусенцев.</div></div>
+<div class="warn">⚠ ПОМНИ: детали из тонколистового металла при гибке и клёпке зажимают ТОЛЬКО в тисках! Края листа острые — работай осторожно.</div>
+</div>
+
+<div class="card">
+<h2><span class="n">6</span>Чек-лист техники безопасности</h2>
+<div id="bar"><div id="barfill"></div></div>
+<label class="check"><input type="checkbox" onchange="upd()"><span>Работаю в спецодежде, длинные волосы убраны</span></label>
+<label class="check"><input type="checkbox" onchange="upd()"><span>Инструменты лежат на своих местах на верстаке</span></label>
+<label class="check"><input type="checkbox" onchange="upd()"><span>Заготовку зажимаю в тисках, а не держу в руках</span></label>
+<label class="check"><input type="checkbox" onchange="upd()"><span>Удар молотком — только по бородку или обжимке</span></label>
+<label class="check"><input type="checkbox" onchange="upd()"><span>Не беру проволоку и металл с острыми краями без осторожности</span></label>
+<label class="check"><input type="checkbox" onchange="upd()"><span>Не отвлекаюсь и не разговариваю во время работы</span></label>
+<label class="check"><input type="checkbox" onchange="upd()"><span>Убрал рабочее место после работы</span></label>
+<p id="prz" style="display:none;color:#2e7d32;font-weight:800">✅ Молодец! Все правила соблюдены — можно начинать работу!</p>
+</div>
+
+<div class="card">
+<h2><span class="n">7</span>Мини-тест</h2>
+<div class="q" data-a="1"><p>1. Как называют «замок» из двойных загнутых краёв листового металла?</p>
+<button class="opt">Сварка</button><button class="opt">Фальц</button><button class="opt">Клейка</button></div>
+<div class="q" data-a="1"><p>2. Чем соединяют детали при клёпке?</p>
+<button class="opt">Гвоздём</button><button class="opt">Заклёпкой</button><button class="opt">Скруткой</button></div>
+<div class="q" data-a="0"><p>3. Каким инструментом делают аккуратные петли из проволоки?</p>
+<button class="opt">Круглогубцами</button><button class="opt">Напильником</button><button class="opt">Чертилкой</button></div>
+<div class="q" data-a="2"><p>4. Что проверяют перед сборкой изделия?</p>
+<button class="opt">Цвет краски</button><button class="opt">Массу деталей</button><button class="opt">Размеры деталей</button></div>
+<div class="q" data-a="1"><p>5. Где зажимают деталь при гибке и клёпке?</p>
+<button class="opt">В руках</button><button class="opt">В тисках</button><button class="opt">На столе</button></div>
+<div id="res"></div>
+</div>
+
+<div class="card">
+<h2><span class="n">8</span>Запомни главное</h2>
+<details><summary>Что такое технологическая карта?</summary><p>Документ с последовательностью операций: что делать, каким инструментом и какой будет результат.</p></details>
+<details><summary>Что такое фальц?</summary><p>Соединение листового металла «замком» из загнутых краёв — так делают, например, жестяные банки.</p></details>
+<details><summary>Как работает заклёпка?</summary><p>Стержень заклёпки вставляют в отверстие, затем расклёпывают — он расширяется и крепко зажимает детали.</p></details>
+<details><summary>Чем гнут тонкий лист, не портя его?</summary><p>Киянкой — молотком с мягкой головкой, зажав деталь в тисках.</p></details>
+<details><summary>Почему края листового металла опасны?</summary><p>Они острые, как нож, — могут порезать. Края обрабатывают напильником, работают осторожно.</p></details>
+</div>
+
+<div class="card">
+<h2><span class="n">9</span>Домашнее задание</h2>
+<ul class="goals">
+<li>записать в тетрадь порядок сборки изделия по технологической карте;</li>
+<li>найти дома 2 предмета из тонколистового металла и определить, как они соединены (фальц, нахлёстка, заклёпки);</li>
+<li>принести заготовку из тонколистового металла для проекта.</li>
+</ul>
+</div>
+
+<div class="footer">📡 Шестой — на связи! Технология, 6 класс. Урок №20</div>
+</div>
+<script>
+function upd(){var c=document.querySelectorAll('.check input'),n=0;c.forEach(function(x){if(x.checked)n++});var p=n/c.length*100;document.getElementById('barfill').style.width=p+'%';document.getElementById('prz').style.display=p===100?'block':'none';}
+document.querySelectorAll('.q').forEach(function(q){var a=+q.dataset.a;q.querySelectorAll('.opt').forEach(function(b,i){b.addEventListener('click',function(){q.querySelectorAll('.opt').forEach(function(o,j){o.classList.remove('correct','wrong');if(j===a)o.classList.add('correct');else if(b===o)o.classList.add('wrong')});q.dataset.done='1';calc()})})});
+function calc(){var n=document.querySelectorAll('.q'),d=0,r=0;n.forEach(function(q){if(q.dataset.done==='1'){d++;if(q.querySelector('.correct')&&q.querySelector('.correct').dataset.done!=='x'){}r+=0}});var ok=0;n.forEach(function(q){if(q.dataset.done==='1'){var a=+q.dataset.a;var opts=q.querySelectorAll('.opt');var chosen=false;opts.forEach(function(o){if(o.classList.contains('wrong'))chosen=true;if(o.classList.contains('correct'))ok=Math.max(ok,1)}})});var score=0;n.forEach(function(q){if(q.dataset.done==='1'){var opts=q.querySelectorAll('.opt');var good=false,bad=false;opts.forEach(function(o){if(o.classList.contains('correct'))good=true;if(o.classList.contains('wrong'))bad=true});if(good&&!bad)score++}});var done=Array.from(n).filter(function(q){return q.dataset.done==='1'}).length;var el=document.getElementById('res');el.textContent='Ответлено: '+done+' из '+n.length+'. Правильных ответов: '+score+'. '+(done===n.length?(score>=4?'Отличный результат! 🎉':'Попробуй ещё раз!'):'');}
+</script>
+</body>
+</html>
