@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок №10. Понятие формы. Геометрическая основа формы</title>
+<style>
+:root{
+  --bg:#f5f2ec; --card:#ffffff; --ink:#2b2118; --accent:#8b3a2f;
+  --accent2:#b06a3b; --gold:#c9a227; --soft:#efe8dc; --ok:#3e7d4f; --warn:#b3402e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman',serif;background:var(--bg);color:var(--ink);line-height:1.55}
+.wrap{max-width:960px;margin:0 auto;padding:16px}
+header.hero{background:linear-gradient(135deg,#2b2118 0%,#4a3221 60%,#8b3a2f 100%);color:#f7ecd7;border-radius:0 0 22px 22px;padding:26px 22px 20px;text-align:center}
+.badge{display:inline-block;background:var(--gold);color:#2b2118;font-family:Arial,sans-serif;font-weight:bold;font-size:13px;letter-spacing:1px;padding:5px 14px;border-radius:20px;margin:4px}
+h1{font-size:26px;margin:10px 0 6px}
+.sub{font-family:Arial,sans-serif;font-size:14px;opacity:.9}
+section{background:var(--card);border-radius:16px;padding:20px 22px;margin:18px 0;box-shadow:0 2px 10px rgba(43,33,24,.08)}
+h2{color:var(--accent);font-size:20px;margin-bottom:12px;border-left:4px solid var(--gold);padding-left:10px}
+h3{color:var(--accent2);font-size:16px;margin:14px 0 8px}
+p,li{font-size:15px}
+ul,ol{padding-left:22px;margin:8px 0}
+.goals{background:#fbf7ee;border:1px dashed var(--accent2);border-radius:12px;padding:12px 16px}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:14px}
+th{background:var(--accent);color:#fff;padding:8px;text-align:left;font-family:Arial,sans-serif}
+td{border:1px solid #e2d8c8;padding:8px;vertical-align:top}
+tr:nth-child(even) td{background:#faf6ef}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:12px 0}
+.tool{background:var(--soft);border-radius:12px;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:.2s}
+.tool:hover{border-color:var(--gold)}
+.tool summary{padding:12px 14px;font-weight:bold;list-style:none;position:relative;padding-right:38px;font-size:15px}
+.tool summary::-webkit-details-marker{display:none}
+.tool summary:after{content:"+";position:absolute;right:14px;top:10px;width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;text-align:center;line-height:24px;font-family:Arial}
+.tool[open] summary:after{content:"−"}
+.tool .body{padding:0 14px 12px;font-size:14px}
+figure{margin:14px 0;text-align:center}
+figcaption{font-size:13px;font-family:Arial,sans-serif;color:#6b5b4a;margin-top:6px}
+.steps{counter-reset:s;margin:12px 0}
+.steps li{counter-increment:s;margin:8px 0;padding-left:36px;position:relative;list-style:none}
+.steps li:before{content:counter(s);position:absolute;left:0;top:1px;width:26px;height:26px;background:var(--accent2);color:#fff;border-radius:50%;text-align:center;line-height:26px;font-family:Arial;font-size:13px}
+.notice{border-radius:12px;padding:12px 16px;margin:12px 0;font-size:14px}
+.notice.red{background:#fdecea;border-left:5px solid var(--warn)}
+.notice.green{background:#e8f5ea;border-left:5px solid var(--ok)}
+.check{display:flex;align-items:flex-start;gap:10px;background:#fbf7ee;border-radius:10px;padding:10px 14px;margin:8px 0;cursor:pointer;font-size:14px}
+.check input{margin-top:3px;transform:scale(1.3)}
+.bar{height:12px;background:#e5dccd;border-radius:8px;overflow:hidden;margin:12px 0}
+.bar div{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0;transition:.3s}
+.done{text-align:center;color:var(--ok);font-weight:bold;display:none}
+.quiz .q{margin:14px 0}
+.q p{font-weight:bold;margin-bottom:6px}
+.opt{display:block;background:#fbf7ee;border:2px solid #e5dccd;border-radius:10px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:14px}
+.opt:hover{border-color:var(--accent2)}
+.opt.ok{background:#e8f5ea;border-color:var(--ok);font-weight:bold}
+.opt.bad{background:#fdecea;border-color:var(--warn)}
+.res{margin-top:12px;font-family:Arial,sans-serif;font-weight:bold;text-align:center;display:none;padding:10px;border-radius:10px}
+.mem{background:var(--soft);border-radius:12px;margin:10px 0}
+.mem summary{padding:12px 16px;font-weight:bold;cursor:pointer;list-style:none}
+.mem summary::-webkit-details-marker{display:none}
+.mem summary:before{content:"? "}
+.mem[open] summary:before{content:"✓ "}
+.mem .a{padding:0 16px 12px;font-size:14px}
+.teacher{border-left:5px solid var(--gold);background:#fdfaf3;border-radius:12px;margin:10px 0}
+.teacher summary{padding:12px 16px;font-weight:bold;cursor:pointer;color:var(--accent)}
+.teacher .b{padding:0 16px 12px;font-size:14px}
+footer{background:linear-gradient(135deg,#8b3a2f,#4a3221);color:#f7ecd7;text-align:center;padding:18px;border-radius:18px 18px 0 0;margin-top:20px;font-family:Arial,sans-serif}
+.small{font-size:12px;opacity:.85;font-family:Arial,sans-serif}
+@media(max-width:600px){h1{font-size:21px}section{padding:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <span class="badge">ШЕСТОЙ — НА СВЯЗИ!</span>
+  <span class="badge">6 КЛАСС</span>
+  <span class="badge">ИЗОБРАЗИТЕЛЬНОЕ ИСКУССТВО</span>
+  <h1>УРОК № 10</h1>
+  <p class="sub">Понятие формы. Геометрическая основа формы и конструкция (структура) сложной формы. Зарисовки предметов с выявлением геометрической основы</p>
+</header>
+
+<section>
+<h2>Цели урока</h2>
+<div class="goals">
+<ul>
+<li>узнать, что такое <b>форма</b>, <b>геометрическая основа</b> и <b>конструкция (структура)</b> сложной формы;</li>
+<li>научиться видеть в предметах простые геометрические тела: шар, цилиндр, конус, куб, параллелепипед;</li>
+<li>выполнить <b>зарисовки предметов</b> с выявлением геометрической основы — сначала «скелет», потом детали.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>Теория. Как устроена форма предмета</h2>
+<p>Каждый предмет, который нас окружает, можно описать простым языком геометрии. <b>Форма</b> — это внешний облик предмета. <b>Геометрическая основа</b> — это простое тело или сочетание тел, которое «спрятано» внутри предмета и определяет его главные пропорции.</p>
+<figure>
+<svg viewBox="0 0 700 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="700" height="150" fill="#faf6ef"/>
+<!-- шар -->
+<circle cx="80" cy="75" r="42" fill="#e8d9c3" stroke="#4a3221" stroke-width="2"/>
+<path d="M50 65 Q80 55 110 65" fill="none" stroke="#b3402e" stroke-width="2" stroke-dasharray="4 3"/>
+<path d="M50 88 Q80 98 110 88" fill="none" stroke="#b3402e" stroke-width="2" stroke-dasharray="4 3"/>
+<ellipse cx="80" cy="75" rx="42" ry="12" fill="none" stroke="#b3402e" stroke-width="2" stroke-dasharray="4 3"/>
+<!-- цилиндр -->
+<g transform="translate(180,0)">
+<rect x="15" y="40" width="60" height="70" fill="#e8d9c3" stroke="#4a3221" stroke-width="2"/>
+<ellipse cx="45" cy="40" rx="30" ry="11" fill="#f2e8d6" stroke="#4a3221" stroke-width="2"/>
+<path d="M15 40 a30 11 0 0 0 60 0" fill="none" stroke="#b3402e" stroke-width="2" stroke-dasharray="4 3"/>
+</g>
+<!-- конус -->
+<g transform="translate(300,0)">
+<path d="M45 25 L15 108 Q45 122 75 108 Z" fill="#e8d9c3" stroke="#4a3221" stroke-width="2"/>
+<path d="M15 108 Q45 122 75 108" fill="none" stroke="#b3402e" stroke-width="2" stroke-dasharray="4 3"/>
+</g>
+<!-- куб -->
+<g transform="translate(420,0)">
+<path d="M15 45 L45 30 L80 42 L50 58 Z" fill="#f2e8d6" stroke="#4a3221" stroke-width="2"/>
+<path d="M15 45 L15 105 L50 120 L50 58 Z" fill="#e0d0b6" stroke="#4a3221" stroke-width="2"/>
+<path d="M50 58 L80 42 L80 100 L50 120 Z" fill="#d4c2a4" stroke="#4a3221" stroke-width="2"/>
+</g>
+<!-- призма/параллелепипед -->
+<g transform="translate(560,0)">
+<path d="M15 50 L40 38 L75 48 L50 60 Z" fill="#f2e8d6" stroke="#4a3221" stroke-width="2"/>
+<path d="M15 50 L15 100 L50 112 L50 60 Z" fill="#e0d0b6" stroke="#4a3221" stroke-width="2"/>
+<path d="M50 60 L75 48 L75 98 L50 112 Z" fill="#d4c2a4" stroke="#4a3221" stroke-width="2"/>
+</g>
+<text x="80" y="140" text-anchor="middle" font-family="Arial" font-size="13" fill="#4a3221">ШАР</text>
+<text x="240" y="140" text-anchor="middle" font-family="Arial" font-size="13" fill="#4a3221">ЦИЛИНДР</text>
+<text x="345" y="140" text-anchor="middle" font-family="Arial" font-size="13" fill="#4a3221">КОНУС</text>
+<text x="468" y="140" text-anchor="middle" font-family="Arial" font-size="13" fill="#4a3221">КУБ</text>
+<text x="597" y="140" text-anchor="middle" font-family="Arial" font-size="13" fill="#4a3221">ПРИЗМА</text>
+</svg>
+<figcaption>Пять главных геометрических тел — «строительный материал» любой формы</figcaption>
+</figure>
+<p><b>Конструкция (структура)</b> сложной формы — это сочетание нескольких простых тел. Кувшин — это цилиндр + конус (горлышко) + часть шара (тулово). Крыша дома — призма или пирамида. Разобрав предмет на тела, мы понимаем, как он построен, — и можем нарисовать его правильно.</p>
+<h3>Разбор предметов на тела</h3>
+<figure>
+<svg viewBox="0 0 700 220" width="100%" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="700" height="220" fill="#faf6ef"/>
+<!-- кружка -->
+<g transform="translate(30,20)">
+<path d="M20 60 L20 150 Q55 168 90 150 L90 60" fill="#e8d9c3" stroke="#4a3221" stroke-width="2"/>
+<ellipse cx="55" cy="60" rx="35" ry="10" fill="#f2e8d6" stroke="#4a3221" stroke-width="2"/>
+<path d="M90 80 Q120 84 118 104 Q116 124 90 124" fill="none" stroke="#4a3221" stroke-width="2.5"/>
+<text x="55" y="196" text-anchor="middle" font-family="Arial" font-size="12" fill="#4a3221">КРУЖКА = цилиндр + ручка-дуга</text>
+</g>
+<!-- кувшин -->
+<g transform="translate(230,15)">
+<path d="M35 25 L30 55 Q10 70 12 105 Q14 145 45 152 Q76 145 78 105 Q80 70 60 55 L55 25 Q45 18 35 25 Z" fill="#e8d9c3" stroke="#4a3221" stroke-width="2"/>
+<path d="M78 85 Q104 92 100 112" fill="none" stroke="#4a3221" stroke-width="2.5"/>
+<ellipse cx="45" cy="25" rx="10" ry="4" fill="#f2e8d6" stroke="#4a3221" stroke-width="2"/>
+<path d="M12 105 Q45 118 78 105" fill="none" stroke="#b3402e" stroke-width="2" stroke-dasharray="5 4"/>
+<path d="M30 55 Q45 60 60 55" fill="none" stroke="#b3402e" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="45" y="196" text-anchor="middle" font-family="Arial" font-size="12" fill="#4a3221">КУВШИН = тулово + горлышко</text>
+</g>
+<!-- домик -->
+<g transform="translate(430,20)">
+<path d="M25 100 L25 160 L115 160 L115 100 Z" fill="#e8d9c3" stroke="#4a3221" stroke-width="2"/>
+<path d="M15 100 L70 55 L125 100 Z" fill="#e0d0b6" stroke="#4a3221" stroke-width="2"/>
+<rect x="60" y="118" width="26" height="42" fill="#d4c2a4" stroke="#4a3221" stroke-width="2"/>
+<rect x="33" y="115" width="18" height="18" fill="#f7ecd7" stroke="#4a3221" stroke-width="2"/>
+<path d="M70 55 L70 100" stroke="#b3402e" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="70" y="196" text-anchor="middle" font-family="Arial" font-size="12" fill="#4a3221">ДОМ = куб-основа + призма-крыша</text>
+</g>
+</svg>
+<figcaption>Пунктиром показана геометрическая основа предметов</figcaption>
+</figure>
+<h3>Зарисовка кружки: четыре этапа</h3>
+<figure>
+<svg viewBox="0 0 700 170" width="100%" xmlns="http://www.w3.org/2000/svg">
+<rect x="0" y="0" width="700" height="170" fill="#faf6ef"/>
+<g transform="translate(25,15)">
+<ellipse cx="55" cy="70" rx="38" ry="12" fill="none" stroke="#8a8a8a" stroke-width="2" stroke-dasharray="5 4"/>
+<text x="55" y="150" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b5b4a">1. Основная ось</text>
+<text x="55" y="166" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b5b4a">и овалы</text>
+</g>
+<g transform="translate(200,15)">
+<line x1="55" y1="20" x2="55" y2="120" stroke="#b3402e" stroke-width="1.5" stroke-dasharray="4 4"/>
+<path d="M17 70 L17 115 Q55 130 93 115 L93 70" fill="none" stroke="#4a3221" stroke-width="2"/>
+<ellipse cx="55" cy="70" rx="38" ry="12" fill="none" stroke="#4a3221" stroke-width="2"/>
+<text x="55" y="150" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b5b4a">2. Тело — цилиндр</text>
+<text x="55" y="166" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b5b4a">по осям</text>
+</g>
+<g transform="translate(375,15)">
+<path d="M17 70 L17 115 Q55 130 93 115 L93 70" fill="none" stroke="#4a3221" stroke-width="2"/>
+<ellipse cx="55" cy="70" rx="38" ry="12" fill="#f2e8d6" stroke="#4a3221" stroke-width="2"/>
+<path d="M93 82 Q120 88 117 103 Q114 118 93 118" fill="none" stroke="#4a3221" stroke-width="2.5"/>
+<text x="55" y="150" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b5b4a">3. Ручка — дуга,</text>
+<text x="55" y="166" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b5b4a">проверяем пропорции</text>
+</g>
+<g transform="translate(550,15)">
+<path d="M17 70 L17 115 Q55 130 93 115 L93 70" fill="#e8d9c3" stroke="#4a3221" stroke-width="2.5"/>
+<ellipse cx="55" cy="70" rx="38" ry="12" fill="#f7ecd7" stroke="#4a3221" stroke-width="2.5"/>
+<path d="M93 82 Q120 88 117 103 Q114 118 93 118" fill="none" stroke="#4a3221" stroke-width="3"/>
+<path d="M20 96 Q55 106 90 96" fill="none" stroke="#8b7a63" stroke-width="2" opacity=".5"/>
+<path d="M22 108 Q55 118 88 108" fill="none" stroke="#8b7a63" stroke-width="2" opacity=".35"/>
+<text x="55" y="150" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b5b4a">4. Уточняем форму,</text>
+<text x="55" y="166" text-anchor="middle" font-family="Arial" font-size="12" fill="#6b5b4a">лёгкая светотень</text>
+</g>
+</svg>
+<figcaption>От общего к частному: оси — тела — детали — уточнение</figcaption>
+</figure>
+</section>
+
+<section>
+<h2>Тело → предметы: таблица подсказок</h2>
+<table>
+<tr><th>Геометрическое тело</th><th>Признаки</th><th>Какие предметы так устроены</th></tr>
+<tr><td><b>Шар</b></td><td>круглый со всех сторон, все точки равноудалены от центра</td><td>яблоко, мяч, глобус, апельсин, горошина</td></tr>
+<tr><td><b>Цилиндр</b></td><td>круглый в сечении, боковая поверхность ровная</td><td>кружка, банка, стакан, карандаш, ствол дерева, бревно</td></tr>
+<tr><td><b>Конус</b></td><td>круглое основание сужается к вершине</td><td>морковь, рожок мороженого, воронка, клоунский колпак</td></tr>
+<tr><td><b>Куб</b></td><td>6 равных квадратных граней</td><td>кубик, коробка, кусок сахара, ящик</td></tr>
+<tr><td><b>Параллелепипед, призма</b></td><td>грани — прямоугольники, форма вытянутая</td><td>книга, телефон, шкаф, пенал, брусок</td></tr>
+<tr><td><b>Пирамида</b></td><td>основание и сходящиеся к точке грани</td><td>крыша дома, пирамиды Египта, пирамидка-игрушка</td></tr>
+</table>
+</section>
+
+<section>
+<h2>Конспект для учителя</h2>
+<details class="teacher">
+<summary>1. Тема, цели и оборудование</summary>
+<div class="b">
+<p><b>Тема:</b> Понятие формы. Геометрическая основа формы и конструкция (структура) сложной формы. Зарисовки предметов с выявлением геометрической основы.</p>
+<p><b>Цели:</b> познакомить с понятиями «форма», «геометрическая основа», «конструкция»; формировать умение анализировать строение предмета; выполнить зарисовки с выявлением геометрической основы.</p>
+<p><b>Оборудование:</b> альбомные листы, простые карандаши разной мягкости (НВ, В, 2В), ластик, гипсовые модели геометрических тел (или кубики/шары из класса), предметный натюрморт: кружка, кувшин, яблоко, коробка; проектор для показа урока.</p>
+</div>
+</details>
+<details class="teacher">
+<summary>2. Ход урока (45 минут)</summary>
+<div class="b">
+<ul>
+<li><b>1–5 мин.</b> Оргмомент. Демонстрация натюрморта из предметов, вопрос: «Как бы вы описали эти предметы простыми словами?»</li>
+<li><b>6–15 мин.</b> Объяснение нового: форма, геометрическая основа, конструкция. Показ схем из урока: тела, разбор кувшина и домика пунктиром. Краткое перечисление предметов к каждому телу.</li>
+<li><b>16–30 мин.</b> Практика: зарисовка кружки по 4 этапам (ось и овалы → тело → ручка → уточнение и лёгкая светотень). Учитель рисует у доски или показывает на проекторе шаг за шагом.</li>
+<li><b>31–40 мин.</b> Самостоятельная зарисовка второго предмета по выбору (яблоко — шар, коробка — параллелепипед, кувшин — сочетание тел) с выявлением основы пунктиром.</li>
+<li><b>41–45 мин.</b> Мини-тест на уроке или просмотр работ, рефлексия: «Что спрятано внутри кувшина?», домашнее задание.</li>
+</ul>
+</div>
+</details>
+<details class="teacher">
+<summary>3. Ключевые тезисы объяснения</summary>
+<div class="b">
+<ul>
+<li>Любая форма — от мяча до автомобиля — сводится к сочетанию простых геометрических тел.</li>
+<li>Рисовать начинают не с деталей, а с общей основы: ось, большие овалы и линии основных граней.</li>
+<li>Конструкция — это «скелет» предмета: где стыкуются части, каковы их пропорции.</li>
+<li>Линии основы сначала рисуем легко, пунктиром, — потом они убираются или становятся контуром.</li>
+<li>Симметрия проверяем по вертикальной оси: обе стороны должны совпасть.</li>
+</ul>
+</div>
+</details>
+<details class="teacher">
+<summary>4. Критерии оценки и возможные трудности</summary>
+<div class="b">
+<p><b>Критерии:</b> правильное выявление геометрической основы (тела названы верно); соблюдение пропорций и симметрии; аккуратность этапов (сначала основа, потом детали); завершённость зарисовки.</p>
+<p><b>Типичные трудности:</b> учащиеся начинают с деталей (сразу ручка кружки, узоры) — направлять к этапу оси и общей формы; несимметричные овалы — напоминать об оси; слишком сильный нажим карандаша — линии основы должны быть лёгкими.</p>
+</div>
+</details>
+</section>
+
+<section>
+<h2>Опорная карта ученика</h2>
+<div class="notice green"><b>Формула рисунка:</b> сначала «скелет» из простых тел — потом детали — потом уточнение. Не наоборот!</div>
+<h3>7 шагов зарисовки</h3>
+<ol class="steps">
+<li>Рассмотри предмет: из каких тел он состоит? Скажи про себя: «Это цилиндр + дуга».</li>
+<li>Проведи лёгкую вертикальную ось — по ней проверяй симметрию.</li>
+<li>Отметь высоту предмета и самой широкой части короткими штрихами.</li>
+<li>Построй геометрическую основу: овалы сверху и снизу, соединяющие линии, боковые грани. Линии — тонкие, без нажима.</li>
+<li>Проверь пропорции: ширина и высота соотносятся, как у настоящего предмета?</li>
+<li>Добавь детали: ручку, носик, края. Основу не стирай сразу — она помогает.</li>
+<li>Убери лишние линии построения, уточни контур, добавь лёгкую светотень.</li>
+</ol>
+<h3>Вопросы-помощники</h3>
+<ul>
+<li>Какое тело главное в этом предмете? Что приставлено к нему?</li>
+<li>Где самая широкая часть? Совпадает ли она с осью?</li>
+<li>Что я нарисовал сначала: общую форму или деталь?</li>
+</ul>
+</section>
+
+<section>
+<h2>Чек-лист зарисовки</h2>
+<div id="checks">
+<label class="check"><input type="checkbox" onchange="upd()"> Вертикальная ось проведена лёгкой линией</label>
+<label class="check"><input type="checkbox" onchange="upd()"> Высота и ширина предмета отмечены штрихами</label>
+<label class="check"><input type="checkbox" onchange="upd()"> Геометрическая основа построена (овалы, грани)</label>
+<label class="check"><input type="checkbox" onchange="upd()"> Пропорции проверены: не слишком широкая/узкая</label>
+<label class="check"><input type="checkbox" onchange="upd()"> Симметрия проверена по оси</label>
+<label class="check"><input type="checkbox" onchange="upd()"> Детали добавлены после общей формы</label>
+<label class="check"><input type="checkbox" onchange="upd()"> Линии построения убраны, контур уточнён</label>
+</div>
+<div class="bar"><div id="bar"></div></div>
+<div class="done" id="done">Превосходно! Зарисовка построена по всем правилам 🎨</div>
+</section>
+
+<section class="quiz">
+<h2>Мини-тест: проверь себя</h2>
+<div class="q"><p>1. Геометрическая основа формы — это…</p>
+<div class="opt" onclick="a(this,0)">узор, которым украшен предмет</div>
+<div class="opt" onclick="a(this,1)">простое тело или сочетание тел, определяющее главные пропорции предмета</div>
+<div class="opt" onclick="a(this,2)">цвет и фактура поверхности предмета</div></div>
+<div class="q"><p>2. Геометрическая основа кружки — это…</p>
+<div class="opt" onclick="a(this,0)">конус</div>
+<div class="opt" onclick="a(this,1)">шар</div>
+<div class="opt" onclick="a(this,2)">цилиндр с ручкой-дугой</div></div>
+<div class="q"><p>3. С чего правильно начинать зарисовку предмета?</p>
+<div class="opt" onclick="a(this,0)">с мелких деталей и узоров</div>
+<div class="opt" onclick="a(this,1)">с общей геометрической основы и оси</div>
+<div class="opt" onclick="a(this,2)">со штриховки и тени</div></div>
+<div class="q"><p>4. Дома, шкаф и книга имеют основой…</p>
+<div class="opt" onclick="a(this,0)">шар</div>
+<div class="opt" onclick="a(this,1)">конус</div>
+<div class="opt" onclick="a(this,2)">параллелепипед (призму)</div></div>
+<div class="q"><p>5. Конструкция сложной формы — это…</p>
+<div class="opt" onclick="a(this,0)">сочетание нескольких простых тел в одном предмете</div>
+<div class="opt" onclick="a(this,0)">название предмета</div>
+<div class="opt" onclick="a(this,2)">способ раскрасить рисунок</div></div>
+<div class="res" id="res"></div>
+</section>
+
+<section>
+<h2>Запомни главное</h2>
+<details class="mem"><summary>Что такое форма?</summary><div class="a">Внешний облик предмета — то, как он выглядит в пространстве: круглый, вытянутый, угловатый.</div></details>
+<details class="mem"><summary>Что такое геометрическая основа?</summary><div class="a">Простое тело (шар, цилиндр, конус, куб, призма) или их сочетание, которое «спрятано» в предмете и задаёт его пропорции.</div></details>
+<details class="mem"><summary>Что такое конструкция (структура) формы?</summary><div class="a">Устройство предмета из частей: какие тела соединяются, где стыкуются, каковы их размеры относительно друг друга.</div></details>
+<details class="mem"><summary>Какой главный порядок работы над зарисовкой?</summary><div class="a">От общего к частному: ось → геометрическая основа → пропорции → детали → уточнение и светотень.</div></details>
+<details class="mem"><summary>Зачем рисуют ось и овалы лёгкой линией?</summary><div class="a">Чтобы легко исправить ошибку: построение — это черновик рисунка, оно должно оставаться незаметным в готовой работе.</div></details>
+</section>
+
+<section>
+<h2>Домашнее задание</h2>
+<ul>
+<li>Найди дома <b>три предмета</b> разной формы и определи их геометрическую основу (устно или в тетради).</li>
+<li>Выбери один предмет и выполни его <b>зарисовку с выявлением геометрической основы</b>: ось, тела пунктиром, затем детали.</li>
+<li>Принеси зарисовку на следующий урок — устроим мини-выставку класса.</li>
+</ul>
+</section>
+
+<footer>
+<b>Шестой — на связи!</b><br>
+<span class="small">Рисуем от общего к частному — и любой предмет поддаётся карандашу</span><br>
+<span class="small">ИЗО · 6 класс · Урок № 10</span>
+</footer>
+</div>
+<script>
+function upd(){var c=document.querySelectorAll('#checks input');var n=0;c.forEach(function(x){if(x.checked)n++});
+document.getElementById('bar').style.width=(n/c.length*100)+'%';
+if(n===c.length)document.getElementById('done').style.display='block';}
+function a(el,i){var q=el.parentNode;var opts=q.querySelectorAll('.opt');
+opts.forEach(function(o,k){o.classList.remove('ok','bad');if(k===1)o.classList.add('ok');});
+if(i!==1){el.classList.add('bad');}
+var qs=document.querySelectorAll('.quiz .q');var done=0;
+qs.forEach(function(qq){var ok=qq.querySelector('.opt.ok');if(ok)done++;});
+var r=document.getElementById('res');r.style.display='block';
+r.textContent='Верно отвечено: '+done+' из '+qs.length+'. '+(done===5?'Отлично! Ты видишь геометрию в предметах!':'Перечитай теорию и попробуй ещё!');
+r.style.background=done===5?'#e8f5ea':'#fbf7ee';}
+</script>
+</body>
+</html>
