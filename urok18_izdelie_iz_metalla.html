@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок №18 — Шестой на связи! Изделие из металла</title>
+<style>
+:root{
+  --blue:#1c3faa; --blue2:#2b5fd9; --sky:#eaf1ff; --yellow:#ffd84d;
+  --green:#1e9e5a; --red:#d93838; --card:#ffffff; --ink:#1d2430;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif; background:var(--sky); color:var(--ink); line-height:1.55;}
+.wrap{max-width:900px; margin:0 auto; padding:16px;}
+header{background:linear-gradient(120deg,var(--blue),var(--blue2)); color:#fff;
+  border-radius:0 0 22px 22px; padding:26px 20px; text-align:center;}
+.badge{display:inline-block; background:var(--yellow); color:var(--blue);
+  font-weight:800; padding:6px 16px; border-radius:999px; letter-spacing:1px; margin-bottom:12px;}
+h1{font-size:1.7em; margin-bottom:8px;}
+.sub{opacity:.92; font-size:1.02em;}
+.num{font-size:2.6em; font-weight:900; letter-spacing:2px; margin:6px 0;}
+section{background:var(--card); border-radius:16px; padding:20px; margin-top:18px;
+  box-shadow:0 3px 10px rgba(28,63,170,.10);}
+h2{color:var(--blue); margin-bottom:12px; font-size:1.25em;}
+h2::before{content:"📡 ";}
+.goal{background:#fff8e0; border-left:5px solid var(--yellow); padding:12px 14px; border-radius:8px;}
+table{width:100%; border-collapse:collapse; margin-top:10px; font-size:.95em;}
+th{background:var(--blue); color:#fff; padding:8px;}
+td{border:1px solid #d7e0f5; padding:8px; text-align:center;}
+tr:nth-child(even) td{background:#f4f7ff;}
+.card{border:2px solid #d7e0f5; border-radius:12px; margin-top:10px; overflow:hidden; cursor:pointer;}
+.card-head{padding:12px 14px; font-weight:700; background:#f4f7ff; display:flex; justify-content:space-between; align-items:center;}
+.card-head .arrow{transition:transform .25s;}
+.card.open .arrow{transform:rotate(90deg);}
+.card-body{display:none; padding:12px 14px; border-top:1px solid #e6ecfa;}
+.card.open .card-body{display:block;}
+.steps li{margin:10px 0; padding-left:6px;}
+.step-num{display:inline-block; background:var(--blue); color:#fff; font-weight:800;
+  width:26px; height:26px; text-align:center; line-height:26px; border-radius:50%; margin-right:8px;}
+.warn{background:#ffe9e9; border-left:5px solid var(--red); padding:12px 14px; border-radius:8px; margin-top:14px; font-weight:600;}
+.tip{background:#e7f8ef; border-left:5px solid var(--green); padding:12px 14px; border-radius:8px; margin-top:14px;}
+.check{display:flex; align-items:center; gap:10px; padding:10px; border:2px solid #d7e0f5;
+  border-radius:10px; margin-top:8px; cursor:pointer; user-select:none; transition:.2s;}
+.check input{width:20px; height:20px; accent-color:var(--green); cursor:pointer;}
+.check.done{background:#e7f8ef; border-color:var(--green);}
+.bar{height:14px; background:#e2e8f7; border-radius:999px; margin-top:14px; overflow:hidden;}
+.bar-fill{height:100%; width:0; background:linear-gradient(90deg,var(--green),#4fd68b); transition:width .3s; border-radius:999px;}
+.bar-text{text-align:center; font-weight:700; margin-top:6px; color:var(--green);}
+.celebrate{display:none; text-align:center; font-size:1.15em; font-weight:800; color:var(--green); margin-top:10px;}
+.celebrate.show{display:block;}
+.q{border:2px solid #d7e0f5; border-radius:12px; padding:14px; margin-top:12px;}
+.q p{font-weight:700; margin-bottom:8px;}
+.opt{display:block; padding:10px 12px; border:2px solid #d7e0f5; border-radius:10px;
+  margin-top:6px; cursor:pointer; transition:.15s;}
+.opt:hover{background:#f4f7ff;}
+.opt.correct{background:#e7f8ef; border-color:var(--green); font-weight:700;}
+.opt.wrong{background:#ffe9e9; border-color:var(--red);}
+.result{display:none; text-align:center; font-size:1.2em; font-weight:800; margin-top:16px; padding:12px; border-radius:12px;}
+.result.show{display:block;}
+.result.good{background:#e7f8ef; color:var(--green);}
+.result.mid{background:#fff8e0; color:#a07c00;}
+.result.bad{background:#ffe9e9; color:var(--red);}
+details{border:2px solid #d7e0f5; border-radius:12px; padding:12px 14px; margin-top:10px; cursor:pointer;}
+summary{font-weight:700; color:var(--blue);}
+details p{margin-top:8px;}
+.hw{background:#eaf1ff; border-radius:12px; padding:14px; margin-top:14px;}
+.hw b{color:var(--blue);}
+footer{text-align:center; padding:20px; color:#5a6a8f; font-size:.92em;}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">ШЕСТОЙ — НА СВЯЗИ! 📡</div>
+  <div class="num">УРОК № 18</div>
+  <h1>Проект «Изделие из металла»</h1>
+  <div class="sub">Выполнение технологических операций ручными инструментами по технологической карте • Раздел 3. Технологии обработки материалов</div>
+</header>
+<div class="wrap">
+
+<section>
+  <h2>Цели урока</h2>
+  <div class="goal">
+    <b>Повторить</b> правила безопасной работы ручными инструментами по металлу и
+    <b>научиться выполнять операции по технологической карте</b>: разметка, накернивание, опиливание, контроль размеров.
+  </div>
+</section>
+
+<section>
+  <h2>Что такое технологическая карта?</h2>
+  <p>Это документ, в котором записан <b>порядок всех операций</b> при изготовлении изделия: что делать, каким инструментом и в какой последовательности. Технологическая карта — как маршрут: следуешь шаг за шагом и получаешь готовую деталь.</p>
+  <table>
+    <tr><th>Операция</th><th>Инструмент</th><th>Результат</th></tr>
+    <tr><td>Разметка</td><td>Чертилка, линейка, разметочный циркуль</td><td>Линии контура на заготовке</td></tr>
+    <tr><td>Накернивание</td><td>Кернер, молоток</td><td>Углубления-центры для сверла</td></tr>
+    <tr><td>Опиливание</td><td>Напильник</td><td>Ровные края, точный размер</td></tr>
+    <tr><td>Контроль</td><td>Штангенциркуль, линейка</td><td>Проверка размеров по карте</td></tr>
+    <tr><td>Сборка</td><td>Отвёртка, пассатижи</td><td>Готовое изделие</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Инструменты урока (нажми на карточку)</h2>
+  <div class="card" onclick="this.classList.toggle('open')">
+    <div class="card-head">🔧 Верстак и тиски <span class="arrow">▶</span></div>
+    <div class="card-body">Главное рабочее место. Заготовку закрепляют <b>в тисках</b> — только так можно пилить, опиливать и сверлить. Не закрепил — не работай!</div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('open')">
+    <div class="card-head">✏️ Чертилка и разметочный циркуль <span class="arrow">▶</span></div>
+    <div class="card-body">Наносят линии контура прямо по металлу. Работают по линейке, разметку проверяют дважды — «семь раз отмерь».</div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('open')">
+    <div class="card-head">🔨 Кернер <span class="arrow">▶</span></div>
+    <div class="card-body">Стальной стержень с острым концом. По нему ударяют молотком, чтобы сделать углубление — сверло не соскользнёт с места сверления.</div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('open')">
+    <div class="card-head">🪒 Напильник <span class="arrow">▶</span></div>
+    <div class="card-body">Снимает тонкий слой металла и выравнивает края. Держат правой рукой за ручку, левой — за носок. Работают только по закреплённой в тисках заготовке.</div>
+  </div>
+  <div class="card" onclick="this.classList.toggle('open')">
+    <div class="card-head">📏 Штангенциркуль <span class="arrow">▶</span></div>
+    <div class="card-body">Точный измерительный прибор: меряет наружные и внутренние размеры с точностью до 0,1 мм. Сверяй каждый размер с технологической картой.</div>
+  </div>
+</section>
+
+<section>
+  <h2>Работа по карте: 7 шагов</h2>
+  <ol class="steps">
+    <li><span class="step-num">1</span>Прочитай технологическую карту до конца — понял каждую операцию.</li>
+    <li><span class="step-num">2</span>Осмотри заготовку: нет ли ржавчины, заусенцев, трещин.</li>
+    <li><span class="step-num">3</span>Нанеси разметку чертилкой по размерам из карты.</li>
+    <li><span class="step-num">4</span>Накерни центры отверстий кернером и молотком.</li>
+    <li><span class="step-num">5</span>Выполни опиливание краёв напильником — держи заготовку в тисках.</li>
+    <li><span class="step-num">6</span>Проверь размеры штангенциркулем и сравни с картой.</li>
+    <li><span class="step-num">7</span>Зачисти изделие, сдай работу на проверку.</li>
+  </ol>
+  <div class="warn">⚠️ ВСЕ операции — только при закреплённой в тисках заготовке! Держать деталь в руке при опиливании и накернивании запрещено.</div>
+  <div class="tip">💡 Совет мастера: сверяйся с картой после КАЖДОЙ операции. Ошибка на раннем шаге портит всё изделие.</div>
+</section>
+
+<section>
+  <h2>Чек-лист безопасной работы</h2>
+  <div id="checks">
+    <label class="check"><input type="checkbox"> Надел очки и фартук, убрал одежду с длинными свисающими деталями</label>
+    <label class="check"><input type="checkbox"> Проверил исправность тисков и прочность закрепления заготовки</label>
+    <label class="check"><input type="checkbox"> Инструменты с исправными рукоятками, без сколов и трещин</label>
+    <label class="check"><input type="checkbox"> Держу безопасную дистанцию от напарника при ударах молотком</label>
+    <label class="check"><input type="checkbox"> Металлическая стружка убирается щёткой-сметкой, а не рукой</label>
+    <label class="check"><input type="checkbox"> Не отвлекаюсь во время работы и не разговариваю</label>
+    <label class="check"><input type="checkbox"> По окончании — инструменты на место, рабочее место убрано</label>
+  </div>
+  <div class="bar"><div class="bar-fill" id="barfill"></div></div>
+  <div class="bar-text" id="bartext">Отмечено 0 из 7</div>
+  <div class="celebrate" id="celebrate">🎉 Отлично! Все правила соблюдены — можно идти в мастерскую!</div>
+</section>
+
+<section>
+  <h2>Мини-тест: проверь себя</h2>
+  <div id="quiz"></div>
+  <div class="result" id="result"></div>
+</section>
+
+<section>
+  <h2>Запомни главное</h2>
+  <details><summary>Что такое технологическая карта?</summary><p>Документ с полным порядком операций: что делать, каким инструментом, в какой последовательности. Работаем строго по карте.</p></details>
+  <details><summary>Зачем накернивать отверстие?</summary><p>Углубление от кернера не даёт сверлу соскользнуть — сверление начинается точно в размеченной точке.</p></details>
+  <details><summary>Как закрепить заготовку?</summary><p>В тисках верстака, плотно и без перекоса. Слабо зажатая заготовка может вырваться и травмировать.</p></details>
+  <details><summary>Чем убирают опилки и стружку?</summary><p>Только щёткой-сметкой. Рукой — нельзя: острые кромки металла режут кожу.</p></details>
+  <details><summary>Что проверить перед сдачей изделия?</summary><p>Размеры по карте штангенциркулем, качество опиливания, отсутствие заусенцев и острых кромок.</p></details>
+</section>
+
+<section class="hw">
+  <h2>Домашнее задание</h2>
+  <p>📦 Выпиши в тетрадь последовательность операций из технологической карты твоего проекта и принеси подготовленную заготовку к следующему уроку.</p>
+</section>
+
+<footer>ШЕСТОЙ — НА СВЯЗИ! 📡 Урок №18 • Технология • 6 класс</footer>
+</div>
+
+<script>
+// Чек-лист
+var boxes=document.querySelectorAll('#checks input');
+boxes.forEach(function(b){b.addEventListener('change',upd);});
+function upd(){
+  var n=0; boxes.forEach(function(b){if(b.checked)n++; b.parentNode.classList.toggle('done',b.checked);});
+  document.getElementById('barfill').style.width=(n/boxes.length*100)+'%';
+  document.getElementById('bartext').textContent='Отмечено '+n+' из '+boxes.length;
+  if(n===boxes.length)document.getElementById('celebrate').classList.add('show');
+  else document.getElementById('celebrate').classList.remove('show');
+}
+// Тест
+var quiz=[
+ {q:'1. Зачем накернивают место сверления?',o:['Чтобы сверло не соскользнуло','Чтобы украсить заготовку','Чтобы металл стал мягче'],a:0},
+ {q:'2. Как закрепляют заготовку при опиливании?',o:['Держат в руке','В тисках верстака','Прижимают коленом'],a:1},
+ {q:'3. Чем убирают металлическую стружку?',o:['Рукой','Рукавом','Щёткой-сметкой'],a:2},
+ {q:'4. Что такое технологическая карта?',o:['Рисунок изделия','Порядок операций и инструменты','Список класса'],a:1},
+ {q:'5. Чем контролируют размеры по карте?',o:['Штангенциркулем','На глаз','Линейкой от стены'],a:0}
+];
+var answered=0, score=0;
+quiz.forEach(function(item,qi){
+  var d=document.createElement('div'); d.className='q';
+  var p=document.createElement('p'); p.textContent=item.q; d.appendChild(p);
+  item.o.forEach(function(txt,oi){
+    var s=document.createElement('div'); s.className='opt'; s.textContent=txt;
+    s.onclick=function(){
+      if(d.dataset.done)return; d.dataset.done='1'; answered++;
+      if(oi===item.a){s.classList.add('correct'); score++;}
+      else{s.classList.add('wrong'); d.children[1+item.a].classList.add('correct');}
+      if(answered===quiz.length){
+        var r=document.getElementById('result'); r.classList.add('show');
+        if(score===5){r.textContent='🎉 Отлично! 5 из 5 — ты готов к работе!'; r.classList.add('good');}
+        else if(score>=3){r.textContent='🙂 Неплохо! '+score+' из 5. Загляни в «Запомни главное». Ответ: перечитай карточки инструментов.'; r.classList.add('mid');}
+        else{r.textContent='📚 '+score+' из 5. Повтори теорию урока и попробуй снова!'; r.classList.add('bad');}
+      }
+    };
+    d.appendChild(s);
+  });
+  document.getElementById('quiz').appendChild(d);
+});
+</script>
+</body>
+</html>
