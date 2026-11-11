@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My School Lunch — урок английского, 3 класс</title>
+<style>
+:root{--red:#e63946;--yellow:#ffb703;--cream:#fff8ec;--dark:#2b2d42;--green:#2a9d8f;--blue:#457b9d;}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:var(--cream);color:var(--dark);line-height:1.6}
+.wrap{max-width:860px;margin:0 auto;padding:16px}
+header{background:linear-gradient(135deg,#ff9a3c,#e63946);color:#fff;border-radius:0 0 24px 24px;padding:28px 20px;text-align:center}
+.badge{display:inline-block;background:#fff;color:var(--red);font-weight:700;padding:4px 14px;border-radius:20px;font-size:13px;letter-spacing:1px;margin-bottom:8px}
+h1{font-size:30px;margin:6px 0}
+.sub{opacity:.95;font-size:15px}
+section{background:#fff;border-radius:16px;padding:20px;margin-top:18px;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+h2{color:var(--red);font-size:21px;margin-bottom:10px}
+h2::before{content:'🍎 '}
+.goals{list-style:none}
+.goals li{background:#fff3d6;border-left:4px solid var(--yellow);padding:8px 12px;border-radius:8px;margin:6px 0}
+.vocab{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:10px}
+.vcard{background:#f2fbf9;border:2px solid var(--green);border-radius:12px;padding:10px;text-align:center}
+.vcard b{font-size:18px;color:var(--green)}
+.vcard .ru{color:#666;font-size:14px}
+.vcard button{margin-top:6px;background:var(--green);color:#fff;border:none;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:13px}
+.box{border:3px dashed var(--yellow);border-radius:16px;padding:14px;margin-top:12px;text-align:center;min-height:70px}
+.foods{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:10px}
+.fbtn{font-size:26px;background:#fff;border:2px solid var(--yellow);border-radius:12px;padding:8px 12px;cursor:pointer;transition:.2s}
+.fbtn:hover{transform:scale(1.1);background:#fff3d6}
+.inbox{display:inline-block;font-size:26px;margin:4px;background:#fff;border:2px solid var(--green);border-radius:10px;padding:6px 10px;cursor:pointer}
+.sentence{margin-top:10px;font-weight:700;font-size:18px;color:var(--blue)}
+.dlg{background:#f4f8ff;border-left:4px solid var(--blue);border-radius:10px;padding:12px;margin:10px 0}
+.dlg p{margin:4px 0}
+.dlg .ru{color:#777;font-size:13px;font-style:italic}
+.ord{background:#fff;border:2px solid var(--blue);border-radius:12px;padding:12px;margin-top:10px;text-align:center}
+.ord .fbtn{border-color:var(--blue)}
+.phrase{margin-top:10px;font-size:18px;font-weight:700;color:var(--red)}
+.q{margin:12px 0;padding:12px;border:2px solid #eee;border-radius:12px}
+.q p{font-weight:600;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:#fafafa;border:2px solid #eee;border-radius:10px;padding:8px 12px;margin:5px 0;cursor:pointer;font-size:15px}
+.opt.ok{background:#e6f7f0;border-color:var(--green);font-weight:700}
+.opt.bad{background:#fdeaea;border-color:var(--red)}
+#result{margin-top:10px;font-weight:700;text-align:center;font-size:18px}
+.memo{background:#fff3d6;border-radius:12px;padding:12px}
+.memo div{margin:6px 0}
+details{background:#fdf1f1;border-radius:12px;padding:12px;margin:10px 0;border:1px solid #f3c9c9}
+summary{font-weight:700;color:var(--red);cursor:pointer}
+.plan td,.plan th{border:1px solid #eee;padding:6px 8px;font-size:14px;text-align:left}
+.plan{width:100%;border-collapse:collapse;margin-top:8px}
+.map{background:#f2fbf9;border-radius:12px;padding:12px}
+.hw{background:#fdeaea;border-radius:12px;padding:12px;border-left:4px solid var(--red)}
+footer{text-align:center;color:#999;font-size:13px;padding:20px}
+@media(max-width:600px){h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header>
+<div class="badge">ENGLISH • 3 КЛАСС</div>
+<h1>🥪 My School Lunch</h1>
+<div class="sub">Мой школьный обед: слова, ланч-бокс и диалоги в столовой</div>
+</header>
+<div class="wrap">
+
+<section>
+<h2>Цели урока</h2>
+<ul class="goals">
+<li>Выучить слова по теме «Еда» 🍎</li>
+<li>Собрать свой ланч-бокс и рассказать о нём по-английски</li>
+<li>Составить и разыграть диалог в школьной столовой</li>
+</ul>
+</section>
+
+<section>
+<h2>Новые слова</h2>
+<p>Нажми на кнопку 🔊 — слово прозвучит вслух!</p>
+<div class="vocab" id="vocab"></div>
+</section>
+
+<section>
+<h2>Собери свой ланч-бокс</h2>
+<p>Кликай на продукты — они падают в ланч-бокс. Потом расскажи: <b>“I have got …”</b></p>
+<div class="foods" id="foods"></div>
+<div class="box" id="box">🥡 Ланч-бокс пока пуст…</div>
+<div class="sentence" id="sentence"></div>
+</section>
+
+<section>
+<h2>Диалог в школьной столовой</h2>
+<div class="dlg">
+<p>👩‍🏫 Teacher (учитель): <b>Good afternoon! Are you hungry?</b></p>
+<p class="ru">Добрый день! Ты голоден?</p>
+<p>🧒 Pupil (ученик): <b>Yes, I am! Can I have a sandwich, please?</b></p>
+<p class="ru">Да! Можно мне сэндвич, пожалуйста?</p>
+<p>👩‍🏫 Teacher: <b>Here you are. And what would you like to drink?</b></p>
+<p class="ru">Вот, возьми. А что ты хочешь выпить?</p>
+<p>🧒 Pupil: <b>I would like some juice, please. Thank you!</b></p>
+<p class="ru">Я бы хотел сок, спасибо!</p>
+</div>
+<div class="dlg">
+<p>🧒🧒 Anna: <b>What have you got in your lunch box?</b></p>
+<p class="ru">Что у тебя в ланч-боксе?</p>
+<p>🧒🧒 Max: <b>I have got an apple, a banana and a biscuit. And you?</b></p>
+<p class="ru">У меня яблоко, банан и печенье. А у тебя?</p>
+<p>🧒🧒 Anna: <b>I have got a sandwich and some water.</b></p>
+<p class="ru">У меня сэндвич и вода.</p>
+</div>
+<p style="margin-top:8px">💡 <b>Разыграйте диалог по ролям с соседом по парте!</b></p>
+</section>
+
+<section>
+<h2>Игра «Закажи по-английски»</h2>
+<div class="ord">
+<p>Выбери еду — программа соберёт вежливую фразу!</p>
+<div class="foods" id="order"></div>
+<div class="phrase" id="orderPhrase">Can I have … , please?</div>
+</div>
+</section>
+
+<section>
+<h2>Проверь себя: тест</h2>
+<div id="test"></div>
+<div id="result"></div>
+</section>
+
+<section>
+<h2>Запомни главное</h2>
+<div class="memo">
+<div>❓ <b>Как сказать «у меня есть»?</b> — I have got …</div>
+<div>❓ <b>Как попросить еду вежливо?</b> — Can I have …, please?</div>
+<div>❓ <b>Как спросить друга?</b> — What have you got?</div>
+<div>❓ <b>Слова-звёзды урока:</b> sandwich, apple, juice, cheese, bread, water, biscuit, banana</div>
+</div>
+</section>
+
+<section>
+<h2>Конспект для учителя</h2>
+<table class="plan">
+<tr><th>Этап</th><th>Время</th><th>Содержание</th></tr>
+<tr><td>Разминка</td><td>3 мин</td><td>Приветствие, вопрос «What do you like to eat?»</td></tr>
+<tr><td>Новая лексика</td><td>8 мин</td><td>8 слов-карточек, произношение, повтор хором</td></tr>
+<tr><td>Практика</td><td>10 мин</td><td>«Собери ланч-бокс», фраза I have got…</td></tr>
+<tr><td>Диалоги</td><td>12 мин</td><td>Разыгрывание сценок в столовой по ролям</td></tr>
+<tr><td>Игра и тест</td><td>7 мин</td><td>«Закажи по-английски», тест на 5 вопросов</td></tr>
+<tr><td>Итог</td><td>5 мин</td><td>Запомни главное, домашнее задание</td></tr>
+</table>
+<p style="margin-top:8px"><b>Критерии:</b> знает 8 слов — «5»; знает 6–7 — «4»; 4–5 — «3». Диалог: оцениваем смелость, а не только грамматику 😊</p>
+</section>
+
+<section>
+<h2>Опорная карта ученика</h2>
+<div class="map">
+<b>Формула урока:</b> слова → ланч-бокс → диалог → заказ<br>
+<b>8 слов:</b> sandwich • apple • juice • cheese • bread • water • biscuit • banana<br>
+<b>3 фразы:</b> I have got… • Can I have…, please • What have you got?
+</div>
+</section>
+
+<section class="hw">
+<h2>Домашнее задание</h2>
+<p>🎨 Нарисуй свой ланч-бокс и подпиши продукты по-английски. Выучи 8 слов урока. По желанию: разыграй диалог в столовой с родителями — они с удовольствием сыграют роль учителя 😄</p>
+</section>
+
+<footer>My School Lunch • English • 3 класс • Урок-игра</footer>
+</div>
+
+<script>
+const words=[["sandwich","сэндвич","🥪"],["apple","яблоко","🍎"],["juice","сок","🧃"],["cheese","сыр","🧀"],["bread","хлеб","🍞"],["water","вода","💧"],["biscuit","печенье","🍪"],["banana","банан","🍌"]];
+const vocab=document.getElementById('vocab');
+words.forEach((w,i)=>{
+ const d=document.createElement('div');d.className='vcard';
+ d.innerHTML=`<div style="font-size:30px">${w[2]}</div><b>${w[0]}</b><div class="ru">${w[1]}</div><button onclick="say(${i})">🔊 послушать</button>`;
+ vocab.appendChild(d);
+});
+function say(i){if(window.speechSynthesis){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(words[i][0]);u.lang='en-GB';speechSynthesis.speak(u);}}
+let mine=[];
+const foods=document.getElementById('foods');
+words.forEach((w,i)=>{
+ const b=document.createElement('button');b.className='fbtn';b.textContent=w[2];b.title=w[0];
+ b.onclick=()=>{mine.push(w);renderBox();say(i);};foods.appendChild(b);
+});
+function renderBox(){
+ const box=document.getElementById('box');box.innerHTML='';
+ if(!mine.length){box.textContent='🥡 Ланч-бокс пока пуст…';}
+ else{mine.forEach((w,i)=>{const s=document.createElement('span');s.className='inbox';s.textContent=w[2];s.title='убрать';s.onclick=()=>{mine.splice(i,1);renderBox();};box.appendChild(s);});}
+ const s=document.getElementById('sentence');
+ if(mine.length){
+  const names=mine.map(w=>w[0][0].match(/[aeiou]/i)?'an '+w[0]:'a '+w[0]);
+  s.textContent='“I have got '+(names.length>1?names.slice(0,-1).join(', ')+' and '+names[names.length-1]:names[0])+'.”';
+ } else s.textContent='';
+}
+const orderList=document.getElementById('order');let order=[];
+words.forEach((w)=>{
+ const b=document.createElement('button');b.className='fbtn';b.textContent=w[2];b.title=w[0];
+ b.onclick=()=>{if(order.length<3){order.push(w[0]);}updOrder();};orderList.appendChild(b);
+});
+function updOrder(){
+ const p=document.getElementById('orderPhrase');
+ p.textContent=order.length?'Can I have '+order.join(', ')+', please?':'Can I have … , please?';
+}
+const test=[
+ {q:'Перевод слова “sandwich”?',o:['сэндвич','сок','печенье'],a:0},
+ {q:'«У меня есть яблоко» — это…',o:['I have got an apple.','Can I have an apple?','What have you got?'],a:0},
+ {q:'Вежливая просьба о еде:',o:['Give me!','Can I have some juice, please?','I am juice.'],a:1},
+ {q:'Слово “bread” переводится как…',o:['хлеб','сыр','банан'],a:0},
+ {q:'Сколько слов-продуктов мы выучили?',o:['5','8','10'],a:1}
+];
+const tbox=document.getElementById('test');
+let score=0,answered=0;
+test.forEach((t,qi)=>{
+ const d=document.createElement('div');d.className='q';
+ d.innerHTML='<p>'+(qi+1)+'. '+t.q+'</p>';
+ t.o.forEach((o,oi)=>{
+  const b=document.createElement('button');b.className='opt';b.textContent=o;
+  b.onclick=()=>{if(d.dataset.done)return;d.dataset.done=1;
+   t.o.forEach((_,i2)=>{d.querySelectorAll('.opt')[i2].classList.add(i2===t.a?'ok':'');});
+   if(oi===t.a)score++;answered++;
+   if(answered===test.length){const r=document.getElementById('result');
+    r.textContent='Твой результат: '+score+' из 5'+(score===5?' — супер! 🏆':score>=3?' — хорошо! 👍':' — попробуй ещё раз 💪');};
+  };
+  d.appendChild(b);
+ });
+ tbox.appendChild(d);
+});
+</script>
+</body>
+</html>
