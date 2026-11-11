@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Спринтерский бег — физкультура 6 класс</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0e1a2b;color:#eaf2ff;line-height:1.55}
+.wrap{max-width:920px;margin:0 auto;padding:18px}
+.hero{background:linear-gradient(135deg,#c62828,#e53935 55%,#ff7043);border-radius:18px;padding:28px 24px;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.45)}
+.badge{display:inline-block;background:#fff;color:#c62828;font-weight:800;font-size:13px;letter-spacing:2px;padding:6px 16px;border-radius:30px;margin:4px}
+.badge.red{background:#ffd54f;color:#7a1f1f}
+h1{font-size:34px;margin:12px 0 6px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.35)}
+.sub{font-size:16px;color:#fff3e0}
+.card{background:#16283f;border-radius:14px;padding:20px 22px;margin:18px 0;border-left:5px solid #e53935}
+h2{font-size:22px;color:#ffab6b;margin-bottom:12px}
+h3{font-size:17px;color:#8fd3ff;margin:14px 0 8px}
+p,li{font-size:16px}
+ul,ol{margin:8px 0 8px 22px}
+li{margin:6px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}
+th{background:#e53935;color:#fff;padding:9px;text-align:left}
+td{border-bottom:1px solid #2c415e;padding:9px;vertical-align:top}
+.Emph{color:#ffd54f;font-weight:700}
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.stage{background:#1d3350;border-radius:12px;padding:14px;cursor:pointer;transition:.2s;border:2px solid transparent}
+.stage:hover{border-color:#ffab6b;transform:translateY(-3px)}
+.stage .n{font-size:26px}
+.stage b{display:block;color:#ffd54f;margin:6px 0}
+.stage .more{display:none;margin-top:8px;font-size:15px;color:#cfe3ff}
+.stage.open .more{display:block}
+.start-trainer{background:#1d3350;border-radius:12px;padding:16px;margin:12px 0}
+.start-trainer .cmd{font-size:24px;font-weight:800;color:#fff;text-align:center;min-height:36px;margin:10px 0}
+.start-trainer .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{background:#e53935;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:15px;font-weight:700;cursor:pointer;transition:.2s}
+.btn:hover{background:#ff5a44}
+.btn.ok{background:#2e7d32}.btn.no{background:#546e7a}
+.msg{text-align:center;font-weight:700;min-height:24px;color:#ffd54f}
+.quiz{margin:12px 0}
+.q{background:#1d3350;border-radius:12px;padding:14px;margin:10px 0}
+.q b{color:#8fd3ff}
+.opt{display:block;width:100%;text-align:left;background:#24405f;color:#eaf2ff;border:1px solid #35577d;border-radius:9px;padding:10px 12px;margin:7px 0;cursor:pointer;font-size:15px}
+.opt:hover{border-color:#ffab6b}
+.opt.right{background:#2e7d32;border-color:#66bb6a}
+.opt.wrong{background:#b34700;border-color:#ff7043}
+.check{display:flex;align-items:center;gap:10px;background:#1d3350;border-radius:10px;padding:11px 14px;margin:8px 0;cursor:pointer}
+.check input{width:19px;height:19px;accent-color:#e53935;cursor:pointer}
+.check.done{background:#1f4433;border-left:4px solid #66bb6a}
+.bar{height:12px;background:#24405f;border-radius:8px;overflow:hidden;margin:10px 0}
+.bar>div{height:100%;background:linear-gradient(90deg,#e53935,#ffb300);width:0;transition:.4s}
+.praise{display:none;background:#1f4433;border:2px solid #66bb6a;color:#c8f7d4;border-radius:12px;padding:12px;text-align:center;font-weight:700;margin:10px 0}
+.mem{background:linear-gradient(135deg,#4a148c,#7b1fa2);border-radius:14px;padding:20px 22px;margin:18px 0}
+.mem h2{color:#ffd54f}
+.memo-item{background:rgba(255,255,255,.08);border-radius:10px;padding:10px 14px;margin:8px 0}
+.teacher{background:#0b2239;border:2px dashed #4fc3f7;border-radius:14px;padding:18px 20px;margin:18px 0}
+.small{font-size:14px;color:#9fb8d8}
+.foot{text-align:center;color:#9fb8d8;font-size:13px;padding:20px 0 8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="hero">
+<span class="badge">ФИЗКУЛЬТУРА</span><span class="badge">6 КЛАСС</span><span class="badge red">УРОК: СПРИНТЕРСКИЙ БЕГ</span>
+<h1>🏃‍♂️ Спринтерский бег</h1>
+<div class="sub">Быстрее. Смелее. До финиша! Низкий старт, разгон, финишный рывок</div>
+</div>
+
+<div class="card">
+<h2>🎯 Цели урока</h2>
+<ul>
+<li>узнать, что такое <span class="Emph">спринт</span> и какие бывают спринтерские дистанции;</li>
+<li>освоить <span class="Emph">низкий старт</span> и команды «На старт!», «Внимание!», «Марш!»;</li>
+<li>научиться правильно стартовать, разгоняться и финишировать;</li>
+<li>знать правила безопасности при беге на короткие дистанции.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>⚡ Что такое спринт</h2>
+<p><span class="Emph">Спринт</span> — бег на короткие дистанции, где главное — развить максимальную скорость и удержать её до финиша. Классические спринтерские дистанции: <span class="Emph">60, 100, 200 и 400 метров</span>.</p>
+<p>Спортсмен бежит по <span class="Emph">отдельной дорожке</span> — пересекать чужую линию нельзя! Победитель определяется не красотой бега, а грудью, которая первой пересекает финишный створ.</p>
+<h3>Известные спринтеры</h3>
+<p>Усэйн Болт (Ямайка) — мировой рекорд на 100 м: <span class="Emph">9,58 секунды</span>. Валерий Брумель и современные российские бегуны — примеры того, как техника и труд делают спортсмена чемпионом.</p>
+</div>
+
+<div class="card">
+<h2>🦵 Техника бега: четыре этапа</h2>
+<p>Нажми на карточку — откроется описание.</p>
+<div class="stages">
+<div class="stage" onclick="this.classList.toggle('open')"><div class="n"> старт</div><b>1. Низкий старт</b>Команды «На старт!» и «Внимание!»<div class="more">Толчковая нога — впереди, маховая — на 1,5–2 ступни сзади. Руки упираются в землю на ширине плеч, плечи над линией старта. На «Внимание!» таз поднимается, вес переносится на руки и ногу — тело как пружина!</div></div>
+<div class="stage" onclick="this.classList.toggle('open')"><div class="n">🚀</div><b>2. Стартовый разгон</b>Первые 15–20 метров<div class="more">Начинаем с низкого наклона, шаги частые и мощные. Туловище постепенно выпрямляется, длина шагов растёт. Цель — набрать максимальную скорость как можно раньше.</div></div>
+<div class="stage" onclick="this.classList.toggle('open')"><div class="n">🔥</div><b>3. Бег по дистанции</b>Максимальная скорость<div class="more">Туловище слегка наклонено вперёд, руки работают как маятники вдоль тела. Нога ставится на носок, шаг упругий и свободный. Не зажимай плечи — дыши ровно!</div></div>
+<div class="stage" onclick="this.classList.toggle('open')"><div class="n">🏁</div><b>4. Финиш</b>Финишный рывок<div class="more">На последних метрах — резкий рывок грудью вперёд на линию финиша. После финиша <span class="Emph">не тормози резко</span>: пробеги по инерции ещё 10–15 метров, постепенно замедляясь.</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2>🚦 Тренажёр старта</h2>
+<p>Расставь команды низкого старта в правильном порядке!</p>
+<div class="start-trainer">
+<div class="cmd" id="stCmd">?</div>
+<div class="btns">
+<button class="btn" onclick="startStep(0)">На старт!</button>
+<button class="btn" onclick="startStep(1)">Внимание!</button>
+<button class="btn" onclick="startStep(2)">Марш!</button>
+</div>
+<div class="msg" id="stMsg"></div>
+</div>
+</div>
+
+<div class="card">
+<h2>⚠️ Безопасность на уроке</h2>
+<ul>
+<li>Бегаем <span class="Emph">строго по своей дорожке</span> — соседу дорогу не занимаем.</li>
+<li>После финиша <span class="Emph">не останавливаемся резко</span> и не поворачиваемся спиной к бегущим.</li>
+<li>Обувь — кроссовки со шнуровкой, шнурки завязаны!</li>
+<li>Перед бегом — разминка и спецбеговые упражнения, после — заминка.</li>
+<li>Если чувствуешь боль или головокружение — сразу сообщи учителю.</li>
+</ul>
+</div>
+
+<div class="card">
+<h2>❌ Типичные ошибки</h2>
+<table>
+<tr><th>Ошибка</th><th>Почему плохо</th></tr>
+<tr><td>Высокий старт вместо низкого</td><td>Потеря времени на старте, медленный разгон</td></tr>
+<tr><td>Голова поднята слишком рано</td><td>Тело выпрямляется раньше времени, скорость падает</td></tr>
+<tr><td>Зажатые плечи и кулаки</td><td>Лишнее напряжение «съедает» скорость</td></tr>
+<tr><td>Резкая остановка после финиша</td><td>Опасно для сердца и мышц!</td></tr>
+</table>
+</div>
+
+<div class="card">
+<h2>✅ Чек-лист: готов к уроку?</h2>
+<div class="bar"><div id="chkBar"></div></div>
+<label class="check"><input type="checkbox" onchange="chk()">Знаю, что такое спринт и его дистанции</label>
+<label class="check"><input type="checkbox" onchange="chk()">Могу показать положение «На старт!»</label>
+<label class="check"><input type="checkbox" onchange="chk()">Знаю команды старта по порядку</label>
+<label class="check"><input type="checkbox" onchange="chk()">Понимаю, как финишировать</label>
+<label class="check"><input type="checkbox" onchange="chk()">Помню правила безопасности</label>
+<label class="check"><input type="checkbox" onchange="chk()">Готов выполнять пробежки на скорость</label>
+<div class="praise" id="chkPraise">💪 Отлично! Ты готов к спринту — вперёд, к финишу!</div>
+</div>
+
+<div class="card">
+<h2>📝 Мини-тест: 5 вопросов</h2>
+<div class="quiz" id="quiz"></div>
+</div>
+
+<div class="mem">
+<h2>🧠 Запомни главное</h2>
+<div class="memo-item">🏃 Спринт — бег на короткие дистанции: 60, 100, 200, 400 метров.</div>
+<div class="memo-item">🚦 Низкий старт: «На старт!» → «Внимание!» → «Марш!»</div>
+<div class="memo-item">🚀 Первые 15–20 метров — стартовый разгон: частые шаги, низкий наклон.</div>
+<div class="memo-item">🏁 Финиш — рывок грудью, после линии пробегаем по инерции.</div>
+<div class="memo-item">⚠️ Бегаем только по своей дорожке и не тормозим резко.</div>
+</div>
+
+<div class="teacher">
+<h2>📋 Конспект для учителя</h2>
+<h3>Ход урока (40 минут)</h3>
+<ol>
+<li><span class="Emph">Построение, приветствие, задачи урока</span> — 3 мин.</li>
+<li><span class="Emph">Разминка в движении</span> (ходьба, лёгкий бег, ОРУ) — 8 мин.</li>
+<li><span class="Emph">Спецбеговые упражнения</span>: бег с высоким подниманием бедра, семенящий бег, захлёст голени, прыжки с ноги на ногу — 5 мин.</li>
+<li><span class="Emph">Изучение низкого старта</span>: показ, команды по очереди, пробежки по 10–15 м из положения старта — 8 мин.</li>
+<li><span class="Emph">Повторные пробежки 30 м с фиксацией времени</span> и стартовый разгон — 10 мин.</li>
+<li><span class="Emph">Эстафета или бег 60 м на результат</span> (по готовности класса) — 4 мин.</li>
+<li><span class="Emph">Заминка, построение, итоги</span> — 2 мин.</li>
+</ol>
+<h3>Контроль и оценка</h3>
+<ul>
+<li>Техника низкого старта: положение рук, ног, реакция на команды.</li>
+<li>Бег по дистанции: наклон туловища, работа рук, постановка стопы.</li>
+<li>Соблюдение безопасности: не пересекает дорожки, не тормозит резко после финиша.</li>
+</ul>
+<h3>Опорная карта ученика</h3>
+<p><span class="Emph">Спринт</span> = низкий старт → разгон (15–20 м) → максимальная скорость → финишный рывок грудью → пробегание по инерции.</p>
+</div>
+
+<div class="card">
+<h2>🏠 Домашнее задание</h2>
+<ul>
+<li>Повторить команды низкого старта — отработать их дома перед зеркалом (без бега!).</li>
+<li>Выполнить дома: приседания — 2×10, выпады — 2×8 на каждую ногу, прыжки на месте — 2×20.</li>
+<li>Утром — лёгкий бег или быстрая ходьба 10 минут (по самочуванию).</li>
+</ul>
+</div>
+
+<div class="foot">Интерактивный урок · Физкультура · 6 класс · Спринтерский бег</div>
+</div>
+<script>
+const stNames=['На старт!','Внимание!','Марш!'];
+const stHints=['Заняли место у линии, упёрлись руками в дорожку','Подняли таз, вес на руки и толчковую ногу','Рванули с места — частые мощные шаги!'];
+let stIdx=0;
+function startStep(i){
+ if(i===stIdx){
+  document.getElementById('stCmd').textContent=stNames[i];
+  document.getElementById('stMsg').textContent=stHints[i];
+  stIdx++;
+  if(stIdx>=3){document.getElementById('stMsg').textContent='🏁 Идеальный старт! Три команды — по порядку!';}
+ }else if(stIdx<3){
+  document.getElementById('stMsg').textContent='⏳ Не торопись! Сначала: '+stNames[stIdx];
+ }
+}
+const quiz=[
+ {q:'Какие дистанции относятся к спринтерским?',o:['1500, 3000, 5000 м','60, 100, 200, 400 м','马拉松 marathon','800 и 1500 м'],a:1},
+ {q:'В каком порядке звучат команды старта?',o:['«Марш!» → «На старт!» → «Внимание!»','«Внимание!» → «На старт!» → «Марш!»','«На старт!» → «Внимание!» → «Марш!»','Порядок не важен'],a:2},
+ {q:'Сколько метров длится стартовый разгон?',o:['2–3 метра','15–20 метров','Всю дистанцию','50 метров'],a:1},
+ {q:'Что делают после пересечения линии финиша?',o:['Останавливаются резко','Бегут назад','Пробегают по инерции 10–15 метров','Прыгают от радости'],a:2},
+ {q:'По какой дорожке бежит спринтер?',o:['По любой, как удобнее','Строго по своей','По внешней','По траве'],a:1}
+];
+let answered=0,score=0;
+function buildQuiz(){
+ const c=document.getElementById('quiz');
+ quiz.forEach((it,i)=>{
+  const d=document.createElement('div');d.className='q';
+  d.innerHTML='<b>Вопрос '+(i+1)+'.</b> '+it.q;
+  it.o.forEach((o,j)=>{
+   const b=document.createElement('button');b.className='opt';b.textContent=o;
+   b.onclick=()=>{
+    if(d.dataset.done)return;d.dataset.done=1;answered++;
+    if(j===it.a){b.classList.add('right');score++;}else{b.classList.add('wrong');d.children[j===it.a?j:j].classList.add('right');if(d.querySelectorAll('.opt')[it.a])d.querySelectorAll('.opt')[it.a].classList.add('right');}
+    if(answered===quiz.length){const r=document.createElement('div');r.className='praise';r.style.display='block';r.textContent='🏁 Тест пройден! Верных ответов: '+score+' из '+quiz.length+'. '+((score===5)?'Ты готов к старту! 💪':'Перечитай карточки и попробуй снова!');c.appendChild(r);}
+   };
+   d.appendChild(b);
+  });
+  c.appendChild(d);
+ });
+}
+buildQuiz();
+function chk(){
+ const boxes=document.querySelectorAll('.check');
+ let n=0;boxes.forEach(b=>{if(b.querySelector('input').checked){n++;b.classList.add('done');}else{b.classList.remove('done');}});
+ document.getElementById('chkBar').style.width=Math.round(n/boxes.length*100)+'%';
+ document.getElementById('chkPraise').style.display=(n===boxes.length)?'block':'none';
+}
+</script>
+</body>
+</html>
