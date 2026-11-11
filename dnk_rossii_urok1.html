@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ДНК России — Урок № 1. Что такое духовно-нравственная культура</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', Arial, sans-serif; background:#f4f1ea; color:#2b2b2b; line-height:1.55; }
+  .wrap { max-width:900px; margin:0 auto; padding:16px; }
+  header { background:linear-gradient(135deg,#7a1f2b,#4a1520); color:#fff; border-radius:0 0 20px 20px; padding:26px 20px 22px; text-align:center; }
+  .badges { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-bottom:12px; }
+  .badge { background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.4); border-radius:20px; padding:4px 14px; font-size:12px; letter-spacing:1px; text-transform:uppercase; }
+  .badge.red { background:#c33; border-color:#c33; font-weight:700; }
+  h1 { font-size:26px; margin-bottom:6px; }
+  .sub { opacity:.85; font-size:15px; }
+  .question-banner { background:#fff3cd; border:2px dashed #d4a017; border-radius:14px; padding:14px 18px; margin:20px 0 8px; text-align:center; font-weight:600; }
+  section { background:#fff; border-radius:16px; padding:22px 20px; margin-top:20px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+  h2 { color:#7a1f2b; font-size:20px; margin-bottom:12px; padding-bottom:8px; border-bottom:2px solid #f0e6d8; }
+  p { margin-bottom:10px; }
+  .accent { color:#7a1f2b; font-weight:700; }
+  /* ДНК метафора */
+  .dna-visual { display:flex; align-items:center; justify-content:center; gap:10px; background:#faf7f2; border-radius:12px; padding:18px 10px; margin:14px 0; flex-wrap:wrap; }
+  .dna-word { background:#7a1f2b; color:#fff; border-radius:8px; padding:8px 12px; font-weight:700; }
+  .dna-letter { font-size:34px; font-weight:800; color:#c9a227; }
+  .dna-eq { font-size:26px; font-weight:800; color:#555; }
+  /* Три понятия */
+  .concepts { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; margin:14px 0; }
+  .concept { border-radius:14px; padding:16px; color:#fff; }
+  .c1 { background:#4a6fa5; } .c2 { background:#7a1f2b; } .c3 { background:#b07d2b; }
+  .concept h3 { margin-bottom:6px; font-size:17px; }
+  .concept p { font-size:14px; opacity:.95; margin:0; }
+  /* Флип-карточки */
+  .flip-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; margin:16px 0; }
+  .flip { perspective:1000px; height:130px; cursor:pointer; }
+  .flip-inner { position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d; }
+  .flip.flipped .flip-inner { transform:rotateY(180deg); }
+  .flip-face { position:absolute; inset:0; backface-visibility:hidden; border-radius:12px; padding:12px; display:flex; flex-direction:column; justify-content:center; text-align:center; }
+  .flip-front { background:#fff; border:2px solid #c9a227; font-weight:700; color:#4a1520; font-size:15px; }
+  .flip-front span { display:block; font-size:11px; color:#999; font-weight:400; margin-top:6px; }
+  .flip-back { background:#4a1520; color:#fff; font-size:13px; transform:rotateY(180deg); }
+  /* Игра */
+  .game-box { background:#faf7f2; border-radius:14px; padding:18px; }
+  .game-q { font-size:17px; font-weight:700; margin-bottom:12px; text-align:center; }
+  .game-def { background:#fff; border:1px solid #e5dcc8; border-radius:10px; padding:10px 14px; margin-bottom:10px; cursor:pointer; transition:.2s; font-size:15px; }
+  .game-def:hover { transform:translateX(4px); border-color:#c9a227; }
+  .game-def.ok { background:#e6f4e6; border-color:#3a7d3a; font-weight:600; }
+  .game-def.err { background:#fdeaea; border-color:#c33; }
+  .game-score { text-align:center; font-weight:700; color:#7a1f2b; margin-top:10px; }
+  /* Тест */
+  .quiz-q { margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid #f0e6d8; }
+  .quiz-q:last-child { border-bottom:none; }
+  .opt { display:block; background:#faf7f2; border:2px solid #eee; border-radius:10px; padding:10px 14px; margin:6px 0; cursor:pointer; transition:.2s; font-size:15px; }
+  .opt:hover { border-color:#c9a227; }
+  .opt.correct { background:#e6f4e6; border-color:#3a7d3a; }
+  .opt.wrong { background:#fdeaea; border-color:#c33; }
+  .expl { display:none; background:#fff8e6; border-left:4px solid #c9a227; border-radius:0 8px 8px 0; padding:8px 12px; margin-top:8px; font-size:13.5px; }
+  /* Рефлексия */
+  .refl-box { background:#eef3f8; border-radius:12px; padding:14px 16px; margin:10px 0; border-left:4px solid #4a6fa5; }
+  .refl-box strong { color:#4a6fa5; }
+  footer { text-align:center; color:#8a7f6a; font-size:12px; padding:24px 0 30px; }
+  .btn { display:inline-block; background:#7a1f2b; color:#fff; border:none; border-radius:10px; padding:10px 22px; font-size:15px; cursor:pointer; margin-top:8px; }
+  .hint { font-size:13px; color:#888; text-align:center; margin-top:6px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="badges">
+    <span class="badge">ДНК России</span>
+    <span class="badge">5 класс</span>
+    <span class="badge red">Урок № 1</span>
+  </div>
+  <h1>Что такое духовно-нравственная культура</h1>
+  <div class="sub">Введение • Учебник «Духовно-нравственная культура России», 5 класс</div>
+</header>
+
+<div class="wrap">
+
+  <div class="question-banner">Главный вопрос урока: 🤔 почему ДНК — это не только молекула, но и ключ к культуре России?</div>
+
+  <section>
+    <h2>🧬 Одна аббревиатура — два смысла</h2>
+    <p>В твоём организме — миллионы клеток, и почти в каждой есть молекула <span class="accent">ДНК</span>: в ней записана наследственная информация, которую ты получил от родителей, а они — от своих предков. ДНК связывает тебя с бабушками, дедушками и далёкими поколениями.</p>
+    <p>А теперь посмотри на название предмета. Первые три слова складываются в то же сокращение:</p>
+    <div class="dna-visual">
+      <span class="dna-word">Духовно-нравственная</span><span class="dna-letter">+</span>
+      <span class="dna-word">культура</span><span class="dna-eq">=</span>
+      <span class="dna-letter">ДНК</span>
+      <span class="dna-word">России</span>
+    </div>
+    <p>Это не просто совпадение букв. <span class="accent">Молекула ДНК хранит и передаёт наследственную информацию. Духовно-нравственная культура тоже связывает поколения</span> — но передаётся иначе: через семейные истории, книги, искусство, религиозные традиции, историческую память и поступки людей.</p>
+    <p><strong>Важное отличие:</strong> гены достаются человеку от родителей сами собой. А чтобы приобщиться к духовному наследию, нужно потрудиться самому: узнать, осмыслить и научиться проявлять его в поступках.</p>
+  </section>
+
+  <section>
+    <h2>🗝 Три ключевых слова</h2>
+    <div class="concepts">
+      <div class="concept c1"><h3>Духовность</h3><p>Внутренний мир человека: мысли, чувства, убеждения, намерения. Она определяет причину поступка: человек делает добро от чистого сердца или ради похвалы.</p></div>
+      <div class="concept c2"><h3>Нравственность</h3><p>Представления человека о добре и зле, по которым он разделяет поступки на хорошие и плохие. Мысли скрыты, но дела видны: говорит ли он правду, держит ли слово.</p></div>
+      <div class="concept c3"><h3>Культура</h3><p>Материальные и духовные ценности, созданные человечеством за всю его историю: книги, картины, дома, церкви, крепости, традиции.</p></div>
+    </div>
+    <p>Слово «культура» изначально означало <em>возделывание земли</em> — так её делали пригодной для жизни. В латинском языке у слова были значения: возделывание, воспитание, образование, почитание.</p>
+    <div class="refl-box"><strong>💡 Вывод учебника:</strong> духовное рождается внутри человека, нравственное проявляется в отношениях с другими, а культура сохраняет то, что люди создали и посчитали достойным передачи детям и внукам.</div>
+  </section>
+
+  <section>
+    <h2>🎴 Карточки: переверни и проверь себя</h2>
+    <p style="font-size:14px;color:#666">Нажми на карточку, чтобы прочитать определение.</p>
+    <div class="flip-grid">
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front">Ценности<span>нажми →</span></div><div class="flip-face flip-back">То, что человек считает особенно важным, чем дорожит и чем руководствуется в жизни.</div></div></div>
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front">Традиционные ценности<span>нажми →</span></div><div class="flip-face flip-back">Представления о том, что особенно важно для граждан России и всего общества. Они сохраняются в обычаях, памяти, религии и искусстве и передаются из поколения в поколение.</div></div></div>
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front">Нравственность<span>нажми →</span></div><div class="flip-face flip-back">Представления о добре и зле, по которым человек отличает хорошие поступки от плохих.</div></div></div>
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front">Материальные ценности<span>нажми →</span></div><div class="flip-face flip-back">Орудия труда, предметы быта, дома, церкви, крепости — памятники культуры, которые можно увидеть и потрогать.</div></div></div>
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-face flip-front">Зерно добродетели<span>нажми →</span></div><div class="flip-face flip-back">Семейная история или поступок героя может стать «зерном»: оно прорастает, когда человек повторяет увиденное в собственном поступке. Смелость растёт, когда действуешь во благо, даже если страшно.</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>🎮 Игра «Подбери определение»</h2>
+    <div class="game-box" id="game">
+      <div class="game-q" id="gameTerm">Нажми «Начать игру»</div>
+      <div id="gameOpts"></div>
+      <div class="game-score" id="gameScore"></div>
+      <div style="text-align:center"><button class="btn" onclick="startGame()">Начать игру</button></div>
+      <div class="hint" id="gameHint">Соотнеси понятие с его определением</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>✅ Проверь себя: тест из 5 вопросов</h2>
+    <div id="quiz"></div>
+    <div class="game-score" id="quizResult"></div>
+  </section>
+
+  <section>
+    <h2>✍️ «Твоё мнение» — задания из учебника</h2>
+    <div class="refl-box"><strong>1.</strong> Какой поступок человека из твоей жизни, жизни твоей семьи или истории страны тебе хотелось бы не забыть?</div>
+    <div class="refl-box"><strong>2.</strong> Почему одни поступки люди помнят много лет, а другие быстро забывают?</div>
+    <div class="refl-box"><strong>3. Проектная мастерская.</strong> Выбери героя — Александр Невский, А. В. Суворов, Ю. А. Гагарин, Д. И. Менделеев или Сергий Радонежский. Составь схему: кем он был, чем прославился, почему его поступки важны, какие качества ему помогли. Обсудите в классе, что объединяет этих людей.</div>
+    <div class="refl-box"><strong>4. Жизненный компас.</strong> В течение недели наблюдай, как созидательный труд проявляется вокруг тебя: дома, в школе, во дворе. Какой пример запомнился больше всего?</div>
+  </section>
+
+  <section>
+    <h2>📋 Сделай выводы</h2>
+    <p>▪ Чем передача духовно-нравственной культуры отличается от передачи наследственных признаков?</p>
+    <p>▪ Как связаны духовность, нравственность и культура?</p>
+    <p>▪ Через что человек приобщается к духовно-нравственной культуре? Приведи пример.</p>
+  </section>
+
+</div>
+<footer>Урок № 1 • Духовно-нравственная культура России • 5 класс<br>Составлено по учебнику (Минпросвещения России, 2027)</footer>
+
+<script>
+const defs = [
+ {t:"Ценности", d:"То, что человек считает особенно важным и чем руководствуется в жизни."},
+ {t:"Нравственность", d:"Представления о добре и зле, по которым поступки делятся на хорошие и плохие."},
+ {t:"Культура", d:"Материальные и духовные ценности, созданные человечеством за всю историю."},
+ {t:"Духовность", d:"Внутренний мир человека: мысли, чувства, убеждения, намерения."},
+ {t:"Традиционные ценности", d:"Представления о важном для граждан России, передаваемые из поколения в поколение."}
+];
+let order=[], step=0, score=0;
+function shuffle(a){return a.sort(()=>Math.random()-0.5);}
+function startGame(){
+  order=shuffle(defs.slice()); step=0; score=0;
+  document.getElementById('gameScore').textContent='';
+  showQ();
+}
+function showQ(){
+  const item=order[step];
+  document.getElementById('gameTerm').textContent='Что означает: «'+item.t+'»? ('+(step+1)+' из '+order.length+')';
+  const opts=shuffle(defs.map(d=>d.d));
+  const box=document.getElementById('gameOpts'); box.innerHTML='';
+  opts.forEach(o=>{
+    const el=document.createElement('div'); el.className='game-def'; el.textContent=o;
+    el.onclick=()=>{
+      if(o===item.d){el.classList.add('ok'); score++; step++;
+        setTimeout(()=>{ step<order.length?showQ():finish(); },600);}
+      else {el.classList.add('err'); setTimeout(()=>el.classList.remove('err'),600);}
+    };
+    box.appendChild(el);
+  });
+}
+function finish(){
+  document.getElementById('gameTerm').textContent='Игра завершена!';
+  document.getElementById('gameOpts').innerHTML='';
+  document.getElementById('gameScore').textContent='Результат: '+score+' из '+order.length+(score===order.length?' — отлично! 🏆':' — попробуй ещё раз!');
+}
+const quiz=[
+ {q:"Что делает молекулу ДНК похожей на духовно-нравственную культуру?", o:["Обе хранят информацию и передают её из поколения в поколение","Обе изучаются на уроках биологии","Обе созданы в XX веке"], c:0, e:"Культура, как и ДНК, связывает поколения — только через книги, традиции и поступки."},
+ {q:"Что такое ценности?", o:["Дорогие вещи человека","То, что человек считает особенно важным и чем руководствуется в жизни","Школьные отметки"], c:1, e:"Ценности — это то, чем человек дорожит и на что опирается в решениях."},
+ {q:"Как передаётся духовно-нравственная культура?", o:["Через гены","Сама собой, без усилий","Через семейные истории, книги, искусство и поступки"], c:2, e:"Чтобы приобщиться к наследию, нужно самому потрудиться: узнать, осмыслить, проявить в поступках."},
+ {q:"Что такое нравственность?", o:["Представления о добре и зле","Умение красиво писать","Знание истории страны"], c:0, e:"Слово связано с «нравом» — характером: это разделение поступков на хорошие и плохие."},
+ {q:"Почему слово «культура» изначально означало «возделывание земли»?", o:["Люди зарывали книги в землю","Человек «возделывает» и себя: воспитание, образование","Земля — главный предмет изучения"], c:1, e:"В латинском языке культура означала возделывание, воспитание, образование, почитание."}
+];
+let answered={};
+function renderQuiz(){
+  const box=document.getElementById('quiz'); box.innerHTML='';
+  quiz.forEach((item,i)=>{
+    const q=document.createElement('div'); q.className='quiz-q';
+    q.innerHTML='<strong>Вопрос '+(i+1)+'.</strong> '+item.q;
+    item.o.forEach((opt,j)=>{
+      const el=document.createElement('div'); el.className='opt'; el.textContent=opt;
+      el.onclick=()=>{
+        if(answered[i])return; answered[i]=true;
+        if(j===item.c){el.classList.add('correct');}
+        else {el.classList.add('wrong');
+          q.querySelectorAll('.opt')[item.c].classList.add('correct');}
+        const ex=document.createElement('div'); ex.className='expl'; ex.style.display='block'; ex.textContent='💡 '+item.e;
+        q.appendChild(ex);
+        checkAll();
+      };
+      q.appendChild(el);
+    });
+    box.appendChild(q);
+  });
+}
+function checkAll(){
+  if(Object.keys(answered).length===quiz.length){
+    const right=quiz.filter((it,i)=>document.getElementById('quiz').children[i].querySelectorAll('.opt.correct').length>0 && document.getElementById('quiz').children[i].querySelectorAll('.opt').length===0 ? true : countRight(i)).length;
+    document.getElementById('quizResult').textContent='Готово! Проверь свои ответы выше 👆';
+  }
+}
+function countRight(i){
+  const q=document.getElementById('quiz').children[i];
+  return q.querySelector('.opt.correct') && !q.querySelector('.opt.wrong');
+}
+renderQuiz();
+</script>
+</body>
+</html>
