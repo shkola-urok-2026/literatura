@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок: Европа на пороге Нового времени — 6 класс</title>
+<style>
+  :root{
+    --navy:#060d1f; --deep:#0a1630; --cyan:#3fd9ff; --blue:#6fa8ff;
+    --violet:#a78bff; --text:#eaf2ff; --dim:rgba(234,242,255,.65);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Segoe UI',Arial,sans-serif;
+    background:linear-gradient(160deg,#0e2050 0%,#060d1f 55%,#04070f 100%);
+    color:var(--text); min-height:100vh; padding-bottom:60px;
+  }
+  .dots{position:fixed;inset:0;pointer-events:none;opacity:.25;
+    background-image:radial-gradient(rgba(120,180,255,.5) 1px,transparent 1px);
+    background-size:42px 42px;}
+  .wrap{max-width:960px;margin:0 auto;padding:24px 18px;position:relative;z-index:2}
+
+  header{ text-align:center; padding:34px 10px 10px;}
+  .kicker{letter-spacing:.35em;color:var(--cyan);font-size:13px;text-transform:uppercase;
+    text-shadow:0 0 12px rgba(63,217,255,.7)}
+  h1{font-size:clamp(28px,5vw,44px);margin:12px 0 6px;
+    text-shadow:0 0 24px rgba(63,217,255,.55)}
+  h1 .neon{color:var(--cyan)}
+  .meta{color:var(--dim);font-size:14px;letter-spacing:.08em}
+
+  section{margin-top:34px;background:rgba(10,22,48,.55);border:1px solid rgba(111,168,255,.28);
+    border-radius:18px;padding:22px 22px 26px; backdrop-filter:blur(4px);
+    box-shadow:0 0 30px rgba(30,90,180,.25) inset}
+  section h2{font-size:20px;color:var(--blue);margin-bottom:6px;display:flex;gap:10px;align-items:center}
+  section h2 .num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;
+    border-radius:50%;border:1.5px solid var(--cyan);color:var(--cyan);font-size:15px;flex:0 0 auto;
+    text-shadow:0 0 8px rgba(63,217,255,.8)}
+  .hint{color:var(--dim);font-size:14px;margin-bottom:14px}
+  .tag{display:inline-block;font-size:12px;border:1px solid rgba(111,168,255,.4);border-radius:999px;
+    padding:2px 10px;margin:0 6px 10px 0;color:var(--dim)}
+
+  /* Верю-не верю */
+  .quiz-item{border:1px solid rgba(167,139,255,.45);border-radius:12px;padding:14px 16px;margin-bottom:12px}
+  .quiz-item p{margin-bottom:10px;line-height:1.5}
+  .btns button{font:inherit;cursor:pointer;border-radius:8px;padding:7px 16px;margin-right:10px;
+    background:transparent;color:var(--text);border:1.5px solid var(--dim);transition:.2s}
+  .btns button:hover{border-color:var(--cyan);color:var(--cyan)}
+  .verdict{display:inline-block;margin-top:8px;font-size:14px;min-height:20px}
+  .ok{color:#7dffb0}.no{color:#ff7d90}
+
+  /* Собери эпоху: drag&drop */
+  .match{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+  .chip{user-select:none;cursor:grab;border:1.5px solid var(--cyan);border-radius:10px;
+    padding:9px 14px;background:rgba(6,13,31,.7);font-size:14px;min-width:150px;text-align:center;
+    transition:.2s}
+  .chip.dragging{opacity:.4}
+  .slot{border:1.5px dashed var(--blue);border-radius:12px;padding:10px;min-height:56px;flex:1 1 260px}
+  .slot b{display:block;color:var(--violet);font-size:13px;margin-bottom:6px;letter-spacing:.05em}
+  .checkbtn{margin-top:6px}
+  .mres{margin-top:10px;font-size:15px;min-height:22px}
+
+  /* Сундук */
+  .chest{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+  .card{border:1.5px solid var(--violet);border-radius:12px;padding:14px;cursor:pointer;
+    background:rgba(6,13,31,.6);transition:.2s}
+  .card:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(63,217,255,.35)}
+  .card .face{font-size:15px;font-weight:600}
+  .card .back{display:none;margin-top:8px;font-size:13.5px;color:var(--dim);line-height:1.45}
+  .card.open .back{display:block}
+
+  /* Рефлексия */
+  textarea{width:100%;min-height:70px;background:rgba(6,13,31,.7);color:var(--text);
+    border:1.5px solid rgba(111,168,255,.4);border-radius:10px;padding:10px;font:inherit;resize:vertical}
+  .saved{color:var(--cyan);font-size:13px;margin-top:6px;min-height:18px}
+
+  footer{margin-top:40px;text-align:center;color:var(--dim);font-size:14px;letter-spacing:.04em}
+  footer .motto{color:rgba(234,242,255,.75);text-shadow:0 2px 6px rgba(0,0,0,.6)}
+  .clock{position:fixed;right:16px;bottom:14px;font-family:'Consolas',monospace;color:var(--cyan);
+    font-size:13px;text-shadow:0 0 10px rgba(63,217,255,.8);z-index:5}
+</style>
+</head>
+<body>
+<div class="dots"></div>
+<div class="wrap">
+
+<header>
+  <div class="kicker">Интерактивный урок • История</div>
+  <h1><span class="neon">ЕВРОПА</span> НА ПОРОГЕ НОВОГО ВРЕМЕНИ</h1>
+  <div class="meta">6 класс • Великие открытия, печать и Возрождение</div>
+</header>
+
+<section>
+  <h2><span class="num">1</span>Разминка: что такое Новое время?</h2>
+  <p class="hint">Прочитайте вслух, дайте классу выслушать 3–4 версии и только потом нажмите кнопку.</p>
+  <p style="line-height:1.6">«Раньше рыцари ездили верхом и верили, что Земля плоская. А потом моряки поплыли через океан, а художники рисовали людей как живых. Что изменилось?»</p>
+  <button class="checkbtn btns" style="margin-top:12px;border-color:var(--cyan);color:var(--cyan);background:transparent;border-radius:8px;padding:8px 18px;cursor:pointer;font:inherit" onclick="this.nextElementSibling.style.display='inline'">Показать ключевую мысль</button>
+  <span class="verdict ok" style="display:none">Новое время — переход от «веры без вопросов» к «вопросам и поискам»: люди стали исследовать мир, а не принимать его как данность.</span>
+</section>
+
+<section>
+  <h2><span class="num">2</span>Верю — не верю</h2>
+  <p class="hint">Нажмите «Верю» или «Не верю» — ответ появится сразу.</p>
+
+  <div class="quiz-item">
+    <p>В 1492 году Колумб достиг берегов Америки, думая, что приплыл в Индию.</p>
+    <div class="btns"><button onclick="vd(this,true)">Верю</button><button onclick="vd(this,false)">Не верю</button></div>
+    <span class="verdict" data-yes="Верно! Колумб был уверен, что открыл западный путь в Индию." data-no="Ошибка: именно так и было!"></span>
+  </div>
+
+  <div class="quiz-item">
+    <p>Моряков в шторм спасали специально обученные синицы — они предупреждали о буре.</p>
+    <div class="btns"><button onclick="vd(this,true)">Верю</button><button onclick="vd(this,false)">Не верю</button></div>
+    <span class="verdict" data-yes="Увы, нет — это ловушка!" data-no="Верно, это выдумка! Спасали карты, компас и опыт моряков."></span>
+  </div>
+
+  <div class="quiz-item">
+    <p>Первая печатная книга Гутенберга вышла около 1455 года — раньше книги переписывали вручную годами.</p>
+    <div class="btns"><button onclick="vd(this,true)">Верю</button><button onclick="vd(this,false)">Не верю</button></div>
+    <span class="verdict" data-yes="Верно! Печатный станок изменил всё." data-no="Ошибка: это правда!"></span>
+  </div>
+
+  <div class="quiz-item">
+    <p>Команда Магеллана впервые совершила кругосветное плавание в 1519–1522 годах.</p>
+    <div class="btns"><button onclick="vd(this,true)">Верю</button><button onclick="vd(this,false)">Не верю</button></div>
+    <span class="verdict" data-yes="Верно! Сам Магеллан погиб на Филиппинах, но команда завершила путь." data-no="Ошибка: это правда!"></span>
+  </div>
+
+  <div class="quiz-item">
+    <p>В эпоху Возрождения художникам разрешалось рисовать только религиозные сюжеты.</p>
+    <div class="btns"><button onclick="vd(this,true)">Верю</button><button onclick="vd(this,false)">Не верю</button></div>
+    <span class="verdict" data-yes="Неверно!" data-no="Верно! Художники изображали людей и природу как живых — потому эпоха и называется Возрождением."></span>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">3</span>Собери эпоху</h2>
+  <p class="hint">Перетащите мышкой события в подходящие даты (на планшете — просто нажмите карточку, затем слот).</p>
+  <div class="match" id="pool"></div>
+  <div class="match">
+    <div class="slot" data-key="1453"><b>1453</b></div>
+    <div class="slot" data-key="1455"><b>1455</b></div>
+    <div class="slot" data-key="1492"><b>1492</b></div>
+    <div class="slot" data-key="1519-1522"><b>1519–1522</b></div>
+  </div>
+  <button class="btns checkbtn" style="border-color:var(--cyan);color:var(--cyan);background:transparent;border-radius:8px;padding:8px 18px;cursor:pointer;font:inherit" onclick="checkMatch()">Проверить</button>
+  <button class="btns" style="border-color:var(--dim);color:var(--dim);background:transparent;border-radius:8px;padding:8px 18px;cursor:pointer;font:inherit" onclick="resetMatch()">Сбросить</button>
+  <div class="mres" id="mres"></div>
+</section>
+
+<section>
+  <h2><span class="num">4</span>Сундук открытий</h2>
+  <p class="hint">Каждая команда берёт «сокровище»: нажмите на карточку — она откроется. Задача: за 30 секунд объяснить классу, что это и почему это сокровище эпохи.</p>
+  <div class="chest">
+    <div class="card" onclick="this.classList.toggle('open')"><div class="face">🧭 Компас</div><div class="back">Прибор, указывающий на север. Без него плавание через океан было бы слепым блужданием.</div></div>
+    <div class="card" onclick="this.classList.toggle('open')"><div class="face">⛵ Каравелла</div><div class="back">Лёгкий корабль с парусами, способный идти против ветра. На таких плавали Колумб и Магеллан.</div></div>
+    <div class="card" onclick="this.classList.toggle('open')"><div class="face">🖨 Печатный станок</div><div class="back">Изобретение Гутенберга. Книга перестала быть роскошью — знания стали доступны многим.</div></div>
+    <div class="card" onclick="this.classList.toggle('open')"><div class="face">🗺 Карта мира</div><div class="back">С каждым плаванием карта становилась точнее. Мир перестал быть «плоским диском с краем».</div></div>
+    <div class="card" onclick="this.classList.toggle('open')"><div class="face">💡 Гуманизм</div><div class="back">Идея Возрождения: человек — главная ценность, его разум и творчество стоят в центре мира.</div></div>
+    <div class="card" onclick="this.classList.toggle('open')"><div class="face">🚩 Флаг португальцев</div><div class="back">Португалия первой начала систематические плавания вдоль Африки, прокладывая путь в Индию.</div></div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="num">5</span>Парус и якорь</h2>
+  <p class="hint">Рефлексия. Напишите, что сегодня «надуло паруса» (что узнали) и что «держит якорь» (что осталось непонятным). Текст сохраняется в браузере.</p>
+  <p style="color:var(--cyan);margin-bottom:6px">⛵ Парус:</p>
+  <textarea id="sail" oninput="save()"></textarea>
+  <p style="color:var(--violet);margin:12px 0 6px">⚓ Якорь:</p>
+  <textarea id="anchor" oninput="save()"></textarea>
+  <div class="saved" id="saved"></div>
+</section>
+
+<footer>
+  <div class="motto">Знания сегодня — большие возможности завтра!</div>
+  <div style="margin-top:8px;font-size:12.5px">Урок для 6 класса • 12 ноября 2026 • можно проецировать на экран</div>
+</footer>
+
+</div>
+<div class="clock" id="clock"></div>
+
+<script>
+function vd(btn, saysTrue){
+  const item = btn.closest('.quiz-item');
+  const truth = item.dataset.truth;
+  const out = item.querySelector('.verdict');
+  const correct = (saysTrue === (truth === 't'));
+  out.textContent = correct ? out.dataset.yes : out.dataset.no;
+  out.className = 'verdict ' + (correct ? 'ok' : 'no');
+}
+// проставим правду: 1 t, 2 f, 3 t, 4 t, 5 f
+document.querySelectorAll('.quiz-item').forEach((el,i)=>{
+  el.dataset.truth = ['t','f','t','t','f'][i];
+});
+
+const EVENTS = {
+  '1453':'Падение Константинополя — перекрыты торговые пути на Восток',
+  '1455':'Первая печатная книга Гутенберга',
+  '1492':'Плавание Колумба через Атлантику',
+  '1519-1522':'Кругосветное путешествие Магеллана'
+};
+function resetMatch(){
+  const pool=document.getElementById('pool');
+  pool.innerHTML='';
+  Object.entries(EVENTS).forEach(([k,v])=>{
+    const d=document.createElement('div');
+    d.className='chip'; d.draggable=true; d.dataset.key=k; d.textContent=v;
+    pool.appendChild(d);
+  });
+  document.querySelectorAll('.slot').forEach(s=>{
+    s.querySelectorAll('.chip').forEach(c=>c.remove());
+  });
+  document.getElementById('mres').textContent='';
+  initDnD();
+}
+function initDnD(){
+  document.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',c.dataset.key);c.classList.add('dragging');});
+    c.addEventListener('dragend',()=>c.classList.remove('dragging'));
+    c.addEventListener('click',()=>{ // тап-режим
+      const slot=document.querySelector('.slot:empty')||[...document.querySelectorAll('.slot')].find(s=>!s.querySelector('.chip[data-key="'+c.dataset.key+'"]'));
+      if(slot){slot.appendChild(c);}
+    });
+  });
+  document.querySelectorAll('.slot').forEach(s=>{
+    s.addEventListener('dragover',e=>e.preventDefault());
+    s.addEventListener('drop',e=>{
+      e.preventDefault();
+      const key=e.dataTransfer.getData('text/plain');
+      const chip=document.querySelector('.chip[data-key="'+key+'"]');
+      if(chip) s.appendChild(chip);
+    });
+  });
+}
+function checkMatch(){
+  let ok=0,total=0;
+  document.querySelectorAll('.slot').forEach(s=>{
+    const chip=s.querySelector('.chip'); if(!chip) return;
+    total++;
+    if(chip.dataset.key===s.dataset.key){ok++; chip.style.borderColor='#7dffb0';}
+    else{chip.style.borderColor='#ff7d90';}
+  });
+  const r=document.getElementById('mres');
+  r.textContent = ok===total && total===4 ? 'Отлично! Все 4 события на месте — эпоха собрана!' :
+    'Правильно: '+ok+' из '+total+'. Красные рамки — переставить и проверить снова.';
+  r.style.color = (ok===total && total===4) ? '#7dffb0' : '#ff9fb0';
+}
+function save(){
+  localStorage.setItem('sail',document.getElementById('sail').value);
+  localStorage.setItem('anchor',document.getElementById('anchor').value);
+  document.getElementById('saved').textContent='Сохранено локально ✓';
+}
+(function load(){
+  const s=localStorage.getItem('sail'),a=localStorage.getItem('anchor');
+  if(s!==null)document.getElementById('sail').value=s;
+  if(a!==null)document.getElementById('anchor').value=a;
+})();
+setInterval(()=>{
+  const d=new Date();
+  document.getElementById('clock').textContent=d.toLocaleTimeString('ru-RU');
+},1000);
+resetMatch();
+</script>
+</body>
+</html>
