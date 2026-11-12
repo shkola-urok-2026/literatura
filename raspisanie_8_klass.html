@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Расписание уроков — 8 класс</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', Arial, sans-serif; background:linear-gradient(135deg,#1a2a6c,#2a4d8f,#3a6bc9); min-height:100vh; padding:16px 10px 40px; }
+  .container { max-width:520px; margin:0 auto; }
+  header { text-align:center; color:#fff; margin-bottom:18px; }
+  header h1 { font-size:1.5em; text-shadow:0 2px 8px rgba(0,0,0,.4); }
+  header p { font-size:.9em; opacity:.85; margin-top:6px; }
+  .status { background:rgba(255,255,255,.15); backdrop-filter:blur(6px); border-radius:14px; padding:12px 16px; margin-bottom:16px; color:#fff; text-align:center; font-size:.95em; border:1px solid rgba(255,255,255,.25); }
+  .status b { color:#ffd97a; }
+  .progress-wrap { background:rgba(0,0,0,.25); border-radius:10px; height:14px; margin-top:10px; overflow:hidden; }
+  .progress-bar { height:100%; background:linear-gradient(90deg,#7bed9f,#ffd97a); width:0%; border-radius:10px; transition:width .6s; }
+  .tabs { display:flex; gap:6px; margin-bottom:14px; }
+  .tab { flex:1; text-align:center; padding:10px 2px; border-radius:12px; background:rgba(255,255,255,.12); color:#cfdcff; font-weight:600; cursor:pointer; border:2px solid transparent; transition:.25s; font-size:.95em; user-select:none; }
+  .tab:hover { background:rgba(255,255,255,.22); }
+  .tab.active { background:#fff; color:#1a2a6c; border-color:#ffd97a; box-shadow:0 4px 12px rgba(0,0,0,.3); }
+  .tab.today::after { content:' •'; color:#ffd97a; }
+  .card { display:none; animation:fade .35s; }
+  .card.show { display:block; }
+  @keyframes fade { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+  .lesson { background:#fff; border-radius:14px; padding:12px 14px; margin-bottom:9px; display:flex; align-items:center; gap:12px; box-shadow:0 3px 10px rgba(0,0,0,.18); border-left:5px solid #7fb2ff; transition:.25s; position:relative; }
+  .lesson.now { border-left-color:#2ecc71; background:#eafff1; transform:scale(1.02); box-shadow:0 4px 16px rgba(46,204,113,.4); }
+  .lesson .num { min-width:34px; height:34px; border-radius:50%; background:#e8f0ff; color:#1a2a6c; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .lesson.now .num { background:#2ecc71; color:#fff; }
+  .lesson .info { flex:1; }
+  .lesson .subj { font-weight:700; color:#1a2a6c; font-size:1.02em; }
+  .lesson .time { font-size:.85em; color:#5a6a8a; margin-top:2px; }
+  .badge-now { position:absolute; right:10px; top:10px; background:#2ecc71; color:#fff; font-size:.68em; padding:3px 8px; border-radius:20px; font-weight:700; animation:pulse 1.6s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.55;} }
+  .no-lessons { text-align:center; color:#fff; background:rgba(255,255,255,.12); border-radius:14px; padding:26px 16px; font-size:1.05em; }
+  footer { text-align:center; color:rgba(255,255,255,.7); font-size:.8em; margin-top:20px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>📅 Расписание уроков — 8 класс</h1>
+    <p>Жми на вкладку дня — уроки откроются мгновенно</p>
+  </header>
+
+  <div class="status" id="status">Загрузка...</div>
+  <div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="cards"></div>
+
+  <footer>Интерактивное расписание • всегда в закреплённом сообщении 📌</footer>
+</div>
+
+<script>
+var DAYS = ["воскресенье","понедельник","вторник","среда","четверг","пятница","суббота"];
+var TABS = [
+ {name:"ПН", full:"Понедельник", lessons:[
+   ["08:30","08:50","Разговоры о важном"],
+   ["09:00","09:20","Русский язык"],
+   ["09:30","09:50","Информатика"],
+   ["10:10","10:30","Алгебра"],
+   ["10:40","11:00","Иностранный язык (английский)"],
+   ["11:10","11:30","Биология"],
+   ["11:40","12:00","ОБЗ"],
+   ["12:10","12:30","Физическая культура"]]},
+ {name:"ВТ", full:"Вторник", lessons:[
+   ["08:30","08:50","Химия"],
+   ["09:00","09:20","Литература"],
+   ["09:30","09:50","Геометрия"],
+   ["10:10","10:30","История"],
+   ["10:40","11:00","Вероятность и статистика"],
+   ["11:10","11:30","География"]]},
+ {name:"СР", full:"Среда", lessons:[
+   ["08:30","08:50","Иностранный язык"],
+   ["09:00","09:20","Химия"],
+   ["09:30","09:50","Русский язык"],
+   ["10:10","10:30","Алгебра"],
+   ["10:40","11:00","История"],
+   ["11:10","11:30","Биология"],
+   ["11:40","12:00","Физическая культура"]]},
+ {name:"ЧТ", full:"Четверг", lessons:[
+   ["08:30","08:50","Россия — мои горизонты"],
+   ["09:00","09:20","Литература"],
+   ["09:30","09:50","История"],
+   ["10:10","10:30","Геометрия"],
+   ["10:40","11:00","Труд (технология)"],
+   ["11:10","11:30","Физика"],
+   ["11:40","12:00","Углублённый курс биологии"],
+   ["12:10","12:30","Классный час"]]},
+ {name:"ПТ", full:"Пятница", lessons:[
+   ["08:30","08:50","Русский язык"],
+   ["09:00","09:20","Иностранный язык (английский)"],
+   ["09:30","09:50","Физика"],
+   ["10:10","10:30","Алгебра"],
+   ["10:40","11:00","Музыка"],
+   ["11:10","11:30","География"],
+   ["11:40","12:00","Модуль «Шахматы для всех»"]]}
+];
+var now = new Date();
+var todayIdx = now.getDay(); // 1=ПН ... 5=ПТ
+var nowMin = now.getHours()*60 + now.getMinutes();
+var dayStart = 8*60+30, dayEnd = 12*60+30;
+
+function toMin(t){ var p=t.split(":"); return (+p[0])*60+(+p[1]); }
+
+function buildTabs(){
+  var tw = document.getElementById("tabs");
+  tw.innerHTML = "";
+  TABS.forEach(function(t,i){
+    var d = document.createElement("div");
+    d.className = "tab" + ((i+1)===todayIdx ? " today":"");
+    d.id = "tab"+i;
+    d.textContent = t.name;
+    d.onclick = function(){ showCard(i); };
+    tw.appendChild(d);
+  });
+}
+
+function buildCards(){
+  var cw = document.getElementById("cards");
+  cw.innerHTML = "";
+  TABS.forEach(function(t,i){
+    var card = document.createElement("div");
+    card.className = "card"; card.id = "card"+i;
+    var html = "";
+    if(t.lessons.length === 0){
+      html = '<div class="no-lessons">😴 Сегодня уроков нет — отдыхайте!</div>';
+    } else {
+      t.lessons.forEach(function(l,j){
+        var s=toMin(l[0]), e=toMin(l[1]);
+        var isNow = ((i+1)===todayIdx && nowMin>=s && nowMin<e);
+        html += '<div class="lesson'+(isNow?" now":"")+'">'
+             + '<div class="num">'+(j+1)+'</div>'
+             + '<div class="info"><div class="subj">'+l[2]+'</div><div class="time">'+l[0]+' – '+l[1]+'</div></div>'
+             + (isNow?'<div class="badge-now">СЕЙЧАС</div>':"")
+             + '</div>';
+      });
+    }
+    card.innerHTML = html;
+    cw.appendChild(card);
+  });
+}
+
+function showCard(i){
+  TABS.forEach(function(_,j){
+    document.getElementById("card"+j).classList.remove("show");
+    document.getElementById("tab"+j).classList.remove("active");
+  });
+  document.getElementById("card"+i).classList.add("show");
+  document.getElementById("tab"+i).classList.add("active");
+}
+
+function updateStatus(){
+  var st = document.getElementById("status");
+  var pb = document.getElementById("pbar");
+  var dayName = DAYS[todayIdx];
+  var dayOfWeek = (todayIdx>=1 && todayIdx<=5);
+  if(!dayOfWeek){
+    st.innerHTML = dayName + ": 🌴 <b>уроков нет</b> — выходной! До встречи в понедельник.";
+    pb.style.width = "100%";
+    return;
+  }
+  if(nowMin < dayStart){
+    st.innerHTML = dayName + " ⏰ Уроки начнутся в <b>8:30</b> — самое время собраться!";
+    pb.style.width = "0%";
+  } else if(nowMin >= dayEnd){
+    st.innerHTML = dayName + " 🎉 <b>Уроки закончились!</b> Отдыхайте, вы отлично поработали.";
+    pb.style.width = "100%";
+  } else {
+    var pct = Math.round((nowMin-dayStart)/(dayEnd-dayStart)*100);
+    var current = "";
+    TABS[todayIdx-1].lessons.forEach(function(l){
+      if(nowMin>=toMin(l[0]) && nowMin<toMin(l[1])) current = l[2];
+    });
+    st.innerHTML = dayName + ": идёт урок <b>"+current+"</b> • учебный день пройден на <b>"+pct+"%</b>";
+    pb.style.width = pct+"%";
+  }
+}
+
+buildTabs(); buildCards(); updateStatus();
+showCard((todayIdx>=1 && todayIdx<=5) ? todayIdx-1 : 0);
+</script>
+</body>
+</html>
