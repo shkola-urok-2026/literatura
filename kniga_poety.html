@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поэты пушкинской поры — интерактивная книга</title>
+<style>
+  :root{
+    --cyan:#4fd8ff; --purple:#b18cff; --gold:#ffd166; --orange:#ff9d4d;
+    --good:#2ecc71; --bad:#e74c3c;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; color:#eaf2ff;
+    font-family:'Segoe UI',Arial,sans-serif; line-height:1.6;
+    background:linear-gradient(160deg,#0a1230 0%,#14205a 55%,#1a2a6e 100%);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:840px; margin:0 auto; padding:18px 16px 40px}
+  header.bookhead{text-align:center; padding:18px 0 6px}
+  .eyebrow{letter-spacing:.22em; font-size:13px; color:#9fc6ff; text-transform:uppercase}
+  h1{
+    margin:8px 0 4px; font-size:34px; color:#ffffff;
+    text-shadow:0 0 16px rgba(79,216,255,.85), 0 0 40px rgba(79,216,255,.35);
+  }
+  .subtitle{color:#bcd2ff; font-size:16px}
+  .page{display:none}
+  .page.active{display:block; animation:fade .35s ease}
+  @keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  .panel{
+    background:rgba(20,40,110,.55); border:1px solid rgba(79,216,255,.35);
+    border-radius:16px; padding:16px 18px; margin:14px 0;
+  }
+  .c-cyan{border-color:rgba(79,216,255,.55)}
+  .c-purple{border-color:rgba(177,140,255,.55)}
+  .c-gold{border-color:rgba(255,209,102,.55)}
+  .c-orange{border-color:rgba(255,157,77,.7)}
+  h2{color:#fff; margin:6px 0 10px; font-size:24px;
+     text-shadow:0 0 12px rgba(177,140,255,.6)}
+  h3{color:#bfe0ff; margin:14px 0 6px; font-size:18px}
+  .tag{display:inline-block; padding:3px 12px; border-radius:999px; font-size:13px;
+       border:1px solid rgba(177,140,255,.6); color:#d9c9ff; margin-bottom:8px}
+  .poem{
+    font-style:italic; line-height:1.8; border-left:3px solid var(--purple);
+    padding:6px 0 6px 16px; margin:10px 0; color:#f4ecff;
+  }
+  ul.clean{margin:8px 0; padding-left:20px}
+  ul.clean li{margin:5px 0}
+  .btn{
+    background:linear-gradient(135deg,#2a6df4,#4fd8ff); border:none; border-radius:12px;
+    padding:11px 20px; color:#06122e; font-weight:700; cursor:pointer; font-size:16px;
+    box-shadow:0 4px 18px rgba(42,109,244,.45);
+  }
+  .btn:active{transform:scale(.98)}
+  .btn-ghost{
+    background:transparent; border:1px solid rgba(79,216,255,.55); color:#cfeaff;
+    box-shadow:none;
+  }
+  .reveal-box{
+    display:none; margin-top:12px; padding:12px 14px; border-radius:12px;
+    background:rgba(79,216,255,.10); border:1px dashed rgba(79,216,255,.5);
+  }
+  .reveal-box.open{display:block}
+  .hint{color:#9fb8e8; font-size:14px; margin:6px 0 0}
+  .pill-task{
+    background:rgba(255,255,255,.05); border:1px solid rgba(177,140,255,.45);
+    border-radius:14px; padding:12px 14px; margin:10px 0; cursor:pointer; user-select:none;
+  }
+  .pill-task b{color:#ffd166}
+  .pill-task .more{display:none; margin-top:8px; color:#d7e6ff}
+  .pill-task.open .more{display:block}
+  .pill-task .arrow{float:right; color:#4fd8ff}
+  .match{display:flex; align-items:center; gap:10px; margin:10px 0; flex-wrap:wrap}
+  .match .line{flex:1 1 220px}
+  .match select{
+    background:rgba(10,20,50,.8); color:#eaf2ff; border:1px solid rgba(79,216,255,.5);
+    border-radius:8px; padding:8px 10px; font-size:15px; outline:none;
+  }
+  .match select.good{border-color:var(--good); box-shadow:0 0 8px rgba(46,204,113,.5)}
+  .match select.bad{border-color:var(--bad); box-shadow:0 0 8px rgba(231,76,60,.5)}
+  textarea{
+    width:100%; min-height:110px; border-radius:12px; padding:12px; font-size:15px;
+    background:rgba(10,20,50,.7); color:#eaf2ff; border:1px solid rgba(177,140,255,.5);
+    resize:vertical; font-family:inherit;
+  }
+  .opt{
+    display:block; width:100%; text-align:left; margin:7px 0; padding:11px 14px;
+    border-radius:12px; border:1px solid rgba(255,255,255,.22);
+    background:rgba(255,255,255,.06); color:#eaf2ff; cursor:pointer; font-size:16px;
+  }
+  .opt:hover{background:rgba(255,255,255,.11)}
+  .opt.ok{background:rgba(46,204,113,.25); border-color:var(--good)}
+  .opt.bad{background:rgba(231,76,60,.25); border-color:var(--bad)}
+  .q{margin:16px 0}
+  .score{font-weight:700; color:#ffd166}
+  .navrow{display:flex; gap:10px; justify-content:space-between; margin:20px 0 8px}
+  .dots{display:flex; flex-wrap:wrap; gap:6px; justify-content:center; margin:14px 0 4px}
+  .dot{
+    padding:6px 11px; border-radius:999px; border:1px solid rgba(79,216,255,.4);
+    background:transparent; color:#cfe6ff; cursor:pointer; font-size:13px;
+  }
+  .dot.active{background:rgba(79,216,255,.25); color:#fff; border-color:#4fd8ff}
+  .center{text-align:center}
+  .quote{font-style:italic; color:#ffe3a6; text-align:center; font-size:18px}
+  .final{
+    background:linear-gradient(135deg,rgba(79,216,255,.18),rgba(177,140,255,.18));
+    border-radius:18px; padding:18px; text-align:center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="bookhead">
+  <div class="eyebrow">ЛИТЕРАТУРА • 10 КЛАСС • ИНТЕРАКТИВНАЯ КНИГА</div>
+  <h1>Поэты пушкинской поры</h1>
+  <div class="subtitle">Золотой век русской поэзии • 1810–1830-е годы</div>
+</header>
+
+<div class="dots" id="dots"></div>
+
+<!-- СТРАНИЦА 0. ОБЛОЖКА -->
+<section class="page active">
+  <div class="panel c-purple center" style="padding:30px 20px">
+    <div style="font-size:52px">✦</div>
+    <h2 style="font-size:28px">Добро пожаловать в книгу!</h2>
+    <p>Перед вами — маленькое литературное путешествие по «золотому веку» русской поэзии.
+    Внутри шесть глав: четыре поэта, задания с проверкой и финальная викторина.</p>
+    <p class="hint">Листайте кнопками внизу или выбирайте главу в меню выше.</p>
+    <p><button class="btn" onclick="show(1)">Открыть книгу &#8594;</button></p>
+  </div>
+</section>
+
+<!-- СТРАНИЦА 1. ЗОЛОТОЙ ВЕК -->
+<section class="page">
+  <h2>Глава I. Золотой век</h2>
+  <div class="panel c-cyan">
+    <p><b>Пушкинская эпоха</b> — период расцвета русской поэзии, когда творили не только
+    А. С. Пушкин, но и целая плеяда талантливых поэтов: Батюшков, Дельвиг, Языков,
+    Баратынский.</p>
+    <p>Нажмите на три «пилюли» — и узнаете приметы времени.</p>
+    <div class="pill-task" onclick="this.classList.toggle('open')">
+      <span class="arrow">&#9662;</span><b>Пилюля 1. Время</b>
+      <div class="more">1810–1830-е годы: время расцвета русской поэзии, формирования
+      национального литературного языка и появления новых поэтических жанров.</div>
+    </div>
+    <div class="pill-task" onclick="this.classList.toggle('open')">
+      <span class="arrow">&#9662;</span><b>Пилюля 2. Стили</b>
+      <div class="more">Эпоха соединила классицизм, сентиментализм и романтизм —
+      от «лёгкой поэзии» Батюшкова до «поэзии мысли» Баратынского.</div>
+    </div>
+    <div class="pill-task" onclick="this.classList.toggle('open')">
+      <span class="arrow">&#9662;</span><b>Пилюля 3. Кружки и салоны</b>
+      <div class="more">Патриотический подъём после войны 1812 года, влияние европейской
+      культуры, литературные кружки и салоны — поэзию обсуждали вслух и на людях.</div>
+    </div>
+  </div>
+</section>
+
+<!-- СТРАНИЦА 2. БАТЮШКОВ -->
+<section class="page">
+  <h2>Глава 1. Константин Батюшков</h2>
+  <div class="panel c-cyan">
+    <span class="tag">«Поэт радости и светлой грусти»</span>
+    <p><b>Темы:</b> любовь и красота, античные мотивы, размышления о жизни и смерти,
+    тема поэта и поэзии, патриотическая лирика.</p>
+    <p><b>Стиль:</b> музыкальность стиха, пластичность образов, «лёгкая поэзия»,
+    гармоничность и изящество формы.</p>
+    <p><b>Ключевые произведения:</b> «Мой гений», «Вакханка», «К Дашкову», «Тень друга».</p>
+  </div>
+  <div class="panel c-purple">
+    <h3>Задание по Батюшкову</h3>
+    <div class="poem">О память сердца! ты сильней<br>
+    Рассудка памяти печальной<br>
+    И часто сладостью своей<br>
+    Меня в стране пленяешь дальной.</div>
+    <p>Определите средства художественной выразительности и объясните их роль.</p>
+    <button class="btn" onclick="toggleBox('ans1')">Показать разбор</button>
+    <div class="reveal-box" id="ans1">
+      <b>Обращение</b> — «О память сердца!»; <b>эпитеты</b> — «печальной», «дальной»;
+      <b>метафора</b> — «память сердца».<br>
+      Эти средства создают эмоциональную напряжённость и подчёркивают превосходство
+      чувств над рассудком.
+    </div>
+  </div>
+</section>
+
+<!-- СТРАНИЦА 3. ДЕЛЬВИГ -->
+<section class="page">
+  <h2>Глава 2. Антон Дельвиг</h2>
+  <div class="panel c-gold">
+    <span class="tag">«Поэт золотой середины» (1798–1831)</span>
+    <p><b>Темы:</b> дружба и лицейское братство, идиллическая любовь, русский фольклор,
+    античность в русском преломлении.</p>
+    <p><b>Стиль:</b> простота и ясность, фольклорные жанры («русская песня»),
+    классическая уравновешенность, мелодичность.</p>
+    <p><b>Ключевые произведения:</b> «Соловей», «Русская песня» («Соловей мой, соловей»),
+    «Вдохновение».</p>
+  </div>
+  <div class="panel c-purple">
+    <h3>Задание: соотнесите начало и конец строк</h3>
+    <div class="match" data-answer="Б">
+      <span class="line">1. Наяву и в сладком сне…</span>
+      <select><option value="">— выберите —</option><option>А</option><option>Б</option><option>В</option></select>
+    </div>
+    <div class="match" data-answer="В">
+      <span class="line">2. Соловей мой, соловей…</span>
+      <select><option value="">— выберите —</option><option>А</option><option>Б</option><option>В</option></select>
+    </div>
+    <div class="match" data-answer="А">
+      <span class="line">3. Когда, душа, просилась ты…</span>
+      <select><option value="">— выберите —</option><option>А</option><option>Б</option><option>В</option></select>
+    </div>
+    <p class="hint">Концы строк: А — «…Погубить или любить!» &nbsp;Б — «…Всё мечтаетесь вы мне» &nbsp;В — «…Голосистый соловей!»</p>
+    <button class="btn" onclick="checkMatch()">Проверить</button>
+  </div>
+</section>
+
+<!-- СТРАНИЦА 4. ЯЗЫКОВ -->
+<section class="page">
+  <h2>Глава 3. Николай Языков</h2>
+  <div class="panel c-cyan">
+    <span class="tag">«Певец вольности и молодости» (1803–1846)</span>
+    <p><b>Темы:</b> студенческая вольность, молодость и свобода, патриотическая лирика,
+    природа родного края, историческое прошлое России.</p>
+    <p><b>Стиль:</b> энергичный, порывистый стих, обилие восклицаний, романтический пафос,
+    яркая образность.</p>
+    <p><b>Ключевые произведения:</b> «Пловец», «Элегия» («Свободы гордой вдохновенье»),
+    «Родина».</p>
+  </div>
+  <div class="panel c-purple">
+    <h3>Задание по Языкову</h3>
+    <div class="poem">Нелюдимо наше море,<br>
+    День и ночь шумит оно;<br>
+    В роковом его просторе<br>
+    Много бед погребено.</div>
+    <p>Напишите мини-анализ (3–4 предложения): каково символическое значение образа моря?</p>
+    <textarea id="myz" placeholder="Пишите здесь ваш анализ..."></textarea>
+    <button class="btn" onclick="toggleBox('ans3')">Сравнить с образцом</button>
+    <div class="reveal-box" id="ans3">
+      Море у Языкова — символ жизненного пути, полного испытаний и опасностей.
+      Эпитеты «нелюдимо», «роковом» создают образ враждебной стихии, а метафора
+      «много бед погребено» подчёркивает трагизм человеческой судьбы. Однако само
+      название «Пловец» говорит о готовности лирического героя противостоять стихии.
+    </div>
+  </div>
+</section>
+
+<!-- СТРАНИЦА 5. БАРАТЫНСКИЙ -->
+<section class="page">
+  <h2>Глава 4. Евгений Баратынский</h2>
+  <div class="panel c-gold">
+    <span class="tag">«Поэт мысли» (1800–1844)</span>
+    <p><b>Темы:</b> философская лирика, разочарование и скепсис, противоречие между
+    идеалом и действительностью, природа и человек, судьба поэта в обществе.</p>
+    <p><b>Стиль:</b> интеллектуальность, точность психологического анализа, сдержанность
+    и строгость формы, глубина философских обобщений.</p>
+    <p><b>Ключевые произведения:</b> «Разуверение», «Признание», «Последний поэт».</p>
+  </div>
+  <div class="panel c-purple">
+    <h3>Задание: сравните два отрывка</h3>
+    <div class="poem">Баратынский:<br>
+    «Не искушай меня без нужды<br>
+    Возвратом нежности твоей»</div>
+    <div class="poem">Пушкин:<br>
+    «Я вас любил: любовь ещё, быть может,<br>
+    В душе моей угасла не совсем»</div>
+    <p>В чём сходство и различие в раскрытии темы угасшей любви?</p>
+    <button class="btn" onclick="toggleBox('ans4')">Показать разбор</button>
+    <div class="reveal-box" id="ans4">
+      <b>Сходство:</b> оба поэта говорят о прошедшей любви, обращаются к бывшей
+      возлюбленной.<br>
+      <b>Различие:</b> у Баратынского — просьба не тревожить душу, защита от новых
+      страданий; у Пушкина — великодушное прощание и пожелание счастья.
+      Баратынский более скептичен и осторожен, Пушкин — благороден и открыт.
+    </div>
+  </div>
+</section>
+
+<!-- СТРАНИЦА 6. ВИКТОРИНА -->
+<section class="page">
+  <h2>Глава 5. Викторина «Узнай поэта»</h2>
+  <div class="panel c-cyan">
+    <p>По характеристике определите поэта. Нажимайте на вариант — верный подсветится
+    зелёным, неверный красным.</p>
+    <p class="score">Счёт: <span id="score">0 из 4</span></p>
+  </div>
+  <div class="panel c-purple q">
+    <p><b>1.</b> Его называли «поэтом радости и светлой грусти».</p>
+    <button class="opt" data-ok="1">Батюшков</button>
+    <button class="opt" data-ok="0">Дельвиг</button>
+    <button class="opt" data-ok="0">Языков</button>
+    <button class="opt" data-ok="0">Баратынский</button>
+  </div>
+  <div class="panel c-purple q">
+    <p><b>2.</b> Лицейский друг Пушкина, автор «Соловья» и «Русской песни».</p>
+    <button class="opt" data-ok="0">Батюшков</button>
+    <button class="opt" data-ok="1">Дельвиг</button>
+    <button class="opt" data-ok="0">Языков</button>
+    <button class="opt" data-ok="0">Баратынский</button>
+  </div>
+  <div class="panel c-purple q">
+    <p><b>3.</b> Воспевал студенческую вольность, писал стихи в Дерпте, автор «Пловца».</p>
+    <button class="opt" data-ok="0">Батюшков</button>
+    <button class="opt" data-ok="0">Дельвиг</button>
+    <button class="opt" data-ok="1">Языков</button>
+    <button class="opt" data-ok="0">Баратынский</button>
+  </div>
+  <div class="panel c-purple q">
+    <p><b>4.</b> Пушкин называл его «певцом пиров и грусти томной» — это «поэт мысли».</p>
+    <button class="opt" data-ok="0">Батюшков</button>
+    <button class="opt" data-ok="0">Дельвиг</button>
+    <button class="opt" data-ok="0">Языков</button>
+    <button class="opt" data-ok="1">Баратынский</button>
+  </div>
+</section>
+
+<!-- СТРАНИЦА 7. ИТОГИ -->
+<section class="page">
+  <h2>Глава VI. Итоги и домашнее задание</h2>
+  <div class="panel c-cyan">
+    <h3>Что мы узнали</h3>
+    <ul class="clean">
+      <li>Пушкинская эпоха — время расцвета русской поэзии и формирования национальной литературы.</li>
+      <li>Каждый поэт внёс уникальный вклад в развитие русской лирики.</li>
+      <li>Основные темы эпохи: любовь, дружба, свобода, философские размышления, народные мотивы.</li>
+      <li>Поэты пушкинской плеяды создали разнообразие стилей — от «лёгкой поэзии» Батюшкова до «поэзии мысли» Баратынского.</li>
+    </ul>
+  </div>
+  <div class="panel c-orange">
+    <h3 style="color:#ffd9a6">Домашнее задание</h3>
+    <p>Выберите одного из изученных поэтов и найдите его стихотворение, которое
+    откликнется именно в вашей душе. Это будет ваше личное открытие в мире
+    классической поэзии!</p>
+    <p class="hint">Работу высылаем в ЛС учителю до 13 ноября, 20:00.</p>
+  </div>
+  <div class="final">
+    <p class="quote">«Поэзия есть огонь, загорающийся в душе человека.<br>
+    Огонь этот жжёт, греет и освещает»</p>
+    <p class="hint">— Л. Н. Толстой</p>
+    <button class="btn btn-ghost" onclick="show(0)">Вернуться к обложке</button>
+  </div>
+</section>
+
+<div class="navrow">
+  <button class="btn btn-ghost" id="prevBtn">&#8592; Назад</button>
+  <button class="btn" id="nextBtn">Далее &#8594;</button>
+</div>
+<div class="center hint" id="pageinfo"></div>
+
+</div>
+
+<script>
+var score = 0;
+var cur = 0;
+
+function show(n){
+  var ps = document.querySelectorAll('.page');
+  if(n < 0) n = 0;
+  if(n > ps.length - 1) n = ps.length - 1;
+  for(var i = 0; i < ps.length; i++){
+    if(i === n){ ps[i].classList.add('active'); } else { ps[i].classList.remove('active'); }
+  }
+  var ds = document.querySelectorAll('.dot');
+  for(var j = 0; j < ds.length; j++){
+    if(j === n){ ds[j].classList.add('active'); } else { ds[j].classList.remove('active'); }
+  }
+  cur = n;
+  document.getElementById('pageinfo').textContent = 'Страница ' + (n + 1) + ' из ' + ps.length;
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleBox(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+function checkMatch(){
+  var ms = document.querySelectorAll('.match');
+  var allOk = true;
+  for(var i = 0; i < ms.length; i++){
+    var sel = ms[i].querySelector('select');
+    var ok = (sel.value === ms[i].getAttribute('data-answer'));
+    sel.classList.remove('good','bad');
+    if(ok){ sel.classList.add('good'); } else { sel.classList.add('bad'); allOk = false; }
+  }
+  var btn = document.getElementById('matchMsg');
+  btn.textContent = allOk ? 'Всё верно! 1-Б, 2-В, 3-А' : 'Есть ошибки — проверьте ещё раз';
+}
+
+function quizPick(btn){
+  var q = btn.parentElement;
+  var ok = (btn.getAttribute('data-ok') === '1');
+  var opts = q.querySelectorAll('.opt');
+  for(var i = 0; i < opts.length; i++){
+    if(opts[i].getAttribute('data-ok') === '1'){ opts[i].classList.add('ok'); }
+    else { opts[i].classList.remove('ok'); opts[i].classList.remove('bad'); }
+  }
+  if(ok){
+    if(!q.getAttribute('data-done')){
+      q.setAttribute('data-done','1');
+      score++;
+    }
+  } else {
+    btn.classList.add('bad');
+    q.removeAttribute('data-done');
+    score = Math.max(0, score - 1);
+  }
+  document.getElementById('score').textContent = score + ' из 4';
+}
+
+// сборка меню-точек
+(function(){
+  var labels = ['Обложка','Золотой век','Батюшков','Дельвиг','Языков','Баратынский','Викторина','Итоги'];
+  var box = document.getElementById('dots');
+  for(var i = 0; i < labels.length; i++){
+    var b = document.createElement('button');
+    b.className = 'dot' + (i === 0 ? ' active' : '');
+    b.textContent = labels[i];
+    (function(idx){ b.onclick = function(){ show(idx); }; })(i);
+    box.appendChild(b);
+  }
+})();
+
+// клики по вариантам викторины
+(function(){
+  var opts = document.querySelectorAll('.opt');
+  for(var i = 0; i < opts.length; i++){
+    (function(b){ b.onclick = function(){ quizPick(b); }; })(opts[i]);
+  }
+})();
+
+// стрелки навигации
+document.getElementById('prevBtn').onclick = function(){ show(cur - 1); };
+document.getElementById('nextBtn').onclick = function(){ show(cur + 1); };
+
+show(0);
+</script>
+</body>
+</html>
