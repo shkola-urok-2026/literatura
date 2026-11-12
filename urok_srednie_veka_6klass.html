@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Историческое и культурное наследие Средних веков — 6 класс</title>
+<style>
+  :root{
+    --parch:#f3e7d3; --parch2:#fdf6e8; --ink:#3b2f1e; --accent:#8b4f2a;
+    --green:#2e7d32; --red:#c62828; --gold:#c9a227;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia,'Times New Roman',serif; background:#e8dcc3;
+       color:var(--ink); min-height:100vh; padding:14px;}
+  .wrap{max-width:760px; margin:0 auto;}
+  .card{background:var(--parch2); border:2px solid var(--accent); border-radius:14px;
+        padding:20px 18px; box-shadow:0 4px 14px rgba(59,47,30,.25); margin-bottom:16px;}
+  h1{font-size:26px; text-align:center; color:var(--accent); margin-bottom:6px;}
+  h2{font-size:20px; color:var(--accent); margin-bottom:12px;}
+  .sub{text-align:center; font-style:italic; margin-bottom:14px;}
+  .bar{background:#d9c9a8; border-radius:8px; height:16px; overflow:hidden; margin:10px 0 16px;}
+  .bar > div{height:100%; background:linear-gradient(90deg,#b5651d,var(--gold)); width:0%;
+             transition:width .4s; border-radius:8px;}
+  .btn{display:inline-block; background:var(--accent); color:#fff; border:none; border-radius:10px;
+       padding:12px 22px; font-size:17px; font-family:inherit; cursor:pointer; margin-top:12px;}
+  .btn:active{transform:scale(.97);}
+  .btn.ghost{background:#efe3cb; color:var(--ink); border:1.5px solid var(--accent);}
+  .q{margin-bottom:16px; padding:12px; border:1.5px solid #cbb890; border-radius:10px; background:#fffdf5;}
+  .q p{margin-bottom:8px; font-weight:bold;}
+  .opt{display:block; width:100%; text-align:left; background:#f7efdd; border:1.5px solid #cbb890;
+       border-radius:8px; padding:9px 12px; margin:6px 0; font-family:inherit; font-size:15px; cursor:pointer;}
+  .opt.ok{background:#d9f2d9; border-color:var(--green); font-weight:bold;}
+  .opt.bad{background:#f8d7da; border-color:var(--red);}
+  .expl{display:none; margin-top:8px; padding:8px 10px; background:#fdf3dc; border-left:4px solid var(--gold);
+        border-radius:6px; font-size:14px;}
+  .pairrow{display:flex; gap:8px; margin-bottom:8px; flex-wrap:wrap;}
+  .pairbtn{flex:1 1 140px; padding:9px; border-radius:8px; border:1.5px solid #cbb890; background:#f7efdd;
+           font-family:inherit; font-size:14px; cursor:pointer;}
+  .pairbtn.selA{background:#f3e0b8; border-color:var(--gold); font-weight:bold;}
+  .pairbtn.done{background:#d9f2d9; border-color:var(--green); cursor:default;}
+  .pairbtn.err{background:#f8d7da; border-color:var(--red);}
+  .timeline .ev{display:block; width:100%; text-align:left; margin:6px 0; padding:9px 12px;
+       border:1.5px solid #cbb890; border-radius:8px; background:#f7efdd; font-family:inherit;
+       font-size:15px; cursor:pointer;}
+  .timeline .ev.used{background:#d9f2d9; border-color:var(--green); cursor:default;}
+  .timeline .ev.err{background:#f8d7da; border-color:var(--red);}
+  .cwrow{margin-bottom:10px;}
+  .cwrow input{width:70px; text-align:center; font-size:17px; letter-spacing:2px; padding:6px;
+       border:1.5px solid #cbb890; border-radius:8px; background:#fffdf5; font-family:inherit; text-transform:uppercase;}
+  .hint{font-size:14px; font-style:italic; margin-bottom:6px;}
+  .res{ text-align:center;}
+  .medal{font-size:56px;}
+  .stars{font-size:30px; color:var(--gold); letter-spacing:4px;}
+  table{width:100%; border-collapse:collapse; margin-top:12px; font-size:15px;}
+  th,td{border:1px solid #cbb890; padding:6px 8px; text-align:center;}
+  th{background:#f0e2c4;}
+  .stat{font-size:16px; margin-top:10px;}
+  .center{text-align:center;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div id="start" class="card center">
+  <h1>🏰 Историческое и культурное наследие Средних веков</h1>
+  <p class="sub">Урок повторения, обобщения и контроля • 6 класс</p>
+  <p style="text-align:left">Тебя ждут <b>пять станций</b>: карта терминов, «Верю — не верю»,
+  лента времени, кроссворд рыцаря и итоговый контроль. Пройди все — и получи оценку!</p>
+  <button class="btn" onclick="startLesson()">Начать путь ▶</button>
+</div>
+
+<div id="progress" class="card" style="display:none">
+  <div class="bar"><div id="pbar"></div></div>
+  <div class="center" id="ptext" style="font-size:14px; margin-top:-8px; margin-bottom:8px;"></div>
+
+  <!-- СТАНЦИЯ 1 -->
+  <div id="st1">
+    <h2>🗺 Станция 1. Карта терминов</h2>
+    <p class="sub">Нажми на термин, затем на его определение</p>
+    <div id="terms"></div>
+    <div class="center"><button class="btn" id="st1next" style="display:none" onclick="go(2)">Дальше ▶</button></div>
+  </div>
+
+  <!-- СТАНЦИЯ 2 -->
+  <div id="st2" style="display:none">
+    <h2>⚔️ Станция 2. Верю — не верю</h2>
+    <div id="tf"></div>
+    <div class="center"><button class="btn" id="st2next" style="display:none" onclick="go(3)">Дальше ▶</button></div>
+  </div>
+
+  <!-- СТАНЦИЯ 3 -->
+  <div id="st3" style="display:none">
+    <h2>📅 Станция 3. Лента времени</h2>
+    <p class="sub">Нажимай события в порядке от более раннего к более позднему</p>
+    <div class="timeline" id="tl"></div>
+    <div class="center"><button class="btn" id="st3next" style="display:none" onclick="go(4)">Дальше ▶</button></div>
+  </div>
+
+  <!-- СТАНЦИЯ 4 -->
+  <div id="st4" style="display:none">
+    <h2>🔤 Станция 4. Кроссворд рыцаря</h2>
+    <div class="cwrow"><div class="hint">1. Защитник в тяжёлых доспехах, служивший сеньору (6 букв)</div>
+      <input maxlength="6" id="w1"></div>
+    <div class="cwrow"><div class="hint">2. Стиль высоких готических соборов со стрельчатыми окнами (6 букв)</div>
+      <input maxlength="6" id="w2"></div>
+    <div class="cwrow"><div class="hint">3. Союз ремесленников одного города (3 буквы)</div>
+      <input maxlength="3" id="w3"></div>
+    <div class="cwrow"><div class="hint">4. Земельное владение, за которое несли службу сеньору (4 буквы)</div>
+      <input maxlength="4" id="w4"></div>
+    <div class="cwrow"><div class="hint">5. «Мать наук» — учебное заведение Средневековья (10 букв)</div>
+      <input maxlength="10" id="w5"></div>
+    <button class="btn" onclick="checkCross()">Проверить</button>
+    <p id="crossMsg" class="sub"></p>
+    <div class="center"><button class="btn" id="st4next" style="display:none" onclick="go(5)">Дальше ▶</button></div>
+  </div>
+
+  <!-- СТАНЦИЯ 5 -->
+  <div id="st5" style="display:none">
+    <h2>🏆 Станция 5. Итоговый контроль</h2>
+    <div id="test"></div>
+    <div class="center"><button class="btn" id="st5next" style="display:none" onclick="showResult()">Завершить урок</button></div>
+  </div>
+
+  <!-- РЕЗУЛЬТАТ -->
+  <div id="result" style="display:none">
+    <h2>🎉 Путь завершён!</h2>
+    <div class="res">
+      <div class="medal" id="medal"></div>
+      <div class="stars" id="stars"></div>
+      <div class="stat" id="totalScore"></div>
+      <div class="stat" id="grade"></div>
+      <table id="resTable"></table>
+      <p class="sub" style="margin-top:14px">📸 Пришли скриншот этого экрана учителю!</p>
+      <button class="btn ghost" onclick="location.reload()">Пройти ещё раз 🔁</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+const DATA = {
+  pairs: [
+    ["Феодализм","Строй, при котором власть и земля принадлежали феодалам, а крестьяне зависели от них"],
+    ["Барщина","Обязательный труд крестьянина на земле господина"],
+    ["Оброк","Платёж крестьянина господину продуктами или деньгами"],
+    ["Натуральное хозяйство","Всё необходимое производят для себя, а не на продажу"],
+    ["Обмирщение","Ослабление влияния церкви на жизнь и культуру"],
+    ["Индульгенция","Церковная «грамота о прощении грехов», продававшаяся за деньги"]
+  ],
+  tf: [
+    ["Крестьяне Средневековья платили сеньору оброк и отрабатывали барщину.", true, "Верно: это главные повинности зависимого крестьянина."],
+    ["Цехи объединяли купцов, торгующих в разных странах.", false, "Неверно: цехи объединяли ремесленников, а купцов — гильдии."],
+    ["Готические соборы отличались высокими стрельчатыми арками и витражами.", true, "Верно: готика — стиль соборов, устремлённых вверх."],
+    ["Первые университеты появились в Древнем Риме.", false, "Неверно: первые университеты (Болонья, Париж) появились в XII–XIII веках."],
+    ["В Средние века книги переписывали от руки монахи.", true, "Верно: до книгопечатания книги были трудом переписчиков."],
+    ["Романский стиль храмов украшали лёгкие ажурные башни.", false, "Неверно: романский стиль — массивный и суровый; лёгкость — черта готики."]
+  ],
+  timeline: [
+    ["1066 г. — Нормандское завоевание Англии", 0],
+    ["1096 г. — начало Первого крестового похода", 1],
+    ["1215 г. — Великая хартия вольностей в Англии", 2],
+    ["1265 г. — созыв первого английского парламента", 3],
+    ["1381 г. — восстание Уота Тайлера", 4],
+    ["1453 г. — падение Константинополя", 5]
+  ],
+  crossword: [
+    ["w1","РЫЦАРЬ"],
+    ["w2","ГОТИКА"],
+    ["w3","ЦЕХ"],
+    ["w4","ФЕОД"],
+    ["w5","УНИВЕРСИТЕТ"]
+  ],
+  test: [
+    ["Главные повинности зависимого крестьянина — это:",
+     ["Барщина и оброк","Военная служба и пошлины","Работа в цеху","Уплата десятины университету"],0,
+     "Именно барщина (труд на господина) и оброк (платёж) были основными повинностями."],
+    ["Кто жил в замке и владел землёй?",
+     ["Крестьянин","Феодал (сеньор)","Епископ всегда","Цеховой мастер"],1,
+     "Земля и власть принадлежали феодалам."],
+    ["Готика — это стиль:", 
+     ["Рыцарских поем","Городских соборов XII–XV вв.","Античных храмов","Деревенских изб"],1,
+     "Готика — стиль величественных соборов со стрельчатыми окнами и витражами."],
+    ["Первые университеты возникли в:",
+     ["XI–XII веках","Античности","XVII веке","VI веке"],0,
+     "Болонский университет возник в конце XI века, за ним — Париж, Оксфорд."],
+    ["Натуральное хозяйство — это когда:",
+     ["Всё производят для продажи","Всё производят для себя","Хозяин платит налоги деньгами","Работают на фабрике"],1,
+     "Продукты шли на собственное потребление, а не на рынок."],
+    ["Кто такой средневековый рыцарь?",
+     ["Крестьянин с наделом","Тяжеловооружённый всадник на службе сеньора","Торговец","Городской судья"],1,
+     "Рыцарь — воин-всадник, служивший сеньору за землю (фью/фьеф)."],
+    ["Цехи и гильдии защищали интересы:",
+     ["Короля и знать","Ремесленников и купцов города","Крестьян","Инквизиции"],1,
+     "Цех — союз ремесленников, гильдия — купцов."],
+    ["Падение Константинополя в 1453 году означало:",
+     ["Конец крестовым походам","Конец Византийской империи","Начало Реформации","Открытие Америки"],1,
+     "Город взяли османы — Византия пала. Это рубеж, который часто связывают с окончанием Средневековья."]
+  ]
+};
+
+let cur=1, score={s1:0,s2:0,s3:0,s4:0,s5:0}, max={s1:6,s2:6,s3:6,s4:5,s5:8};
+
+function startLesson(){ document.getElementById("start").style.display="none";
+  document.getElementById("progress").style.display="block"; renderSt1(); updBar(); }
+
+function updBar(){ const done = cur>=6 ? 5 : cur-1;
+  const pct = Math.round(done/5*100);
+  document.getElementById("pbar").style.width=pct+"%";
+  document.getElementById("ptext").textContent = "Пройдено станций: "+done+" из 5"; }
+
+function go(n){ document.getElementById("st"+cur).style.display="none"; cur=n;
+  document.getElementById("st"+n).style.display="block"; updBar();
+  if(n===2) renderSt2(); if(n===3) renderSt3(); if(n===5) renderTest(); }
+
+/* СТАНЦИЯ 1 */
+let selTerm=null, found=new Set(), shuffledDefs;
+function renderSt1(){
+  shuffledDefs = DATA.pairs.map((p,i)=>[p[1],i]).sort(()=>Math.random()-0.5);
+  const terms = DATA.pairs.map((p,i)=>[p[0],i]).sort(()=>Math.random()-0.5);
+  let html='<div class="pairrow">';
+  terms.forEach(t=>{ html+='<button class="pairbtn term" id="term'+t[1]+'" onclick="pickTerm('+t[1]+')">'+t[0]+'</button>'; });
+  html+='</div><div class="pairrow">';
+  shuffledDefs.forEach(d=>{ html+='<button class="pairbtn def" id="def'+d[1]+'" onclick="pickDef('+d[1]+')">'+d[0]+'</button>'; });
+  html+='</div>';
+  document.getElementById("terms").innerHTML=html;
+}
+function pickTerm(i){ if(document.getElementById("term"+i).classList.contains("done"))return;
+  selTerm=i;
+  document.querySelectorAll(".term").forEach(b=>b.classList.remove("selA"));
+  document.getElementById("term"+i).classList.add("selA"); }
+function pickDef(i){ if(selTerm===null)return; const tEl=document.getElementById("term"+i), dEl=document.getElementById("def"+i);
+  if(i===selTerm){ tEl.classList.add("done"); dEl.classList.add("done"); found.add(i); score.s1++;
+    } else { tEl.classList.add("err"); dEl.classList.add("err"); setTimeout(()=>{tEl.classList.remove("err");dEl.classList.remove("err");},600); }
+  selTerm=null;
+  if(found.size===DATA.pairs.length){ document.getElementById("st1next").style.display="inline-block"; } }
+
+/* СТАНЦИЯ 2 */
+let tfDone=new Set();
+function renderSt2(){
+  let html='';
+  DATA.tf.forEach((t,i)=>{
+    html+='<div class="q"><p>'+t[0]+'</p>'+
+      '<button class="opt" id="t'+i+'y" onclick="tfAns('+i+',true)">✅ Верно</button>'+
+      '<button class="opt" id="t'+i+'n" onclick="tfAns('+i+',false)">❌ Неверно</button>'+
+      '<div class="expl" id="te'+i+'"></div></div>';
+  });
+  document.getElementById("tf").innerHTML=html;
+}
+function tfAns(i,ans){
+  if(tfDone.has(i))return; tfDone.add(i);
+  const ok = DATA.tf[i][1]===ans;
+  if(ok) score.s2++;
+  const yBtn=document.getElementById("t"+i+"y"), nBtn=document.getElementById("t"+i+"n");
+  if(DATA.tf[i][1]) yBtn.classList.add("ok"); else nBtn.classList.add("ok");
+  if(!ok) (ans?yBtn:nBtn).classList.add("bad");
+  const e=document.getElementById("te"+i); e.textContent=DATA.tf[i][2]; e.style.display="block";
+  if(tfDone.size===DATA.tf.length) document.getElementById("st2next").style.display="inline-block";
+}
+
+/* СТАНЦИЯ 3 */
+let tlCount=0;
+function renderSt3(){
+  const evs = DATA.timeline.map((e,i)=>[e[0],i]).sort(()=>Math.random()-0.5);
+  let html='';
+  evs.forEach(e=>{ html+='<button class="ev" id="ev'+e[1]+'" onclick="pickEv('+e[1]+')">'+e[0]+'</button>'; });
+  document.getElementById("tl").innerHTML=html;
+}
+function pickEv(i){
+  const el=document.getElementById("ev"+i);
+  if(el.classList.contains("used"))return;
+  if(i===tlCount){ el.classList.add("used"); score.s3++; tlCount++; }
+  else { el.classList.add("err"); setTimeout(()=>el.classList.remove("err"),500); }
+  if(tlCount===DATA.timeline.length) document.getElementById("st3next").style.display="inline-block";
+}
+
+/* СТАНЦИЯ 4 */
+function checkCross(){
+  let ok=0;
+  DATA.crossword.forEach(c=>{
+    const el=document.getElementById(c[0]);
+    if(el.value.trim().toUpperCase()===c[1]){ el.style.background="#d9f2d9"; el.style.borderColor="#2e7d32"; ok++; }
+    else { el.style.background="#f8d7da"; el.style.borderColor="#c62828"; }
+  });
+  score.s4=ok;
+  const msg=document.getElementById("crossMsg");
+  if(ok===5){ msg.textContent="Все слова разгаданы! 🎉"; document.getElementById("st4next").style.display="inline-block"; }
+  else msg.textContent="Правильно: "+ok+" из 5. Исправь слова с красной подсветкой и проверь снова.";
+}
+
+/* СТАНЦИЯ 5 */
+let testDone=new Set();
+function renderTest(){
+  let html='';
+  DATA.test.forEach((q,i)=>{
+    html+='<div class="q"><p>'+(i+1)+'. '+q[0]+'</p>';
+    q[1].forEach((o,j)=>{ html+='<button class="opt" id="q'+i+'o'+j+'" onclick="testAns('+i+','+j+')">'+o+'</button>'; });
+    html+='<div class="expl" id="qe'+i+'"></div></div>';
+  });
+  document.getElementById("test").innerHTML=html;
+}
+function testAns(i,j){
+  if(testDone.has(i))return; testDone.add(i);
+  const ok = DATA.test[i][2]===j; if(ok) score.s5++;
+  const right=document.getElementById("q"+i+"o"+DATA.test[i][2]);
+  right.classList.add("ok");
+  if(!ok) document.getElementById("q"+i+"o"+j).classList.add("bad");
+  const e=document.getElementById("qe"+i); e.textContent=DATA.test[i][3]; e.style.display="block";
+  if(testDone.size===DATA.test.length) document.getElementById("st5next").style.display="inline-block";
+}
+
+/* РЕЗУЛЬТАТ */
+function showResult(){
+  document.getElementById("st5").style.display="none";
+  updBar();
+  const total = score.s1+score.s2+score.s3+score.s4+score.s5;
+  const maxT = max.s1+max.s2+max.s3+max.s4+max.s5;
+  const pct = Math.round(total/maxT*100);
+  let stars, medal, grade;
+  if(pct>=90){ stars="⭐⭐⭐⭐⭐"; medal="🏆"; grade="Оценка: 5"; }
+  else if(pct>=75){ stars="⭐⭐⭐⭐"; medal="🥇"; grade="Оценка: 5"; }
+  else if(pct>=60){ stars="⭐⭐⭐"; medal="🥈"; grade="Оценка: 4"; }
+  else if(pct>=40){ stars="⭐⭐"; medal="🥉"; grade="Оценка: 3"; }
+  else { stars="⭐"; medal="💪"; grade="Оценка: 2 — пройди урок ещё раз и вернись к правилам"; }
+  document.getElementById("medal").textContent=medal;
+  document.getElementById("stars").textContent=stars;
+  document.getElementById("totalScore").textContent="Всего баллов: "+total+" из "+maxT+" ("+pct+"%)";
+  document.getElementById("grade").innerHTML="<b>"+grade+"</b>";
+  const names={"s1":"Карта терминов","s2":"Верю — не верю","s3":"Лента времени","s4":"Кроссворд","s5":"Итоговый контроль"};
+  let rows="<tr><th>Станция</th><th>Баллы</th></tr>";
+  for(let k of ["s1","s2","s3","s4","s5"]) rows+="<tr><td>"+names[k]+"</td><td>"+score[k]+" / "+max[k]+"</td></tr>";
+  document.getElementById("resTable").innerHTML=rows;
+  document.getElementById("result").style.display="block";
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
