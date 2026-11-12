@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сравнение и упорядочивание дробей — 6 класс</title>
+<style>
+:root{
+  --blue:#3b6fd4; --blue-dark:#2b57ab; --green:#2fa866; --green-dark:#1f7a49;
+  --orange:#f0a020; --red:#e05555; --purple:#8a5fc0;
+  --bg:#eef4fb; --card:#ffffff; --text:#22344d; --muted:#6b7f9c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Verdana,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:16px}
+.screen{display:none;animation:fadeIn .35s ease}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border-radius:16px;padding:22px;margin-bottom:16px;box-shadow:0 4px 14px rgba(30,60,120,.08)}
+h1{color:var(--blue-dark);font-size:1.5rem;text-align:center;margin-bottom:6px}
+h2{color:var(--blue-dark);font-size:1.2rem;margin-bottom:12px}
+.sub{text-align:center;color:var(--muted);margin-bottom:16px}
+.btn{display:inline-block;border:none;border-radius:12px;padding:12px 24px;font-size:1rem;font-weight:600;cursor:pointer;transition:.2s;color:#fff}
+.btn:hover{transform:translateY(-2px)}
+.btn-blue{background:var(--blue)}.btn-blue:hover{background:var(--blue-dark)}
+.btn-green{background:var(--green)}.btn-green:hover{background:var(--green-dark)}
+.btn-orange{background:var(--orange)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.center{text-align:center}
+.rule{border-left:5px solid var(--blue);background:#f4f8ff;border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.rule b{color:var(--blue-dark)}
+.rule .ex{margin-top:6px;background:#eaf1fd;border-radius:8px;padding:8px 10px;font-size:.98rem}
+.frac{display:inline-block;text-align:center;vertical-align:middle;margin:0 4px}
+.frac .num{display:block;border-bottom:2px solid var(--text);padding:0 6px}
+.frac .den{display:block;padding:0 6px}
+.progress{height:8px;background:#d8e4f2;border-radius:6px;margin-bottom:16px;overflow:hidden}
+.progress>div{height:100%;background:var(--green);width:0;transition:width .4s}
+.q{font-size:1.08rem;font-weight:600;margin-bottom:14px}
+.opt{display:block;width:100%;text-align:left;background:#f4f8ff;border:2px solid #d8e4f2;border-radius:12px;padding:12px 14px;margin-bottom:10px;font-size:1rem;cursor:pointer;transition:.2s;color:var(--text)}
+.opt:hover{border-color:var(--blue)}
+.opt.correct{background:#e6f7ee;border-color:var(--green);font-weight:600}
+.opt.wrong{background:#fdeaea;border-color:var(--red)}
+.fb{border-radius:10px;padding:12px 14px;margin:10px 0;display:none}
+.fb.ok{background:#e6f7ee;color:var(--green-dark);display:block}
+.fb.no{background:#fdeaea;color:#b23c3c;display:block}
+.order-slot{display:inline-flex;align-items:center;justify-content:center;min-width:56px;min-height:56px;border:2px dashed #b9c8dd;border-radius:10px;margin:4px;background:#fbfcfe}
+.order-slot.filled{border-style:solid;border-color:var(--purple);background:#f4eefc}
+.chip{display:inline-block;border:2px solid var(--blue);background:#eef4ff;color:var(--blue-dark);border-radius:10px;padding:10px 14px;margin:4px;font-size:1.05rem;font-weight:600;cursor:pointer}
+.chip:disabled{opacity:.35;cursor:not-allowed}
+.chip.pick{background:var(--purple);color:#fff;border-color:var(--purple)}
+.medal{font-size:3.2rem;text-align:center;margin-bottom:8px}
+.score{font-size:1.3rem;text-align:center;font-weight:700;color:var(--blue-dark);margin-bottom:10px}
+.steps{display:flex;gap:8px;justify-content:center;margin-bottom:18px;flex-wrap:wrap}
+.step{padding:6px 14px;border-radius:20px;background:#dde7f3;color:var(--muted);font-size:.85rem;font-weight:600}
+.step.done{background:var(--green);color:#fff}
+.step.cur{background:var(--blue);color:#fff}
+.badge{display:inline-block;padding:4px 12px;border-radius:14px;font-size:.82rem;font-weight:600;margin-left:8px}
+.b-th{background:#e6f7ee;color:var(--green-dark)}
+.b-ki{background:#fdeee0;color:#b06a10}
+.big-frac{font-size:1.4rem}
+@media(max-width:480px){.wrap{padding:10px}.card{padding:16px}h1{font-size:1.25rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ЭКРАН 0: ТИТУЛ -->
+<div class="screen active" id="s0">
+  <div class="card center">
+    <div style="font-size:3rem">📐</div>
+    <h1>Сравнение и упорядочивание дробей</h1>
+    <div class="sub">Математика • 6 класс • 13 ноября</div>
+    <p style="margin-bottom:16px;color:var(--muted)">Сегодня научимся сравнивать обыкновенные дроби и расставлять их по возрастанию и убыванию. Пройдём урок по шагам: правила → разминка → тренажёр → упорядочивание → итоговый тест.</p>
+    <div class="steps">
+      <span class="step">1. Цель</span><span class="step">2. Правила</span><span class="step">3. Разминка</span><span class="step">4. Тренажёр</span><span class="step">5. Порядок</span><span class="step">6. Тест</span>
+    </div>
+    <button class="btn btn-blue" onclick="show('s1')">Начать урок ▶</button>
+  </div>
+</div>
+
+<!-- ЭКРАН 1: ЦЕЛЬ -->
+<div class="screen" id="s1">
+  <div class="card">
+    <div class="progress"><div id="pb1"></div></div>
+    <h2>🎯 Цель урока</h2>
+    <p style="margin-bottom:12px">К концу урока вы будете уметь:</p>
+    <div class="rule">✅ сравнивать обыкновенные дроби <b>разными способами</b>;</div>
+    <div class="rule">✅ упорядочивать дроби <b>по возрастанию и по убыванию</b>;</div>
+    <div class="rule">✅ применять правила в <b>типовых и нестандартных</b> заданиях.</div>
+    <div class="center" style="margin-top:16px">
+      <button class="btn btn-blue" onclick="show('s2')">К правилам 📖</button>
+    </div>
+  </div>
+</div>
+
+<!-- ЭКРАН 2: ПРАВИЛА -->
+<div class="screen" id="s2">
+  <div class="card">
+    <div class="progress"><div style="width:20%"></div></div>
+    <h2>📖 Основные правила сравнения дробей</h2>
+
+    <div class="rule"><b>1. Одинаковые знаменатели.</b> Сравниваем числители: больше та дробь, у которой числитель больше.
+      <div class="ex"><span class="frac big-frac"><span class="num">3</span><span class="den">7</span></span> &lt; <span class="frac big-frac"><span class="num">5</span><span class="den">7</span></span> — знаменатели равны, сравниваем 3 и 5.</div>
+    </div>
+
+    <div class="rule"><b>2. Одинаковые числители.</b> Сравниваем знаменатели: больше та дробь, у которой знаменатель <b>меньше</b> — части крупнее.
+      <div class="ex"><span class="frac big-frac"><span class="num">2</span><span class="den">5</span></span> &gt; <span class="frac big-frac"><span class="num">2</span><span class="den">9</span></span> — числители равны, 5 меньше 9, значит части крупнее.</div>
+    </div>
+
+    <div class="rule"><b>3. Разные числители и знаменатели.</b> Два основных способа:
+      <div class="ex">🔹 <b>Приведение к общему знаменателю (НОЗ)</b>: приводим дроби к одному знаменателю и сравниваем числители.</div>
+      <div class="ex">🔹 <b>Перекрёстное умножение</b>: умножаем числитель первой дроби на знаменатель второй и наоборот — сравниваем результаты:
+        <span class="frac big-frac"><span class="num">a</span><span class="den">b</span></span> ⋛ <span class="frac big-frac"><span class="num">c</span><span class="den">d</span></span> ⟺ сравниваем a·d и c·b.</div>
+    </div>
+
+    <div class="rule"><b>4. Сравнение с единицей.</b>
+      <div class="ex">🔹 Правильная дробь (числитель &lt; знаменателя) всегда <b>меньше 1</b>.</div>
+      <div class="ex">🔹 Неправильная дробь (числитель ≥ знаменателя) всегда <b>больше или равна 1</b>.</div>
+    </div>
+
+    <div class="rule"><b>5. Правильная и неправильная дробь.</b> Неправильная дробь всегда больше правильной (если обе положительные).
+      <div class="ex"><span class="frac big-frac"><span class="num">7</span><span class="den">5</span></span> &gt; <span class="frac big-frac"><span class="num">5</span><span class="den">7</span></span></div>
+    </div>
+
+    <div class="rule" style="border-left-color:var(--orange);background:#fff9f0"><b>🧭 Как упорядочивать дроби?</b> Те же приёмы: приводим все дроби к общему знаменателю (или сравниваем попарно перекрёстным умножением), сравниваем числители и записываем дроби от меньшей к большей (возрастание) или от большей к меньшей (убывание).</div>
+
+    <div class="center" style="margin-top:14px">
+      <button class="btn btn-blue" onclick="show('s3')">К разминке 🔥</button>
+    </div>
+  </div>
+</div>
+
+<!-- ЭКРАН 3: РАЗМИНКА -->
+<div class="screen" id="s3">
+  <div class="card">
+    <div class="progress"><div style="width:35%"></div></div>
+    <h2>🔥 Разминка</h2>
+    <p class="sub" style="margin-bottom:14px">5 простых вопросов на первые два правила. Отвечайте смело!</p>
+    <div id="warm"></div>
+    <div class="center" id="warmNext" style="display:none;margin-top:10px">
+      <button class="btn btn-blue" onclick="show('s4')">К тренажёру 💪</button>
+    </div>
+  </div>
+</div>
+
+<!-- ЭКРАН 4: ТРЕНАЖЁР -->
+<div class="screen" id="s4">
+  <div class="card">
+    <div class="progress"><div style="width:55%"></div></div>
+    <h2>💪 Тренажёр</h2>
+    <p class="sub" style="margin-bottom:14px">10 заданий всех типов — включая перекрёстное умножение и сравнение с единицей.</p>
+    <div id="train"></div>
+    <div class="center" id="trainNext" style="display:none;margin-top:10px">
+      <button class="btn btn-blue" onclick="show('s5')">К упорядочиванию 🧩</button>
+    </div>
+  </div>
+</div>
+
+<!-- ЭКРАН 5: УПОРЯДОЧИВАНИЕ -->
+<div class="screen" id="s5">
+  <div class="card">
+    <div class="progress"><div style="width:75%"></div></div>
+    <h2>🧩 Упорядочивание дробей</h2>
+    <p class="sub" style="margin-bottom:14px">3 раунда: нажимайте дроби в нужном порядке — от меньшей к большей или наоборот. Ошиблись — дробь вернётся в набор, можно исправить.</p>
+    <div id="order"></div>
+    <div class="center" id="orderNext" style="display:none;margin-top:10px">
+      <button class="btn btn-blue" onclick="show('s6')">К итоговому тесту 🏆</button>
+    </div>
+  </div>
+</div>
+
+<!-- ЭКРАН 6: ТЕСТ -->
+<div class="screen" id="s6">
+  <div class="card">
+    <div class="progress"><div style="width:90%"></div></div>
+    <h2>🏆 Итоговый тест</h2>
+    <p class="sub" style="margin-bottom:14px">5 вопросов на всё, что изучили. Соберём медаль!</p>
+    <div id="test"></div>
+    <div class="center" id="testNext" style="display:none;margin-top:10px">
+      <button class="btn btn-blue" onclick="show('s7')">Показать результат 🎉</button>
+    </div>
+  </div>
+</div>
+
+<!-- ЭКРАН 7: РЕЗУЛЬТАТ -->
+<div class="screen" id="s7">
+  <div class="card center">
+    <div class="medal" id="medal"></div>
+    <div class="score" id="finalScore"></div>
+    <div id="finalMsg" style="margin-bottom:16px"></div>
+    <button class="btn btn-green" onclick="location.reload()">Пройти урок заново 🔁</button>
+  </div>
+</div>
+
+</div>
+<script>
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const F=(n,d)=>`<span class="frac"><span class="num">${n}</span><span class="den">${d}</span></span>`;
+const Fb=(n,d)=>`<span class="frac big-frac"><span class="num">${n}</span><span class="den">${d}</span></span>`;
+
+/* ---------- quizzes ---------- */
+let warmI=0, trainI=0, testI=0;
+let warmOk=0, trainOk=0, testOk=0;
+
+const warm=[
+ {q:`Что больше: ${F(3,7)} или ${F(5,7)}?`,opts:[`${F(3,7)}`,`${F(5,7)}`,`равны`,`нельзя сравнить`],a:1,why:`Знаменатели одинаковые — сравниваем числители: 5 > 3.`},
+ {q:`Что больше: ${F(2,5)} или ${F(2,9)}?`,opts:[`${F(2,5)}`,`${F(2,9)}`,`равны`,`нельзя сравнить`],a:0,why:`Числители одинаковые — сравниваем знаменатели: 5 < 9, значит части крупнее и дробь больше.`},
+ {q:`Правильная дробь всегда…`,opts:[`больше 1`,`меньше 1`,`равна 1`,`может быть любой`],a:1,why:`У правильной дроби числитель меньше знаменателя, поэтому она всегда меньше 1.`},
+ {q:`Неправильная дробь всегда…`,opts:[`меньше 1`,`больше или равна 1`,`равна 0`,`отрицательная`],a:1,why:`У неправильной дроби числитель больше или равен знаменателю, поэтому она не меньше 1.`},
+ {q:`Что больше: ${F(7,5)} или ${F(5,7)}?`,opts:[`${F(7,5)}`,`${F(5,7)}`,`равны`,`нельзя сравнить`],a:0,why:`${F(7,5)} — неправильная (больше 1), ${F(5,7)} — правильная (меньше 1). Неправильная всегда больше правильной.`}
+];
+const train=[
+ {q:`Сравните: ${Fb(4,9)} … ${Fb(7,9)}`,opts:[`${F(4,9)} < ${F(7,9)}`,`${F(4,9)} > ${F(7,9)}`,`равны`],a:0,why:`Одинаковые знаменатели: 4 < 7.`},
+ {q:`Сравните: ${Fb(5,12)} … ${Fb(5,8)}`,opts:[`${F(5,12)} < ${F(5,8)}`,`${F(5,12)} > ${F(5,8)}`,`равны`],a:0,why:`Одинаковые числители: 12 > 8, значит у ${F(5,8)} части крупнее.`},
+ {q:`Сравните перекрёстным умножением: ${Fb(3,4)} … ${Fb(2,3)}`,opts:[`${F(3,4)} > ${F(2,3)}`,`${F(3,4)} < ${F(2,3)}`,`равны`],a:0,why:`3·3 = 9 и 2·4 = 8. Так как 9 > 8, то ${F(3,4)} > ${F(2,3)}.`},
+ {q:`Сравните перекрёстным умножением: ${Fb(5,8)} … ${Fb(7,12)}`,opts:[`${F(5,8)} > ${F(7,12)}`,`${F(5,8)} < ${F(7,12)}`,`равны`],a:0,why:`5·12 = 60 и 7·8 = 56. Так как 60 > 56, то ${F(5,8)} > ${F(7,12)}.`},
+ {q:`Что больше: ${Fb(6,7)} или 1?`,opts:[`${F(6,7)}`,`1`,`равны`],a:1,why:`${F(6,7)} — правильная дробь, она всегда меньше 1.`},
+ {q:`Что больше: ${Fb(9,4)} или 1?`,opts:[`${F(9,4)}`,`1`,`равны`],a:0,why:`${F(9,4)} — неправильная дробь (9 > 4), она больше 1.`},
+ {q:`Сравните: ${Fb(11,3)} … ${Fb(5,8)}`,opts:[`${F(11,3)} > ${F(5,8)}`,`${F(11,3)} < ${F(5,8)}`,`равны`],a:0,why:`${F(11,3)} — неправильная, ${F(5,8)} — правильная. Неправильная всегда больше.`},
+ {q:`Приведите к НОЗ и сравните: ${Fb(2,3)} … ${Fb(3,5)}`,opts:[`${F(2,3)} > ${F(3,5)}`,`${F(2,3)} < ${F(3,5)}`,`равны`],a:0,why:`НОЗ = 15: ${F(2,3)} = ${F(10,15)}, ${F(3,5)} = ${F(9,15)}. Так как 10 > 9, то ${F(2,3)} больше.`},
+ {q:`Сравните: ${Fb(4,5)} … ${Fb(4,7)}`,opts:[`${F(4,5)} > ${F(4,7)}`,`${F(4,5)} < ${F(4,7)}`,`равны`],a:0,why:`Одинаковые числители: 5 < 7 — у ${F(4,5)} части крупнее.`},
+ {q:`Сравните: ${Fb(7,10)} … ${Fb(3,4)}`,opts:[`${F(7,10)} < ${F(3,4)}`,`${F(7,10)} > ${F(3,4)}`,`равны`],a:0,why:`Перекрёстно: 7·4 = 28 и 3·10 = 30. Так как 28 < 30, то ${F(7,10)} < ${F(3,4)}.`}
+];
+const test=[
+ {q:`${Fb(3,8)} … ${Fb(5,8)}`,opts:[`<`,`>`,`=`],a:0,why:`Одинаковые знаменатели: 3 < 5.`},
+ {q:`${Fb(4,9)} … ${Fb(4,11)}`,opts:[`<`,`>`,`=`],a:1,why:`Одинаковые числители: 9 < 11, значит ${F(4,9)} больше.`},
+ {q:`${Fb(2,5)} … ${Fb(3,7)}`,opts:[`<`,`>`,`=`],a:1,why:`Перекрёстно: 2·7 = 14 и 3·5 = 15. Так как 14 < 15, то ${F(2,5)} < ${F(3,7)}.`},
+ {q:`Какая дробь больше единицы?`,opts:[`${F(5,8)}`,`${F(8,5)}`,`${F(1,3)}`],a:1,why:`${F(8,5)} — неправильная дробь: 8 > 5, значит она больше 1.`},
+ {q:`Расставьте по возрастанию: ${Fb(1,2)}, ${Fb(3,4)}, ${Fb(2,3)}`,opts:[`${F(1,2)}, ${F(2,3)}, ${F(3,4)}`,`${F(3,4)}, ${F(2,3)}, ${F(1,2)}`,`${F(2,3)}, ${F(1,2)}, ${F(3,4)}`],a:0,why:`Общий знаменатель 12: ${F(6,12)}, ${F(9,12)}, ${F(8,12)} → ${F(1,2)} < ${F(2,3)} < ${F(3,4)}.`}
+];
+
+/* ---------- runners ---------- */
+function ask(list,i,box,done,counter){
+  const el=document.getElementById(box);
+  if(i>=list.length){done();return;}
+  const item=list[i];
+  el.innerHTML=`<div class="q">Вопрос ${i+1} из ${list.length}. ${item.q}</div><div id="${box}_opts"></div><div class="fb" id="${box}_fb"></div>`;
+  const opts=document.getElementById(box+'_opts');
+  item.opts.forEach((o,idx)=>{
+    const b=document.createElement('button');
+    b.className='opt';b.innerHTML=o;
+    b.onclick=()=>answer(item,idx,b,box,done,list,i,counter);
+    opts.appendChild(b);
+  });
+}
+function answer(item,idx,btn,box,done,list,i,counter){
+  document.querySelectorAll('#'+box+'_opts .opt').forEach(b=>b.onclick=null);
+  const opts=document.querySelectorAll('#'+box+'_opts .opt');
+  opts[item.a].classList.add('correct');
+  const fb=document.getElementById(box+'_fb');
+  if(idx===item.a){counter.ok++;fb.className='fb ok';fb.innerHTML='✅ Верно! '+item.why;}
+  else{btn.classList.add('wrong');fb.className='fb no';fb.innerHTML='❌ Не совсем. '+item.why;}
+  setTimeout(()=>{counter.i=(counter.i||0)+1;ask(list,i+1,box,done,counter);},1400);
+}
+
+function runWarm(){
+  const counter={ok:0,i:0};
+  ask(warm,0,'warm',()=>{document.getElementById('warmNext').style.display='block';},counter);
+}
+function runTrain(){
+  const counter={ok:0,i:0};
+  ask(train,0,'train',()=>{document.getElementById('trainNext').style.display='block';},counter);
+}
+function runTest(){
+  const counter={ok:0,i:0};
+  ask(test,0,'test',()=>{document.getElementById('testNext').style.display='block';},counter);
+}
+
+/* ---------- ordering ---------- */
+const rounds=[
+ {dir:'возрастание (от меньшей к большей)',fr:[[1,2],[3,4],[2,5],[1,3]]},
+ {dir:'убывание (от большей к меньшей)',fr:[[5,8],[1,2],[7,8],[3,4]]},
+ {dir:'возрастание (от меньшей к большей)',fr:[[2,3],[1,2],[5,6],[1,3],[4,6]]}
+];
+let rI=0;
+function value(n,d){return n/d;}
+function runOrder(){
+  rI=0; renderRound();
+}
+function renderRound(){
+  const r=rounds[rI];
+  const box=document.getElementById('order');
+  box.innerHTML=`<div class="q">Раунд ${rI+1} из ${rounds.length}: расставьте по ${r.dir}</div>
+    <div style="margin-bottom:10px;color:var(--muted)">Порядок: <span id="ord_slots"></span></div>
+    <div id="ord_chips"></div><div class="fb" id="ord_fb"></div>`;
+  drawChips(r);
+}
+function drawChips(r){
+  const slots=document.getElementById('ord_slots');
+  slots.innerHTML=r.fr.map((_,i)=>`<span class="order-slot" id="slot${i}">?</span>`).join(' ');
+  const chips=document.getElementById('ord_chips');
+  chips.innerHTML='';r.fr.forEach((f,i)=>{
+    const c=document.createElement('button');
+    c.className='chip';c.id='chip'+i;
+    c.innerHTML=F(f[0],f[1]);
+    c.onclick=()=>pick(c,i,r);
+    chips.appendChild(c);
+  });
+  r.picked=[];
+}
+function pick(btn,i,r){
+  if(r.picked.includes(i))return;
+  r.picked.push(i);
+  btn.classList.add('pick');btn.disabled=true;
+  const f=r.fr[i];
+  const slot=document.getElementById('slot'+(r.picked.length-1));
+  slot.className='order-slot filled';slot.innerHTML=F(f[0],f[1]);
+  if(r.picked.length===r.fr.length)checkRound(r);
+}
+function checkRound(r){
+  const fb=document.getElementById('ord_fb');
+  const vals=r.picked.map(i=>value(r.fr[i][0],r.fr[i][1]));
+  let ok=true;
+  for(let k=0;k<vals.length-1;k++){
+    if(r.dir.startsWith('возр')&&vals[k]>=vals[k+1])ok=false;
+    if(r.dir.startsWith('убыв')&&vals[k]<=vals[k+1])ok=false;
+  }
+  if(ok){
+    fb.className='fb ok';fb.innerHTML='✅ Верно! Порядок правильный.';
+    setTimeout(()=>{rI++;if(rI<rounds.length)renderRound();else{document.getElementById('orderNext').style.display='block';fb.innerHTML='✅ Отлично! Все раунды пройдены!';fb.className='fb ok';}},1200);
+  }else{
+    fb.className='fb no';fb.innerHTML='❌ Пока не тот порядок — дробь возвращается в набор. Попробуйте снова!';
+    setTimeout(()=>drawChips(r),1200);
+  }
+}
+
+/* ---------- final ---------- */
+function finale(){
+  const total=test.length;
+  const pct=Math.round(testOk/total*100);
+  let medal,msg;
+  if(pct>=90){medal='🏆';msg=`Блестяще! ${testOk} из ${total} — вы настоящий мастер дробей!`;}
+  else if(pct>=70){medal='🥈';msg=`Хороший результат: ${testOk} из ${total}. Ещё чуть-чуть до perfect!`;}
+  else if(pct>=50){medal='🥉';msg=`Неплохо: ${testOk} из ${total}. Загляните ещё раз в правила — и будет отлично.`;}
+  else{medal='💪';msg=`Получилось ${testOk} из ${total}. Не сдавайтесь: вернитесь к правилам и пройдите урок заново!`;}
+  document.getElementById('medal').textContent=medal;
+  document.getElementById('finalScore').textContent=`Тест: ${testOk} из ${total} (${pct}%)`;
+  document.getElementById('finalMsg').innerHTML=msg+`<br><small style="color:var(--muted)">Разминка: ${warmOk}/${warm.length} • Тренажёр: ${trainOk}/${train.length}</small>`;
+}
+
+/* hook: count correct answers */
+const origAsk=ask;
+ask=function(list,i,box,done,counter){
+  origAsk(list,i,box,()=>{
+    if(box==='warm')warmOk=counter.ok;
+    if(box==='train')trainOk=counter.ok;
+    if(box==='test')testOk=counter.ok;
+    done();
+  },counter);
+};
+
+runWarm();runTrain();runOrder();runTest();
+</script>
+</body>
+</html>
