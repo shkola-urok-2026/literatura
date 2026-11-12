@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Литература • 10 класс • Урок 28 — Тютчев</title>
+<style>
+:root{--cy:#4fd8ff;--vi:#a78bff;--bl:#6ea8ff;--or:#ffb347;--bg1:#0b1230;--bg2:#1a2c5e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;color:#eaf2ff;background:radial-gradient(circle at 20% 10%,rgba(79,216,255,.08),transparent 40%),radial-gradient(circle at 85% 90%,rgba(167,139,255,.09),transparent 40%),linear-gradient(160deg,var(--bg1),var(--bg2));min-height:100vh;background-attachment:fixed}
+.wrap{max-width:960px;margin:0 auto;padding:24px 14px 70px}
+header{text-align:center;padding:26px 8px 14px}
+h1{font-size:clamp(22px,4.2vw,38px);letter-spacing:2px;color:#fff;text-shadow:0 0 16px rgba(79,216,255,.9),0 0 42px rgba(79,216,255,.35)}
+.sub{color:#9fb4dd;margin-top:8px;font-size:13px;letter-spacing:3px}
+.clock{color:var(--cy);margin-top:6px;font-size:15px}
+section{background:rgba(10,18,45,.66);border:1px solid rgba(79,216,255,.28);border-radius:16px;padding:22px;margin:18px 0;box-shadow:0 8px 30px rgba(0,0,0,.35)}
+h2{color:var(--cy);font-size:20px;margin-bottom:12px;letter-spacing:1px}
+p{line-height:1.6;margin:8px 0}
+.hint{color:#9fb4dd;font-size:14px}
+.btn{display:inline-block;background:linear-gradient(90deg,#1d3f8f,#2a5fd0);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:15px;cursor:pointer;margin:6px 8px 6px 0;transition:.2s}
+.btn:hover{box-shadow:0 0 14px rgba(79,216,255,.5);transform:translateY(-1px)}
+.hidden{display:none}
+.poem{font-size:18px;line-height:1.8;margin:14px 0;padding:18px;background:rgba(79,216,255,.06);border-left:3px solid var(--cy);border-radius:0 12px 12px 0}
+.w{cursor:pointer;border-radius:5px;padding:1px 3px;transition:.15s}
+.w:hover{background:rgba(79,216,255,.25)}
+.w.picked{background:rgba(255,255,255,.22);outline:1px dashed #fff}
+.w.ok-e{background:rgba(255,209,102,.25);outline:1.5px solid #ffd166}
+.w.ok-o{background:rgba(79,216,255,.25);outline:1.5px solid var(--cy)}
+.w.ok-m{background:rgba(167,139,255,.3);outline:1.5px solid var(--vi)}
+.w.missed{outline:1.5px dashed rgba(255,209,102,.7)}
+.w.bad{background:rgba(255,80,80,.25);outline:1.5px solid #ff5f5f}
+.legend span{display:inline-block;padding:3px 10px;border-radius:8px;font-size:13px;margin:4px 6px 4px 0}
+.l-e{border:1.5px solid #ffd166;color:#ffd166}
+.l-o{border:1.5px solid var(--cy);color:var(--cy)}
+.l-m{border:1.5px solid var(--vi);color:var(--vi)}
+.items,.slots{display:grid;gap:8px;margin:10px 0}
+.item{background:rgba(42,95,208,.25);border:1.5px solid var(--bl);border-radius:10px;padding:10px 14px;cursor:pointer;transition:.15s}
+.item.sel{border-color:#fff;box-shadow:0 0 12px rgba(255,255,255,.4);transform:scale(1.02)}
+.slot{border:1.5px dashed rgba(110,168,255,.6);border-radius:10px;padding:12px 14px;min-height:46px;cursor:pointer;font-size:14px;color:#9fb4dd}
+.slot.filled{border-style:solid;color:#eaf2ff}
+.slot.num::before{content:attr(data-n)') ';color:var(--or);font-weight:700}
+.plates{display:grid;gap:12px;margin-top:14px}
+.plate{border-radius:14px;padding:14px 16px;border:1.5px solid rgba(79,216,255,.6);background:rgba(13,24,60,.8)}
+.plate .lab{font-size:12px;letter-spacing:2px;color:#9fb4dd;margin-bottom:6px}
+.plate.v{border-color:rgba(167,139,255,.7)}
+.plate.o{border-color:rgba(255,179,71,.8)}
+.plate.b{border-color:rgba(110,168,255,.7)}
+.motto{text-align:center;color:#c9d8ff;padding:18px 0 0;letter-spacing:1px;text-shadow:0 0 10px rgba(79,216,255,.4)}
+.qz{margin:12px 0;padding:14px;background:rgba(42,95,208,.14);border-radius:12px}
+.qz label{display:block;padding:7px 10px;margin:5px 0;border-radius:9px;cursor:pointer;border:1px solid transparent}
+.qz label:hover{background:rgba(79,216,255,.12)}
+.qz input{margin-right:8px}
+.qz label.right{border-color:#3ddc84;background:rgba(61,220,132,.15)}
+.qz label.wrong{border-color:#ff5f5f;background:rgba(255,95,95,.15)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.tab{background:rgba(42,95,208,.3);border:1.5px solid var(--bl);color:#eaf2ff;border-radius:10px;padding:8px 14px;cursor:pointer;font-size:14px}
+.tab.on{background:linear-gradient(90deg,#2a5fd0,#4fd8ff33);border-color:var(--cy);box-shadow:0 0 12px rgba(79,216,255,.4)}
+textarea{width:100%;background:rgba(10,18,45,.9);border:1.5px solid rgba(79,216,255,.4);border-radius:10px;color:#eaf2ff;padding:10px;font:inherit;min-height:80px;resize:vertical}
+.ok-msg{color:#3ddc84;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>ЛИТЕРАТУРА • 10 КЛАСС • УРОК № 28</h1>
+  <div class="sub">12.11.2026 • ЧЕТВЕРГ</div>
+  <div class="sub" style="margin-top:2px">РАЗВИТИЕ РЕЧИ</div>
+  <div class="clock">Часы: <span id="cl">--:--:--</span></div>
+</header>
+
+<section>
+  <h2>Тема урока</h2>
+  <p style="font-size:19px">Анализ лирического произведения Ф. И. Тютчева</p>
+  <p class="hint">Цели: освоить план анализа лирического произведения; научиться находить средства выразительности; увидеть идею стихотворения через образы, ритм и настроение; сформировать собственное читательское впечатление.</p>
+</section>
+
+<section>
+  <h2>1 • Разминка «Первое впечатление»</h2>
+  <p class="hint">Прочитайте стихотворение про себя. Не анализируйте — только почувствуйте. Что вы «увидели» и «услышали»?</p>
+  <div class="poem">Есть в осени первоначальной<br>Короткая, но дивная пора —<br>Весь день стоит как бы хрустальный,<br>И лучезарны вечера.<br><br>Где бодрый серп гулял и падал колос,<br>Теперь уж пусто всё — простор везде, —<br>Лишь паутины тонкий волос<br>Блестит на праздной борозде.<br><br>Пустеет воздух, птиц не слышно боле,<br>Но далеко ещё до первых зимних бурь —<br>И льётся чистая и тёплая лазурь<br>На отдыхающее поле…</div>
+  <button class="btn" onclick="sh(this)">Показать вопросы для разговора</button>
+  <div class="hidden" id="q1">
+    <p>• Какое настроение создаётся уже в первой строке?</p>
+    <p>• С каким временем года вы бы сравнили это состояние человека?</p>
+    <p>• Почему «пора» названа «короткой» — и дивной одновременно?</p>
+    <p class="hint">Выслушайте 3–4 версии: в лирике не бывает одного «правильного» впечатления — есть точность чувств.</p>
+  </div>
+</section>
+
+<section>
+  <h2>2 • Теория: план анализа лирического произведения</h2>
+  <p class="hint">Лирика — род литературы, в котором изображаются чувства и переживания лирического героя. Анализируем стихотворение по плану:</p>
+  <div class="plate v"><div class="lab">ПЛАН АНАЛИЗА</div>
+    <p>1. Внимательное чтение и первое впечатление.<br>
+    2. Тема и настроение (лирический сюжет).<br>
+    3. Образы и художественные средства (эпитет, метафора, олицетворение, сравнение, звукопись).<br>
+    4. Композиция и ритм (строфика, рифма, паузы).<br>
+    5. Идея и авторская позиция.<br>
+    6. Личное восприятие: чем стихотворение отозвалось в вас.</p>
+  </div>
+</section>
+
+<section>
+  <h2>3 • Игра «Собери план анализа»</h2>
+  <p class="hint">Пункты плана перепутались! Кликните по пункту, затем по его месту в плане. Когда соберёте — проверьте.</p>
+  <div class="slots" id="slots"></div>
+  <div class="items" id="items"></div>
+  <button class="btn" onclick="checkPlan()">Проверить</button>
+  <button class="btn" onclick="resetPlan()">Перемешать снова</button>
+  <p id="planRes"></p>
+</section>
+
+<section>
+  <h2>4 • «Найди средство выразительности»</h2>
+  <p class="hint">Кликайте по словам в стихотворении, если считаете их средством выразительности. Затем нажмите «Сверить» — верные ответы подсветятся цветом по типу, неверные — красным.</p>
+  <div class="legend"><span class="l-e">ЭПИТЕТ</span><span class="l-o">ОЛИЦЕТВОРЕНИЕ</span><span class="l-m">МЕТАФОРА</span></div>
+  <div class="poem" id="pex">
+    Есть в осени первоначальной<br>
+    Короткая, но <span class="w" data-t="e">дивная</span> пора —<br>
+    Весь день стоит как бы <span class="w" data-t="e">хрустальный</span>,<br>
+    И <span class="w" data-t="e">лучезарны</span> вечера.<br><br>
+    Где <span class="w" data-t="e">бодрый</span> серп <span class="w" data-t="o">гулял</span> и падал колос,<br>
+    Теперь уж пусто всё — простор везде, —<br>
+    Лишь паутины <span class="w" data-t="e">тонкий</span> волос<br>
+    Блестит на <span class="w" data-t="e">праздной</span> борозде.<br><br>
+    Пустеет воздух, птиц не слышно боле,<br>
+    Но далеко ещё до первых зимних бурь —<br>
+    И <span class="w" data-t="m">льётся</span> <span class="w" data-t="e">чистая</span> и <span class="w" data-t="e">тёплая</span> лазурь<br>
+    На <span class="w" data-t="o">отдыхающее</span> поле…
+  </div>
+  <button class="btn" onclick="checkWords()">Сверить</button>
+  <button class="btn" onclick="resetWords()">Сбросить</button>
+  <p id="wRes"></p>
+  <p class="hint" id="wExpl"></p>
+</section>
+
+<section>
+  <h2>5 • Работа в группах: три стихотворения Тютчева</h2>
+  <p class="hint">Класс делится на три группы. Каждая анализирует своё стихотворение по плану из раздела 2 и готовит выступление на 2 минуты: тема — образы и средства — идея — личное впечатление.</p>
+  <div class="tabs">
+    <button class="tab on" onclick="tab(0,this)">Группа 1 • «Есть в осени первоначальной…»</button>
+    <button class="tab" onclick="tab(1,this)">Группа 2 • «Silentium!»</button>
+    <button class="tab" onclick="tab(2,this)">Группа 3 • «Весенняя гроза»</button>
+  </div>
+  <div id="g0">
+    <p class="hint">Текст — в разделе 4 (уже перед глазами).</p>
+    <p><b>Задание:</b> сколько «покрытий» природы вы насчитали? Что меняется от строфы к строфе: цвет, звук, время суток? Каким ритмом — коротким или плавным — дышит стихотворение?</p>
+  </div>
+  <div id="g1" class="hidden">
+    <div class="poem">Молчи, скрывайся и таи<br>Свои чувства и мечты —<br>Пусть в душевной глубине<br>Встают и заходят оне<br>Безмолвно, как звёзды в ночи, —<br>Любуйся ими — и молчи.<br><br>Как сердцу высказать себя?<br>Другому как понять тебя?<br>Поймёт ли он, чем ты живёшь?<br>Мысль изречённая есть ложь.<br>Взрывая, возмутишь ключи:<br>Питайся ими — и молчи…</div>
+    <p class="hint">(Окончание — в хрестоматии.)</p>
+    <p><b>Задание:</b> сколько раз звучит глагол «молчи» и зачем он нужен? О чём говорит строка «Мысль изречённая есть ложь»? Что здесь сравнивается со звёздами?</p>
+  </div>
+  <div id="g2" class="hidden">
+    <div class="poem">Люблю грозу в начале мая,<br>Когда весенний, первый гром,<br>Как бы резвяся и играя,<br>Грохочет в небе голубом.<br><br>Гремят раскаты молодые.<br>Вот дождик брызнул, пыль летит,<br>Повисли перлы дождевые,<br>И солнце нити золотит.<br><br>С горы бежит поток проворный,<br>В лесу не смолкает птичий гам,<br>И гам лесной и шум нагорный —<br>Всё вторит весело громам…</div>
+    <p class="hint">(Окончание — в хрестоматии.)</p>
+    <p><b>Задание:</b> какие звуки создают «гром» в самой речи стихотворения? Найдите олицетворения. Почему гроза названа «молодой»?</p>
+  </div>
+</section>
+
+<section>
+  <h2>6 • Проверь себя: мини-квиз</h2>
+  <div id="quiz"></div>
+  <button class="btn" onclick="checkQuiz()">Проверить ответы</button>
+  <p id="qRes"></p>
+</section>
+
+<section>
+  <h2>7 • Рефлексия: «Моя строка»</h2>
+  <p class="hint">Закончите одну (или обе) фразы — это ваш личный итог урока:</p>
+  <p>«Сегодня я понял(а), что лирика Тютчева — это…»</p>
+  <textarea id="refl1" placeholder="Ваше предложение…"></textarea>
+  <p>«Из всех средств выразительности ярче всего на меня подействовало…»</p>
+  <textarea id="refl2" placeholder="Ваше предложение…"></textarea>
+  <p class="hint">Записи сохраняются в вашем браузере — можно вернуться к ним при написании домашнего анализа.</p>
+</section>
+
+<section>
+  <h2>8 • Домашнее задание</h2>
+  <div class="plate o"><div class="lab">ДОМАШНЕЕ ЗАДАНИЕ</div>
+    <p>Написать письменный анализ одного из стихотворений (групповое — можно то же, личное — на выбор) по плану из раздела 2: <b>150–200 слов</b>. В анализе обязательно: тема и настроение, не менее трёх средств выразительности с примерами, идея, личное впечатление.</p>
+  </div>
+  <div class="plate"><div class="lab">СДАЧА</div>
+    <p>Работу высылаем в личные сообщения учителю <b>до 13 ноября, 20:00</b>.</p>
+  </div>
+</section>
+
+<p class="motto">Знания сегодня — большие возможности завтра!</p>
+</div>
+
+<script>
+setInterval(function(){document.getElementById('cl').textContent=new Date().toLocaleTimeString('ru-RU')},1000);
+function sh(b){var e=b.nextElementSibling;e.classList.toggle('hidden');b.textContent=e.classList.contains('hidden')?'Показать вопросы для разговора':'Скрыть вопросы';}
+
+// --- план анализа: собрать по порядку ---
+var planOrder=['Внимательное чтение и первое впечатление','Тема и настроение (лирический сюжет)','Образы и художественные средства','Композиция и ритм: строфика, рифма, паузы','Идея и авторская позиция','Личное восприятие'];
+var plan, sel=null;
+function shufflePlan(){plan=planOrder.slice();for(var i=plan.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=plan[i];plan[i]=plan[j];plan[j]=t;}sel=null;drawPlan();}
+function drawPlan(){
+ var s=document.getElementById('slots');s.innerHTML='';
+ for(var i=0;i<6;i++){var d=document.createElement('div');d.className='slot num';d.setAttribute('data-n',i+1);d.setAttribute('data-i',i);d.textContent='кликните — и пункт встанет сюда';d.onclick=function(){if(sel!==null){this.textContent=plan[sel];this.classList.add('filled');sel=null;}};s.appendChild(d);}
+ var it=document.getElementById('items');it.innerHTML='';
+ plan.forEach(function(t,idx){var d=document.createElement('div');d.className='item';d.textContent=t;d.onclick=function(){var was=this.classList.contains('sel');document.querySelectorAll('.item').forEach(function(x){x.classList.remove('sel')});if(!was){this.classList.add('sel');sel=idx;}};it.appendChild(d);});
+ document.getElementById('planRes').textContent='';
+}
+function checkPlan(){
+ var slots=document.querySelectorAll('#slots .slot'),ok=true;
+ slots.forEach(function(sl,i){sl.classList.remove('badSlot');var v=sl.textContent.replace(/^\d\)\s*/,'');
+ if(v!=='кликните — и пункт встанет сюда'&&v!==planOrder[i]){ok=false;sl.style.borderColor='#ff5f5f';}else if(v!=='кликните — и пункт встанет сюда'){sl.style.borderColor='#3ddc84';}else{ok=false;sl.style.borderColor='rgba(110,168,255,.6)';}});
+ document.getElementById('planRes').textContent=ok?'Верно! План собран в правильном порядке.':'Пока не всё на своих местах — поменяйте пункты и попробуйте снова.';
+ document.getElementById('planRes').className=ok?'ok-msg':'hint';
+}
+function resetPlan(){shufflePlan();}
+
+// --- средства выразительности ---
+function resetWords(){document.querySelectorAll('#pex .w').forEach(function(w){w.classList.remove('picked','ok-e','ok-o','ok-m','missed','bad')});document.getElementById('wRes').textContent='';document.getElementById('wExpl').textContent='';}
+document.querySelectorAll('#pex .w').forEach(function(w){w.onclick=function(){if(w.classList.contains('ok-e')||w.classList.contains('ok-o')||w.classList.contains('ok-m'))return;w.classList.toggle('picked');};});
+function checkWords(){
+ var names={e:'эпитет',o:'олицетворение',m:'метафора'};
+ var found=0,missed=0,wrong=0;
+ document.querySelectorAll('#pex .w').forEach(function(w){
+  var t=w.getAttribute('data-t'),picked=w.classList.contains('picked');
+  w.classList.remove('picked');
+  if(picked&&t===w.getAttribute('data-t')){}
+  if(picked){found++;w.classList.add('ok-'+t);}
+  else{missed++;w.classList.add('missed');}
+ });
+ var total=document.querySelectorAll('#pex .w').length;
+ document.getElementById('wRes').textContent='Отмечено средств: '+found+' из '+total+'. Ненайденные показаны пунктиром — рассмотрите их и объясните классу.';
+ document.getElementById('wExpl').textContent='Подсказка учителю: «гулял» — олицетворение серпа, «отдыхающее поле» — олицетворение, «льётся лазурь» — метафора, остальные отмеченные — эпитеты.';
+}
+
+// --- табы групп ---
+function tab(i,btn){
+ document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('on')});btn.classList.add('on');
+ [0,1,2].forEach(function(k){document.getElementById('g'+k).classList.toggle('hidden',k!==i)});
+}
+
+// --- квиз ---
+var quiz=[
+ {q:'Кто написал «Silentium!»?',o:['А. С. Пушкин','Ф. И. Тютчев','М. Ю. Лермонтов'],a:1},
+ {q:'Из какого стихотворения строка «Мысль изречённая есть ложь»?',o:['«Весенняя гроза»','«Листок»','«Silentium!»'],a:2},
+ {q:'Как называется перенос человеческих свойств на предметы природы («серп гулял», «поле отдыхает»)?',o:['Олицетворение','Гипербола','Анафора'],a:0},
+ {q:'Какое настроение чаще всего звучит в стихотворении «Есть в осени первоначальной…»?',o:['Мятежное и гневное','Светлая грусть и умиление','Радостный азарт'],a:1},
+ {q:'Что такое эпитет?',o:['Образное определение при слове-предмете','Перечисление однородных членов','Повторение слова в начале строк'],a:0}
+];
+function drawQuiz(){
+ var z=document.getElementById('quiz');z.innerHTML='';
+ quiz.forEach(function(item,qi){
+  var d=document.createElement('div');d.className='qz';
+  var h='<p><b>'+(qi+1)+'. '+item.q+'</b></p>';
+  item.o.forEach(function(op,oi){h+='<label data-a="'+(oi===item.a)+'"><input type="radio" name="q'+qi+'">'+op+'</label>';});
+  d.innerHTML=h;z.appendChild(d);
+ });
+}
+function checkQuiz(){
+ var right=0;
+ quiz.forEach(function(item,qi){
+  document.querySelectorAll('input[name=q'+qi+']').forEach(function(inp){var lb=inp.parentElement;lb.classList.remove('right','wrong');
+   if(inp.checked){if(lb.getAttribute('data-a')==='true'){lb.classList.add('right');right++;}else{lb.classList.add('wrong');}}
+   else if(lb.getAttribute('data-a')==='true'){lb.classList.add('right');}
+  });
+ });
+ document.getElementById('qRes').textContent='Правильных ответов: '+right+' из '+quiz.length+(right===quiz.length?' — блестяще!':' — перечитайте разделы 2 и 4.');
+}
+
+// --- сохранение рефлексии ---
+['refl1','refl2'].forEach(function(id){var el=document.getElementById(id);el.value=localStorage.getItem(id)||'';el.oninput=function(){localStorage.setItem(id,el.value)};});
+
+shufflePlan();drawQuiz();
+</script>
+</body>
+</html>
