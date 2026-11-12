@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тайна трёх земель — интерактивное приключение</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    background: linear-gradient(160deg, #2b2118 0%, #1a1410 60%, #241a12 100%);
+    color: #f0e6d2;
+    min-height: 100vh;
+    display: flex; justify-content: center; padding: 12px;
+  }
+  #app {
+    width: 100%; max-width: 560px;
+    background: #f5ecd7;
+    color: #3b2a1a;
+    border-radius: 14px;
+    box-shadow: 0 0 40px rgba(0,0,0,.6);
+    padding: 22px 20px 30px;
+    position: relative;
+    overflow: hidden;
+  }
+  #app::before {
+    content: "";
+    position: absolute; inset: 8px;
+    border: 2px solid #8a6a3f;
+    border-radius: 10px;
+    pointer-events: none;
+  }
+  h1 {
+    text-align: center; color: #7a3b1e;
+    font-size: 26px; margin: 10px 0 4px;
+    letter-spacing: 1px;
+  }
+  h2 { color: #5a4632; font-size: 20px; margin: 14px 0 8px; text-align:center; }
+  .subtitle { text-align:center; font-style: italic; color:#8a6a3f; margin-bottom: 14px; }
+  .text { line-height: 1.55; margin: 12px 0; font-size: 16px; white-space: pre-line; }
+  .choices { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .choice {
+    background: linear-gradient(180deg, #fff8e8, #f0e2c4);
+    border: 2px solid #a9895a;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+    color: #3b2a1a;
+    transition: transform .12s, box-shadow .12s;
+  }
+  .choice:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,.25); }
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 12px;
+    font-size: 13px; font-weight: bold; color: #fff; margin-right: 6px;
+  }
+  .terra { background: #7d5ba6; }
+  .myst  { background: #4c7a4c; }
+  .imag  { background: #b0533a; }
+  #statusbar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #3b2a1a; color: #f0e6d2;
+    border-radius: 8px; padding: 8px 12px; margin-bottom: 14px;
+    font-size: 14px; gap: 8px; flex-wrap: wrap;
+  }
+  .gem { font-size: 18px; letter-spacing: 2px; }
+  .karta-mini {
+    margin: 14px auto; max-width: 420px;
+    background: #eaddc0; border: 2px dashed #8a6a3f;
+    border-radius: 10px; padding: 10px;
+    text-align: center; font-size: 14px;
+  }
+  .karta-mini .regions { display:flex; gap:8px; justify-content:center; margin-top:8px; flex-wrap:wrap; }
+  .karta-mini .regions button {
+    font-family: inherit; cursor:pointer; border:none; border-radius:8px;
+    padding:8px 12px; color:#fff; font-size:14px;
+  }
+  .sep { height: 2px; background: linear-gradient(90deg, transparent, #a9895a, transparent); margin: 16px 0; border:none; }
+  .final {
+    background: #fff3cf; border: 2px solid #c9a227; border-radius: 12px;
+    padding: 16px; margin-top: 12px; text-align: center;
+  }
+  .restart {
+    margin: 18px auto 4px; display:block;
+    background:#7a3b1e; color:#fff; border:none; border-radius:10px;
+    padding:12px 22px; font-size:16px; cursor:pointer; font-family:inherit;
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="content"></div>
+</div>
+<script>
+const state = { shards: 0, honesty: 0, kindness: 0, inv: [] };
+
+function statusbar() {
+  return '<div id="statusbar">' +
+    '<span>Осколки: ' + state.shards + '/3</span>' +
+    '<span class="gem">' + "\u25C6".repeat(state.shards) + "\u25C7".repeat(3 - state.shards) + '</span>' +
+    '<span>Инвентарь: ' + (state.inv.length ? state.inv.join(", ") : "\u2014") + '</span>' +
+  '</div>';
+}
+
+function scene(html) {
+  document.getElementById("content").innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+const scenes = {};
+
+/* ---------- СТАРТ ---------- */
+scenes.start = function() {
+  scene(
+    '<h1>\u2693 Тайна трёх земель</h1>' +
+    '<p class="subtitle">интерактивное приключение по старинной карте</p>' +
+    '<div class="text">Шторм отбросил ваш корабль «Ласточка» к неведомому берегу. На рассвете капитан вручает вам старый пергамент:\n' +
+    '«На карте три земли: Терра Нова, Мистерия и Имаго Демиди. В сердце острова спит Алмаз.\n' +
+    'Три осколка — три ключа. Собери их, и камень оживёт. Но помни: остров видит, КАК ты идёшь к цели».\n' +
+    'Солнце встаёт. Куда направимся первым делом?</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'terra1\')">\uD83C\uDFF0 К северу — <span class="badge terra">Терра Нова</span>: маяк и каменный замок</button>' +
+      '<button class="choice" onclick="go(\'myst1\')">\uD83C\uDF3F К центру — <span class="badge myst">Мистерия</span>: пагода в зелёных холмах</button>' +
+      '<button class="choice" onclick="go(\'imag1\')">\uD83C\uDF0B К югу — <span class="badge imag">Имаго Демиди</span>: горы и кузня кузнеца Демида</button>' +
+    '</div>'
+  );
+};
+
+/* ---------- ТЕРРА НОВА ---------- */
+scenes.terra1 = function() {
+  scene(
+    '<h2><span class="badge terra">Терра Нова</span></h2>' +
+    '<div class="text">Маяк на скале погас, а смотритель Фарвард сидит на ступеньках, поворачивая ключ в пустых руках.\n' +
+    '«Свет мой пропал вместе со склянкой масла! — вздыхает он. — Говорят, крыса утащила. Без света не найдёшь осколок в маяке...»</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'terra_rat\')">🐭 Пойду искать крысу — она живёт у замковых развалин</button>' +
+      '<button class="choice" onclick="go(\'terra_mayak\')">🗼 Сначала осмотрю погасший маяк</button>' +
+    '</div>'
+  );
+};
+
+scenes.terra_rat = function() {
+  scene(
+    '<div class="text">У развалин замка вас встречает крысёнок Пых. «Склянка у меня, — признаётся он, — но она мне нужна: смазать колесо тележки.\n' +
+    'Меняю на головку сыра! Пекарня в Мистерии, хотите верьте».</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'terra_deal\')">🤝 Честно согласиться на обмен (потом зайдёте в Мистерию)</button>' +
+      '<button class="choice" onclick="go(\'terra_steal\')">🤫 Отвлечь крысёнка и взять склянку тихонько</button>' +
+    '</div>'
+  );
+};
+
+scenes.terra_deal = function() {
+  state.inv.push("Склянка масла");
+  state.honesty++;
+  scene(
+    '<div class="text">«Договорились!» — Пых доверчиво жмёт лапу. — «Склянку возьми сейчас, а сыр принесёшь, когда будешь в Мистерии. Я запомню».</div>' +
+    '<div class="text">✨ Вы получили <b>Склянку масла</b>. Пых обещает ждать.</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'terra_mayak\')">🗼 Возвращаться к маяку</button>' +
+    '</div>'
+  );
+};
+
+scenes.terra_steal = function() {
+  state.inv.push("Склянка масла");
+  scene(
+    '<div class="text">Вы отвлекли Пыха блеском монетки и тихонько забрали склянку. Крысёнок заметил пропажу и погнался за вами —\n' +
+    'пришлось бежать через кусты. Склянка у вас, но на душе неспокойно.</div>' +
+    '<div class="text">⚠️ Вы получили <b>Склянку масла</b>, но честность пострадала.</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'terra_mayak\')">🗼 Всё равно идти к маяку</button>' +
+    '</div>'
+  );
+};
+
+scenes.terra_mayak = function() {
+  scene(
+    '<div class="text">Внутри маяка — винтовая лестница, а вверху тусклая, почти мёртвая лампа. Рядом с лампой углубление, точно под склянку масла.\n' +
+    'Если залить масло и поджечь — свет вернётся, и в луче проступит первый осколок.</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'terra_light\')">🔥 Залить масло и зажечь лампу</button>' +
+      '<button class="choice" onclick="go(\'hub\')">↩️ Вернуться на развилку</button>' +
+    '</div>'
+  );
+};
+
+scenes.terra_light = function() {
+  if (!state.inv.includes("Склянка масла")) { go('terra_mayak'); return; }
+  state.inv = state.inv.filter(function(x) { return x !== "Склянка масла"; });
+  state.shards++;
+  scene(
+    '<div class="text">Масло плещется в лампу, огонёк разгорается — и маяк Терра Нова снова светит над морем!\n' +
+    'В круге света на полу вспыхивает <b>первый осколок Алмаза</b>. Фарвард щёлкает каблуками: «Свет! Мой свет вернулся!»</div>' +
+    statusbar() +
+    '<div class="final">💎 Осколок 1 из 3 получен!</div>' +
+    '<button class="restart" onclick="go(\'hub\')">Продолжить путь</button>'
+  );
+};
+
+/* ---------- МИСТЕРИЯ ---------- */
+scenes.myst1 = function() {
+  scene(
+    '<h2><span class="badge myst">Мистерия</span></h2>' +
+    '<div class="text">Зелёные холмы, пагода с гонгом и хранительница Лина, которая ловит на ладонь солнечного зайчика.\n' +
+    '«Осколок у меня, — улыбается она, — но отдам его тому, кто отгадает загадку пагоды. Готов слушать?»</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'myst_cat\')">🐱 Заметить котёнка на крыше пекарни</button>' +
+      '<button class="choice" onclick="go(\'myst_riddle\')">🎧 Слушать загадку</button>' +
+    '</div>'
+  );
+};
+
+scenes.myst_cat = function() {
+  scene(
+    '<div class="text">На крыше пекарни жалобно мяукает котёнок Мурзик — забрался и не может спуститься. Пекарь развозит хлеб и не слышит.</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'myst_rescue\')">🪜 Спасать котёнка!</button>' +
+      '<button class="choice" onclick="go(\'myst_riddle\')">↩️ Вернуться к Лине</button>' +
+    '</div>'
+  );
+};
+
+scenes.myst_rescue = function() {
+  state.kindness++;
+  state.inv.push("Головка сыра");
+  scene(
+    '<div class="text">Вы осторожно сняли Мурзика с крыши. Он отряхнулся, а пекарь, узнав о спасении, дал вам <b>головку сыра</b> —\n' +
+    'ту самую, что он всегда откладывал для крысёнка Пыха из Терра Нова.</div>' +
+    '<div class="text">✨ Получено: <b>Головка сыра</b>. Доброта идёт по кругу!</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'myst_riddle\')">🎧 Теперь — к загадке Лины</button>' +
+    '</div>'
+  );
+};
+
+scenes.myst_riddle = function() {
+  scene(
+    '<div class="text">Лина говорит нараспев: «Кричу я без голоса, слышу — без ушей. Обо мне не молвят без тени и без стен. Кто я?»</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'myst_echo\')">🗣 Эхо</button>' +
+      '<button class="choice" onclick="go(\'myst_wrong\')">💭 Тишина</button>' +
+    '</div>'
+  );
+};
+
+scenes.myst_echo = function() {
+  scene(
+    '<div class="text">«Верно — эхо! — Лина хлопает в ладоши. — И ты понял(а) главное: даже молчаливые ответы бывают правильными».</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'myst_shard\')">💎 Получить второй осколок</button>' +
+    '</div>'
+  );
+};
+
+scenes.myst_wrong = function() {
+  scene(
+    '<div class="text">Лина мягко качает головой: «Почти. Послушай каменные стены ещё раз». Она предлагает подумать и вернуться.</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'myst_riddle\')">↩️ Попробовать снова</button>' +
+    '</div>'
+  );
+};
+
+scenes.myst_shard = function() {
+  state.shards++;
+  scene(
+    '<div class="text">Лина достаёт из-за пояса шкатулку: внутри мерцает <b>второй осколок Алмаза</b>.\n' +
+    '«Носи в сердце, а не в кармане, — говорит она. — Так он не потеряется».</div>' +
+    statusbar() +
+    '<div class="final">💎 Осколок 2 из 3 получен!</div>' +
+    '<button class="restart" onclick="go(\'hub\')">Продолжить путь</button>'
+  );
+};
+
+/* ---------- ИМАГО ДЕМИДИ ---------- */
+scenes.imag1 = function() {
+  scene(
+    '<h2><span class="badge imag">Имаго Демиди</span></h2>' +
+    '<div class="text">Красные скалы, кузня и молчаливый кузнец Демид, что бьёт молотом без единого слова. За кузней — вход в пещеру\n' +
+    'светящихся камней. Демид протягивает вам каменную дощечку с надписью: «Возьми себе лишь то, что можешь унести в сердце».</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'imag_smith\')">🔨 Помочь кузнецу разжечь горн</button>' +
+      '<button class="choice" onclick="go(\'imag_cave\')">💎 Сразу войти в пещеру светящихся камней</button>' +
+    '</div>'
+  );
+};
+
+scenes.imag_smith = function() {
+  state.kindness++;
+  scene(
+    '<div class="text">Вы раздуваете меха — пламя вспыхивает, и молот Демида звенит по-настоящему. Он молчит, но глаза его благодарят вас.\n' +
+    'Кузнец кивает в сторону пещеры: для друзей кузни она открыта.</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'imag_cave\')">💎 Теперь — в пещеру</button>' +
+    '</div>'
+  );
+};
+
+scenes.imag_cave = function() {
+  scene(
+    '<div class="text">В пещере — россыпь светящихся камней. Блестит и третий осколок! Но рядом лежит ещё целая горка самоцветов —\n' +
+    'таких, что хватит на целую жизнь. Что выберете?</div>' +
+    statusbar() +
+    '<div class="choices">' +
+      '<button class="choice" onclick="go(\'imag_take\')">💎 Взять только осколок — как велит дощечка</button>' +
+      '<button class="choice" onclick="go(\'imag_greed\')">💰 Набрать полный мешок самоцветов «на всякий случай»</button>' +
+    '</div>'
+  );
+};
+
+scenes.imag_take = function() {
+  state.shards++;
+  state.honesty++;
+  scene(
+    '<div class="text">Вы взяли только осколок — и как только пальцы его коснулись, пещера залилась тёплым светом.\n' +
+    'Самоцветы остались на месте, но и не потускнели: они не добыча, они дом.</div>' +
+    '<div class="text">✨ Вы получили <b>третий осколок Алмаза</b>!</div>' +
+    statusbar() +
+    '<div class="final">💎 Осколок 3 из 3 получен! Пора к сердцу острова!</div>' +
+    '<button class="restart" onclick="go(\'final\')">Отправиться к Алмазу</button>'
+  );
+};
+
+scenes.imag_greed = function() {
+  state.shards++;
+  scene(
+    '<div class="text">Вы насыпали полный мешок самоцветов — и стены пещеры задрожали! Камни потускнели, вход стал сужаться.\n' +
+    'Пришлось спешно выбегать, бросив всё лишнее: мешок с самоцветами исчез, а в руках остался лишь осколок.</div>' +
+    '<div class="text">✨ Вы получили <b>третий осколок</b>, но остров не забыл жадности.</div>' +
+    statusbar() +
+    '<div class="final">💎 Осколок 3 из 3 получен — но с трудом!</div>' +
+    '<button class="restart" onclick="go(\'final\')">Отправиться к Алмазу</button>'
+  );
+};
+
+/* ---------- ХАБ ---------- */
+scenes.hub = function() {
+  scene(
+    '<h2>🗺 Развилка</h2>' +
+    '<div class="text">Вы возвращаетесь к перекрёстку дорог. Корабль ждёт в бухте. Куда дальше?</div>' +
+    statusbar() +
+    '<div class="karta-mini">' +
+      'Старинная карта трёх земель' +
+      '<div class="regions">' +
+        '<button style="background:#7d5ba6" onclick="go(\'terra1\')">🏰 Терра Нова</button>' +
+        '<button style="background:#4c7a4c" onclick="go(\'myst1\')">🌿 Мистерия</button>' +
+        '<button style="background:#b0533a" onclick="go(\'imag1\')">🌋 Имаго Демиди</button>' +
+      '</div>' +
+    '</div>'
+  );
+};
+
+/* ---------- ФИНАЛ ---------- */
+scenes.final = function() {
+  if (state.shards < 3) { go('hub'); return; }
+  let ending;
+  if (state.honesty >= 2 && state.kindness >= 1) {
+    ending = 'Алмаз вспыхивает так ярко, что день на острове продлевается на целый час! Он сияет золотым лучом над тремя землями,\n' +
+      'и все жители видят его в один миг. Крысёнок Пых получает свой сыр, Мурзик сворачивается клубком на солнце, а кузнец Демид впервые за годы улыбается.\n' +
+      'Лучшая концовка: осколки помнили каждый ваш честный и добрый поступок.';
+  } else if (state.honesty >= 1) {
+    ending = 'Алмаз оживает и светится ровным, спокойным светом. Земли получают свет маяка, смех пагоды и звон кузни.\n' +
+      'Но где-то в глубине камня дрожит тень — остров помнит тёмные моменты пути. Хорошая концовка.';
+  } else {
+    ending = 'Алмаз медленно оживает... и свет его выходит серым и холодным. Он светит, но не греет. Жители трёх земель\n' +
+      'выглядывают из домов и молча смотрят на серое сияние. Остров помнит всё. Тревожная концовка — но и она учитель.';
+  }
+  scene(
+    '<h2>✨ Сердце острова ✨</h2>' +
+    '<div class="text">Три осколка сходятся в ваших ладонях и сами плывут к центру карты. Земля дышит. Из глубины поднимается Алмаз...</div>' +
+    '<div class="final"><div class="text">' + ending + '</div></div>' +
+    statusbar() +
+    '<div class="text" style="text-align:center">Осколков: ' + state.shards + ' • Честных поступков: ' + state.honesty + ' • Добрых дел: ' + state.kindness + '</div>' +
+    '<button class="restart" onclick="restart()">⚓ Играть заново (попробовать другую концовку)</button>'
+  );
+};
+
+function restart() {
+  state.shards = 0; state.honesty = 0; state.kindness = 0; state.inv = [];
+  go('start');
+}
+
+function go(name) { scenes[name](); }
+
+go('start');
+</script>
+</body>
+</html>
