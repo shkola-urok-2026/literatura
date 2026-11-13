@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Интерактивная школа: от замысла к среде — доклад</title>
+<style>
+  :root{
+    --navy:#1b2a4a; --navy2:#24365e; --gold:#c9a227; --gold1:#e8d9a8;
+    --bg:#f7f5ef; --card:#ffffff; --line:#e2dcc8; --ink:#22304d; --soft:#5a6478;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Georgia,'Times New Roman',serif; background:var(--bg); color:var(--ink);}
+  .slide{
+    position:relative; width:1280px; height:720px; margin:28px auto;
+    background:var(--card); border:1px solid var(--line);
+    padding:56px 64px; box-shadow:0 10px 30px rgba(27,42,74,.12); overflow:hidden;
+  }
+  .slide:before{content:""; position:absolute; left:0; top:0; bottom:0; width:10px; background:var(--navy);}
+  .slide:after{content:""; position:absolute; left:10px; top:0; bottom:0; width:3px; background:var(--gold);}
+  .kicker{font-family:Arial,sans-serif; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:10px;}
+  h1{font-size:44px; color:var(--navy); line-height:1.15; margin-bottom:12px;}
+  h2{font-size:30px; color:var(--navy); margin-bottom:10px;}
+  .sub{font-size:19px; color:var(--soft); max-width:1000px;}
+  .cols{display:flex; gap:28px; margin-top:26px; align-items:stretch;}
+  .col{flex:1; background:#fbfaf6; border:1px solid var(--line); padding:20px 22px; border-radius:6px;}
+  .col h3{font-size:18px; color:var(--navy); margin-bottom:10px;}
+  .col p, .col li{font-size:15.5px; line-height:1.5;}
+  .col ul{padding-left:18px;}
+  .col li{margin-bottom:8px;}
+  .insight{margin-top:24px; border:2px solid var(--gold); background:#fdf9ec; padding:18px 22px; border-radius:6px;}
+  .insight b{color:var(--navy);}
+  .verdict{position:absolute; left:64px; right:64px; bottom:34px; background:var(--navy); color:#fff;
+    padding:14px 22px; border-left:8px solid var(--gold); font-size:17px; line-height:1.45;}
+  .verdict b{color:var(--gold1);}
+  .msg{background:#fbfaf6; border:1px solid var(--line); border-left:4px solid var(--navy);
+    padding:14px 18px; margin-bottom:14px; border-radius:4px; font-size:15.5px; line-height:1.5;}
+  .msg .who{font-weight:bold; color:var(--navy);}
+  .msg .time{font-family:Arial,sans-serif; font-size:12px; color:var(--soft); margin-left:8px;}
+  .chat{display:flex; gap:20px; align-items:flex-start; margin-top:20px;}
+  .chatcard{width:380px; background:#fff; border:1.5px solid var(--navy); border-radius:14px; padding:18px;}
+  .avatar{width:64px; height:64px; border-radius:50%; background:var(--navy); color:var(--gold1);
+    display:flex; align-items:center; justify-content:center; font-size:26px; margin:0 auto 10px;}
+  .chatname{text-align:center; font-weight:bold; color:var(--navy); font-size:17px;}
+  .chatdesc{margin-top:10px; border:1px dashed var(--gold); background:#fdf9ec; padding:10px; font-size:13.5px; border-radius:6px; text-align:center;}
+  .chatmeta{margin-top:10px; font-family:Arial,sans-serif; font-size:11.5px; color:var(--soft); text-align:center;}
+  .arrow{font-size:40px; color:var(--gold); align-self:center;}
+  table{width:100%; border-collapse:collapse; margin-top:18px; font-size:15px;}
+  th{background:var(--navy); color:#fff; padding:10px 12px; text-align:left; font-weight:bold;}
+  td{border:1px solid var(--line); padding:9px 12px; vertical-align:top; line-height:1.4; background:#fff;}
+  .badge{display:inline-block; background:var(--gold); color:var(--navy); font-family:Arial,sans-serif;
+    font-size:11px; letter-spacing:.08em; padding:3px 10px; border-radius:12px; text-transform:uppercase;}
+  .chain{display:flex; gap:10px; margin-top:20px; align-items:center; flex-wrap:wrap;}
+  .step{background:var(--navy); color:#fff; padding:12px 16px; border-radius:6px; font-size:15px; flex:1; text-align:center; min-width:150px;}
+  .step span{display:block; font-family:Arial,sans-serif; font-size:11px; color:var(--gold1); margin-bottom:4px; letter-spacing:.1em; text-transform:uppercase;}
+  .a{color:var(--gold); font-size:24px;}
+  .a-out{color:var(--navy); border-bottom:1px solid var(--gold);}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px;}
+  .mini{background:#fbfaf6; border:1px solid var(--line); padding:14px 16px; border-radius:6px; font-size:14.5px; line-height:1.45;}
+  .mini b{color:var(--navy);}
+  .pgnum{position:absolute; right:22px; bottom:16px; font-family:Arial,sans-serif; font-size:11px; color:var(--soft);}
+  .birth{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px;}
+  .bchip{background:#fdf9ec; border:1px solid var(--gold); border-radius:16px; padding:4px 10px; font-size:12.5px;}
+</style>
+</head>
+<body>
+
+<!-- 1. ТИТУЛ -->
+<div class="slide">
+  <div style="margin-top:130px; text-align:center;">
+    <div class="kicker">Доклад классного руководителя 6 класса</div>
+    <h1 style="font-size:52px;">Интерактивная школа:<br>от замысла к среде</h1>
+    <p class="sub" style="margin:18px auto 0; max-width:820px;">Как цифровые чаты и интерактивные уроки сложились в целостную образовательную среду —
+    с опорой на ФГОС, закон «Об образовании» и управление через административный ресурс.</p>
+    <div class="insight" style="margin-top:46px; max-width:860px; margin-left:auto; margin-right:auto;">
+      <b>Главный тезис.</b> ИИ и чаты — не «приложение к урокам», а инфраструктура школы нового типа:
+      учебные чаты учат предмету, классный чат объединяет класс, а интерактивные уроки делают знания живыми.
+    </div>
+  </div>
+  <div class="pgnum">1 / 15</div>
+</div>
+
+<!-- 2. ИСХОДНАЯ ТОЧКА -->
+<div class="slide">
+  <div class="kicker">Исходная точка</div>
+  <h2>Как мы пришли к интерактивным урокам</h2>
+  <p class="sub">Проблема не в детях и не в дистанционном формате. Проблема была в инструментах — и мы её увидели своими глазами.</p>
+  <div class="cols">
+    <div class="col">
+      <h3>Как было</h3>
+      <ul>
+        <li>уроки и материалы — «мёртвыми» файлами, которые нужно скачать и открыть;</li>
+        <li>вкладки отвлекают на рекламу и посторонние сайты;</li>
+        <li>чаты — свалка: файлы, скриншоты, объявления — всё в одной ленте;</li>
+        <li>ребёнок тратит силы на поиск, а не на понимание.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Как стало</h3>
+      <ul>
+        <li>живая веб-страница урока: открыл ссылку из чата — и учишься;</li>
+        <li>интерактив удерживает внимание вместо развлечений;</li>
+        <li>каждый чат — со своей ролью, правилами и ритмом;</li>
+        <li>личный опыт: сын осваивал те же сайты, и я видела разницу на себе.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="verdict"><b>Вывод.</b> Мы не добавили технологии к старой практике — мы поменяли саму форму, в которой живёт знание.</div>
+  <div class="pgnum">2 / 15</div>
+</div>
+
+<!-- 3. ИНСАЙТ И ФГОС -->
+<div class="slide">
+  <div class="kicker">Правовая основа</div>
+  <h2>Инсайт и ФГОС: месяц поиска — и ответ</h2>
+  <p class="sub">Месяц изучения нормативной базы дал простой результат: всё, что мы делаем, — законно и соответствует стандарту.</p>
+  <table>
+    <tr><th style="width:34%;">Требование ФГОС</th><th>Как оно выполнено в наших интерактивных уроках</th></tr>
+    <tr><td>Соответствие программе (КТП)</td><td>Календарно-тематическое планирование лежит в основе каждого урока: интерактив повторяет тему и порядок изучения</td></tr>
+    <tr><td>Технологическая карта урока</td><td>Цели, задачи, этапы и планируемые результаты формулируются в промте и проверяются педагогом</td></tr>
+    <tr><td>Наглядность и опорные схемы</td><td>Опорная схема создаётся в Word и прилагается к уроку — её можно распечатать и вклеить</td></tr>
+    <tr><td>ФЗ-273 «Об образовании»</td><td>Урок создаёт педагог, публикуется в официальной среде класса, без рекламы и сторонних сервисов</td></tr>
+  </table>
+  <div class="insight"><b>Ответ комиссии.</b> Все условия соблюдены: КТП — есть, технологическая карта — есть, опорная схема — есть, закон соблюдён.</div>
+  <div class="pgnum">3 / 15</div>
+</div>
+
+<!-- 4. ТЕХНОЛОГИЯ -->
+<div class="slide">
+  <div class="kicker">Технология</div>
+  <h2>Конвейер: из документов — в живой урок</h2>
+  <p class="sub">Один воспроизводимый маршрут. Любой учитель класса может повторить его для любой темы.</p>
+  <div class="chain">
+    <div class="step"><span>Шаг 1</span>Рабочие документы</div><div class="a">→</div>
+    <div class="step"><span>Шаг 2</span>Учебник</div><div class="a">→</div>
+    <div class="step"><span>Шаг 3</span>Промт</div><div class="a">→</div>
+    <div class="step"><span>Шаг 4</span>Интерактивный урок</div>
+  </div>
+  <div class="insight"><b>Примечание.</b> ИИ — инструмент педагога, а не замена. Каждую страницу я создаю и проверяю сама:
+  факты, задания, соответствие программе — за человеком. Технология берёт на себя рутину, педагог — смысл.</div>
+  <div class="verdict"><b>Вывод.</b> Это не разовый эксперимент, а технология: маршрут повторяем, качество воспроизводимо.</div>
+  <div class="pgnum">4 / 15</div>
+</div>
+
+<!-- 5. АНАЛИТИЧЕСКАЯ ЗАПИСКА -->
+<div class="slide">
+  <div class="kicker">Управление</div>
+  <h2>Аналитическая записка и административный ресурс</h2>
+  <p class="sub">Чтобы среда заработала, одного энтузиазма мало — нужен порядок в чатах и решение администрации.</p>
+  <div class="cols">
+    <div class="col">
+      <h3>Диагноз</h3>
+      <ul>
+        <li>чаты класса и предметов превращались в свалку: файлы, скриншоты, объявления — в одной ленте;</li>
+        <li>важное тонет в потоке, исполнение заданий не отслеживается;</li>
+        <li>у каждого учителя — свой формат, у родителей — своя логика.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Решение</h3>
+      <ul>
+        <li>выход из зоны комфорта: аналитическая записка с предложениями — руководству;</li>
+        <li>единые правила оформления и ведения чатов для всех предметов;</li>
+        <li>закреп-объявления, регламенты, контроль исполнения — по единой схеме.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="insight"><b>В терминах менеджмента</b> это называется административный (директивный) ресурс:
+  руководитель использует полномочия, чтобы закрепить новую практику и снять барьер «кто даст команду». Без этого шага изменения остаются инициативой одного человека.</div>
+  <div class="pgnum">5 / 15</div>
+</div>
+
+<!-- 6. УТРО -->
+<div class="slide">
+  <div class="kicker">Витрина одного дня</div>
+  <h2>Утро: «Доброе утро, 6 класс!»</h2>
+  <div class="chat">
+    <div>
+      <div class="msg" style="border-left-color:var(--gold);">
+        <span class="who">Классный руководитель</span><span class="time">08:05</span><br>
+        «Доброе утро, 6 класс! Сегодня я хочу поговорить о <b>доброте</b>. Доброта — это не слабость, это сила.
+        Дневное задание на доброту: сегодня каждый постарается сделать хотя бы одно доброе дело —
+        маленькое или большое, оно будет замечено, и оно вернётся к вам теплом. Согласны? Дайте мне знать 🌞»
+      </div>
+      <div class="insight" style="margin-top:14px;"><b>Шесть педагогических эффектов одного приветствия:</b>
+      ритуал начала дня · эмоциональный контакт с каждым · анонс дня · ценностная точка (доброта) ·
+      вовлечение через вопрос · предсказуемость и опора. Утренний пост — это не «сообщение», а вход в образовательную среду.</div>
+    </div>
+  </div>
+  <div class="verdict"><b>Вывод.</b> День начинается не со звонка, а с контакта: классный руководитель встречает класс в чате раньше, чем в кабинете.</div>
+  <div class="pgnum">6 / 15</div>
+</div>
+
+<!-- 7. ЛИТЕРАТУРА -->
+<div class="slide">
+  <div class="kicker">Витрина одного дня</div>
+  <h2>8:30 · Литература — живой конспект «Дубровского»</h2>
+  <div class="cols">
+    <div class="col" style="flex:1.2;">
+      <div class="msg"><span class="who">Учитель литературы</span><span class="time">8:12</span><br>
+      «Доброе утро, 6 класс! Сегодня работаем по роману А. С. Пушкина <b>„Дубровский“</b>.
+      Конспект перед вами — не файл, а живая страница: читаем, отвечаем, разбираемся».</div>
+      <div class="msg"><span class="who">Ученики отвечают</span><span class="time">8:52</span><br>
+      Ответы по главам приходят прямо в чат — учитель видит, кто работает, и задаёт следующий вопрос.</div>
+    </div>
+    <div class="col" style="flex:1;">
+      <h3>Почему живой текст, а не файл</h3>
+      <ul>
+        <li>файл нужно скачать и открыть — страницу открывает одна ссылка;</li>
+        <li>файл «уходит» в загрузки и теряется — страница всегда на месте;</li>
+        <li>файл читают глазами — страница ставит вопросы и получает ответы.</li>
+      </ul>
+      <p style="margin-top:12px;">🔗 Полный интерактивный урок:<br>
+      <a class="a-out" href="https://shkola-urok-2026.github.io/literatura/dubrovsky.html">интерактивный урок «Дубровский»</a></p>
+    </div>
+  </div>
+  <div class="verdict"><b>Вывод.</b> Таймлайн 8:12 → 8:52 — сорок минут живой работы: ссылка из чата, конспект на экране, ответы в ленте.</div>
+  <div class="pgnum">7 / 15</div>
+</div>
+
+<!-- 8. МАТЕМАТИКА -->
+<div class="slide">
+  <div class="kicker">Витрина одного дня</div>
+  <h2>9:00 · Математика — пост-регламент</h2>
+  <div class="cols">
+    <div class="col" style="flex:1.2;">
+      <div class="msg"><span class="who">Татьяна Викторовна</span><span class="time">9:00</span><br>
+      «Ребята, доброе утро! Порядок работы сегодня такой: <b>1)</b> открываем интерактивный урок по ссылке;
+      <b>2)</b> конспект ведём в тетради; <b>3)</b> домашнее задание — до конца дня; <b>4)</b> вопросы — только в этот чат,
+      я отвечаю до 18:00. Приступаем!»</div>
+    </div>
+    <div class="col">
+      <h3>Два формата — одна система</h3>
+      <ul>
+        <li><b>литература</b> — живой конспект прямо в чате: диалог, вопросы, ответы;</li>
+        <li><b>математика</b> — пост-регламент: номерация шагов, срок, канал вопросов;</li>
+        <li>оба формата — под едиными правилами чатов: структура, вежливость, предсказуемость.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="verdict"><b>Вывод.</b> Учителя — разные, форматы — разные, а правила одни. Так аналитическая записка превращается в практику.</div>
+  <div class="pgnum">8 / 15</div>
+</div>
+
+<!-- 9. ИСТОРИЯ -->
+<div class="slide">
+  <div class="kicker">Витрина одного дня</div>
+  <h2>История — формат с контролем исполнения</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Структура поста</h3>
+      <ul>
+        <li><b>закреп:</b> тема и порядок дня — объявление не тонет;</li>
+        <li><b>конспект .docx:</b> высылается всем в чат, доступен родителям;</li>
+        <li><b>пять вопросов:</b> проверка усвоения — по пройденному материалу;</li>
+        <li><b>срок:</b> ответы до 15.11 до 20:00 — дедлайн явный, не «до завтра».</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Что это даёт</h3>
+      <ul>
+        <li>задание нельзя «потерять» — оно закреплено вверху чата;</li>
+        <li>родитель видит и конспект, и вопрос, и срок;</li>
+        <li>учитель к вечеру видит, кто сдал, — и обращается к тем, кто не сдал, до того, как пробел станет провалом.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="verdict"><b>Вывод.</b> Контроль исполнения — не слежка, а страховка: дедлайн известен заранее, отставание видно сразу.</div>
+  <div class="pgnum">9 / 15</div>
+</div>
+
+<!-- 10. ФИНАЛ ДНЯ -->
+<div class="slide">
+  <div class="kicker">Витрина одного дня</div>
+  <h2>Финал дня: итоги недели и сводка об отсутствующих</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Итоги недели</h3>
+      <ul>
+        <li>каждому предмету — своя лента, каждому заданию — свой срок;</li>
+        <li>конспекты не теряются: живые страницы и файлы собраны по темам;</li>
+        <li>класс работает по одному расписанию — что бы ни происходило за окном.</li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Сводка об отсутствующих</h3>
+      <ul>
+        <li><b>Арина</b> — знак вопроса: не выходила на связь весь день; назначен обход и звонок семье;</li>
+        <li><b>Андрей</b> — поломка техники: уроки переданы в бумажном виде, созвон с родителями.</li>
+      </ul>
+      <p style="margin-top:10px;">Цифровая среда не заменяет человеческое внимание — она его подсвечивает: видно, кто молчит.</p>
+    </div>
+  </div>
+  <div class="verdict"><b>Вывод.</b> Система замечает не только тех, кто отвечает, но и тех, кто пропал. Это и есть забота, встроенная в формат.</div>
+  <div class="pgnum">10 / 15</div>
+</div>
+
+<!-- 11. КВЕСТ -->
+<div class="slide">
+  <div class="kicker">Витрина одного дня</div>
+  <h2>12:16 · Квест «Предприми себя»</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Что произошло</h3>
+      <ul>
+        <li>в ленте дня появляется не предмет, а игра: образовательный квест о предпринимательстве;</li>
+        <li>игра слов в названии: <b>предприятие — предпринимать — предприми себя</b>: сначала пойми себя, потом дело;</li>
+        <li>ссылка на квест: <a class="a-out" href="https://предпримисеба.рф">предпримисеба.рф</a></li>
+      </ul>
+    </div>
+    <div class="col">
+      <h3>Почему это важно</h3>
+      <ul>
+        <li>воспитательная работа и предпрофессиональное обучение встроены в тот же канал, что и уроки;</li>
+        <li>ребёнок не переходит «в другой мир» — среда одна;</li>
+        <li>инициатива и предприимчивость — прямое требование к выпускнику школы.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="insight"><b>Одна лента — весь день.</b> Утренняя доброта, литература, математика, история и предпринимательский квест —
+  всё в одном пространстве. Дитя не переключается между «школой» и «жизнью»: они совмещены.</div>
+  <div class="pgnum">11 / 15</div>
+</div>
+
+<!-- 12. ВЕЧЕР -->
+<div class="slide">
+  <div class="kicker">Витрина одного дня</div>
+  <h2>Вечер: итоги дня «пятница 13-е»</h2>
+  <div class="cols">
+    <div class="col">
+      <div class="msg"><span class="who">Классный руководитель</span><span class="time">вечер</span><br>
+      «Пятница 13-е не сглазила наш класс! Итоги дня: уроки — сделаны, квест — пройден,
+      добрые дела — сделаны. Выходные — заслуженные. В понедельник — по расписанию. Отдыхайте, команда!»</div>
+    </div>
+    <div class="col">
+      <h3>Кольцо дня</h3>
+      <ul>
+        <li><b>утро</b> — приветствие и ценность дня;</li>
+        <li><b>день</b> — предметы, задания, контроль;</li>
+        <li><b>день-плюс</b> — квест и внеурочные события;</li>
+        <li><b>вечер</b> — итоги, обратная связь, «сводка об отсутствующих».</li>
+      </ul>
+    </div>
+  </div>
+  <div class="verdict"><b>Вывод.</b> Кольцо дня замыкается: класс засыпает и просыпается в одной среде. Так из отдельных постов складывается ритм жизни класса.</div>
+  <div class="pgnum">12 / 15</div>
+</div>
+
+<!-- 13. ШЕСТОЙ НА СВЯЗИ -->
+<div class="slide">
+  <div class="kicker">Классный чат</div>
+  <h2>«Шестой на связи»</h2>
+  <p class="sub">Из учебных чатов — в живое пространство класса: уроки, события, помощь и хорошее настроение.</p>
+  <div class="chat">
+    <div class="chatcard">
+      <div class="avatar">📡</div>
+      <div class="chatname">Шестой-на связи</div>
+      <div class="chatmeta">1 из 13 в сети · 13 участников: ученики, родители, классный руководитель</div>
+      <div class="chatdesc">«Шестой — на связи! 📡 Здесь наш класс: уроки, события, помощь и хорошее настроение.
+      Услышали сигнал — отзовись!»</div>
+      <div class="chatmeta">Звонок · Видео · Звук · Найти · Ещё | Участники · Медиа · Файлы · Ссылки</div>
+    </div>
+    <div style="flex:1;">
+      <div class="insight" style="margin-top:0;"><b>Радиоэфир как метафора.</b> Позывной, сигнал, связь — язык чата выбран не случайно.
+      Для ребёнка в дистанционном обучении важно чувствовать: тебя не просто «учитывают» — с тобой держат связь.
+      Чат, где «услышали сигнал — отзовись», превращает сообщение в прикосновение, а класс — в экипаж.</div>
+      <ul style="margin-top:14px; padding-left:18px; font-size:15.5px; line-height:1.6;">
+        <li><b>название — это позиция:</b> не «родители 6А», а команда на связи;</li>
+        <li><b>описание — устав в одной строке:</b> четыре опоры классной жизни заявлены при входе;</li>
+        <li><b>преемственность:</b> из учебного чата в классный ребёнок не попадает в другой мир.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="verdict"><b>Вывод.</b> Учебные чаты учат, классный чат объединяет. Вместе они — среда, в которой ребёнок растёт: и как ученик, и как человек.</div>
+  <div class="pgnum">13 / 15</div>
+</div>
+
+<!-- 14. ПУТЬ ЧАТА -->
+<div class="slide">
+  <div class="kicker">Классный чат</div>
+  <h2>Путь чата: от первых правил — к живому классу</h2>
+  <p class="sub">Начало и последний день работы чата — как регламент превращается в сообщество.</p>
+  <div class="cols">
+    <div class="col">
+      <h3>Начало: устанавливаем порядок</h3>
+      <div class="msg" style="margin-bottom:10px;"><span class="who">Закреп · правила и санкции</span><br>
+      «1-е нарушение — предупреждение 🟡, 2-е — разговор с директором 🔴, 3-е — разговор с родителями.
+      Будьте взаимно вежливы, и наш чат станет местом, куда хочется заходить каждый день! Пишем, общаемся, учимся — вместе!»</div>
+      <div class="msg" style="margin-bottom:0;"><span class="who">«Экстренный совет шестого класса»</span><br>
+      «Наша аватарка ГРУСТИТ! И честно — нам с вами не идёт быть грустными! Мы же 6 класс: шумные, яркие, с идеями из каждой парты!»</div>
+    </div>
+    <div class="col">
+      <h3>Последний день: класс решает сам</h3>
+      <div class="msg" style="margin-bottom:10px;"><span class="who">Голосование за название</span><br>
+      «Шестое чувство» против «Космоса 6-го класса» — 6 проголосовали: дети решают сами.</div>
+      <div class="msg" style="margin-bottom:10px;"><span class="who">Конкурс «Молодёжь против коррупции»</span><br>
+      Работы учеников — плакат «Мы за мир», рисунок «Коррупция — туча, молодёжь против!» — соберём в интерактивный буклет.</div>
+      <div class="msg" style="margin-bottom:0;"><span class="who">Календарь дней рождения</span><br>
+      <div class="birth">
+        <span class="bchip">Настя — 10.09</span><span class="bchip">Александр — 19.09</span>
+        <span class="bchip">Лука — 13.11</span><span class="bchip">Арина — 12.12</span>
+        <span class="bchip">Александр — 20.02</span><span class="bchip">Вероника — 14.03</span>
+        <span class="bchip">Маргарита — 27.04</span><span class="bchip">Денис — 01.05</span>
+        <span class="bchip">Екатерина — 14.07</span><span class="bchip">Константин — 28.08</span>
+      </div></div>
+    </div>
+  </div>
+  <div class="insight"><b>Из регламента — в сообщество.</b> Чат не изменил правила — он вырос над ними: порядок стал привычкой, а привычка — дружбой.
+  Дети — соавторы среды: голосуют, создают, поздравляют. И ни один ребёнок не забыт.</div>
+  <div class="pgnum">14 / 15</div>
+</div>
+
+<!-- 15. ВЫВОДЫ -->
+<div class="slide">
+  <div class="kicker">Итоги</div>
+  <h2>Выводы</h2>
+  <div class="cols">
+    <div class="col">
+      <h3>Система</h3>
+      <p>Интерактивные уроки — не эксперимент, а воспроизводимая технология: рабочие документы → учебник → промт → живая страница.
+      Каждая ссылка — один клик до знания.</p>
+    </div>
+    <div class="col">
+      <h3>Управление</h3>
+      <p>Аналитическая записка + административный ресурс = порядок в чатах школы. Правила едины для всех предметов:
+      структура, вежливость, контроль исполнения, закрепы.</p>
+    </div>
+    <div class="col">
+      <h3>Среда</h3>
+      <p>Утро, день, вечер — кольцо. Учебные чаты учат, классный чат объединяет, квесты воспитывают.
+      Ребёнок живёт в одной среде — и растёт в ней как ученик и как человек.</p>
+    </div>
+  </div>
+  <div class="insight" style="text-align:center; font-size:18px;">
+    <b>Финальная мысль.</b> Мы построили школу, в которой технология — инструмент, порядок — привычка, а связь между людьми — главное. Шестой — на связи 📡
+  </div>
+  <div class="pgnum">15 / 15</div>
+</div>
+
+</body>
+</html>
