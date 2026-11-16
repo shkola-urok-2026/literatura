@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Урок 9. Инструменты сбора данных / план эксперимента / прототип — Индивидуальный проект, 10 класс</title>
+<style>
+  :root{
+    --accent:#4a6fd8; --accent2:#2e9e6b; --warn:#e8912d; --danger:#d84a4a;
+    --bg:#f4f6fb; --card:#ffffff; --ink:#23283d; --muted:#6b7280; --line:#e4e8f2;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif; background:var(--bg); color:var(--ink); line-height:1.55;}
+  .wrap{max-width:960px; margin:0 auto; padding:16px;}
+  header{background:linear-gradient(135deg,#4a6fd8,#7a4ad8); color:#fff; border-radius:14px; padding:22px 26px; margin-bottom:18px;}
+  header h1{font-size:1.45rem; margin-bottom:6px;}
+  header p{opacity:.92; font-size:.95rem;}
+  .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+  .badge{background:rgba(255,255,255,.18); padding:4px 12px; border-radius:20px; font-size:.8rem;}
+  .card{background:var(--card); border-radius:12px; padding:20px 22px; margin-bottom:16px; box-shadow:0 2px 8px rgba(30,40,90,.07);}
+  .card h2{font-size:1.15rem; margin-bottom:12px; color:var(--accent); display:flex; align-items:center; gap:8px;}
+  .num{display:inline-flex; align-items:center; justify-content:center; min-width:30px; height:30px; border-radius:50%; background:var(--accent); color:#fff; font-size:.85rem; flex-shrink:0;}
+  .timer-line{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:10px;}
+  .time-chip{background:#eef1fb; color:var(--accent); font-weight:600; padding:4px 12px; border-radius:20px; font-size:.85rem;}
+  .timer-btn{background:var(--accent2); color:#fff; border:none; border-radius:20px; padding:6px 16px; cursor:pointer; font-size:.85rem;}
+  .timer-btn:hover{filter:brightness(1.08);}
+  .timer-disp{font-weight:700; font-size:1.05rem; color:var(--accent2); min-width:52px;}
+  .goal{background:#f0f7f3; border-left:4px solid var(--accent2); padding:12px 16px; border-radius:0 8px 8px 0; margin-bottom:10px;}
+  ul.clean{list-style:none;}
+  ul.clean li{padding:7px 0 7px 26px; position:relative;}
+  ul.clean li::before{content:"✓"; position:absolute; left:2px; color:var(--accent2); font-weight:700;}
+  .tools{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:12px; margin-top:8px;}
+  .tool{border:1.5px solid var(--line); border-radius:10px; padding:14px; cursor:pointer; transition:.2s;}
+  .tool:hover{border-color:var(--accent); background:#f8faff;}
+  .tool h3{font-size:.98rem; margin-bottom:6px; color:var(--accent);}
+  .tool p{font-size:.85rem; color:var(--muted);}
+  .tool-detail{display:none; margin-top:12px; background:#f8faff; border-radius:8px; padding:14px; font-size:.9rem;}
+  .tool-detail.show{display:block; animation:fade .3s;}
+  @keyframes fade{from{opacity:0; transform:translateY(-4px);} to{opacity:1;}}
+  .q{margin-bottom:14px; padding-bottom:12px; border-bottom:1px dashed var(--line);}
+  .q:last-child{border-bottom:none;}
+  .q p{font-weight:600; margin-bottom:8px;}
+  .opt{display:block; padding:8px 12px; border:1.5px solid var(--line); border-radius:8px; margin-bottom:6px; cursor:pointer; font-size:.9rem; transition:.15s;}
+  .opt:hover{border-color:var(--accent); background:#f8faff;}
+  .opt.correct{border-color:var(--accent2); background:#eafaf2; font-weight:600;}
+  .opt.wrong{border-color:var(--danger); background:#fdeeee;}
+  .quiz-ok{margin-top:6px; font-size:.88rem; font-weight:600; color:var(--accent2); display:none;}
+  .quiz-bad{margin-top:6px; font-size:.88rem; font-weight:600; color:var(--danger); display:none;}
+  .check{display:flex; align-items:flex-start; gap:10px; padding:8px 0; cursor:pointer;}
+  .check input{width:18px; height:18px; margin-top:2px; accent-color:var(--accent2); cursor:pointer;}
+  .check.done span{text-decoration:line-through; color:var(--muted);}
+  .bar{height:8px; background:var(--line); border-radius:6px; overflow:hidden; margin-top:10px;}
+  .bar-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--accent2),#6fd8a8); transition:.4s;}
+  table{width:100%; border-collapse:collapse; font-size:.88rem; margin-top:10px;}
+  th{background:#eef1fb; color:var(--accent); text-align:left; padding:8px 10px;}
+  td{padding:8px 10px; border-bottom:1px solid var(--line);}
+  .proto{background:#fdf6ec; border-left:4px solid var(--warn); padding:14px 16px; border-radius:0 8px 8px 0;}
+  .cycle{display:flex; gap:6px; flex-wrap:wrap; margin:10px 0; }
+  .cycle span{background:#fff; border:2px solid var(--warn); border-radius:20px; padding:5px 14px; font-size:.85rem; font-weight:600;}
+  .hw{background:#fff7e6; border-radius:10px; padding:14px 16px;}
+  .hw h3{color:var(--warn); margin-bottom:8px;}
+  .score-table input[type=number]{width:56px; padding:4px 6px; border:1.5px solid var(--line); border-radius:6px; font-size:.95rem; text-align:center;}
+  .total{font-size:1.1rem; font-weight:700; margin-top:8px;}
+  .pill-ok{color:var(--accent2);} .pill-bad{color:var(--danger);}
+  footer{text-align:center; color:var(--muted); font-size:.8rem; padding:14px;}
+  details{margin:6px 0;}
+  summary{cursor:pointer; font-weight:600; padding:6px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>Урок № 9. Инструменты сбора данных / план эксперимента / прототипа</h1>
+  <p>Индивидуальный проект · 10 класс · Модуль 2 «Планирование и методология» · контрольная точка КТ2</p>
+  <div class="badges">
+    <span class="badge">45 минут</span>
+    <span class="badge">урок-практикум</span>
+    <span class="badge">КТ2: анкета / гайд / план эксперимента</span>
+    <span class="badge">ГБОУ «Подо-Калиновская школа»</span>
+  </div>
+</header>
+
+<!-- ЦЕЛЬ -->
+<div class="card">
+  <h2><span class="num">🎯</span> Цель урока</h2>
+  <div class="goal">К концу урока каждый ученик имеет <b>готовый инструмент сбора данных</b> — анкету, гайд интервью или план эксперимента/прототип — согласованный с целью и задачами своего проекта.</div>
+  <p style="font-size:.9rem; color:var(--muted);">Планируемые результаты: выбирать метод под задачу · проектировать инструмент · планировать пилот · давать и принимать обратную связь · соблюдать этику работы с респондентами.</p>
+</div>
+
+<!-- ЭТАП 1 -->
+<div class="card">
+  <h2><span class="num">1</span> Разминка: почему плохие вопросы губят проект <span class="time-chip">3 мин</span>
+      <button class="timer-btn" onclick="startTimer(180,this)">▶ Таймер</button> <span class="timer-disp" id="t1"></span></h2>
+  <p><b>Проблемный вопрос на доске:</b> <i>«Почему анкета с плохими вопросами портит даже хороший проект?»</i></p>
+  <details><summary>Разбор примера для обсуждения</summary>
+    <p style="font-size:.92rem;">Вопрос <i>«Вам нравится наша столовая?»</i> содержит сразу три дефекта: <b>двойной смысл</b> (нравится что — еда, интерьер, цена?), <b>наводящую формулировку</b> (подталкивает ответить «да») и <b>отсутствие шкалы</b> (что считать ответом?). Один вопрос — три ошибки. Сегодня научимся их видеть и исправлять.</p>
+  </details>
+</div>
+
+<!-- ЭТАП 2 -->
+<div class="card">
+  <h2><span class="num">2</span> Актуализация: мост «метод → инструмент» <span class="time-chip">5 мин</span>
+      <button class="timer-btn" onclick="startTimer(300,this)">▶ Таймер</button> <span class="timer-disp" id="t2"></span></h2>
+  <p>2–3 ученика озвучивают выбранный на уроке 8 метод и его обоснование. На доске собираем цепочку:</p>
+  <p style="text-align:center; font-weight:600; margin:12px 0; font-size:1.02rem;">
+    цель проекта → задачи → какие данные нужны → инструмент, который их соберёт
+  </p>
+  <div class="tools">
+    <div class="tool" onclick="toggle('d1')"><h3>📋 Опрос / интервью</h3><p>значит, создаём анкету или гайд интервью</p><div class="tool-detail" id="d1">Анкета — для большой группы, закрытые вопросы, обработка в таблице. Гайд — для 5–15 глубинных интервью, открытые вопросы «как? почему? что?».</div></div>
+    <div class="tool" onclick="toggle('d2')"><h3>🧪 Эксперимент</h3><p>значит, пишем план эксперимента</p><div class="tool-detail" id="d2">Гипотеза «если А, то Б», переменные (что меняем / измеряем / контролируем), число замеров, оборудование и безопасность.</div></div>
+    <div class="tool" onclick="toggle('d3')"><h3>🛠 Продукт</h3><p>значит, делаем прототип и ТЗ на его проверку</p><div class="tool-detail" id="d3">ТЗ на 1 страницу: какую функцию проверяем, критерий успеха, кто тестировщики, как фиксируем наблюдения. Макет — даже бумажный.</div></div>
+  </div>
+</div>
+
+<!-- ЭТАП 3 -->
+<div class="card">
+  <h2><span class="num">3</span> Мини-лекция: критерии качества инструмента <span class="time-chip">10 мин</span>
+      <button class="timer-btn" onclick="startTimer(600,this)">▶ Таймер</button> <span class="timer-disp" id="t3"></span></h2>
+  <ul class="clean">
+    <li><b>Каждый вопрос работает на задачу</b> проекта — ничего «на всякий случай»;</li>
+    <li><b>Закрытые вопросы</b> с исчерпывающими вариантами + не более 2–3 открытых;</li>
+    <li><b>Нет наводящих и двойных вопросов</b>; шкалы единообразны (например, 1–5);</li>
+    <li><b>Объём: до 10–12 вопросов</b>, заполнение до 5–7 минут;</li>
+    <li><b>Этика:</b> первый вопрос — простой и необидный, персональные данные — только с согласия.</li>
+  </ul>
+  <div class="proto" style="margin-top:12px;">
+    <b>Что такое прототип?</b> Это <b>упрощённая работающая модель будущего продукта</b>, которую делают заранее, чтобы дёшево проверить идею до больших вложений. Он отвечает на вопрос «сработает ли идея так, как задумано?». Прототип может быть совсем грубым: макет сайта из бумаги, модель из картона, первая версия программы с одной кнопкой.
+    <div class="cycle"><span>создал</span><span>→ дал попробовать людям</span><span>→ записал замечания</span><span>→ улучшил</span><span>→ повторил</span></div>
+    В нашем курсе это версия <b>0.1</b> из Модуля 3 — от неё вы будете идти к версии 1.0.
+  </div>
+  <details style="margin-top:10px;"><summary>📐 Проверь себя: что такое прототип? (интерактивный тест)</summary>
+    <div class="q"><p>1. Прототип — это…</p>
+      <span class="opt" onclick="answer(this,true,'q1')">упрощённая работающая модель продукта для проверки идеи</span>
+      <span class="opt" onclick="answer(this,false,'q1')">окончательная версия продукта</span>
+      <span class="opt" onclick="answer(this,false,'q1')">красивая презентация проекта</span>
+      <div class="quiz-ok" id="ok1">✓ Верно! Главное — проверить идею дёшево и быстро.</div>
+      <div class="quiz-bad" id="bad1">✗ Нет. Прототип — черновая версия для проверки, не финал.</div>
+    </div>
+    <div class="q"><p>2. Сколько функций обычно проверяет первый прототип?</p>
+      <span class="opt" onclick="answer(this,false,'q2')">все сразу</span>
+      <span class="opt" onclick="answer(this,true,'q2')">одну ключевую</span>
+      <span class="opt" onclick="answer(this,false,'q2')">ни одной, только внешний вид</span>
+      <div class="quiz-ok" id="ok2">✓ Верно! Проверяем одну ключевую функцию.</div>
+      <div class="quiz-bad" id="bad2">✗ Не все. Сначала — одна ключевая функция.</div>
+    </div>
+    <div class="q"><p>3. Какой вопрос в анкете — наводящий?</p>
+      <span class="opt" onclick="answer(this,true,'q3')">«Не согласны ли вы, что наша столовая отличная?»</span>
+      <span class="opt" onclick="answer(this,false,'q3')">«Оцените обеды в столовой по шкале от 1 до 5»</span>
+      <span class="opt" onclick="answer(this,false,'q3')">«Каким блюдам вы отдаёте предпочтение?»</span>
+      <div class="quiz-ok" id="ok3">✓ Верно! Формулировка подталкивает к ответу — это ошибка.</div>
+      <div class="quiz-bad" id="bad3">✗ Подумайте ещё: какой вопрос подсказывает «правильный» ответ?</div>
+    </div>
+    <div class="q"><p>4. Что обязательно должно быть в плане эксперимента?</p>
+      <span class="opt" onclick="answer(this,false,'q4')">красивый постер</span>
+      <span class="opt" onclick="answer(this,true,'q4')">проверяемая гипотеза и переменные</span>
+      <span class="opt" onclick="answer(this,false,'q4')">список друзей для помощи</span>
+      <div class="quiz-ok" id="ok4">✓ Верно! Гипотеза «если А, то Б» + что меняем, что измеряем, что контролируем.</div>
+      <div class="quiz-bad" id="bad4">✗ Основа эксперимента — гипотеза и переменные.</div>
+    </div>
+  </details>
+</div>
+
+<!-- ЭТАП 4 -->
+<div class="card">
+  <h2><span class="num">4</span> Практикум: создаём свой инструмент <span class="time-chip">17 мин</span>
+      <button class="timer-btn" onclick="startTimer(1020,this)">▶ Таймер</button> <span class="timer-disp" id="t4"></span></h2>
+  <p>Работаем индивидуально (парная работа — по типу проектов). Учитель консультирует, на доске — чек-лист качества.</p>
+  <ul class="clean">
+    <li><b>Анкета</b> — минимум 8 вопросов с вариантами; кто выбрал опрос — сразу собирает в Яндекс/Google Форме, к концу урока должна быть ссылка;</li>
+    <li><b>Гайд интервью</b> — 6 вопросов с пояснением, кого интервьюируем;</li>
+    <li><b>План эксперимента</b> — гипотеза, переменные, число замеров, таблица записи результатов;</li>
+    <li><b>Прототип</b> — ТЗ на 1 страницу: функция, макет на бумаге, критерий проверки.</li>
+  </ul>
+  <details><summary>📎 Образец: анкета «О школьном питании» (разобрать вместе)</summary>
+    <table>
+      <tr><th>№</th><th>Вопрос</th><th>Формат</th></tr>
+      <tr><td>1</td><td>В каком ты классе?</td><td>выбор: 5 / 6 / 7 / 8 / 9 / 10 / 11</td></tr>
+      <tr><td>2</td><td>Пользуешься ли ты школьной столовой?</td><td>да / нет</td></tr>
+      <tr><td>3</td><td>Оцени вкус обедов по шкале 1–5</td><td>шкала 1–5</td></tr>
+      <tr><td>4</td><td>Оцени разнообразие меню по шкале 1–5</td><td>шкала 1–5</td></tr>
+      <tr><td>5</td><td>Хватает ли тебе времени на обед?</td><td>шкала 1–5</td></tr>
+      <tr><td>6</td><td>Какие блюда ты хотел бы видеть чаще?</td><td>мультивыбор</td></tr>
+      <tr><td>7</td><td>Что мешает тебе питаться в столовой?</td><td>варианты + «другое»</td></tr>
+      <tr><td>8</td><td>Я соблюдаю режим питания в школе</td><td>согласен / не согласен</td></tr>
+      <tr><td>9</td><td>Что бы ты изменил в школьном питании?</td><td>открытый</td></tr>
+      <tr><td>10</td><td>Твои предложения по меню</td><td>открытый</td></tr>
+    </table>
+    <p style="font-size:.85rem; color:var(--muted); margin-top:8px;">Почему анкета устроена так: 8 закрытых вопросов, 2 открытых, единая шкала, ни одного наводящего вопроса, каждый вопрос работает на задачу проекта. Каркас легко переписать под любую школьную тему — нагрузку домашними заданиями, загруженность спортзала и т. д.</p>
+  </details>
+</div>
+
+<!-- ЭТАП 5 -->
+<div class="card">
+  <h2><span class="num">5</span> КТ2: взаимная экспертиза по чек-листу <span class="time-chip">7 мин</span>
+      <button class="timer-btn" onclick="startTimer(420,this)">▶ Таймер</button> <span class="timer-disp" id="t5"></span></h2>
+  <p>Обмен работами в парах/четвёрках. Партнёр отмечает пункты прямо на экране:</p>
+  <div id="checklist">
+    <label class="check"><input type="checkbox" onchange="tick(this)"><span>Каждый вопрос/замер связан с задачей проекта</span></label>
+    <label class="check"><input type="checkbox" onchange="tick(this)"><span>Нет наводящих формулировок</span></label>
+    <label class="check"><input type="checkbox" onchange="tick(this)"><span>Формат ответов удобен для обработки (таблица)</span></label>
+    <label class="check"><input type="checkbox" onchange="tick(this)"><span>Есть согласие респондента / безопасность эксперимента</span></label>
+    <label class="check"><input type="checkbox" onchange="tick(this)"><span>Понятна инструкция для участника</span></label>
+  </div>
+  <div class="bar"><div class="bar-fill" id="barfill"></div></div>
+  <p style="font-size:.85rem; color:var(--muted); margin-top:6px;">Партнёр пишет <b>1 сильную сторону</b> и <b>1 конкретное предложение</b> по улучшению. Автор вносит правки прямо на уроке.</p>
+</div>
+
+<!-- ЭТАП 6 + ДЗ -->
+<div class="card">
+  <h2><span class="num">6</span> Итоги и домашнее задание <span class="time-chip">3 мин</span>
+      <button class="timer-btn" onclick="startTimer(180,this)">▶ Таймер</button> <span class="timer-disp" id="t6"></span></h2>
+  <p><b>Домашнее задание — «Подготовить пилот»:</b></p>
+  <ul class="clean">
+    <li>Доработать инструмент по замечаниям экспертизы (обязательно);</li>
+    <li>Провести пилот: 2–3 респондента / 1–2 пробных замера / «бумажный» прототип на одном пользователе;</li>
+    <li>Записать, что «сломалось»: какие вопросы непонятны, где не хватило вариантов, что поправить;</li>
+    <li>Принести исправленный инструмент + протокол пилота (5–7 предложений: кто, когда, что выяснилось).</li>
+  </ul>
+  <p style="margin-top:10px; font-size:.9rem;">🔜 Следующий урок — «Проведение пилота»: тестируем инструменты малой выборкой и исправляем недочёты.</p>
+</div>
+
+<!-- ОЦЕНИВАНИЕ -->
+<div class="card">
+  <h2><span class="num">📊</span> Критерии оценивания КТ2 (10 баллов = 10 % годовой оценки)</h2>
+  <div class="score-table">
+    <table>
+      <tr><th>Критерий</th><th>Баллы</th><th>Оценка учителя</th></tr>
+      <tr><td>Инструмент соответствует задачам проекта</td><td>3</td><td><input type="number" min="0" max="3" value="0" oninput="score()"></td></tr>
+      <tr><td>Качество формулировок (без наводящих вопросов, корректные шкалы)</td><td>3</td><td><input type="number" min="0" max="3" value="0" oninput="score()"></td></tr>
+      <tr><td>Продумана обработка данных</td><td>2</td><td><input type="number" min="0" max="2" value="0" oninput="score()"></td></tr>
+      <tr><td>Этика и согласие / безопасность</td><td>2</td><td><input type="number" min="0" max="2" value="0" oninput="score()"></td></tr>
+    </table>
+    <div class="total">Итого: <span id="tot">0</span> / 10 <span id="verdict"></span></div>
+  </div>
+</div>
+
+<footer>Интерактивный конспект урока № 9 · Индивидуальный проект · 10 класс · 2026/2027 учебный год<br>ГБОУ «Подо-Калиновская школа Алешкинского района»</footer>
+</div>
+
+<script>
+function toggle(id){document.getElementById(id).classList.toggle('show');}
+function answer(el,ok,q){
+  el.parentNode.querySelectorAll('.opt').forEach(o=>o.classList.remove('correct','wrong'));
+  el.classList.add(ok?'correct':'wrong');
+  document.getElementById('ok'+q.slice(1)).style.display = ok?'block':'none';
+  document.getElementById('bad'+q.slice(1)).style.display = ok?'none':'block';
+}
+function tick(cb){cb.parentNode.classList.toggle('done',cb.checked);
+  const boxes=document.querySelectorAll('#checklist input');
+  const done=[...boxes].filter(b=>b.checked).length;
+  document.getElementById('barfill').style.width=(done/boxes.length*100)+'%';}
+function score(){
+  const inputs=document.querySelectorAll('.score-table input');
+  let s=0; inputs.forEach(i=>{s+=Math.min(Math.max(0,+i.value||0),+i.max);});
+  document.getElementById('tot').textContent=s;
+  const v=document.getElementById('verdict');
+  if(s>=8){v.className='pill-ok'; v.textContent=' — инструмент готов к пилоту ✓';}
+  else if(s>=5){v.textContent=' — доработать перед пилотом'; v.className='';}
+  else {v.className='pill-bad'; v.textContent=' — вернуться к шаблону и исправить';}
+}
+const timers={};
+function startTimer(sec,btn){
+  const id=btn.closest('.card').querySelector('.timer-disp').id;
+  clearInterval(timers[id]);
+  let left=sec;
+  const disp=document.getElementById(id);
+  timers[id]=setInterval(()=>{
+    const m=Math.floor(left/60), s=left%60;
+    disp.textContent=m+':'+String(s).padStart(2,'0');
+    left--;
+    if(left<0){clearInterval(timers[id]); disp.textContent='⏰ время!';}
+  },1000);
+}
+</script>
+</body>
+</html>
