@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>День правовой помощи детям — 20 ноября 2026 | Буклет</title>
+<style>
+  :root{
+    --accent:#4a6fd8; --accent2:#2e9e6b; --warn:#e8912d; --danger:#d84a4a;
+    --bg:#f4f6fb; --card:#ffffff; --ink:#23283d; --muted:#6b7280; --line:#e4e8f2;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:Arial, Helvetica, sans-serif; background:var(--bg); color:var(--ink); line-height:1.55; margin:0; padding:0;}
+  .wrap{max-width:860px; margin:0 auto; padding:16px;}
+  header{background:linear-gradient(135deg,#4a6fd8,#7a4ad8); color:#fff; border-radius:14px; padding:22px 18px; text-align:center;}
+  header .school{opacity:.92; font-size:.95rem;}
+  header h1{font-size:1.6rem; margin:10px 0 6px;}
+  header .date{display:inline-block; background:rgba(255,255,255,.18); padding:6px 14px; border-radius:20px; font-weight:bold; margin-top:6px;}
+  section{background:var(--card); border-radius:14px; padding:18px; margin-top:14px; box-shadow:0 2px 8px rgba(30,40,90,.07);}
+  h2{font-size:1.15rem; color:var(--accent); margin-bottom:10px;}
+  .badge{display:inline-block; background:#eef2fd; color:var(--accent); border-radius:20px; padding:4px 12px; font-size:.85rem; font-weight:bold; margin:2px 4px 2px 0;}
+  .docs{list-style:none;}
+  .docs li{padding:8px 0 8px 28px; border-bottom:1px dashed var(--line); position:relative;}
+  .docs li:before{content:"§"; position:absolute; left:4px; color:var(--accent2); font-weight:bold;}
+  /* event cards */
+  .event{border:1px solid var(--line); border-radius:12px; margin-top:10px; overflow:hidden;}
+  .event-head{padding:12px 14px; cursor:pointer; display:flex; align-items:center; gap:10px; background:#f8faff;}
+  .event-head:hover{background:#eef2fd;}
+  .event-num{min-width:34px; height:34px; border-radius:50%; background:var(--accent); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:bold; flex-shrink:0;}
+  .event-title{font-weight:bold;}
+  .event-body{display:none; padding:12px 14px; border-top:1px solid var(--line); font-size:.95rem;}
+  .event.open .event-body{display:block;}
+  .tag{display:inline-block; border-radius:16px; padding:3px 10px; font-size:.8rem; font-weight:bold; margin-left:auto;}
+  .tag.a{background:#e6f7ef; color:#1d7a4f;}
+  .tag.b{background:#fdf1e0; color:#a2620f;}
+  .meta{color:var(--muted); font-size:.85rem; margin-top:6px;}
+  /* quiz */
+  .q{margin-top:14px; padding:12px; border:1px solid var(--line); border-radius:12px;}
+  .q p.q-text{font-weight:bold; margin-bottom:8px;}
+  .opt{display:block; width:100%; text-align:left; padding:9px 12px; margin-top:6px; border:1px solid var(--line); border-radius:10px; background:#fff; cursor:pointer; font-size:.95rem; font-family:inherit;}
+  .opt:hover{background:#f0f4ff;}
+  .opt.ok{background:#e6f7ef; border-color:var(--accent2); font-weight:bold;}
+  .opt.bad{background:#fdeaea; border-color:var(--danger);}
+  .expl{display:none; margin-top:8px; padding:8px 10px; background:#f2f7fb; border-radius:8px; font-size:.9rem; color:#3a4560;}
+  .score{margin-top:12px; font-weight:bold; color:var(--accent);}
+  /* help */
+  .help-item{display:flex; gap:12px; align-items:flex-start; padding:10px 0; border-bottom:1px dashed var(--line);}
+  .help-item:last-child{border-bottom:none;}
+  .help-ico{font-size:1.4rem;}
+  a.tel{font-weight:bold; color:var(--accent); text-decoration:none; font-size:1.05rem;}
+  footer{text-align:center; color:var(--muted); font-size:.85rem; padding:18px 8px;}
+  .hint{font-size:.85rem; color:var(--muted); margin-top:8px;}
+  @media print{ body{background:#fff;} .event-body{display:block;} section{box-shadow:none; border:1px solid #ddd;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="school">ГБОУ ХО «Подо-Калиновская школа Алешкинского района»</div>
+  <h1>📖 День правовой помощи детям</h1>
+  <div class="date">🗓 20 ноября 2026, пятница</div><br>
+  <div class="date" style="margin-top:8px;">Всероссийская акция · приказ № 115 от 06.11.2026</div>
+</header>
+
+<section>
+  <h2>Что это за день?</h2>
+  <p>20 ноября в России проходит Всероссийская акция <b>«День правовой помощи детям»</b>. В этот день каждый школьник может бесплатно получить ответ юриста на любой вопрос о своих правах: в школе, дома, в интернете.</p>
+  <p class="hint">Приказ о проведении акции в нашей школе — № 115 от 06.11.2026. Ответственные: Бондаренко Л.В. и Яркова А.В.</p>
+  <p style="margin-top:10px;"><b>Главные документы о правах ребёнка:</b></p>
+  <ul class="docs">
+    <li><b>Конвенция ООН о правах ребёнка</b> — главный международный документ (1989)</li>
+    <li><b>Конституция РФ</b> — основные права гражданина с рождения</li>
+    <li><b>Семейный кодекс РФ</b> — права в семье</li>
+    <li><b>КоАП РФ</b> — административная ответственность (с 16 лет)</li>
+    <li><b>Уголовный кодекс РФ</b> — уголовная ответственность (за ряд преступлений — с 14 лет)</li>
+  </ul>
+</section>
+
+<section>
+  <h2>План мероприятий · 20 ноября</h2>
+  <p class="hint">Нажми на карточку, чтобы раскрыть подробности 👇</p>
+
+  <div class="event">
+    <div class="event-head" onclick="this.parentElement.classList.toggle('open')">
+      <div class="event-num">1</div>
+      <div class="event-title">Правовой час «Права и обязанности несовершеннолетних: знай, чтобы не нарушать»</div>
+      <span class="tag b">8–11 кл.</span>
+    </div>
+    <div class="event-body">
+      Разъяснение административной и уголовной ответственности несовершеннолетних, разбор типичных правонарушений.<br>
+      <b>Гость:</b> инспектор по делам несовершеннолетних ОМВД России «Алешкинский» старший лейтенант полиции Кузив Е.Г.
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-head" onclick="this.parentElement.classList.toggle('open')">
+      <div class="event-num">2</div>
+      <div class="event-title">Классный час «Твои права заканчиваются там, где начинаются права другого»</div>
+      <span class="tag b">9–11 кл.</span>
+    </div>
+    <div class="event-body">
+      Формирование уважения к правам других людей, профилактика конфликтов и буллинга.<br>
+      <b>Проводят:</b> классные руководители 9–11 классов.
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-head" onclick="this.parentElement.classList.toggle('open')">
+      <div class="event-num">3</div>
+      <div class="event-title">Своя игра «Знаю свои права»</div>
+      <span class="tag a">8–9 кл.</span>
+    </div>
+    <div class="event-body">
+      Интерактивная викторина по категориям: «Семья», «Школа», «Интернет», «Труд», «Ответственность».<br>
+      <b>Проводит:</b> советник директора по воспитанию Яркова А.В.
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-head" onclick="this.parentElement.classList.toggle('open')">
+      <div class="event-num">4</div>
+      <div class="event-title">Конкурс плакатов и буклетов «Молодёжь против коррупции»</div>
+      <span class="tag a">5–11 кл.</span>
+    </div>
+    <div class="event-body">
+      Творческое задание с последующей выставкой работ в школе.<br>
+      <b>Организаторы:</b> совет обучающихся, классные руководители 5–11 классов.
+    </div>
+  </div>
+
+  <div class="event">
+    <div class="event-head" onclick="this.parentElement.classList.toggle('open')">
+      <div class="event-num">5</div>
+      <div class="event-title">Информационная перемена «Права ребёнка в цифровом мире»</div>
+      <span class="tag a">10–11 кл.</span>
+    </div>
+    <div class="event-body">
+      Обсуждение кибербуллинга, цифровой безопасности и защиты персональных данных.<br>
+      <b>Проводит:</b> советник директора по воспитанию Яркова А.В.
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🧠 Проверь себя: мини-тест</h2>
+  <div class="q">
+    <p class="q-text">1. С какого возраста наступает административная ответственность?</p>
+    <button class="opt" data-ok="0" onclick="pick(this)">С 14 лет</button>
+    <button class="opt" data-ok="1" onclick="pick(this)">С 16 лет</button>
+    <button class="opt" data-ok="0" onclick="pick(this)">С 18 лет</button>
+    <div class="expl">Верно: административная ответственность по общему правилу — с 16 лет (КоАП РФ, ст. 2.3).</div>
+  </div>
+  <div class="q">
+    <p class="q-text">2. Что такое кибербуллинг?</p>
+    <button class="opt" data-ok="0" onclick="pick(this)">Компьютерная игра</button>
+    <button class="opt" data-ok="0" onclick="pick(this)">Урок информатики</button>
+    <button class="opt" data-ok="1" onclick="pick(this)">Травля в интернете: оскорбления, угрозы, распространение слухов</button>
+    <div class="expl">Кибербуллинг — унижение и травля с помощью сети. Это нарушение прав человека, и за некоторые действия предусмотрена ответственность. Обсудим на информационной перемене 20 ноября.</div>
+  </div>
+  <div class="q">
+    <p class="q-text">3. Какое право ребёнка закреплено в Конвенции ООН?</p>
+    <button class="opt" data-ok="1" onclick="pick(this)">Право на образование</button>
+    <button class="opt" data-ok="0" onclick="pick(this)">Право водить машину</button>
+    <button class="opt" data-ok="0" onclick="pick(this)">Право самому решать, делать ли домашнее задание</button>
+    <div class="expl">Право на образование закреплено в ст. 28 Конвенции ООН о правах ребёнка и в Конституции РФ.</div>
+  </div>
+  <div class="q">
+    <p class="q-text">4. Что такое коррупция?</p>
+    <button class="opt" data-ok="0" onclick="pick(this)">Помощь другу в учёбе</button>
+    <button class="opt" data-ok="1" onclick="pick(this)">Использование служебного положения ради личной выгоды</button>
+    <button class="opt" data-ok="0" onclick="pick(this)">Сдача экзамена</button>
+    <div class="expl">Коррупция — злоупотребление властью или служебным положением ради личной выгоды. Против неё и направлен конкурс плакатов «Молодёжь против коррупции».</div>
+  </div>
+  <div class="score" id="score">Решено: 0 из 4</div>
+</section>
+
+<section>
+  <h2>🆘 Куда обращаться за правовой помощью?</h2>
+  <div class="help-item">
+    <div class="help-ico">📞</div>
+    <div><b>Детский телефон доверия</b><br><a class="tel" href="tel:88002000122">8-800-2000-122</a> — бесплатно, анонимно, круглосуточно</div>
+  </div>
+  <div class="help-item">
+    <div class="help-ico">🚨</div>
+    <div><b>Экстренные службы</b><br><a class="tel" href="tel:112">112</a> — единый номер · <a class="tel" href="tel:102">102</a> — полиция</div>
+  </div>
+  <div class="help-item">
+    <div class="help-ico">🏫</div>
+    <div><b>В нашей школе</b><br>Ответственные за День правовой помощи детям:<br>Бондаренко Л.В. (зам. директора по ВР) и Яркова А.В. (советник директора по воспитанию) — обратитесь к ним с любым вопросом о правах.</div>
+  </div>
+</section>
+
+<footer>
+  ГБОУ ХО «Подо-Калиновская школа Алешкинского района»<br>
+  Буклет подготовлен к Всероссийской акции «День правовой помощи детям» · 20.11.2026
+</footer>
+
+</div>
+<script>
+function pick(btn){
+  var q=btn.parentElement;
+  if(q.dataset.done) return;
+  q.dataset.done="1";
+  var opts=q.querySelectorAll(".opt");
+  opts.forEach(function(o){o.disabled=true;});
+  if(btn.dataset.ok==="1"){btn.classList.add("ok");}
+  else{btn.classList.add("bad"); q.querySelector('.opt[data-ok="1"]').classList.add("ok");}
+  var total=document.querySelectorAll(".q").length;
+  var done=document.querySelectorAll(".q[data-done]").length;
+  var right=document.querySelectorAll(".q .opt.ok[data-ok='1']").length;
+  document.getElementById("score").textContent="Решено: "+done+" из "+total+" · Правильных ответов: "+right;
+}
+</script>
+</body>
+</html>
