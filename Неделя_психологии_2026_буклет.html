@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Неделя психологии 2026 — интерактивный буклет</title>
+<style>
+  :root{
+    --pink:#ff5c8a; --violet:#7c5cff; --teal:#22c1b6; --yellow:#ffd166;
+    --bg1:#f6f4ff; --card:#ffffff; --ink:#2b2350;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: linear-gradient(160deg,#f6f4ff 0%, #ffeef6 60%, #eafcf9 100%);
+    color:var(--ink); line-height:1.55;
+  }
+  .wrap{max-width:760px; margin:0 auto; padding:16px 16px 48px;}
+  header{
+    border-radius:0 0 28px 28px;
+    background: linear-gradient(120deg,#7c5cff 0%, #ff5c8a 55%, #ffd166 120%);
+    color:#fff; padding:34px 22px 30px; text-align:center;
+    box-shadow:0 10px 30px rgba(124,92,255,.25);
+  }
+  header .logo{font-size:46px;}
+  header h1{font-size:26px; margin:8px 0 6px; text-shadow:0 2px 6px rgba(0,0,0,.15);}
+  header p{opacity:.95; font-size:15px;}
+  .badge{
+    display:inline-block; background:rgba(255,255,255,.22); border:1px solid rgba(255,255,255,.45);
+    padding:6px 16px; border-radius:999px; margin-top:10px; font-size:14px; font-weight:600;
+  }
+  section{margin-top:26px;}
+  h2.title{font-size:20px; display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  h2.title .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(120deg,var(--pink),var(--violet));}
+  .card{background:var(--card); border-radius:20px; padding:18px;
+    box-shadow:0 6px 18px rgba(43,35,80,.08); margin-bottom:14px;}
+  .acc{border-radius:20px; overflow:hidden; box-shadow:0 6px 18px rgba(43,35,80,.08); margin-bottom:12px;}
+  .acc button{
+    width:100%; text-align:left; border:none; cursor:pointer; font-size:16px; font-weight:700;
+    padding:16px 18px; display:flex; align-items:center; gap:12px; color:#fff; transition:.2s;
+  }
+  .acc .a1{background:linear-gradient(120deg,#ff5c8a,#ff8f6b);}
+  .acc .a2{background:linear-gradient(120deg,#7c5cff,#5a8dff);}
+  .acc .a3{background:linear-gradient(120deg,#22c1b6,#3ecf8e);}
+  .acc button .arrow{margin-left:auto; transition:.25s;}
+  .acc.open .arrow{transform:rotate(180deg);}
+  .acc .panel{display:none; background:#fff; padding:16px 18px; font-size:15px;}
+  .acc.open .panel{display:block; animation:fadeIn .3s;}
+  @keyframes fadeIn{from{opacity:0; transform:translateY(-6px);} to{opacity:1;}}
+  .panel ul{margin:8px 0 0 18px;}
+  .panel li{margin-bottom:6px;}
+  .day{border-left:5px solid var(--violet); background:#fff; border-radius:14px;
+      padding:14px 16px; margin-bottom:12px; box-shadow:0 4px 14px rgba(43,35,80,.07);}
+  .day h3{font-size:16px; margin-bottom:6px;}
+  .day .when{display:inline-block; font-size:13px; font-weight:700; color:#7c5cff;
+      background:#f1edff; padding:3px 10px; border-radius:999px; margin-bottom:8px;}
+  .day p{font-size:14.5px;}
+  .day.d1{border-color:#ff5c8a;} .day.d2{border-color:#7c5cff;} .day.d3{border-color:#22c1b6;}
+  .day.d4{border-color:#ffb547;} .day.d5{border-color:#3ecf8e;}
+  .q{margin-bottom:16px;}
+  .q b{font-size:15px;}
+  .opts{display:grid; gap:8px; margin-top:8px;}
+  .opt{border:2px solid #ece7ff; background:#faf9ff; border-radius:12px; padding:10px 14px;
+    cursor:pointer; font-size:14.5px; transition:.15s; text-align:left; width:100%;}
+  .opt:hover{border-color:var(--violet);}
+  .opt.correct{border-color:#3ecf8e; background:#eafff5;}
+  .opt.wrong{border-color:#ff5c8a; background:#fff0f4;}
+  .expl{display:none; margin-top:8px; font-size:13.5px; background:#fff9e6; border-radius:10px; padding:10px 12px;}
+  #quizResult{display:none; text-align:center; font-size:17px; font-weight:800;
+      background:linear-gradient(120deg,#fff3d6,#ffe3ef); border-radius:16px; padding:16px;}
+  .breath{text-align:center;}
+  .circle{
+    width:120px; height:120px; border-radius:50%; margin:16px auto; cursor:pointer;
+    background:radial-gradient(circle at 35% 30%, #a58bff, #7c5cff 70%);
+    color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px;
+    transition:transform 4s ease-in-out; user-select:none;
+  }
+  .hint{font-size:13.5px; color:#6b63a0;}
+  .moods{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+  .mood{font-size:30px; width:60px; height:60px; border-radius:18px; border:2px solid #ece7ff;
+    background:#faf9ff; cursor:pointer; transition:.15s; display:flex; align-items:center; justify-content:center;}
+  .mood:hover{transform:scale(1.12); border-color:var(--pink);}
+  #moodMsg{margin-top:12px; text-align:center; font-size:14.5px; font-weight:600; min-height:42px; color:#7c5cff;}
+  .contact{display:flex; gap:12px; align-items:flex-start; margin-bottom:12px;}
+  .contact .ic{font-size:26px;}
+  .contact a{color:var(--violet); font-weight:700; text-decoration:none; word-break:break-all;}
+  .steps li{margin-bottom:8px;}
+  footer{margin-top:34px; text-align:center; font-size:13px; color:#8b83b8;}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🧠💚</div>
+  <h1>Неделя психологии — 2026</h1>
+  <p>ГБОУ ХО «Подо-Калиновская школа Алешкинского района»</p>
+  <span class="badge">📅 23–27 ноября • финал в преддверии Дня психолога</span>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2 class="title"><span class="dot"></span>Приветствие</h2>
+    <div class="card">
+      <p>Дорогие друзья! С <b>23 по 27 ноября</b> в нашей школе проходит <b>Неделя психологии</b> — время, когда мы учимся понимать себя, поддерживать друг друга и находить спокойствие даже в трудные дни.</p>
+      <p style="margin-top:8px">В этом буклете — программа недели, мини-квиз, техника дыхания и контакты, где всегда могут помочь. Листайте, нажимайте, пробуйте! 👇</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="title"><span class="dot"></span>Три направления недели</h2>
+
+    <div class="acc open">
+      <button class="a1">💪 Блок 1. Не растеряться, когда трудно<span class="arrow">▾</span></button>
+      <div class="panel">
+        <p>Навыки, которые помогают в любой ситуации: замечать свои эмоции, называть их словами и справляться с сильными переживаниями.</p>
+        <ul>
+          <li>Учимся распознавать, что мы чувствуем: радость, злость, тревогу, обиду.</li>
+          <li>Осваиваем простые способы саморегуляции — дыхание, счёт, «стоп-слово».</li>
+          <li>Разбираем трудные ситуации и ищем выход вместе с группой.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc">
+      <button class="a2">🤝 Блок 2. Учимся договариваться и поддерживать друг друга<span class="arrow">▾</span></button>
+      <div class="panel">
+        <p>Навыки общения и тёплый климат в классе: как решать споры миром и быть рядом с другом.</p>
+        <ul>
+          <li>Я-высказывания: говорить о себе, не обвиняя других.</li>
+          <li>Правила мирного спора: слушать, уточнять, искать решение вместе.</li>
+          <li>Как поддержать ровесника, которому трудно, — простыми действиями.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc">
+      <button class="a3">🕊 Блок 3. Шаги спокойствия: от переживаний к действию<span class="arrow">▾</span></button>
+      <div class="panel">
+        <p>Допсихологическая помощь и самопомощь: что делать, если тревожно, обидно или страшно, — себе и другу.</p>
+        <ul>
+          <li>Алгоритм поддержки друга: заметить — выслушать — позвать взрослого.</li>
+          <li>Техники самоуспокоения: дыхание «по квадрату», «5-4-3-2-1», безопасное место.</li>
+          <li>Куда обращаться за помощь — и почему это сильный поступок, а не слабость.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="title"><span class="dot"></span>Программа недели 📅</h2>
+    <p class="hint" style="margin-bottom:12px">Время занятий — в «воспитательном окне» 12:10–14:00, дистанционно (ссылки — в воспитательных группах). Расписание уточняйте у классного руководителя.</p>
+
+    <div class="day d1">
+      <h3>Понедельник, 23 ноября — «Открываем неделю!»</h3>
+      <span class="when">12:10–14:00 • все классы</span>
+      <p>Торжественный старт Недели психологии: анонс событий, флешмоб «Цветное настроение». Для 2–6 классов — игровое занятие «Не растеряться, когда трудно».</p>
+    </div>
+    <div class="day d2">
+      <h3>Вторник, 24 ноября — «День дружбы и поддержки»</h3>
+      <span class="when">12:10–14:00 • 1–11 классы</span>
+      <p>Классные часы «Учимся договариваться». Для 7–11 классов — тренинг «Я-высказывания и мирные споры». Акция «Комплимент по кругу» в воспитательных группах.</p>
+    </div>
+    <div class="day d3">
+      <h3>Среда, 25 ноября — «День спокойствия»</h3>
+      <span class="when">12:10–14:00 • все классы</span>
+      <p>Осваиваем техники самопомощи: дыхание «по квадрату» (есть в этом буклете!), «5-4-3-2-1». Мини-практикум для старшеклассников «От переживаний к действию».</p>
+    </div>
+    <div class="day d4">
+      <h3>Четверг, 26 ноября — «День семьи и доверия»</h3>
+      <span class="when">12:10–14:00 • родители и классы</span>
+      <p>Онлайн-встреча для родителей: «Поддерживаем ребёнка, берегём себя» + рассказ о сервисе «Цифровой психолог». Для обучающихся — занятие «Кому и как рассказать о трудном».</p>
+    </div>
+    <div class="day d5">
+      <h3>Пятница, 27 ноября — «Финал недели» 🎉</h3>
+      <span class="when">12:10–14:00 • все классы</span>
+      <p>Итоговый квиз «Психология вокруг нас» (он тоже есть в этом буклете!), подведение итогов челленджа «Шаги спокойствия», благодарности активным участникам.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="title"><span class="dot"></span>Мини-квиз: проверь себя 🎮</h2>
+    <div class="card" id="quiz">
+      <div class="q" data-c="1">
+        <b>1. Друг расстроился после контрольной. Что сделать первым делом?</b>
+        <div class="opts">
+          <button class="opt" data-i="0">Сказать: «Да ладно, ерунда»</button>
+          <button class="opt" data-i="1">Выслушать и дать выговориться</button>
+          <button class="opt" data-i="2">Сразу дать совет, как надо было учить</button>
+        </div>
+        <div class="expl">💡 Верно: сначала — выслушать. Поддержка начинается с внимания, а не с оценки проблемы.</div>
+      </div>
+      <div class="q" data-c="1">
+        <b>2. Что такое Я-высказывание?</b>
+        <div class="opts">
+          <button class="opt" data-i="0">«Ты вечно меня перебиваешь!»</button>
+          <button class="opt" data-i="1">«Мне обидно, когда меня перебивают»</button>
+          <button class="opt" data-i="2">«Все так делают, ничего страшного»</button>
+        </div>
+        <div class="expl">💡 Говорим о своих чувствах («мне», «я»), а не обвиняем другого через «ты» — так спор не разгорается.</div>
+      </div>
+      <div class="q" data-c="0">
+        <b>3. Правило поддержки друга означает:</b>
+        <div class="opts">
+          <button class="opt" data-i="0">Спроси, поддержи, а если серьёзно — скажи взрослому</button>
+          <button class="opt" data-i="1">Спорь, подумай, защищайся</button>
+          <button class="opt" data-i="2">Сохраняй спокойствие, прячься, убегай</button>
+        </div>
+        <div class="expl">💡 Заметил, что другу по-настоящему плохо, — обратись к взрослому. Это не «стукачество», это забота.</div>
+      </div>
+      <div class="q" data-c="2">
+        <b>4. Ты сильно разволновался перед выступлением. Быстрый способ помочь себе:</b>
+        <div class="opts">
+          <button class="opt" data-i="0">Сесть и ждать, пока отпустит</button>
+          <button class="opt" data-i="1">Проверить соцсети, чтобы отвлечься</button>
+          <button class="opt" data-i="2">Сделать несколько медленных выдохов — например, «по квадрату»</button>
+        </div>
+        <div class="expl">💡 Длинный выдох «включает» спокойствие: попробуйте технику ниже в этом буклете.</div>
+      </div>
+      <div class="q" data-c="1">
+        <b>5. Если тревожно и кажется, что никто не поймёт, можно:</b>
+        <div class="opts">
+          <button class="opt" data-i="0">Молчать и ждать, что пройдёт само</button>
+          <button class="opt" data-i="1">Позвонить на «Школу доверия» 8 (800) 707-02-01 — бесплатно и анонимно</button>
+          <button class="opt" data-i="2">Написать об этом только в соцсети</button>
+        </div>
+        <div class="expl">💡 Линия «Школа доверия» работает круглосуточно. Попросить помощи — сильный шаг.</div>
+      </div>
+      <div id="quizResult"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="title"><span class="dot"></span>Дыхание «по квадрату» 🫁</h2>
+    <div class="card breath">
+      <p>Нажмите на круг и следуйте за подсказками: <b>вдох — пауза — выдох — пауза</b>. По 4 секунды на каждый шаг. Повторите 4 круга — тревога заметно отступит.</p>
+      <div class="circle" id="bcircle">Нажми!</div>
+      <p class="hint" id="bhint">Техника помогает переключить внимание с переживаний на тело.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="title"><span class="dot"></span>Как твоё настроение? 🌈</h2>
+    <div class="card">
+      <div class="moods">
+        <button class="mood" data-m="0" title="Радость">😄</button>
+        <button class="mood" data-m="1" title="Спокойствие">🙂</button>
+        <button class="mood" data-m="2" title="Усталость">😴</button>
+        <button class="mood" data-m="3" title="Тревога">😟</button>
+        <button class="mood" data-m="4" title="Грусть">😢</button>
+        <button class="mood" data-m="5" title="Злость">😠</button>
+      </div>
+      <div id="moodMsg">Нажми на смайлик — получи подсказку на день.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="title"><span class="dot"></span>Памятка: 5 шагов поддержки друга ✨</h2>
+    <div class="card">
+      <ol class="steps">
+        <li><b>Заметить.</b> «Ты чего-то расстроен? Я рядом» — уже поддержка.</li>
+        <li><b>Выслушать.</b> Не перебивать, не оценивать, не спешить с советами.</li>
+        <li><b>Признать чувства.</b> «Понимаю, это правда обидно».</li>
+        <li><b>Предложить вместе.</b> Прогуляться, сделать уроки, просто побыть рядом.</li>
+        <li><b>Позвать взрослого</b>, если ситуация серьёзная. Сохранение в секрете — не лучшее решение, когда речь о безопасности.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="title"><span class="dot"></span>Где получить помощь 🛟</h2>
+    <div class="card">
+      <div class="contact"><span class="ic">📞</span><div><b>Линия «Школа доверия»</b><br><a href="tel:88007070201">8 (800) 707-02-01</a> — бесплатно, круглосуточно, анонимно.</div></div>
+      <div class="contact"><span class="ic">🌐</span><div><b>Сайт «Школа доверия» МГППУ</b><br><a href="https://mgppu.ru/about/hotline">mgppu.ru/about/hotline</a> — можно написать обращение.</div></div>
+      <div class="contact"><span class="ic">💻</span><div><b>«Цифровой психолог»</b><br>онлайн-консультации через <a href="https://www.gosuslugi.ru">Госуслуги</a> — для родителей и обучающихся.</div></div>
+      <div class="contact"><span class="ic">🏫</span><div><b>В нашей школе</b><br>обращайтесь к классному руководителю или в воспитательную группу — подскажут, куда и как обратиться.</div></div>
+    </div>
+  </section>
+
+  <footer>
+    Неделя психологии — 2026 • ГБОУ ХО «Подо-Калиновская школа Алешкинского района»<br>
+    23–27 ноября • Материалы подготовлены с опорой на методические рекомендации Минпросвещения России и ФКЦ МГППУ
+  </footer>
+</div>
+
+<script>
+document.querySelectorAll('.acc button').forEach(function(b){
+  b.addEventListener('click', function(){
+    b.parentElement.classList.toggle('open');
+  });
+});
+
+var answered = 0, rights = 0;
+document.querySelectorAll('.q').forEach(function(q){
+  var correct = parseInt(q.dataset.c);
+  q.querySelectorAll('.opt').forEach(function(o,i){
+    o.addEventListener('click', function(){
+      if (q.classList.contains('done')) return;
+      q.classList.add('done');
+      answered++;
+      if (i === correct) { o.classList.add('correct'); rights++; }
+      else { o.classList.add('wrong'); q.querySelectorAll('.opt')[correct].classList.add('correct'); }
+      q.querySelector('.expl').style.display='block';
+      if (answered === 5){
+        var res = document.getElementById('quizResult');
+        var title = rights >= 5 ? '🏆 Психологический гуру!' :
+                    rights >= 3 ? '🌟 Знаток эмоций — почти гуру!' :
+                    '🌱 Хороший старт — пройди ещё раз!';
+        res.innerHTML = 'Твой результат: <b>' + rights + ' из 5</b><br>' + title;
+        res.style.display='block';
+      }
+    });
+  });
+});
+
+var circle = document.getElementById('bcircle'), hint = document.getElementById('bhint');
+var phases = [
+  {t:'Вдох…', h:'Плавно вдыхай носом'},
+  {t:'Пауза',  h:'Задержи воздух'},
+  {t:'Выдох…', h:'Медленно выдыхай ртом'},
+  {t:'Пауза',  h:'Подожди, потом вдохни снова'}
+];
+var running = false, phase = 0;
+function nextPhase(){
+  if (!running) return;
+  var p = phases[phase % 4];
+  circle.textContent = p.t; hint.textContent = p.h;
+  circle.style.transform = 'scale(' + (phase % 4 === 0 ? 1.5 : 1) + ')';
+  phase++;
+  setTimeout(nextPhase, 4000);
+}
+circle.addEventListener('click', function(){
+  running = !running;
+  if (running){ phase = 0; circle.style.transition='transform 4s ease-in-out'; nextPhase(); }
+  else { circle.style.transition='transform .3s'; circle.style.transform='scale(1)'; circle.textContent='Нажми!'; hint.textContent='Пауза. Нажми ещё раз, чтобы продолжить.'; }
+});
+
+var msgs = [
+  '😄 Отлично! Поделись этой энергией с классом — доброта заразительна.',
+  '🙂 Спокойствие — суперсила. Пусть день будет мягким.',
+  '😴 Устал? Вечером — без экрана и с долгим сном. Ты заслужил отдых.',
+  '😟 Тревожно? Сделай 4 круга дыхания «по квадрату» выше — и скажи о чувстве взрослому, которому доверяешь.',
+  '😢 Грусть — это нормально. Не оставайся с ней один: напиши другу или классному руководителю.',
+  '😠 Злость просит выхода — но мирного: спорт, прогулка, «я-высказывание». Толкать и кричать — не наш путь.'
+];
+document.querySelectorAll('.mood').forEach(function(m){
+  m.addEventListener('click', function(){
+    document.getElementById('moodMsg').textContent = msgs[parseInt(m.dataset.m)];
+  });
+});
+</script>
+</body>
+</html>
