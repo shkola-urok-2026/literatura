@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>План работы СВ и ПО 2026/27 — интерактивная версия</title>
+<style>
+  :root{
+    --accent:#2b6cb0; --accent2:#e53e3e; --ok:#38a169;
+    --bg:#f4f6fa; --card:#ffffff; --text:#1a202c; --muted:#718096;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Segoe UI',Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.5;}
+  header{background:linear-gradient(135deg,#2b6cb0,#553c9a); color:#fff; padding:24px 16px; text-align:center;}
+  header h1{font-size:1.3rem; margin-bottom:6px;}
+  header p{font-size:.9rem; opacity:.9;}
+  .progress-wrap{max-width:960px; margin:14px auto 0; background:rgba(255,255,255,.25); border-radius:20px; height:14px; overflow:hidden;}
+  .progress-bar{height:100%; width:0%; background:#fbd38d; transition:width .4s;}
+  .progress-label{color:#fff; font-size:.85rem; margin-top:6px;}
+  nav{max-width:960px; margin:16px auto; display:flex; flex-wrap:wrap; gap:8px; padding:0 12px;}
+  nav button{border:none; padding:10px 14px; border-radius:20px; background:#fff; color:var(--accent); font-weight:600; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,.08); font-size:.9rem;}
+  nav button.active{background:var(--accent); color:#fff;}
+  main{max-width:960px; margin:0 auto 40px; padding:0 12px;}
+  section.tab{display:none;}
+  section.tab.visible{display:block; animation:fade .3s;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1;}}
+  .card{background:var(--card); border-radius:12px; padding:18px; margin-bottom:16px; box-shadow:0 1px 4px rgba(0,0,0,.07);}
+  .card h2{font-size:1.05rem; color:var(--accent); margin-bottom:10px; display:flex; align-items:center; gap:8px;}
+  .badge{background:var(--accent2); color:#fff; border-radius:10px; font-size:.7rem; padding:2px 8px;}
+  table{width:100%; border-collapse:collapse; font-size:.9rem;}
+  th,td{padding:8px 10px; border-bottom:1px solid #e2e8f0; text-align:left; vertical-align:top;}
+  th{background:#ebf4ff; color:#2a4365;}
+  tr:hover td{background:#f7fafc;}
+  .time{color:var(--accent2); font-weight:700; white-space:nowrap;}
+  ul.check{list-style:none;}
+  ul.check li{padding:7px 4px; border-bottom:1px dashed #e2e8f0; display:flex; gap:10px; align-items:flex-start;}
+  ul.check li input{transform:scale(1.3); margin-top:3px; cursor:pointer; accent-color:var(--ok);}
+  ul.check li.done span{ text-decoration:line-through; color:var(--muted);}
+  .stat{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+  .stat div{flex:1 1 120px; background:#ebf4ff; border-radius:10px; padding:10px; text-align:center;}
+  .stat b{display:block; font-size:1.25rem; color:var(--accent);}
+  .stat small{color:var(--muted);}
+  footer{text-align:center; color:var(--muted); font-size:.8rem; padding:12px;}
+  .reset{background:none; border:1px solid var(--accent2); color:var(--accent2); border-radius:16px; padding:4px 12px; cursor:pointer; font-size:.8rem; margin-top:10px;}
+  @media(max-width:600px){ th,td{padding:6px; font-size:.8rem;} header h1{font-size:1.05rem;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>📘 План работы советника по воспитанию и педагога-организатора</h1>
+  <p>ГБОУ ХО «Подо-Калиновская школа Алешкинского района» • 2026/27 учебный год • дистанционный формат</p>
+  <div class="progress-wrap"><div class="progress-bar" id="pbar"></div></div>
+  <div class="progress-label" id="plabel">Выполнено задач: 0 из 0</div>
+</header>
+<nav id="tabs">
+  <button data-tab="t0" class="active">🏠 Режим</button>
+  <button data-tab="t1">📅 Неделя</button>
+  <button data-tab="t2">🗓 Месяц</button>
+  <button data-tab="t3">🧭 Направления</button>
+  <button data-tab="t4">🛡 Профилактика</button>
+  <button data-tab="t5">📈 Показатели</button>
+</nav>
+<main>
+
+<section class="tab visible" id="t0">
+  <div class="card">
+    <h2>⏰ Режим работы в дистанте <span class="badge">ключевое</span></h2>
+    <table>
+      <tr><th>Направление</th><th>Время</th><th>Формат</th></tr>
+      <tr><td>Ежедневный пост «Доброе утро, школа!» в воспитательную группу</td><td class="time">8:00–8:30</td><td>Онлайн-публикация</td></tr>
+      <tr><td>Живое взаимодействие с детьми: Штаб ВР, ЮИД, театр «Мим», «Калинка», Совет самоуправления</td><td class="time">12:10–14:00</td><td>Яндекс Телемост</td></tr>
+      <tr><td>Пост о «Разговорах о важном»</td><td>Понедельник</td><td>ВК / воспитательная группа</td></tr>
+      <tr><td>Публикации ВК, контент, отчёты, документация</td><td>Весь день</td><td>Дистанционно</td></tr>
+      <tr><td>Встречи с военными организациями</td><td>1 р/мес, 12:10–14:00</td><td>Онлайн-встреча</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>🎯 Цель и задачи года</h2>
+    <ul class="check">
+      <li><input type="checkbox" id="c0"><span>Единое воспитательное пространство (урочная + внеурочная + доп. образование)</span></li>
+      <li><input type="checkbox" id="c1"><span>Патриотическое воспитание: ОБЗР, ДНКР, Год единства народов России (Указ № 962)</span></li>
+      <li><input type="checkbox" id="c2"><span>100% охват внеурочной деятельностью</span></li>
+      <li><input type="checkbox" id="c3"><span>Наставничество: молодые педагоги, ОВЗ, группа риска</span></li>
+      <li><input type="checkbox" id="c4"><span>Профориентация: ярмарка профессий, дни профориентации</span></li>
+      <li><input type="checkbox" id="c5"><span>Профилактика и безопасность: недели, квесты, месячники</span></li>
+      <li><input type="checkbox" id="c6"><span>Цифровая трансформация: ИКТ, мультимедиа, ИИ-инструменты</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="tab" id="t1">
+  <div class="card">
+    <h2>📅 Еженедельный цикл — чек-лист</h2>
+    <ul class="check">
+      <li><input type="checkbox" id="w0"><span><b>Понедельник.</b> Пост о «Разговоре о важном»; контроль РоВ у классных руководителей</span></li>
+      <li><input type="checkbox" id="w1"><span><b>Вторник.</b> Заседание Штаба ВР и текущие дела (12:10–14:00)</span></li>
+      <li><input type="checkbox" id="w2"><span><b>Среда.</b> ЮИД: занятие / подготовка к конкурсам; профилактический контент</span></li>
+      <li><input type="checkbox" id="w3"><span><b>Четверг.</b> Театр «Мим»: репетиция; Совет самоуправления (по плану актива)</span></li>
+      <li><input type="checkbox" id="w4"><span><b>Пятница.</b> Отряд «Калинка»: акция недели; итоговый пост в ВК и воспитательную группу</span></li>
+      <li><input type="checkbox" id="w5"><span><b>Каждый день.</b> Утренний пост в окне 8:00–8:30</span></li>
+    </ul>
+    <p style="margin-top:10px; font-size:.85rem; color:var(--muted)">Отметки сохраняются в браузере — можно вести понедельный контроль.</p>
+  </div>
+</section>
+
+<section class="tab" id="t2">
+  <div class="card">
+    <h2>🗓 Ежемесячный цикл</h2>
+    <ul class="check">
+      <li><input type="checkbox" id="m0"><span>Встреча с представителями военных организаций (Телемост)</span></li>
+      <li><input type="checkbox" id="m1"><span>Планёрка с классными руководителями по воспитательной работе</span></li>
+      <li><input type="checkbox" id="m2"><span>Заседание Совета самоуправления (1–2 раза в месяц)</span></li>
+      <li><input type="checkbox" id="m3"><span>Профилактическое событие: Единый день безопасности, антибуллинг-урок и др.</span></li>
+      <li><input type="checkbox" id="m4"><span>Публикации ВКонтакте: анонсы, итоги, отчёты (постоянно)</span></li>
+      <li><input type="checkbox" id="m5"><span>Отчётность по итогам месяца (последняя неделя)</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>🏛 Ключевые даты 2026/27 (из общешкольного плана)</h2>
+    <table>
+      <tr><th>Дата</th><th>Событие</th></tr>
+      <tr><td>1 сентября</td><td>День знаний</td></tr>
+      <tr><td>5 октября</td><td>Концерт ко Дню учителя</td></tr>
+      <tr><td>18 октября</td><td>День отца</td></tr>
+      <tr><td>до 4 ноября</td><td>День народного единства</td></tr>
+      <tr><td>29 ноября</td><td>День матери</td></tr>
+      <tr><td>декабрь</td><td>День герба и Конституции; Новогодние мероприятия</td></tr>
+      <tr><td>февраль</td><td>Месячник гражданско-патриотического воспитания; День защитника Отечества</td></tr>
+      <tr><td>8 марта</td><td>Концерт к Международному женскому дню</td></tr>
+      <tr><td>8–14 марта</td><td>«Широкая Масленица»</td></tr>
+      <tr><td>до 27 апреля</td><td>Праздник Весны и Труда, субботник</td></tr>
+      <tr><td>май</td><td>«Последний звонок», «Прощание с начальной школой», выставка к 9 Мая</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="tab" id="t3">
+  <div class="card">
+    <h2>🧭 Совет самоуправления</h2>
+    <ul class="check">
+      <li><input type="checkbox" id="s0"><span>Планирование и модерация заседаний (12:10–14:00)</span></li>
+      <li><input type="checkbox" id="s1"><span>Выборы актива класса и школы — сентябрь</span></li>
+      <li><input type="checkbox" id="s2"><span>Вовлечение Совета в апробацию трёхуровневой системы оценивания поведения</span></li>
+      <li><input type="checkbox" id="s3"><span>Самостоятельные мероприятия Совета: идеи, сценарии, ответственные</span></li>
+      <li><input type="checkbox" id="s4"><span>Ежемесячные новости Совета в ВКонтакте</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>🎨 Кружки и объединения</h2>
+    <ul class="check">
+      <li><input type="checkbox" id="k0"><span><b>ЮИД</b> — отряд, конкурсы ПДД, занятия по безопасности дорожного движения</span></li>
+      <li><input type="checkbox" id="k1"><span><b>Театр «Мим»</b> — онлайн-репетиции и постановки, участие в конкурсах</span></li>
+      <li><input type="checkbox" id="k2"><span><b>«Калинка»</b> — социальные, экологические и событийные акции волонтёров</span></li>
+      <li><input type="checkbox" id="k3"><span><b>Штаб ВР</b> — еженедельная координация (вторник)</span></li>
+      <li><input type="checkbox" id="k4"><span><b>«Движение Первых»</b> и Центр детских инициатив — акции, слёты</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>🎖 Патриотическое воспитание и историческое просвещение</h2>
+    <ul class="check">
+      <li><input type="checkbox" id="p0"><span>Событийное сопровождение РоВ и Дней воинской славы</span></li>
+      <li><input type="checkbox" id="p1"><span>Проект «Без срока давности», тематические РоВ исторической направленности</span></li>
+      <li><input type="checkbox" id="p2"><span>Школьный исторический квест (ноябрь)</span></li>
+      <li><input type="checkbox" id="p3"><span>Онлайн-экскурсии по музеям (январь – апрель)</span></li>
+      <li><input type="checkbox" id="p4"><span>Выставка к 9 Мая «Помним. Гордимся. Храним»</span></li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>💼 Профориентация и документация</h2>
+    <ul class="check">
+      <li><input type="checkbox" id="d0"><span>Ярмарка профессий (ноябрь); дни профориентации (февраль)</span></li>
+      <li><input type="checkbox" id="d1"><span>Встречи с представителями профессий и выпускниками (март)</span></li>
+      <li><input type="checkbox" id="d2"><span>Электронный журнал воспитательной работы</span></li>
+      <li><input type="checkbox" id="d3"><span>Сбор сведений о запрете фото/видеосъёмки до публикаций с детьми</span></li>
+      <li><input type="checkbox" id="d4"><span>Отчёты по полугодиям, аналитика анкетирования</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="tab" id="t4">
+  <div class="card">
+    <h2>🛡 Профилактика — план мероприятий</h2>
+    <table>
+      <tr><th>№</th><th>Мероприятие</th><th>Классы</th><th>Сроки</th></tr>
+      <tr><td>1</td><td>Неделя безопасности: ПДД, пожарная безопасность, антибуллинг (онлайн)</td><td>1–11</td><td>сентябрь</td></tr>
+      <tr><td>2</td><td>Антибуллинговые события: игры на сплочение, классные часы</td><td>1–9</td><td>октябрь, февраль</td></tr>
+      <tr><td>3</td><td>День солидарности в борьбе с терроризмом; День Героев Отечества</td><td>1–11</td><td>3 сентября, 9 декабря</td></tr>
+      <tr><td>4</td><td>Квесты по кибербезопасности (с лекторием «Родительский контроль»)</td><td>5–9</td><td>апрель</td></tr>
+      <tr><td>5</td><td>Профилактические посты и памятки</td><td>все</td><td>в течение года</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>✅ Текущий месяц — профилактический чек-лист</h2>
+    <ul class="check">
+      <li><input type="checkbox" id="pr0"><span>Ежемесячная профилактическая памятка в воспитательную группу</span></li>
+      <li><input type="checkbox" id="pr1"><span>Профилактическое событие месяца проведено</span></li>
+      <li><input type="checkbox" id="pr2"><span>Пост об итогах профилактики опубликован в ВК</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="tab" id="t5">
+  <div class="card">
+    <h2>📈 Показатели эффективности</h2>
+    <table>
+      <tr><th>Показатель</th><th>Цель</th><th>Контроль</th></tr>
+      <tr><td>Посты 8:00–8:30</td><td>≥95% учебных дней</td><td>ежемесячно</td></tr>
+      <tr><td>Охват внеурочной деятельностью</td><td>100%</td><td>сентябрь, январь, май</td></tr>
+      <tr><td>Заседания Совета самоуправления</td><td>≥1 раза в месяц</td><td>ежемесячно</td></tr>
+      <tr><td>Встречи с военными организациями</td><td>12 в год</td><td>ежемесячно</td></tr>
+      <tr><td>Публикации ВКонтакте</td><td>≥12 в месяц</td><td>ежемесячно</td></tr>
+      <tr><td>Удовлетворённость детей и родителей</td><td>≥80%</td><td>по полугодиям</td></tr>
+    </table>
+  </div>
+  <div class="card">
+    <h2>🧮 Ваш личный прогресс по плану</h2>
+    <div class="stat">
+      <div><b id="stAll">0</b><small>задач всего</small></div>
+      <div><b id="stDone">0</b><small>выполнено</small></div>
+      <div><b id="stPct">0%</b><small>прогресс</small></div>
+    </div>
+    <button class="reset" onclick="localStorage.removeItem('planSVPO'); location.reload();">Сбросить отметки</button>
+  </div>
+</section>
+
+</main>
+<footer>Интерактивная версия единого плана СВ и ПО • откройте файл в любом браузере • отметки сохраняются автоматически</footer>
+<script>
+const tabs=document.querySelectorAll('#tabs button');
+tabs.forEach(b=>b.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('active')); b.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('visible'));
+  document.getElementById(b.dataset.tab).classList.add('visible');
+}));
+function update(){
+  const all=[...document.querySelectorAll('ul.check input')];
+  const done=all.filter(c=>c.checked).length;
+  document.getElementById('stAll').textContent=all.length;
+  document.getElementById('stDone').textContent=done;
+  const pct=all.length?Math.round(done/all.length*100):0;
+  document.getElementById('stPct').textContent=pct+'%';
+  document.getElementById('pbar').style.width=pct+'%';
+  document.getElementById('plabel').textContent='Выполнено задач: '+done+' из '+all.length+' ('+pct+'%)';
+}
+document.querySelectorAll('ul.check input').forEach(c=>{
+  c.addEventListener('change',()=>{
+    c.closest('li').classList.toggle('done',c.checked);
+    const state={}; document.querySelectorAll('ul.check input').forEach(x=>state[x.id]=x.checked);
+    localStorage.setItem('planSVPO',JSON.stringify(state)); update();
+  });
+  if(localStorage.getItem('planSVPO')){
+    const state=JSON.parse(localStorage.getItem('planSVPO'));
+    if(state[c.id]){c.checked=true; c.closest('li').classList.add('done');}
+  }
+});
+update();
+</script>
+</body>
+</html>
