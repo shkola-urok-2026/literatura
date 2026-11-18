@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Интерактивный буклет: Экстремизм и терроризм</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', Verdana, sans-serif;
+    background: linear-gradient(135deg, #fdf6e3 0%, #f5e6c8 100%);
+    min-height:100vh; color:#2b2b2b;
+  }
+  header {
+    background: linear-gradient(90deg, #8b1a1a, #c0392b);
+    color:#fff; text-align:center; padding:28px 16px 20px;
+    box-shadow:0 4px 14px rgba(0,0,0,.25);
+  }
+  header h1 { font-size:clamp(1.4em,4vw,2.2em); letter-spacing:1px; }
+  header p { margin-top:8px; font-size:1em; opacity:.92; }
+  .wrap { max-width:900px; margin:0 auto; padding:20px 14px 60px; }
+
+  nav.tabs { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:18px 0 24px; }
+  nav.tabs button {
+    border:none; border-radius:24px; padding:10px 20px; font-size:.95em; cursor:pointer;
+    background:#fff; color:#8b1a1a; font-weight:600; box-shadow:0 2px 6px rgba(0,0,0,.12);
+    transition:all .25s;
+  }
+  nav.tabs button:hover { transform:translateY(-2px); box-shadow:0 4px 10px rgba(0,0,0,.18); }
+  nav.tabs button.active { background:#8b1a1a; color:#fff; }
+
+  .page { display:none; animation:fade .4s; }
+  .page.show { display:block; }
+  @keyframes fade { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;} }
+
+  .card {
+    background:#fff; border-radius:16px; padding:22px 24px; margin-bottom:18px;
+    box-shadow:0 3px 12px rgba(0,0,0,.1); border-left:6px solid #c0392b;
+  }
+  .card h2 { color:#8b1a1a; margin-bottom:12px; font-size:1.25em; }
+  .card p, .card li { line-height:1.65; font-size:1em; }
+  .card ul { padding-left:22px; margin-top:8px; }
+  .card li { margin-bottom:6px; }
+  .hl { color:#c0392b; font-weight:700; }
+
+  .vs { display:flex; gap:14px; flex-wrap:wrap; margin-top:14px; }
+  .vs .col { flex:1 1 240px; background:#fdf1e7; border-radius:12px; padding:16px; }
+  .vs .col h3 { color:#8b1a1a; margin-bottom:8px; text-align:center; }
+  .vs .col ul { padding-left:20px; }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin-top:14px; }
+  .flip { perspective:1000px; height:190px; cursor:pointer; }
+  .flip-inner { position:relative; width:100%; height:100%; transition:transform .6s; transform-style:preserve-3d; }
+  .flip.flipped .flip-inner { transform:rotateY(180deg); }
+  .face {
+    position:absolute; inset:0; backface-visibility:hidden; border-radius:14px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:16px; text-align:center; font-size:.92em; box-shadow:0 3px 10px rgba(0,0,0,.12);
+  }
+  .front { background:linear-gradient(135deg,#c0392b,#8b1a1a); color:#fff; font-weight:700; font-size:1.05em; }
+  .front .hint { font-size:.75em; margin-top:10px; opacity:.85; font-weight:400; }
+  .back { background:#fff; transform:rotateY(180deg); border:2px solid #c0392b; }
+
+  .quiz-q { background:#fff; border-radius:14px; padding:18px 20px; margin-bottom:14px; box-shadow:0 2px 8px rgba(0,0,0,.1); }
+  .quiz-q p { font-weight:600; margin-bottom:10px; }
+  .opt { display:block; width:100%; text-align:left; margin:6px 0; padding:10px 14px; border-radius:10px;
+         border:2px solid #e8d9c0; background:#fdfaf4; cursor:pointer; font-size:.95em; transition:all .2s; }
+  .opt:hover { border-color:#c0392b; }
+  .opt.correct { background:#e3f7e3; border-color:#2e8b3d; font-weight:700; }
+  .opt.wrong { background:#fdeaea; border-color:#c0392b; }
+  .quiz-q.done .opt { cursor:default; }
+  .expl { display:none; margin-top:10px; background:#fdf1e7; border-radius:10px; padding:10px 14px; font-size:.9em; }
+  .expl.show { display:block; }
+  #quizResult { text-align:center; font-size:1.15em; font-weight:700; margin-top:14px; min-height:1.5em; }
+
+  .phone { display:inline-block; background:#8b1a1a; color:#fff; font-weight:800; font-size:1.4em;
+           padding:10px 26px; border-radius:14px; text-decoration:none; box-shadow:0 3px 10px rgba(0,0,0,.25); }
+  footer { text-align:center; color:#7a6a55; font-size:.85em; padding:18px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>ЭКСТРЕМИЗМ И ТЕРРОРИЗМ</h1>
+  <p>Интерактивный буклет для школьников • 18 ноября — День правовой помощи детям</p>
+</header>
+
+<div class="wrap">
+<nav class="tabs">
+  <button class="active" onclick="go(0,this)">📚 Понятия</button>
+  <button onclick="go(1,this)">⚖️ Отличия</button>
+  <button onclick="go(2,this)">🃏 Карточки</button>
+  <button onclick="go(3,this)">🚨 Как действовать</button>
+  <button onclick="go(4,this)">✅ Тест</button>
+</nav>
+
+<div class="page show">
+  <div class="card">
+    <h2>Что такое экстремизм?</h2>
+    <p><span class="hl">Экстремизм</span> — это приверженность крайним взглядам и мерам, особенно в политике, идеологии и религии.</p>
+    <ul>
+      <li>крайние взгляды и призывы к насилию;</li>
+      <li>разжигание розни между людьми по национальному, религиозному или другому признаку;</li>
+      <li>насильственные изменения основ конституционного строя;</li>
+      <li>пропаганда исключительности — «мы лучше остальных»;</li>
+      <li>нарушение прав, свобод и законных интересов человека.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>Что такое терроризм?</h2>
+    <p><span class="hl">Терроризм</span> — крайнее проявление экстремизма, которое всегда связано с насилием или угрозой насилия. Его цели — <b>устрашение населения</b> и <b>принуждение к определённым действиям</b>.</p>
+  </div>
+</div>
+
+<div class="page">
+  <div class="card">
+    <h2>Главное отличие</h2>
+    <p>Экстремизм действует через <b>слова и идеологию</b>, терроризм — через <b>прямое насилие и угрозы</b>.</p>
+    <div class="vs">
+      <div class="col">
+        <h3>🗣 Экстремизм</h3>
+        <ul>
+          <li>призыв к насилию;</li>
+          <li>пропаганда идей;</li>
+          <li>идеология;</li>
+          <li>направлен на изменение сознания.</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>💥 Терроризм</h3>
+        <ul>
+          <li>массовое устрашение;</li>
+          <li>применение насилия;</li>
+          <li>угрозы насилия;</li>
+          <li>прямое воздействие на принятие решений.</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:14px;">💡 Запомни: терроризм — это всегда крайняя ступень экстремизма.</p>
+  </div>
+</div>
+
+<div class="page">
+  <div class="card">
+    <h2>Нажми на карточку — перевернётся!</h2>
+    <div class="grid">
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+        <div class="face front">Экстремизм — это…<div class="hint">нажми 🔄</div></div>
+        <div class="face back">Приверженность крайним взглядам и мерам в политике, идеологии, религии.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+        <div class="face front">Терроризм — это…<div class="hint">нажми 🔄</div></div>
+        <div class="face back">Крайнее проявление экстремизма: насилие или его угроза ради устрашения и принуждения.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+        <div class="face front">Главное отличие<div class="hint">нажми 🔄</div></div>
+        <div class="face back">Экстремизм меняет сознание словами, терроризм действует насилием и угрозами напрямую.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+        <div class="face front">Пропаганда исключительности<div class="hint">нажми 🔄</div></div>
+        <div class="face back">Убеждение «мы — лучшие, остальные — враги». Это признак экстремизма, не поддавайся ему.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+        <div class="face front">Телефон спасения<div class="hint">нажми 🔄</div></div>
+        <div class="face back">112 — единый номер экстренных служб. Сообщи взрослым, учителю, полиции.</div>
+      </div></div>
+      <div class="flip" onclick="this.classList.toggle('flipped')"><div class="flip-inner">
+        <div class="face front">Ответственность<div class="hint">нажми 🔄</div></div>
+        <div class="face back">За призывы к экстремизму и ложные сообщения об угрозах отвечает закон — в том числе подростки.</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="card">
+    <h2>Алгоритм «Заметил — Сообщи — Не бойся»</h2>
+    <ul>
+      <li><b>Заметил</b> призывы к ненависти, насилию или страху в интернете? Не пересылай, не поддерживай, сделай скриншот и расскажи взрослым.</li>
+      <li><b>Сообщи:</b> столкнулся с угрозой или опасной ситуацией — сразу к родителям, учителю или звони на 112.</li>
+      <li><b>Не бойся:</b> тот, кто знает, как действовать, уже наполовину защищён. Паника — союзник опасности.</li>
+    </ul>
+    <p style="margin-top:16px;">📞 Единый номер экстренных служб: <a class="phone" href="tel:112">112</a></p>
+  </div>
+  <div class="card">
+    <h2>Помни три «НЕ»</h2>
+    <ul>
+      <li><b>НЕ пересылай</b> сомнительные призывы и пугающие сообщения;</li>
+      <li><b>НЕ молчи</b> — молчание помогает тем, кто сеет страх;</li>
+      <li><b>НЕ поддавайся</b> на обещания «быть особенным» и призывы делить людей на «своих» и «чужих».</li>
+    </ul>
+    <p style="margin-top:12px;">Этот разговор — не для того, чтобы пугать, а для того, чтобы быть внимательными и вовремя позвать на помощь. Берегите себя и друг друга 💙</p>
+  </div>
+</div>
+
+<div class="page">
+  <div class="card">
+    <h2>Проверь себя: 5 вопросов</h2>
+    <div id="quiz"></div>
+    <div id="quizResult"></div>
+  </div>
+</div>
+
+<footer>Буклет подготовлен для классного часа ко Дню правовой помощи детям • 18 ноября</footer>
+</div>
+
+<script>
+function go(n, btn){
+  document.querySelectorAll('.page').forEach((p,i)=>p.classList.toggle('show', i===n));
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+const questions = [
+ {q:'Что такое экстремизм?', opts:['Приверженность крайним взглядам и мерам','Обычные политические споры','Увлечение историей'], ok:0, e:'Экстремизм — крайние взгляды и меры, особенно в политике, идеологии, религии.'},
+ {q:'Что такое терроризм?', opts:['Способ вести дискуссию','Крайнее проявление экстремизма с насилием или угрозой','Жанр кино'], ok:1, e:'Терроризм всегда связан с насилием или его угрозой ради устрашения.'},
+ {q:'Чем терроризм отличается от экстремизма?', opts:['Ничем, это одно и то же','Терроризм — прямое насилие, экстремизм — призывы и идеология','Экстремизм опаснее терроризма'], ok:1, e:'Экстремизм меняет сознание словами, терроризм действует прямым насилием.'},
+ {q:'Тебе прислали призыв к ненависти. Что делать?', opts:['Переслать друзьям','Промолчать и забыть','Не пересылать и рассказать взрослым'], ok:2, e:'Не пересылай, не поддерживай и обязательно сообщи взрослым.'},
+ {q:'Единый номер экстренных служб:', opts:['102','112','911'], ok:1, e:'112 — единый номер экстренных служб, работает со всех телефонов.'}
+];
+
+const box = document.getElementById('quiz'); let score=0, answered=0;
+questions.forEach((item,qi)=>{
+  const d=document.createElement('div'); d.className='quiz-q';
+  d.innerHTML='<p>'+(qi+1)+'. '+item.q+'</p>';
+  item.opts.forEach((o,oi)=>{
+    const b=document.createElement('button'); b.className='opt'; b.textContent=o;
+    b.onclick=()=>{
+      if(d.classList.contains('done'))return;
+      d.classList.add('done'); answered++;
+      if(oi===item.ok){b.classList.add('correct'); score++;}
+      else{b.classList.add('wrong'); d.querySelectorAll('.opt')[item.ok].classList.add('correct');}
+      d.querySelector('.expl').classList.add('show');
+      if(answered===questions.length){
+        const r=document.getElementById('quizResult');
+        r.textContent='Твой результат: '+score+' из 5! '+(score===5?'Отлично, ты знаешь тему! 🏆':score>=3?'Хорошо! Перечитай буклет ещё раз. 💪':'Стоит перечитать понятия — это важно знать каждому. 📖');
+        r.style.color = score===5 ? '#2e8b3d' : '#c0392b';
+      }
+    };
+    d.appendChild(b);
+  });
+  const ex=document.createElement('div'); ex.className='expl'; ex.textContent='💡 '+item.e; d.appendChild(ex);
+  box.appendChild(d);
+});
+</script>
+</body>
+</html>
