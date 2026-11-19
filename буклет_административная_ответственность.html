@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Интерактивный буклет: Административная ответственность несовершеннолетних</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', Arial, sans-serif; background:#1a2a4a; color:#2c3e50; line-height:1.6; }
+  .container { max-width:800px; margin:0 auto; padding:16px; }
+  header { background:linear-gradient(135deg,#0d1b3d 0%,#1e3a6e 60%,#2c5aa0 100%); color:#fff; text-align:center; padding:28px 16px 20px; border-radius:0 0 24px 24px; }
+  header .badge { display:inline-block; background:#f5b301; color:#1a2a4a; font-weight:bold; padding:4px 14px; border-radius:20px; font-size:12px; letter-spacing:1px; margin-bottom:10px; }
+  header h1 { font-size:22px; margin-bottom:8px; }
+  header p { font-size:14px; opacity:.9; }
+  .card { background:#fff; border-radius:16px; padding:20px; margin:16px 0; box-shadow:0 4px 12px rgba(0,0,0,.15); }
+  .card h2 { color:#1e3a6e; font-size:18px; margin-bottom:10px; border-left:5px solid #f5b301; padding-left:10px; }
+  .tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+  .tab-btn { flex:1 1 auto; padding:9px 10px; border:none; border-radius:10px; background:#e8eef7; color:#1e3a6e; font-weight:600; font-size:13px; cursor:pointer; transition:.2s; }
+  .tab-btn.active { background:#1e3a6e; color:#fff; }
+  .tab-content { display:none; animation:fade .3s; }
+  .tab-content.active { display:block; }
+  @keyframes fade { from{opacity:0; transform:translateY(4px);} to{opacity:1;} }
+  .fine-box { display:flex; align-items:center; gap:12px; background:#fff4e0; border:2px dashed #f5a623; border-radius:12px; padding:12px; margin:8px 0; }
+  .fine-amount { font-size:22px; font-weight:bold; color:#c0392b; white-space:nowrap; }
+  details { background:#f4f7fc; border-radius:10px; margin:8px 0; overflow:hidden; }
+  summary { padding:12px 14px; cursor:pointer; font-weight:600; color:#1e3a6e; list-style:none; position:relative; padding-right:34px; }
+  summary::after { content:'+'; position:absolute; right:14px; font-size:20px; color:#f5a623; transition:.2s; }
+  details[open] summary::after { content:'−'; }
+  details .inner { padding:0 14px 12px; font-size:14px; }
+  ul.clean { list-style:none; padding-left:0; }
+  ul.clean li { padding:6px 0 6px 26px; position:relative; border-bottom:1px dashed #d7e0ee; font-size:14px; }
+  ul.clean li:last-child { border-bottom:none; }
+  ul.clean li::before { content:'🚫'; position:absolute; left:2px; font-size:13px; }
+  .quiz-q { margin:14px 0; }
+  .quiz-q p { font-weight:600; margin-bottom:8px; font-size:15px; }
+  .opt { display:block; width:100%; text-align:left; padding:10px 12px; margin:6px 0; border:2px solid #d7e0ee; border-radius:10px; background:#fff; cursor:pointer; font-size:14px; transition:.2s; }
+  .opt:hover { border-color:#2c5aa0; background:#f4f8ff; }
+  .opt.correct { border-color:#27ae60; background:#e9f9ef; }
+  .opt.wrong { border-color:#c0392b; background:#fdeceb; }
+  .explain { display:none; margin-top:8px; background:#eef6ee; border-left:4px solid #27ae60; padding:8px 12px; border-radius:8px; font-size:13px; }
+  .explain.show { display:block; }
+  .score { text-align:center; font-size:16px; font-weight:bold; color:#1e3a6e; margin-top:10px; }
+  .age-box { display:flex; gap:10px; margin:10px 0; flex-wrap:wrap; }
+  .age-card { flex:1 1 180px; border-radius:12px; padding:12px; text-align:center; color:#fff; }
+  .age-card.a1 { background:#e74c3c; } .age-card.a2 { background:#f39c12; } .age-card.a3 { background:#27ae60; }
+  .age-card b { display:block; font-size:20px; }
+  .age-card span { font-size:12px; }
+  .siren { background:#2c3e50; color:#ffd54f; border-radius:12px; padding:14px; text-align:center; font-size:16px; font-weight:bold; margin:12px 0; }
+  .footer { text-align:center; color:#8fa3c8; font-size:12px; padding:16px; }
+  .hotline { background:linear-gradient(135deg,#c0392b,#e74c3c); color:#fff; border-radius:14px; padding:14px; text-align:center; margin:16px 0; }
+  .hotline a { color:#fff; font-size:20px; font-weight:bold; text-decoration:none; }
+</style>
+</head>
+<body>
+<header>
+  <span class="badge">ПРОФИЛАКТИКА • 2026/2027 УЧ. ГОД</span>
+  <h1>⚠️ Административная ответственность несовершеннолетних</h1>
+  <p>Курение и распитие спиртных напитков в общественных местах.<br>Комендантский час для несовершеннолетних</p>
+  <p style="font-size:12px; margin-top:8px;">По материалам ОПДН ОМВД России «Аешкинский» (письмо от 19.11.2026 № 51/9435)</p>
+</header>
+
+<div class="container">
+
+  <!-- ВОЗРАСТ ОТВЕТСТВЕННОСТИ -->
+  <div class="card">
+    <h2>🧒 С какого возраста наступает ответственность?</h2>
+    <div class="age-box">
+      <div class="age-card a1"><b>до 16 лет</b><span>отвечают родители (опекуны)</span></div>
+      <div class="age-card a2"><b>с 16 лет</b><span>сам подросток отвечает за свои поступки</span></div>
+      <div class="age-card a3"><b>с 18 лет</b><span>полная самостоятельная ответственность</span></div>
+    </div>
+    <p style="font-size:14px;">Дела о правонарушениях несовершеннолетних рассматривают <b>комиссии по делам несовершеннолетних и защите их прав (КДН)</b>.</p>
+  </div>
+
+  <!-- АЛКОГОЛЬ -->
+  <div class="card">
+    <h2>🍺 Алкоголь: что говорит закон</h2>
+    <p style="font-size:14px;">Пункт 3 ст. 16 Федерального закона от 22.11.1995 № 171-ФЗ устанавливает <b>полный запрет потребления алкоголя несовершеннолетними</b>.</p>
+    <div class="fine-box"><span class="fine-amount">500–1500 ₽</span><span>штраф за потребление алкоголя в запрещённых местах — <b>ст. 20.20 КоАП РФ</b></span></div>
+    <div class="fine-box"><span class="fine-amount">1500–2000 ₽</span><span>штраф для родителей, если ребенок до 16 лет употребил алкоголь — <b>ст. 20.22 КоАП РФ</b></span></div>
+    <div class="fine-box"><span class="fine-amount">4000–5000 ₽</span><span>штраф за вовлечение несовершеннолетнего в распитие спиртного — <b>ст. 6.10 КоАП РФ</b></span></div>
+    <details>
+      <summary>📍 Где запрещено пить алкоголь (ст. 20.20 КоАП РФ)</summary>
+      <div class="inner">
+        <ul class="clean">
+          <li>детские, образовательные, медицинские организации, объекты спорта</li>
+          <li>организации культуры; общественный транспорт и остановки, включая метро</li>
+          <li>АЗС, рынки, вокзалы, аэропорты</li>
+          <li>места массового скопления людей и объекты повышенной опасности</li>
+          <li>объекты военного назначения; нестационарные торговые объекты</li>
+          <li>дворы, подъезды, лестницы, лифты, детские площадки, скверы, парки, сады</li>
+          <li>пруды, озёра, водоёмы, пляжи и другие места отдыха, спорта и туризма</li>
+        </ul>
+      </div>
+    </details>
+    <details>
+      <summary>😬 Появление в общественном месте в состоянии опьянения</summary>
+      <div class="inner">По <b>ст. 20.21 КоАП РФ</b> — появление на улицах, стадионах, в скверах, парках и транспорте в состоянии опьянения, оскорбляющем человеческое достоинство и общественную нравственность, — штраф <b>от 500 до 1500 рублей</b>.</div>
+    </details>
+  </div>
+
+  <!-- ТАБАК -->
+  <div class="card">
+    <h2>🚬 Табакокурение. Несёт ли несовершеннолетний ответственность?</h2>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab(event,'t1')">Кто отвечает?</button>
+      <button class="tab-btn" onclick="showTab(event,'t2')">Продажа табака</button>
+      <button class="tab-btn" onclick="showTab(event,'t3')">Кальян и трубки</button>
+      <button class="tab-btn" onclick="showTab(event,'t4')">Где нельзя курить</button>
+    </div>
+    <div id="t1" class="tab-content active">
+      <ul class="clean" style="list-style:none;">
+        <li style="--i:1;"><b>До 16 лет</b> — ответственность несут родители, опекуны или официальные представители.</li>
+        <li><b>От 16 до 18 лет</b> — подросток уже сам обязан отвечать за свои поступки.</li>
+        <li>Продавцы, продавшие сигареты без запроса документов, тоже несут ответственность — штраф зависит от размера предприятия.</li>
+        <li>Отвечают все уровни предприятия: и кассир, и директор, и владелец компании.</li>
+      </ul>
+    </div>
+    <div id="t2" class="tab-content">
+      <p style="font-size:14px;">Продажа сигарет и табачных изделий подросткам наносит предприятию огромный ущерб: крупный штраф + внимание правоохранительных органов. Поэтому в крупных сетях кассиры регулярно просят документы даже у очевидно совершеннолетних граждан.</p>
+      <p style="font-size:14px; margin-top:8px;">⚖️ В радиусе <b>100 метров от школ, вузов и колледжей</b> сигареты продаваться не должны.</p>
+    </div>
+    <div id="t3" class="tab-content">
+      <p style="font-size:14px;">А кальян, чистый табак, самокрутки? Нет, <b>однозначно нельзя</b> — они тоже относятся к табачным изделиям, и запрет распространяется на них так же, как на сигареты.</p>
+    </div>
+    <div id="t4" class="tab-content">
+      <ul class="clean">
+        <li>школы, детские сады, вузы и прилегающие к ним территории</li>
+        <li>детские площадки</li>
+        <li>медицинские учреждения</li>
+        <li>территория у входа в общественные здания (ТЦ, моллы)</li>
+        <li>автобусные и трамвайные остановки</li>
+        <li>подъезды и места общего пользования в домах</li>
+        <li>офисные здания</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- КОМЕНДАНТСКИЙ ЧАС -->
+  <div class="card">
+    <h2>🌙 Комендантский час</h2>
+    <p style="font-size:14px;">Нарушение комендантского часа на территории Херсонской области регламентируется <b>Указом Губернатора Херсонской области № 154-У от 20.10.2022</b> «О введении комендантского часа на территории Херсонской области».</p>
+    <div class="siren">🚨 За нарушение — административная ответственность по ч. 1 ст. 20.5.1 КоАП РФ 🚨</div>
+    <p style="font-size:14px;">Помните: ночью в общественных местах несовершеннолетним находиться нельзя. Это не «придумка взрослых», а требование закона, направленное на вашу безопасность.</p>
+  </div>
+
+  <!-- ТЕСТ -->
+  <div class="card">
+    <h2>🎯 Проверь себя: мини-тест</h2>
+    <div class="quiz-q">
+      <p>1. С какого возраста подросток сам отвечает за курение и алкоголь?</p>
+      <button class="opt" onclick="answer(this,false,'q1')">с 14 лет</button>
+      <button class="opt" onclick="answer(this,true,'q1')">с 16 лет</button>
+      <button class="opt" onclick="answer(this,false,'q1')">с 18 лет</button>
+      <div class="explain" id="q1">Верно — с 16 лет (ст. 2.3 КоАП РФ). До 16 лет отвечают родители — по ст. 20.22 КоАП РФ.</div>
+    </div>
+    <div class="quiz-q">
+      <p>2. Штраф за распитие алкоголя в запрещённом месте (ст. 20.20 КоАП РФ)?</p>
+      <button class="opt" onclick="answer(this,false,'q2')">от 100 до 300 рублей</button>
+      <button class="opt" onclick="answer(this,true,'q2')">от 500 до 1500 рублей</button>
+      <button class="opt" onclick="answer(this,false,'q2')">от 5000 до 10000 рублей</button>
+      <div class="explain" id="q2">Верно — от 500 до 1500 рублей.</div>
+    </div>
+    <div class="quiz-q">
+      <p>3. Штраф родителям за вовлечение ребёнка в распитие спиртного (ст. 6.10 КоАП РФ)?</p>
+      <button class="opt" onclick="answer(this,false,'q3')">от 500 до 1000 рублей</button>
+      <button class="opt" onclick="answer(this,false,'q3')">от 1500 до 2000 рублей</button>
+      <button class="opt" onclick="answer(this,true,'q3')">от 4000 до 5000 рублей</button>
+      <div class="explain" id="q3">Верно — от 4000 до 5000 рублей.</div>
+    </div>
+    <div class="quiz-q">
+      <p>4. Можно ли подростку курить кальян?</p>
+      <button class="opt" onclick="answer(this,false,'q4')">да, если нет никотина</button>
+      <button class="opt" onclick="answer(this,true,'q4')">нет, однозначно нельзя</button>
+      <button class="opt" onclick="answer(this,false,'q4')">можно с 16 лет</button>
+      <div class="explain" id="q4">Верно — кальян и табачные изделия запрещены так же, как сигареты.</div>
+    </div>
+    <div class="quiz-q">
+      <p>5. Каким законом установлен комендантский час в Херсонской области?</p>
+      <button class="opt" onclick="answer(this,false,'q5')">Указ № 101-У от 2021 года</button>
+      <button class="opt" onclick="answer(this,true,'q5')">Указ Губернатора № 154-У от 20.10.2022</button>
+      <button class="opt" onclick="answer(this,false,'q5')">Федеральный закон № 171-ФЗ</button>
+      <div class="explain" id="q5">Верно — Указ Губернатора Херсонской области № 154-У от 20.10.2022. Ответственность — ч. 1 ст. 20.5.1 КоАП РФ.</div>
+    </div>
+    <div class="score" id="score"></div>
+  </div>
+
+  <div class="hotline">
+    📞 Телефон дежурной части полиции<br>
+    <a href="tel:102">102</a> &nbsp;|&nbsp; <a href="tel:+79901014239">+7 (990) 101-42-39</a> — ОМВД России «Аешкинский»
+  </div>
+
+  <div class="footer">
+    ГБОУ ХО «Подо-Калиновская школа Алешкинского района»<br>
+    Профилактические классные часы: 23–25 ноября 2026 г. • Буклет размещается в классных и родительских чатах
+  </div>
+</div>
+
+<script>
+function showTab(e,id){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  e.target.classList.add('active');
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+let answered = {};
+let correct = 0, total = 5;
+function answer(btn, isCorrect, qid){
+  if (answered[qid]) return;
+  answered[qid] = true;
+  if (isCorrect){ btn.classList.add('correct'); correct++; }
+  else { btn.classList.add('wrong'); }
+  document.getElementById(qid).classList.add('show');
+  document.getElementById('score').textContent = 'Результат: ' + correct + ' из ' + total + (correct===total ? ' — отличная работа! 🏆' : ' — перечитай буклет ещё раз 😉');
+}
+</script>
+</body>
+</html>
