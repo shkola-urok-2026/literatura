@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Верования восточных славян — интерактивная схема</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    background: linear-gradient(160deg, #1a2610 0%, #2d3d1a 40%, #3a2c14 100%);
+    min-height: 100vh;
+    color: #f0e6c8;
+    padding: 20px;
+  }
+  h1 {
+    text-align:center;
+    color:#e8c96a;
+    text-shadow: 0 2px 8px rgba(0,0,0,.6);
+    font-size: 1.9em;
+    margin-bottom: 6px;
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    text-align:center; color:#b8c99a; font-style: italic; margin-bottom: 24px;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+
+  /* ---- СХЕМА ---- */
+  .scheme { display:flex; flex-direction:column; align-items:center; gap:14px; }
+  .node {
+    padding: 12px 26px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s, filter .2s;
+    text-align:center;
+    font-weight: bold;
+    border: 2px solid rgba(232,201,106,.5);
+    background: linear-gradient(145deg, #4a6b2a, #35501c);
+    color:#f5edd0;
+    box-shadow: 0 4px 14px rgba(0,0,0,.45);
+    user-select:none;
+  }
+  .node:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 8px 22px rgba(232,201,106,.35); filter:brightness(1.15); }
+  .node.branch { border-radius: 14px; background: linear-gradient(145deg, #5a4a28, #3e3218); }
+  .node.spirit { border-radius: 30px; background: linear-gradient(145deg, #2e4a44, #1e332e); }
+  .node.active { outline: 3px solid #e8c96a; transform: scale(1.06); }
+  .row { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .connector {
+    width:2px; height:26px; background: linear-gradient(#e8c96a55,#e8c96a22);
+  }
+  .level-label { color:#9db37a; font-size:.85em; text-transform:uppercase; letter-spacing:1.5px; }
+
+  /* ---- ПАНЕЛЬ ---- */
+  .info {
+    margin-top: 30px;
+    background: rgba(20,26,12,.85);
+    border: 1px solid #e8c96a44;
+    border-radius: 16px;
+    padding: 22px 28px;
+    min-height: 150px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.5);
+  }
+  .info h2 { color:#e8c96a; margin-bottom: 10px; font-size: 1.35em; }
+  .info p { line-height: 1.6; font-size: 1.05em; }
+  .info .hint { color:#8fa06e; font-style: italic; }
+  .tag {
+    display:inline-block; background:#e8c96a22; border:1px solid #e8c96a55;
+    color:#e8c96a; border-radius:12px; padding:2px 12px; font-size:.8em; margin: 4px 6px 4px 0;
+  }
+
+  /* ---- ФАКТЫ ---- */
+  .facts { margin-top: 30px; }
+  .fact-card {
+    background: rgba(232,201,106,.08);
+    border-left: 4px solid #e8c96a;
+    border-radius: 0 12px 12px 0;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    cursor:pointer;
+    transition: background .2s;
+  }
+  .fact-card:hover { background: rgba(232,201,106,.16); }
+  .fact-card .q { font-weight:bold; color:#e8c96a; }
+  .fact-card .a { display:none; margin-top:8px; line-height:1.5; }
+  .fact-card.open .a { display:block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>⚔ ВЕРОВАНИЯ ВОСТОЧНЫХ СЛАВЯН ⚔</h1>
+  <div class="subtitle">Интерактивная схема • нажимайте на элементы — узнавайте их историю</div>
+
+  <div class="scheme">
+    <div class="node" data-key="yaz">Язычество</div>
+    <div class="connector"></div>
+    <div class="row">
+      <div class="node branch" data-key="nature">Поклонение силам природы</div>
+      <div class="node branch" data-key="ancestors">Культ предков</div>
+    </div>
+    <div class="connector"></div>
+    <div class="row">
+      <div class="node branch" data-key="high">Высшие божества</div>
+      <div class="node branch" data-key="low">Низшие божества</div>
+    </div>
+    <div class="connector"></div>
+    <div class="row">
+      <div class="node" data-key="perun">Перун</div>
+      <div class="node" data-key="veles">Велес</div>
+      <div class="node" data-key="dazhbog">Дажьбог</div>
+      <div class="node" data-key="svarog">Сварог</div>
+      <div class="node" data-key="stribog">Стрибог</div>
+      <div class="node" data-key="mokosh">Мокошь</div>
+    </div>
+    <div class="connector"></div>
+    <div class="row">
+      <div class="node spirit" data-key="domovoy">Домовой</div>
+      <div class="node spirit" data-key="leshiy">Леший</div>
+      <div class="node spirit" data-key="vodyanoy">Водяной</div>
+      <div class="node spirit" data-key="rusalka">Русалка</div>
+    </div>
+  </div>
+
+  <div class="info" id="info">
+    <h2>Добро пожаловать!</h2>
+    <p class="hint">До принятия христианства славяне верили во множество богов и духов — это называют язычеством. Нажмите на любой элемент схемы, чтобы узнать о нём подробнее. А внизу — интерактивные факты из доклада.</p>
+  </div>
+
+  <div class="facts" id="facts"></div>
+</div>
+
+<script>
+const D = {
+  yaz: {t:"Язычество", tags:["система верований","до 988 года"], p:"До того, как на Руси приняли христианство, люди верили во множество богов и духов. Слово «язычество» произошло от слова «язык», которое раньше означало «народ». Суть была в том, что славяне одухотворяли всё вокруг: реки, леса, поля, дома — всё казалось населённым духами, а силы природы олицетворяли особые божества."},
+  nature: {t:"Поклонение силам природы", tags:["ветвь верований"], p:"Каждое важное явление природы имело своего покровителя: гром — Перуна, солнце — Дажьбога и Хорса, ветер — Стрибога. Славяне не имели храмов: обряды проводили на капищах — открытых святилищах на холмах, полянах и у источников, где стояли идолы из дерева и камня."},
+  ancestors: {t:"Культ предков", tags:["обряды","Радуница"], p:"Славяне верили, что умершие родственники не исчезают, а становятся невидимыми покровителями рода. На весеннюю Радуницу устраивали трапезы на могилах и оставляли угощения для душ предков. Существовало и представление о «заложных покойниках» — людях, умерших не своей смертью: их души считали опасными."},
+  high: {t:"Высшие божества", tags:["пантеон"], p:"Главные боги славянского пантеона управляли стихиями и человеческими делами: Перун — громом и войной, Велес — скотом и богатством, Сварог — небом и огнём, Дажьбог — солнцем, Стрибог — ветром, Мокошь — судьбой и женским рукоделием."},
+  low: {t:"Низшие божества и духи", tags:["дом","лес","вода"], p:"Помимо богов, славяне верили в духов, живущих рядом с людьми: в доме — домовой, в лесу — леший, у воды — водяной и русалки. К духам относились с уважением и опаской: их задабривали, оставляли угощения."},
+  perun: {t:"⚡ Перун", tags:["гром","война","князь и дружина"], p:"Бог грома, молнии и войны. Позже стал покровителем князя и дружины. Именно Перун стоял во главе пантеона князя Владимира в 980 году — но народ реформу не принял, и вскоре Русь приняла христианство."},
+  veles: {t:"🐮 Велес", tags:["скот","богатство","потусторонний мир"], p:"Покровитель скота и богатства. Его также связывали с потусторонним миром — Навью. Велес был противником Перуна, и их противостояние отражено в легендах о битве громовержца со Змеем."},
+  dazhbog: {t:"☀ Дажьбог", tags:["солнце"], p:"Солнечный бог, даритель света и тепла. Вместе с Хорсом отвечал за небесное светило. Считался предком-заступником славян — «Дажьбога внуками» называли себя древние русичи."},
+  svarog: {t:"🔥 Сварог", tags:["небо","небесный огонь"], p:"Бог неба и небесного огня. Считался небесным кузнецом, покровителем ремесла и очага. Отец Дажьбога (Сварожича). Его символ — огонь, добытый трением."},
+  stribog: {t:"🌬 Стрибог", tags:["ветер","атмосферные явления"], p:"Бог ветра и атмосферных явлений. Дед ветров, повелитель бурь и ураганов. Ему молились моряки и путешественники, чтобы он дул в парус и не мешал пути."},
+  mokosh: {t:"🌾 Мокошь", tags:["судьба","рукоделие","женщины"], p:"Единственное женское божество пантеона. Богиня судьбы, плодородия и женских ремёсел, прежде всего прядения. Считалось, что она прядёт нити жизни и следит за домом хозяйки."},
+  domovoy: {t:"🏠 Домовой", tags:["дух дома","дух предка"], p:"Дух предка, охранявший жилище. Жил за печкой. Если его уважали — он берёг дом и скот; если сердил — устраивал беспорядки. При переезде в новый дом домового «перевозили» в старом лапте или горшке."},
+  leshiy: {t:"🌲 Леший", tags:["лес"], p:"Хозяин леса. Менял рост от травинки до сосны, путал следы, уводил заблудившихся. Чтобы леший не тронул, в лес ходили с оговорками и оставляли ему дары."},
+  vodyanoy: {t:"🌊 Водяной", tags:["вода","реки"], p:"Дух рек и озёр. Хозяин воды, у него просили разрешения ловить рыбу и переправляться через реку. Считалось, что он утаскивает под воду неосторожных."},
+  rusalka: {t:"🧚 Русалка", tags:["вода","поля"], p:"Не совсем та «морская дева», что в сказках: русалками часто становились «заложные покойницы» — утонувшие девушки. Русалочьей неделе боялись: в это время русалки выходили на берег, качались на ветвях и могли защекотать до смерти."}
+};
+
+document.querySelectorAll('.node').forEach(n => {
+  n.addEventListener('click', () => {
+    document.querySelectorAll('.node').forEach(m => m.classList.remove('active'));
+    n.classList.add('active');
+    const d = D[n.dataset.key];
+    document.getElementById('info').innerHTML =
+      `<h2>${d.t}</h2>` +
+      d.tags.map(x => `<span class="tag">${x}</span>`).join('') +
+      `<p style="margin-top:10px">${d.p}</p>`;
+    document.getElementById('info').scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+});
+
+const F = [
+  {q:"Был ли у славян единый пантеон богов?", a:"Нет. Единого для всех славян пантеона не сложилось: у разных племён могли быть свои особо почитаемые божества."},
+  {q:"Что пытался сделать князь Владимир в 980 году?", a:"Провести языческую реформу: создать единый пантеон и поставить во главе Перуна. Но народ реформу не принял — и позже Владимир принял христианство."},
+  {q:"Куда исчезли языческие боги после крещения Руси?", a:"Никуда не «исчезли» — многие традиции сохранились в фольклоре, календарных праздниках (Коляда, Купала) и приметах до наших дней."},
+  {q:"Что такое капище и требы?", a:"Капище — открытое святилище (холм, поляна, источник) с идолом из дерева или камня. Требы — жертвы богам и духам, обычно мелкие животные."},
+  {q:"Кто такие волхвы?", a:"Хранители знаний о богах: толковали знамения, лечили травами и заговорами. При этом волхвы не составляли замкнутого сословия."},
+  {q:"Как славяне делили мир?", a:"На три части: Правь — мир богов, Явь — мир людей, Навь — подземный мир, куда уходят умершие."}
+];
+const fc = document.getElementById('facts');
+F.forEach(f => {
+  const d = document.createElement('div');
+  d.className = 'fact-card';
+  d.innerHTML = `<div class="q">❓ ${f.q}</div><div class="a">${f.a}</div>`;
+  d.addEventListener('click', () => d.classList.toggle('open'));
+  fc.appendChild(d);
+});
+</script>
+</body>
+</html>
