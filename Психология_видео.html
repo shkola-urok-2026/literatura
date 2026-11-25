@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Психология. Факт дня — Мозг во сне</title>
+<style>
+  :root{
+    --night1:#1a1140; --night2:#2b1b5e; --night3:#0e0a2a;
+    --gold:#ffd97a; --pink:#ff9ecb; --violet:#a78bfa;
+    --keep:#7ee8b2; --drop:#8f9bb3;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:100%;height:100%;background:#0e0a2a;overflow:hidden;
+    font-family:'Segoe UI',Arial,sans-serif}
+  #stage{position:relative;width:100vw;height:100vh;overflow:hidden;
+    background:linear-gradient(180deg,#1a1140 0%,#2b1b5e 45%,#0e0a2a 100%)}
+
+  /* ===== звёзды ===== */
+  .star{position:absolute;background:#fff;border-radius:50%;
+    animation:twinkle 3s infinite ease-in-out}
+  @keyframes twinkle{0%,100%{opacity:.25;transform:scale(.8)}
+    50%{opacity:1;transform:scale(1.2)}}
+
+  /* ===== луна ===== */
+  .moon{position:absolute;top:8%;right:9%;width:110px;height:110px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%,#fff8e6,#ffe9a8 60%,#f2c76b);
+    box-shadow:0 0 60px 25px rgba(255,225,150,.25);
+    animation:moonfloat 9s ease-in-out infinite}
+  .moon::after{content:'';position:absolute;border-radius:50%;background:rgba(210,170,90,.25)}
+  .moon .cr1{width:20px;height:20px;top:24px;left:30px}
+  .moon .cr2{width:13px;height:13px;top:60px;left:66px}
+  .moon .cr3{width:9px;height:9px;top:38px;left:70px}
+  @keyframes moonfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  /* ===== заголовок ===== */
+  #badge{position:absolute;top:4.5%;left:4.5%;background:rgba(167,139,250,.16);
+    border:1px solid rgba(167,139,250,.55);color:#cfc3ff;padding:10px 22px;
+    border-radius:40px;font-size:clamp(14px,1.4vw,22px);letter-spacing:.14em;
+    font-weight:600;text-transform:uppercase;backdrop-filter:blur(4px)}
+  h1{position:absolute;top:10.5%;left:4.5%;color:#fff;font-weight:800;
+    font-size:clamp(26px,3.4vw,52px);line-height:1.15;max-width:56%}
+  h1 .hl{color:var(--gold)}
+  #subtitle{position:absolute;top:calc(10.5% + 3.6em);left:4.5%;color:#c9bfe8;
+    font-size:clamp(13px,1.35vw,21px);max-width:46%;line-height:1.5}
+
+  /* ===== спящий ===== */
+  .sleeper{position:absolute;bottom:6%;left:50%;transform:translateX(-50%)}
+  .body{position:relative;width:340px;height:150px}
+  .head{position:absolute;top:-52px;left:50%;transform:translateX(-50%);
+    width:96px;height:96px;border-radius:50%;
+    background:linear-gradient(145deg,#3b2f77,#2a2060)}
+  .hair{position:absolute;top:-8px;left:8px;width:80px;height:44px;border-radius:40px 40px 0 0;
+    background:#150f33}
+  .cheek{position:absolute;width:18px;height:9px;border-radius:50%;background:rgba(255,158,203,.4)}
+  .cL{top:56px;left:22px}.cR{top:56px;right:22px}
+  .mouth{position:absolute;top:64px;left:50%;transform:translateX(-50%);
+    width:20px;height:10px;border-bottom:3px solid #171038;border-radius:0 0 20px 20px}
+  .torso{position:absolute;top:44px;left:50%;transform:translateX(-50%);
+    width:260px;height:120px;border-radius:60px 60px 12px 12px;
+    background:linear-gradient(180deg,#413478,#2f2468)}
+
+  /* ===== мозг-облако ===== */
+  #brainwrap{position:absolute;left:50%;top:16%;transform:translateX(-50%);
+    width:240px;filter:drop-shadow(0 0 30px rgba(167,139,250,.55));
+    animation:brainbob 5s ease-in-out infinite}
+  @keyframes brainbob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-16px)}}
+  #brainwrap svg{width:100%;height:auto;display:block}
+  .pulse{transform-origin:center;animation:pulse 2.6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+  /* ===== Zzz ===== */
+  .zzz{position:absolute;color:#cfc3ff;font-weight:800;opacity:0;
+    animation:zzzfly 4.5s linear infinite;text-shadow:0 0 12px rgba(167,139,250,.7)}
+  @keyframes zzzfly{0%{opacity:0;transform:translate(0,0) scale(.6)}
+    15%{opacity:1}70%{opacity:.9}100%{opacity:0;transform:translate(60px,-130px) scale(1.5)}}
+
+  /* ===== коробки ===== */
+  .box{position:absolute;bottom:9%;width:250px;padding:16px 18px 20px;border-radius:22px;
+    text-align:center;color:#fff;font-size:clamp(14px,1.3vw,20px);font-weight:700;
+    letter-spacing:.04em;border:2px dashed rgba(255,255,255,.35);
+    backdrop-filter:blur(3px);transition:transform .25s,box-shadow .25s}
+  .box .cap{font-size:.85em;font-weight:500;opacity:.85;margin-top:6px}
+  #boxKeep{left:7%;background:rgba(126,232,178,.13);border-color:rgba(126,232,178,.7)}
+  #boxDrop{right:7%;background:rgba(143,155,179,.12);border-color:rgba(200,210,230,.5)}
+  .box.hit{transform:scale(1.08)}
+  #boxKeep.hit{box-shadow:0 0 45px rgba(126,232,178,.6)}
+  #boxDrop.hit{box-shadow:0 0 45px rgba(200,210,230,.45)}
+
+  /* ===== карточки ===== */
+  .card{position:absolute;padding:10px 20px;border-radius:16px;color:#14102e;
+    font-weight:700;font-size:clamp(13px,1.15vw,18px);white-space:nowrap;
+    background:linear-gradient(145deg,#fff,#e9e2ff);
+    box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 0 2px rgba(255,255,255,.25) inset;
+    transform-origin:center;will-change:transform,opacity;z-index:5}
+  .card.keep{background:linear-gradient(145deg,#eafff4,#c9f5dd)}
+  .card.drop{background:linear-gradient(145deg,#eef1f8,#d5dbea);opacity:.95}
+  .spark{position:absolute;font-size:22px;pointer-events:none;z-index:4;
+    animation:sparkup 1.1s ease-out forwards}
+  @keyframes sparkup{0%{opacity:1;transform:translateY(0) scale(.6)}
+    100%{opacity:0;transform:translateY(-46px) scale(1.4)}}
+
+  /* ===== бегущая строка ===== */
+  #ticker{position:absolute;bottom:0;left:0;right:0;background:rgba(12,8,34,.75);
+    border-top:1px solid rgba(167,139,250,.4);color:#d9d0f7;padding:12px 0;
+    font-size:clamp(14px,1.45vw,22px);overflow:hidden;white-space:nowrap}
+  #ticker span{display:inline-block;padding-left:100vw;animation:tick 26s linear infinite}
+  @keyframes tick{to{transform:translateX(-100%)}}
+  #ticker b{color:var(--gold)}
+
+  /* ===== старт-оверлей ===== */
+  #start{position:absolute;inset:0;background:rgba(10,7,30,.9);display:flex;
+    flex-direction:column;align-items:center;justify-content:center;gap:22px;z-index:50;
+    color:#fff;text-align:center;padding:0 10%}
+  #start h2{font-size:clamp(24px,3vw,46px)}
+  #start p{color:#c9bfe8;font-size:clamp(15px,1.5vw,22px);max-width:60ch;line-height:1.55}
+  #playBtn{padding:16px 44px;border-radius:50px;border:none;cursor:pointer;
+    font-size:clamp(16px,1.6vw,24px);font-weight:700;color:#1a1140;
+    background:linear-gradient(135deg,var(--gold),var(--pink));
+    box-shadow:0 10px 35px rgba(255,158,203,.45);transition:transform .2s}
+  #playBtn:hover{transform:scale(1.06)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- звёзды добавит скрипт -->
+  <div class="moon"><i class="cr1"></i><i class="cr2"></i><i class="cr3"></i></div>
+
+  <div id="badge">🧠 Психология. Факт дня</div>
+  <h1>Мозг продолжает работать <span class="hl">даже во сне</span></h1>
+  <div id="subtitle">Пока мы спим, он сортирует информацию: что оставить в памяти надолго, а что можно забыть.</div>
+
+  <!-- мозг -->
+  <div id="brainwrap">
+    <svg viewBox="0 0 240 170">
+      <defs>
+        <radialGradient id="bg1" cx="40%" cy="35%">
+          <stop offset="0%" stop-color="#c9b6ff"/><stop offset="100%" stop-color="#8f6fe8"/>
+        </radialGradient>
+      </defs>
+      <g class="pulse">
+        <path fill="url(#bg1)" d="M35 95 C20 75, 30 45, 60 42 C68 18, 105 10, 125 30
+          C140 8, 180 12, 190 38 C220 40, 230 70, 212 88 C230 108, 210 132, 185 128
+          C178 152, 140 158, 122 140 C100 158, 62 150, 56 126 C28 128, 18 108, 35 95 Z"/>
+        <g fill="none" stroke="#4b34a3" stroke-width="4" stroke-linecap="round" opacity=".75">
+          <path d="M60 60 q18 -12 34 2 q14 12 -4 24"/>
+          <path d="M110 34 q20 8 10 26 q-8 16 12 22"/>
+          <path d="M160 46 q22 2 18 24 q-4 18 14 24"/>
+          <path d="M52 100 q22 -8 30 12 q6 16 26 14"/>
+          <path d="M118 100 q20 -10 34 6 q12 14 30 4"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- спящий -->
+  <div class="sleeper">
+    <div class="body">
+      <div class="torso"></div>
+      <div class="head">
+        <div class="hair"></div>
+        <div class="cheek cL"></div><div class="cheek cR"></div>
+        <div class="mouth"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- коробки -->
+  <div class="box" id="boxKeep">✨ Запомнить надолго<div class="cap">эмоции, друзья, важное</div></div>
+  <div class="box" id="boxDrop">🧹 Можно забыть<div class="cap">мелочи и мусор дня</div></div>
+
+  <!-- строка -->
+  <div id="ticker"><span>🌙 <b>Сон — это не выключение, а рабочая смена.</b> Ночью мозг переносит важное из «короткой» памяти в «долгую» — поэтому зубрить до трёх ночи перед контрольной — худшая стратегия. Выспавшийся мозг вспомнит больше, чем замученный. А ещё он делает «уборку» — выводит накопившиеся за день отходы работы нейронов. Берегите сон — он часть учёбы! 💤</span></div>
+
+  <!-- старт -->
+  <div id="start">
+    <h2>Мозг во сне сортирует память</h2>
+    <p>Ночью наш мозг раскладывает по полкам всё, что произошло за день: важное — на хранение, мелочи — на выброс. Нажмите кнопку и посмотрите, как это выглядит 🙂</p>
+    <button id="playBtn">▶ Запустить ролик</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  // звёзды
+  const stage=document.getElementById('stage');
+  for(let i=0;i<90;i++){
+    const s=document.createElement('div');s.className='star';
+    const sz=Math.random()*2.4+1;
+    s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*70}%;
+      animation-delay:${Math.random()*3}s;animation-duration:${2+Math.random()*3}s`;
+    stage.appendChild(s);
+  }
+  // Zzz
+  const sleeper=document.querySelector('.sleeper');
+  const zwords=['Z','z','Zz','zZ'];
+  setInterval(()=>{
+    const z=document.createElement('div');z.className='zzz';
+    z.textContent=zwords[Math.floor(Math.random()*zwords.length)];
+    z.style.cssText+=`left:${170+Math.random()*60}px;bottom:150px;font-size:${20+Math.random()*22}px;
+      animation-delay:0s;animation-duration:${4+Math.random()*2}s`;
+    sleeper.appendChild(z);
+    setTimeout(()=>z.remove(),6500);
+  },1400);
+
+  // карточки
+  const brain=document.getElementById('brainwrap');
+  const boxK=document.getElementById('boxKeep');
+  const boxD=document.getElementById('boxDrop');
+  const data=[
+    {t:'Три пальмы 🍃',c:'keep'},{t:'Смех с друзьями 😂',c:'keep'},
+    {t:'Контрольная 📚',c:'keep'},{t:'Спор в чате 💬',c:'drop'},
+    {t:'Дружба 🤝',c:'keep'},{t:'Спам-рассылка',c:'drop'},
+    {t:'Формула по алгебре',c:'keep'},{t:'Обида на пустяк',c:'drop'},
+    {t:'Новый знакомый 🙂',c:'keep'},{t:'Мелкая ссора',c:'drop'},
+    {t:'Строки Фета 🎵',c:'keep'},{t:'Навязчивая реклама',c:'drop'}
+  ];
+  const sparks=['✨','⭐','💡','🌟','🫧'];
+
+  function bezier(p0,p1,p2,t){
+    const u=1-t;
+    return {x:u*u*p0.x+2*u*t*p1.x+t*t*p2.x, y:u*u*p0.y+2*u*t*p1.y+t*t*p2.y};
+  }
+  function rectCenter(el){const r=el.getBoundingClientRect();
+    return {x:r.left+r.width/2,y:r.top+r.height/2};}
+
+  function spawnCard(){
+    const item=data[Math.floor(Math.random()*data.length)];
+    const el=document.createElement('div');
+    el.className='card '+item.c;el.textContent=item.t;
+    stage.appendChild(el);
+    const bC=rectCenter(brain);
+    const start={x:bC.x-40,y:bC.y+20};
+    const target=item.c==='keep'?rectCenter(boxK):rectCenter(boxD);
+    const ctrl={x:(start.x+target.x)/2,y:Math.min(start.y,target.y)-180-Math.random()*80};
+    const dur=2400+Math.random()*600;const t0=performance.now();
+    el.style.transform='scale(.4)';el.style.opacity='0';
+
+    function step(now){
+      let t=Math.min((now-t0)/dur,1);
+      const e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2; // easeInOut
+      const p=bezier(start,ctrl,target,e);
+      const ang=Math.atan2(bezier(start,ctrl,target,Math.min(e+.02,1)).y-p.y,
+                           bezier(start,ctrl,target,Math.min(e+.02,1)).x-p.x)*180/Math.PI;
+      el.style.opacity=t<.08?t*12.5:1;
+      el.style.left=p.x+'px';el.style.top=p.y+'px';
+      el.style.transform=`translate(-50%,-50%) rotate(${Math.sin(t*6)*8}deg) scale(${.6+.5*Math.min(t*2,1)})`;
+      if(t<1)requestAnimationFrame(step);
+      else{
+        const box=item.c==='keep'?boxK:boxD;
+        box.classList.add('hit');
+        setTimeout(()=>box.classList.remove('hit'),300);
+        // искры
+        for(let i=0;i<4;i++){
+          const sp=document.createElement('div');sp.className='spark';
+          sp.textContent=item.c==='keep'?sparks[Math.floor(Math.random()*sparks.length)]:'💨';
+          sp.style.left=(p.x+(Math.random()*70-35))+'px';
+          sp.style.top=(p.y-10)+'px';
+          stage.appendChild(sp);setTimeout(()=>sp.remove(),1200);
+        }
+        el.style.transition='opacity .8s,transform .8s';
+        el.style.opacity='0';
+        el.style.transform='translate(-50%,-50%) scale(.5)';
+        setTimeout(()=>el.remove(),900);
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  let loop=null;
+  document.getElementById('playBtn').addEventListener('click',()=>{
+    document.getElementById('start').style.display='none';
+    for(let i=0;i<4;i++)setTimeout(spawnCard,400+i*350);
+    loop=setInterval(spawnCard,1100);
+  });
+})();
+</script>
+</body>
+</html>
