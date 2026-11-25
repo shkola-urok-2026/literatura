@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Конспект урока. Лермонтов. 6 класс</title>
+<style>
+  :root{
+    --green:#2d5a3d; --green2:#3f7d54; --bg:#f4f7f4; --card:#ffffff;
+    --accent:#c97b2d; --line:#dde7dd; --text:#2a2f2a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Georgia','Times New Roman',serif;color:var(--text);background:var(--bg);line-height:1.55}
+  nav{position:sticky;top:0;background:#1e3a2a;color:#fff;padding:10px 16px;display:flex;gap:14px;flex-wrap:wrap;z-index:10}
+  nav a{color:#d7e8d7;text-decoration:none;font-family:'Segoe UI',Arial,sans-serif;font-size:14px;padding:4px 8px;border-radius:6px}
+  nav a:hover{background:rgba(255,255,255,.15)}
+  .wrap{max-width:900px;margin:0 auto;padding:24px 20px 60px}
+  header.cover{background:linear-gradient(135deg,#1e3a2a,#2d5a3d);color:#fff;border-radius:0 0 18px 18px;padding:44px 28px;text-align:center;margin-bottom:28px}
+  header.cover h1{font-size:30px;margin:0 0 10px}
+  header.cover p{margin:4px 0;opacity:.9}
+  .btn{display:inline-block;background:#c97b2d;color:#fff;text-decoration:none;padding:10px 26px;border-radius:24px;font-family:'Segoe UI',Arial,sans-serif;font-weight:600;margin-top:14px}
+  h2{color:var(--green);border-bottom:2px solid var(--line);padding-bottom:6px;font-size:24px;margin-top:44px}
+  .meta{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0}
+  .meta ul{margin:8px 0;padding-left:22px}
+  .say{background:#eaf3ec;border-left:5px solid var(--green2);padding:14px 18px;border-radius:0 10px 10px 0;margin:14px 0;font-style:italic}
+  .say::before{content:"🔊 Реплика вслух: ";font-style:normal;font-weight:700;color:var(--green);font-size:13px;font-family:'Segoe UI',Arial,sans-serif;display:block;margin-bottom:4px}
+  .act{background:#fdf3e7;border-left:5px solid var(--accent);padding:14px 18px;border-radius:0 10px 10px 0;margin:14px 0}
+  .act::before{content:"🎬 Действие ведущего: ";font-weight:700;color:#a05a1a;font-size:13px;font-family:'Segoe UI',Arial,sans-serif;display:block;margin-bottom:4px}
+  .time{display:inline-block;background:var(--green);color:#fff;font-family:'Segoe UI',Arial,sans-serif;font-size:12px;padding:3px 12px;border-radius:12px;margin-left:8px;vertical-align:middle}
+  table{width:100%;border-collapse:collapse;background:var(--card);margin:16px 0;font-size:15px}
+  th{background:var(--green);color:#fff;padding:10px;text-align:left;font-family:'Segoe UI',Arial,sans-serif;font-weight:600}
+  td{border:1px solid var(--line);padding:10px 12px;vertical-align:top}
+  .verse{background:#fbfaf5;border:1px dashed #c9bfa0;border-radius:10px;padding:14px 20px;margin:12px 0;font-style:italic;white-space:pre-line}
+  .board{background:#1e3a2a;color:#f0f5ef;border-radius:10px;padding:16px 20px;margin:14px 0}
+  .board::before{content:"📝 Запись на доске и в тетради";font-family:'Segoe UI',Arial,sans-serif;font-size:13px;color:#9cc39c;display:block;margin-bottom:8px;font-weight:600}
+  input[type=text]{width:100%;padding:8px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:14px;background:#fbfdfb}
+  .print-btn{position:fixed;bottom:20px;right:20px;background:var(--accent);color:#fff;border:none;border-radius:50px;padding:12px 20px;cursor:pointer;font-size:15px;box-shadow:0 3px 10px rgba(0,0,0,.25);font-family:'Segoe UI',Arial,sans-serif}
+  @media print{nav,.print-btn{display:none}body{background:#fff}header.cover{color:#000;background:#fff;border:2px solid #1e3a2a}.say,.act{break-inside:avoid}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#start">Начало</a><a href="#podgotovka">Подготовка</a><a href="#hod">Ход урока</a>
+  <a href="#slovar">Словарь</a><a href="#analiz">Анализ</a><a href="#tablica">Таблица</a>
+  <a href="#itog">Итог</a><a href="#dz">Домашнее задание</a>
+</nav>
+<button class="print-btn" onclick="window.print()">🖨 Печать</button>
+
+<header class="cover" id="start">
+  <h1>М. Ю. Лермонтов. «Три пальмы», «Утёс», «Листок»</h1>
+  <p>Конспект урока литературы · 6 класс</p>
+  <p>Лирический герой, его чувства и переживания · 45 минут</p>
+  <a class="btn" href="#hod">К ходу урока ↓</a>
+</header>
+
+<div class="wrap">
+
+<section>
+<h2 id="podgotovka">Организация урока</h2>
+<div class="meta">
+<p><b>Тип урока:</b> изучение нового материала с элементами анализа текста.</p>
+<p><b>Оборудование:</b> учебник, тексты стихотворений, портрет М. Ю. Лермонтова, раздаточные листы с таблицей (по числу пар), при желании — аудиозапись романса на стихи Лермонтова.</p>
+<p><b>Цели:</b></p>
+<ul>
+<li><b>предметные:</b> познакомить со стихотворениями «Три пальмы», «Утёс», «Листок»; сформировать представление о лирическом герое; учить анализировать пейзажную лирику;</li>
+<li><b>метапредметные:</b> развивать умение сравнивать тексты, формулировать мысль и подтверждать её цитатой;</li>
+<li><b>личностные:</b> подвести к размышлению об одиночестве, гармонии и поиске родственной души.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2 id="hod">Ход урока</h2>
+
+<h3>1. Организационный момент <span class="time">1 мин</span></h3>
+<p>Приветствие, проверка готовности к уроку.</p>
+
+<h3>2. Вступительное слово учителя <span class="time">4 мин</span></h3>
+<div class="say">Лермонтову было 15 лет, когда он написал строки, которые знакомы каждому: «Выхожу один я на дорогу…». Он рано потерял мать, рос в разлуке с отцом, тяжело болел в детстве. Одиночество стало главной темой его поэзии. Сегодня мы прочитаем три стихотворения — и в каждом найдём одинокого героя.</div>
+<div class="board">М. Ю. Лермонтов (1814–1841).<br>Тема: лирический герой, его чувства и переживания.</div>
+
+<h3 id="slovar">3. Словарная работа <span class="time">3 мин</span></h3>
+<div class="meta">
+<ul>
+<li><b>Лирический герой</b> — образ героя в лирике, через которого поэт выражает свои чувства и переживания. Не путать с автором: герой — художественный образ.</li>
+<li><b>Пейзаж</b> — картина природы в произведении.</li>
+<li><b>Аллегория</b> — изображение отвлечённого понятия через конкретный образ.</li>
+<li><b>Олицетворение</b> — наделение неживого свойствами живого.</li>
+</ul>
+</div>
+
+<h3>4. Чтение и первичное восприятие <span class="time">7 мин</span></h3>
+<div class="act">Выразительно прочитайте «Утёс» (1841) и «Листок» (1841). После каждого текста — пауза и вопрос классу.</div>
+<div class="say">Что вы почувствовали, слушая? Каким вы увидели утёс?</div>
+<div class="say">«Листок»: кому вы сочувствуете больше — чинаре или листку?</div>
+
+<h3 id="analiz">5. Анализ стихотворений <span class="time">15 мин</span></h3>
+<p><b>«Утёс».</b></p>
+<div class="verse">Ночевала тучка золотая
+На груди утёса-великана;
+Утром в путь умчалась рано,
+По лазури весело играя;
+
+В его морщинах остался одиноко
+Старый утёс. Вдаль он стоит,
+В пустыне глубоко… тихо плачет
+Он в пустыне глубоко…</div>
+<ul>
+<li>Кто главный герой? Тучка ночевала «на груди» утёса лишь одну ночь.</li>
+<li>Какие слова подсказывают чувства утёса? «Старый», «одиноко», «тихо плачет».</li>
+<li>Олицетворение: тучка — гостья-ребёнок, утёс — «великан». Почему тучка «молодая», а утёс «старый»?</li>
+<li>Символический смысл: мимолётная радость и вечное одиночество. Лирический герой здесь — сам утёс, через него поэт передаёт чувство покинутости.</li>
+</ul>
+<p><b>Вывод:</b> утёс одинок; тучка — гость на одну ночь; утёс переживает разлуку тихо, без упрёка.</p>
+
+<p><b>«Листок».</b></p>
+<ul>
+<li>Откуда листок и куда он просится? «Отчизну» покинул, «жестокой бури» вырвался, прирос к корню чинары — «сухой и чужой».</li>
+<li>Чего просит листок? Приюта: «Спрячь меня на землю чужую под тенью своих зеленых листов».</li>
+<li>Как отвечает чинара и почему отказывает? Она «равнодушной» красавицей» «говорит»: «Ты — пыльный и жёлтый, а я — молодая, свежая…» «Много у меня походит странников — их всех я не знаю».</li>
+<li>Противопоставление: сухой одинокий листок — полная жизни чинара. Лирический герой здесь — листок, образ странника, который ищет родную душу и не находит приюта.</li>
+</ul>
+<p><b>Вывод:</b> в «Листке» одиночество уже не тихая грусть, а тоска по приюту, которая встречает равнодушие.</p>
+
+<p><b>«Три пальмы»</b> (1839) — восточное сказание (баллада).</p>
+<ul>
+<li>О чём жалуются пальмы? На «бездействие»: их красота гибнет «бесплодно», под кроной никто не отдыхает.</li>
+<li>Что происходит, когда желанье сбылось? Караван пришёл — и «румяя» торговцы срубили пальмы на дрова: «ни одна не орошена» слезой, «вся» вырублена». Утром лишь «серые, твёрдые» остатки на «пустой» земле.</li>
+<li>Какие чувства испытывает читатель? Жалость к пальмам — и понимание: бездумное пожелание сбылось «с бедою».</li>
+<li>Символический смысл: желание одиночества кончилось — но встреча с людьми принесла разрушение. Человек не всегда готов к исполнению желаний; природа — «мир», который легко разрушить.</li>
+</ul>
+<div class="act">«Три пальмы» длинное: для экономии времени читайте первые строфы, ключевой момент гибели пальм и финал, остальное — в кратком пересказе.</div>
+
+<h3 id="tablica">6. Сравнительная работа в парах <span class="time">5 мин</span></h3>
+<div class="act">Раздайте листы с таблицей. Пары заполняют её на уроке, затем проверяем вслух.</div>
+<table>
+<tr><th>Стихотворение</th><th>Кто одинок</th><th>Что переживает</th><th>Чем заканчивается встреча</th></tr>
+<tr><td>«Утёс»</td><td>Утёс</td><td>Тихая грусть</td><td>Тучка улетела — он снова один</td></tr>
+<tr><td>«Листок»</td><td>Листок</td><td>Тоска, бездомность</td><td>Чинара отказала в приюте</td></tr>
+<tr><td>«Три пальмы»</td><td>Пальмы</td><td>Обида на бездействие</td><td>Мечта сбылась — и погубила</td></tr>
+</table>
+<p>Общий итог сравнения: во всех трёх текстах — тема <b>одиночества и неразделённости</b>. Герой Лермонтова ищет другого существа — и мир либо не отвечает, либо отвечает гибелью.</p>
+
+<h3 id="itog">7. Итог урока. Рефлексия <span class="time">5 мин</span></h3>
+<div class="say">Что общего у всех трёх героев? Чем лирический герой Лермонтова отличается от героя, например, Пушкина? (Пушкинская природа чаще дарит надежду и покой; у Лермонтова — драма, конфликт с миром.)</div>
+<div class="say">Лермонтов прожил всего 27 лет, но его одиночество знакомо каждому человеку — поэтому его стихи читаются и через 180 лет.</div>
+
+<h3 id="dz">8. Домашнее задание <span class="time">2 мин</span></h3>
+<div class="meta">
+<ul>
+<li><b>Обязательно:</b> выучить наизусть одно стихотворение — «Утёс» или «Листок».</li>
+<li><b>По желанию (творческое):</b> письменно ответить на вопрос «Что чувствует утёс, оставшись один?» — 5–7 предложений от лица утёса.</li>
+</ul>
+</div>
+</section>
+
+<section>
+<h2>Памятка учителю</h2>
+<div class="meta">
+<ul>
+<li>Если класс слабый — замените таблицу устной цепочкой «один герой — одно чувство», «Три пальмы» берите в пересказе.</li>
+<li>Для сильного класса добавьте вопрос: «Почему автор называет чинару „равнодушной“, хотя она жива и прекрасна?» — на нём обычно вспыхивает дискуссия.</li>
+<li>Фрагменты стихотворений в этом конспекте даны опорными строками: перед уроком сверьте полный текст с вашим учебником — в разных изданиях пунктуация и строфика могут немного отличаться.</li>
+</ul>
+</div>
+</section>
+
+</div>
+</body>
+</html>
