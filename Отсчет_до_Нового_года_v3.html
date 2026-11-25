@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Отсчёт до Нового года 🎄</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', 'Comic Sans MS', sans-serif;
+    min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    background: linear-gradient(180deg,#0b1035 0%,#1a2a6c 45%,#2b3a8f 70%,#3d4fa8 100%);
+    color:#fff; overflow-x:hidden; position:relative; padding-bottom:40px;
+  }
+  canvas#snow { position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1; }
+  .wrap { position:relative; z-index:2; text-align:center; width:100%; max-width:900px; padding:24px 16px; }
+  h1 { font-size:clamp(26px,5vw,44px); margin:14px 0 4px; text-shadow:0 0 18px rgba(255,220,120,.5); }
+  .sub { font-size:clamp(15px,2.5vw,20px); opacity:.9; margin-bottom:20px; }
+  .timer { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin:18px 0; }
+  .cell { background:rgba(255,255,255,.08); border:2px solid rgba(255,255,255,.25); border-radius:16px;
+          padding:12px 10px; min-width:88px; backdrop-filter:blur(4px); }
+  .num { font-size:clamp(28px,6vw,52px); font-weight:800; color:#ffd863;
+         text-shadow:0 0 14px rgba(255,215,0,.6); font-variant-numeric:tabular-nums; }
+  .lab { font-size:clamp(11px,1.6vw,14px); opacity:.85; margin-top:4px; letter-spacing:.5px; }
+  .tree { font-size:clamp(70px,15vw,120px); cursor:pointer; user-select:none; display:inline-block;
+          margin:6px 0; transition:transform .15s; filter:drop-shadow(0 0 16px rgba(255,230,120,.45)); }
+  .tree:hover { transform:scale(1.08); }
+  .tree.pop { animation:pop .3s; }
+  @keyframes pop { 0%{transform:scale(1)} 50%{transform:scale(1.25) rotate(-4deg)} 100%{transform:scale(1)} }
+  .hint { font-size:15px; opacity:.85; margin-bottom:10px; }
+  #fw { position:fixed; inset:0; pointer-events:none; z-index:5; }
+  .banner { margin-top:26px; background:linear-gradient(90deg,#ff9a3d,#ffd863); color:#5a2c00;
+            font-weight:700; font-size:clamp(16px,2.6vw,22px); padding:14px 20px; border-radius:14px;
+            box-shadow:0 4px 18px rgba(0,0,0,.35); max-width:760px; margin-left:auto; margin-right:auto; }
+  .psy { margin-top:26px; text-align:left; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.2);
+         border-radius:16px; padding:20px 22px; max-width:760px; margin-left:auto; margin-right:auto; }
+  .psy h2 { font-size:20px; margin-bottom:12px; color:#ffd863; }
+  .psy p { font-size:15.5px; line-height:1.55; margin-bottom:10px; opacity:.95; }
+  .psy b { color:#ffe9a8; }
+  .task { background:rgba(255,216,99,.15); border-left:4px solid #ffd863; padding:10px 14px; border-radius:8px; }
+</style>
+</head>
+<body>
+<canvas id="snow"></canvas>
+<canvas id="fw"></canvas>
+<div class="wrap">
+  <h1>🎄 До Нового года осталось…</h1>
+  <div class="sub">Нажмите на ёлочку — она любит поздравлять салютом!</div>
+  <div class="timer">
+    <div class="cell"><div class="num" id="d">--</div><div class="lab">дней</div></div>
+    <div class="cell"><div class="num" id="h">--</div><div class="lab">часов</div></div>
+    <div class="cell"><div class="num" id="m">--</div><div class="lab">минут</div></div>
+    <div class="cell"><div class="num" id="s">--</div><div class="lab">секунд</div></div>
+  </div>
+  <div class="tree" id="tree">🎄</div>
+  <div class="hint" id="hint">👆 нажмите на ёлку — запустится салют 🎆</div>
+  <div class="banner" id="banner">⏰ Успейте сдать долги по учёбе до каникул!</div>
+  <div class="psy">
+    <h2>🧠 Психология праздника</h2>
+    <p>✨ <b>Предвкушение — половина радости.</b> Учёные выяснили: ожидание праздника дарит почти столько же приятных эмоций, сколько и сам праздник. Так что отсчёт на экране — это не цифры, а готовое счастье по расписанию.</p>
+    <p>🎯 <b>Мозг любит планы.</b> Когда у нас есть понятная дата и план («какие уроки закрою до каникул»), тревоги становится меньше, а настроение — выше. Неопределённость утомляет сильнее, чем любое дело.</p>
+    <p>😴 <b>Каникулы — не про «отоспаться до обеда».</b> Сон, который сбивается на 3–4 часа, мозг воспринимает как перелёт в другой часовой пояс. Ложиться и вставать на 1–2 часа позже обычного — тогда 8 января не будет похожим на понедельник.</p>
+    <p class="task">✍️ <b>Практика до Нового года:</b> напишите на листке три вещи, которые хотите успеть до праздника, — и одну, которой радуетесь уже сейчас. Первое — план, второе — настроение.</p>
+  </div>
+</div>
+<script>
+const TEACHER_TEXT = "⏰ Успейте сдать долги по учёбе до каникул!";
+document.getElementById('banner').textContent = TEACHER_TEXT;
+
+// ---- ТАЙМЕР ----
+function tick(){
+  const now = new Date();
+  let ny = new Date(now.getFullYear()+1, 0, 1, 0, 0, 0);
+  if (now.getMonth()===0 && now.getDate()===1 && now.getHours()<12) {
+    document.getElementById('d').textContent='🎉';
+    ['h','m','s'].forEach(i=>document.getElementById(i).textContent='00');
+    return;
+  }
+  let diff = Math.max(0, ny - now);
+  const d = Math.floor(diff/86400000); diff -= d*86400000;
+  const h = Math.floor(diff/3600000); diff -= h*3600000;
+  const m = Math.floor(diff/60000); diff -= m*60000;
+  const s = Math.floor(diff/1000);
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('d').textContent = d;
+  document.getElementById('h').textContent = pad(h);
+  document.getElementById('m').textContent = pad(m);
+  document.getElementById('s').textContent = pad(s);
+}
+tick(); setInterval(tick, 1000);
+
+// ---- СНЕГ ----
+(function(){
+  const cv = document.getElementById('snow'), ctx = cv.getContext('2d');
+  let W,H,flakes=[];
+  function resize(){ W=cv.width=innerWidth; H=cv.height=innerHeight;
+    flakes = Array.from({length:120},()=>({x:Math.random()*W,y:Math.random()*H,r:1+Math.random()*2.6,
+      vy:.4+Math.random()*1.2,vx:(Math.random()-.5)*.6,o:.4+Math.random()*.6})); }
+  resize(); addEventListener('resize',resize);
+  (function loop(){
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#fff';
+    flakes.forEach(f=>{ f.y+=f.vy; f.x+=f.vx; if(f.y>H+5){f.y=-5;f.x=Math.random()*W;}
+      if(f.x>W+5)f.x=-5; if(f.x<-5)f.x=W+5;
+      ctx.globalAlpha=f.o; ctx.beginPath(); ctx.arc(f.x,f.y,f.r,0,7); ctx.fill(); });
+    requestAnimationFrame(loop);
+  })();
+})();
+
+// ---- САЛЮТ ----
+(function(){
+  const cv = document.getElementById('fw'), ctx = cv.getContext('2d');
+  let W,H,parts=[],running=false;
+  function resize(){ W=cv.width=innerWidth; H=cv.height=innerHeight; }
+  resize(); addEventListener('resize',resize);
+  const COLORS=['#ffd863','#ff5b5b','#5bd6ff','#9fff6b','#ff9af5','#ffb84d','#ffffff'];
+  function burst(x,y){
+    const color = COLORS[Math.floor(Math.random()*COLORS.length)];
+    const n = 60+Math.floor(Math.random()*40);
+    for(let i=0;i<n;i++){
+      const a = Math.random()*Math.PI*2, sp = 2+Math.random()*5.5;
+      parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-1.5,
+        life:1,decay:.012+Math.random()*.015,r:1.5+Math.random()*2.5,
+        c: Math.random()<.75?color:COLORS[Math.floor(Math.random()*COLORS.length)]});
+    }
+  }
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.vy+=.06; p.vx*=.985; p.life-=p.decay;
+      ctx.globalAlpha=Math.max(0,p.life); ctx.fillStyle=p.c;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7); ctx.fill(); });
+    parts = parts.filter(p=>p.life>0);
+    if(parts.length>0 || running) requestAnimationFrame(loop); else { running=false; ctx.clearRect(0,0,W,H); }
+  }
+  window.fireworks = function(cx,cy){
+    if(cx===undefined){ cx=W*(.2+Math.random()*.6); cy=H*(.15+Math.random()*.35); }
+    burst(cx,cy);
+    setTimeout(()=>burst(W*(.15+Math.random()*.2), H*(.1+Math.random()*.3)), 260);
+    setTimeout(()=>burst(W*(.65+Math.random()*.2), H*(.1+Math.random()*.3)), 520);
+    if(!running){ running=true; requestAnimationFrame(loop); }
+  };
+  const tree=document.getElementById('tree');
+  tree.addEventListener('click',()=>{ tree.classList.remove('pop'); void tree.offsetWidth;
+    tree.classList.add('pop'); window.fireworks(); });
+  // авто-салют раз в 12 секунд, чтобы «жило» само
+  setInterval(()=>window.fireworks(), 12000);
+})();
+</script>
+</body>
+</html>
