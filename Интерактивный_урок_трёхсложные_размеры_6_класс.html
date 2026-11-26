@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Трёхсложные стихотворные размеры — интерактивный урок, 6 класс</title>
+<style>
+:root{--тёмный:#1c2b4a;--тёмный2:#24365c;--золотой:#e8b64c;--золотой2:#f5d488;
+--кремовый:#fdf8ef;--розовый:#d96a7b;--розовый2:#f2d3d8;--бирюзовый:#3d7d76;--чернила:#2b2b2b;}
+*{box-sizing:border-box;padding:0;margin:0;}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--кремовый);color:var(--чернила);line-height:1.65;}
+.wrap{max-width:900px;margin:0 auto;padding:24px 18px 60px;}
+header{text-align:center;background:linear-gradient(135deg,var(--тёмный),var(--тёмный2) 60%,var(--бирюзовый));
+color:#fff;border-radius:0 0 28px 28px;padding:36px 18px 30px;}
+header .star{font-size:34px;color:var(--золотой2);}
+h1{font-size:clamp(24px,4.5vw,38px);margin:8px 0 10px;letter-spacing:.5px;}
+header p{opacity:.92;font-size:15px;}
+.badge{display:inline-block;background:var(--золотой);color:var(--тёмный);border-radius:999px;
+padding:5px 16px;font-size:13px;font-weight:bold;margin-top:10px;font-family:Arial,sans-serif;}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;background:#fff;
+box-shadow:0 3px 12px rgba(28,43,74,.12);padding:12px;position:sticky;top:0;z-index:50;}
+nav button{font-family:Arial,sans-serif;font-size:14px;font-weight:bold;border:none;cursor:pointer;
+background:var(--розовый2);color:var(--тёмный);padding:10px 16px;border-radius:999px;transition:.2s;}
+nav button:hover{background:var(--розовый);color:#fff;}
+nav button.active{background:var(--тёмный);color:var(--золотой2);}
+section{display:none;animation:fade .4s;}
+section.visible{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:#fff;border-radius:18px;padding:26px 24px;margin:22px 0;
+box-shadow:0 4px 16px rgba(28,43,74,.08);border-left:6px solid var(--золотой);}
+h2{color:var(--тёмный);font-size:clamp(20px,3vw,27px);margin-bottom:12px;}
+h3{color:var(--бирюзовый);font-size:20px;margin-bottom:8px;}
+p{margin:10px 0;}
+.schema{font-size:clamp(20px,3.4vw,28px);font-weight:bold;letter-spacing:3px;color:var(--тёмный);
+background:var(--золотой2);display:inline-block;padding:6px 16px;border-radius:10px;}
+.u{color:var(--бирюзовый);font-family:Arial,sans-serif;font-size:14px;}
+.btn{font-family:Arial,sans-serif;font-weight:bold;border:none;cursor:pointer;border-radius:12px;
+padding:12px 20px;font-size:15px;margin:6px 6px 6px 0;transition:.2s;}
+.btn:active{transform:scale(.94);}
+.btn-gold{background:var(--золотой);color:var(--тёмный);}
+.btn-teal{background:var(--бирюзовый);color:#fff;}
+.btn-dark{background:var(--тёмный);color:#fff;}
+.btn-pulse{animation:pulse .4s;}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.12)}100%{transform:scale(1)}}
+.quote{font-style:italic;background:var(--кремовый);border-radius:12px;padding:12px 16px;margin-top:12px;
+border-left:4px solid var(--розовый);}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;}
+th,td{border:1px solid #e5dcc8;padding:9px 10px;text-align:left;}
+th{background:var(--тёмный);color:var(--золотой2);font-family:Arial,sans-serif;}
+tr:nth-child(even) td{background:#faf6ec;}
+.stress{color:#b03040;font-weight:bold;}
+.trainer-item{background:#fff;border-radius:14px;padding:16px 18px;margin:14px 0;
+box-shadow:0 3px 10px rgba(28,43,74,.1);border-top:4px solid var(--розовый);}
+.trainer-item .word{font-size:22px;font-weight:bold;color:var(--тёмный);}
+.trainer-item.solved{border-top-color:var(--бирюзовый);opacity:.85;}
+.trainer-item.done{border-top-color:var(--бирюзовый);background:#f0f8f6;}
+.fb{margin-top:8px;font-family:Arial,sans-serif;font-size:14px;font-weight:bold;border-radius:8px;padding:8px 12px;display:none;}
+.fb.ok{display:block;background:#e2f2ec;color:var(--бирюзовый);}
+.fb.no{display:block;background:var(--розовый2);color:#a03040;}
+.counter{font-family:Arial,sans-serif;font-weight:bold;color:var(--тёмный);background:var(--золотой2);
+display:inline-block;padding:8px 18px;border-radius:999px;margin:10px 0;}
+.q-item{background:#fff;border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 3px 10px rgba(28,43,74,.1);}
+.q-item .line{font-style:italic;font-size:17px;}
+.q-item .author{font-family:Arial,sans-serif;font-size:13px;color:#777;margin-top:4px;}
+.steps li{margin:10px 0;}
+textarea{width:100%;min-height:180px;font-family:Georgia,serif;font-size:16px;border:2px solid var(--золотой);
+border-radius:12px;padding:12px;background:#fffdfd;resize:vertical;}
+.small{font-family:Arial,sans-serif;font-size:13px;color:#888;}
+.refl{background:var(--розовый2);border-radius:12px;padding:14px 16px;margin-top:18px;}
+footer{text-align:center;color:var(--тёмный);opacity:.85;font-size:13px;margin-top:34px;font-family:Arial,sans-serif;}
+.hearts{font-size:20px;}
+@media(max-width:600px){nav button{padding:8px 12px;font-size:12px;}.card{padding:18px 14px;}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="star">★</div>
+<h1>Трёхсложные стихотворные размеры</h1>
+<p>Резервный урок литературы, 6 класс · Литературно-творческий урок с участием родителей</p>
+<span class="badge">Проект «Мама — художник, я — поэт»</span>
+</header>
+
+<nav>
+<button data-tab="tab1" class="active">Пульс стиха</button>
+<button data-tab="tab2">Три размера</button>
+<button data-tab="tab3">Тренажёр</button>
+<button data-tab="tab4">Проверь себя</button>
+<button data-tab="tab5">Мастерская</button>
+</nav>
+
+<div class="wrap">
+
+<section id="tab1" class="visible">
+<div class="card">
+<h2>1. У стиха есть пульс</h2>
+<p>Когда мама пела вам колыбельную, она невольно соблюдала ритм. У всякого стихотворения есть пульс — чередование сильных и слабых слогов. Если между ударами — <b>одна</b> слабая доля, размер <b>двусложный</b> (ямб, хорей — с ними мы знакомы). А если между ударами — <b>две</b> слабые доли, перед нами <b>трёхсложный</b> размер.</p>
+<p>Проверьте на слух: нажмите на кнопки — вы услышите, как «стучат» двусложный и трёхсложный пульсы.</p>
+<button class="btn btn-dark btn-pulse" data-rhythm="2">♪ Двусложный пульс</button>
+<button class="btn btn-dark btn-pulse" data-rhythm="3">♪ Трёхсложный пульс</button>
+<p class="small">Двусложный: СИЛЬНО-тихо, СИЛЬНО-тихо · Трёхсложный: СИЛЬНО-тихо-тихо, СИЛЬНО-тихо-тихо</p>
+<div class="quote">«Тучки небесные — вечные странники…» — М. Ю. Лермонтов<br>
+<span class="small">Послушайте эти строки внутри себя: чувствуете, как шаг идёт через три доли?</span></div>
+</div>
+</section>
+
+<section id="tab2">
+<div class="card">
+<h2>2. Три размера — три характера</h2>
+
+<h3>Дактиль</h3>
+<p class="schema">Ууу · Ууу</p>
+<p class="u">ударный — безударный — безударный</p>
+<button class="btn btn-teal" data-rhythm="dactyl">🔊 Прослушать ритм</button>
+<div class="quote">Звучит как топот конницы:<br>«Ту́чки небе́сные, ве́чные стра́нники»</div>
+
+<h3>Амфибрахий</h3>
+<p class="schema">уУу · уУу</p>
+<p class="u">безударный — ударный — безударный</p>
+<button class="btn btn-teal" data-rhythm="amph">🔊 Прослушать ритм</button>
+<div class="quote">Покачивание колыбели — мамина интонация:<br>«Не ве́тер бушу́ет над бо́ром»</div>
+
+<h3>Анапест</h3>
+<p class="schema">ууУ · ууУ</p>
+<p class="u">безударный — безударный — ударный</p>
+<button class="btn btn-teal" data-rhythm="anap">🔊 Прослушать ритм</button>
+<div class="quote">Шаг, барабан, дорога:<br>«Что ты жа́дно гляди́шь на доро́гу»</div>
+
+<h3 style="margin-top:24px">Как быстро узнать размер</h3>
+<table>
+<tr><th>Размер</th><th>Схема стопы</th><th>Слова-подсказки</th><th>Характер</th></tr>
+<tr><td><b>Дактиль</b></td><td>У-у-у</td><td>по́-лоч-ка · я́-бло-ня</td><td>торжественный, плавный</td></tr>
+<tr><td><b>Амфибрахий</b></td><td>у-У-у</td><td>до-ро́-га · си-ни́-ца</td><td>нежный, певучий</td></tr>
+<tr><td><b>Анапест</b></td><td>у-у-У</td><td>ка-ран-да́ш · ав-то-ма́т</td><td>энергичный, летящий</td></tr>
+</table>
+<p class="small">Запоминалка: <b>ДА</b>ктиль — <b>АМ</b>фибрахий — <b>А</b>напест: ударение шагает по слогам вправо!</p>
+</div>
+</section>
+
+<section id="tab3">
+<div class="card">
+<h2>3. Тренажёр «Разложи слово на доли»</h2>
+<p>Произнесите слово вслух по слогам, найдите ударный слог — и подберите его «имя». Нажмите на размер.</p>
+<p class="counter" id="trainerCounter">Разгадано слов: 0 из 7</p>
+<div id="trainerBox"></div>
+</div>
+</section>
+
+<section id="tab4">
+<div class="card">
+<h2>4. Проверь себя: строки великих</h2>
+<p>Прочитайте строку вслух, простучите ритм — и выберите размер.</p>
+<p class="counter" id="quizCounter">Верно определено: 0 из 5</p>
+<div id="quizBox"></div>
+</div>
+</section>
+
+<section id="tab5">
+<div class="card">
+<h2>5. Мастерская «Портрет и стих»</h2>
+<div class="quote"><b>Ключевая мысль урока:</b> мама рисует красками то, что видит, — а мы рисуем словами то, что она в нас видит. Портрет и стихотворение — два портрета одного человека.</div>
+<ol class="steps">
+<li>Возьмите портрет, нарисованный мамой. Посмотрите на лицо: какой у него «пульс» — лёгкий, качающийся или решительный?</li>
+<li>Выберите размер под характер портрета: дактиль — плавный и светлый, амфибрахий — певучий и тёплый, анапест — энергичный и дорожный.</li>
+<li>Напишите 4–6 строк о себе глазами мамы или о маме глазами себя. Начните с зачина-опоры — дальше идите сами.</li>
+<li>Проверьте ритм: прочитайте вслух и простучите по парте. Сильные слоги должны падать на одно и то же место в каждой строке.</li>
+<li>Оформите начисто к выставке «Портрет и стих» — она откроется к Дню матери, 29 ноября.</li>
+</ol>
+
+<h3>Зачины-опоры (выберите свой)</h3>
+<table>
+<tr><th>Дактиль</th><th>Амфибрахий</th><th>Анапест</th></tr>
+<tr><td>«Ма́мины кра́ски рису́ют свет…»</td><td>«Не ве́тер рису́ет портре́ты…»</td><td>«Собира́ю слова́ по доро́ге…»</td></tr>
+</table>
+
+<h3 style="margin-top:20px">Черновик вашего стихотворения</h3>
+<textarea id="draft" placeholder="Начните с зачина — и идите сами…"></textarea>
+<p class="small" id="draftStat">0 символов · 0 строк</p>
+<button class="btn btn-gold" id="checkRhythm">Проверить мой ритм</button>
+<div id="rhythmFb" class="fb"></div>
+
+<div class="refl">
+🌿 <b>Рефлексия:</b> «Мой пульс сегодня — …» Допишите эту фразу одним словом и сохраните её в тетради.<br>
+<input type="text" id="reflInput" placeholder="Мой пульс сегодня — …" style="margin-top:8px;padding:10px;border-radius:8px;border:1.5px solid var(--бирюзовый);min-width:260px;">
+<button class="btn btn-dark" id="saveRefl" style="margin-top:8px;">Сохранить в тетрадь</button>
+</div>
+</div>
+</section>
+
+<footer>
+Проект «Мама — художник, я — поэт» · Подо-Калиновская школа · Методический Бахчан<br>
+Автор разработки: Коялхот Галина. Урок года — своими руками 💛
+</footer>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+var ctx=null;
+function getCtx(){ if(!ctx){ var AC=window.AudioContext||window.webkitAudioContext; if(AC){ctx=new AC();} } if(ctx&&ctx.state==="suspended"){ctx.resume();} return ctx; }
+function beat(t,start,dur,vol){ var o=ctx.createOscillator(),g=ctx.createGain();
+o.type="sine";o.frequency.value=t;g.gain.setValueAtTime(0,start);
+g.gain.linearRampToValueAtTime(vol,start+0.01);g.gain.exponentialRampToValueAtTime(0.001,start+dur);
+o.connect(g);g.connect(ctx.destination);o.start(start);o.stop(start+dur+0.05); }
+var step=0.34, V=0.5, s=0.16;
+var schemes={
+ "2":[[V,0],[s,step]],
+ "3":[[V,0],[s,step],[s,step*2]],
+ "dactyl":[[V,0],[s,step],[s,step*2],[V,step*3],[s,step*4],[s,step*5]],
+ "amph":[[s,0],[V,step],[s,step*2],[s,step*3],[V,step*4],[s,step*5]],
+ "anap":[[s,0],[s,step],[V,step*2],[s,step*3],[s,step*4],[V,step*5]] };
+function play(name){ var c=getCtx(); if(!c){return;} var pat=schemes[name]||schemes["2"], t0=c.currentTime+0.06;
+for(var i=0;i<pat.length;i++){beat(pat[i][0]===V?880:440,t0+pat[i][1],0.14,pat[i][0]);} }
+
+var tabs=document.querySelectorAll("nav button");
+tabs.forEach(function(b){b.addEventListener("click",function(){
+tabs.forEach(function(x){x.classList.remove("active")});b.classList.add("active");
+document.querySelectorAll("section").forEach(function(s){s.classList.remove("visible")});
+document.getElementById(b.dataset.tab).classList.add("visible");
+});});
+
+document.querySelectorAll("[data-rhythm]").forEach(function(b){
+b.addEventListener("click",function(){ play(b.dataset.rhythm);
+b.classList.remove("btn-pulse"); void b.offsetWidth; b.classList.add("btn-pulse"); });});
+
+var words=[
+{w:["по́","лоч","ка"],a:"Дактиль",e:"по́-лоч-ка — ударение на 1-м слоге"},
+{w:["я́","бло","ня"],a:"Дактиль",e:"я́-бло-ня — ударение на 1-м слоге"},
+{w:["до","ро́","га"],a:"Амфибрахий",e:"до-ро́-га — ударение на 2-м слоге"},
+{w:["си","ни́","ца"],a:"Амфибрахий",e:"си-ни́-ца — ударение на 2-м слоге"},
+{w:["ка","ран","да́ш"],a:"Анапест",e:"ка-ран-да́ш — ударение на 3-м (последнем) слоге"},
+{w:["мо","ло","ко́"],a:"Анапест",e:"мо-ло-ко́ — ударение на 3-м (последнем) слоге"},
+{w:["ав","то","ма́т"],a:"Анапест",e:"ав-то-ма́т — ударение на 3-м (последнем) слоге"}
+];
+var solved=0, tBox=document.getElementById("trainerBox"), tCnt=document.getElementById("trainerCounter");
+words.forEach(function(it,ix){
+var d=document.createElement("div"); d.className="trainer-item";
+d.innerHTML='<div class="word">'+it.w.map(function(s,i){return (i===ix? s : s);}).join("-")+'</div>'+
+'<div class="small">'+it.w.join("-")+' — произнесите вслух и найдите ударный слог</div>'+
+'<button class="btn btn-gold sizeBtn" data-a="Дактиль">Дактиль</button>'+
+'<button class="btn btn-gold sizeBtn" data-a="Амфибрахий">Амфибрахий</button>'+
+'<button class="btn btn-gold sizeBtn" data-a="Анапест">Анапест</button>'+
+'<div class="fb"></div>';
+tBox.appendChild(d);
+var fb=d.querySelector(".fb");
+d.querySelectorAll(".sizeBtn").forEach(function(b){
+b.addEventListener("click",function(){
+if(d.classList.contains("done")){return;}
+if(b.dataset.a===it.a){ solved++; d.classList.add("done");
+fb.className="fb ok"; fb.textContent="Верно! "+it.e;
+tCnt.textContent="Разгадано слов: "+solved+" из 7";
+}else{ fb.className="fb no"; fb.textContent="Почти! Подсказка: "+it.e; }
+});});
+});
+
+var quiz=[
+{t:"«Тучки небесные, вечные странники…»",au:"М. Ю. Лермонтов",a:"Дактиль"},
+{t:"«Не ветер бушует над бором…»",au:"М. Ю. Лермонтов",a:"Амфибрахий"},
+{t:"«Славная осень! Здоровый, ядрёный…»",au:"Н. А. Некрасов",a:"Дактиль"},
+{t:"«Что ты жадно глядишь на дорогу…»",au:"Н. А. Некрасов",a:"Анапест"},
+{t:"«Вот парадный подъезд. По торжественным дням…»",au:"Н. А. Некрасов",a:"Анапест"}
+];
+var qOk=0, qBox=document.getElementById("quizBox"), qCnt=document.getElementById("quizCounter");
+quiz.forEach(function(it){
+var d=document.createElement("div"); d.className="q-item";
+d.innerHTML='<div class="line">'+it.t+'</div><div class="author">'+it.au+'</div>'+
+'<button class="btn btn-teal qa" data-a="Дактиль">Дактиль</button>'+
+'<button class="btn btn-teal qa" data-a="Амфибрахий">Амфибрахий</button>'+
+'<button class="btn btn-teal qa" data-a="Анапест">Анапест</button>'+
+'<div class="fb"></div>';
+qBox.appendChild(d);
+var fb=d.querySelector(".fb");
+d.querySelectorAll(".qa").forEach(function(b){
+b.addEventListener("click",function(){
+if(d.classList.contains("done")){return;}
+if(b.dataset.a===it.a){ qOk++; d.classList.add("done");
+fb.className="fb ok"; fb.textContent="Верно! Это "+it.a.toLowerCase()+".";
+qCnt.textContent="Верно определено: "+qOk+" из 5";
+}else{ fb.className="fb no"; fb.textContent="Попробуйте ещё раз — простучите строку по слогам!"; }
+});});
+});
+
+var draft=document.getElementById("draft"), stat=document.getElementById("draftStat");
+draft.addEventListener("input",function(){
+var v=draft.value, lines=v.trim()? v.trim().split(/\n/).length:0;
+stat.textContent=v.length+" символов · "+lines+" строк";
+try{localStorage.setItem("urok_fet_draft",v);}catch(e){}
+});
+try{var saved=localStorage.getItem("urok_fet_draft"); if(saved){draft.value=saved;
+stat.textContent=saved.length+" символов · "+(saved.trim()?saved.trim().split(/\n/).length:0)+" строк";}}catch(e){}
+
+document.getElementById("checkRhythm").addEventListener("click",function(){
+var fb=document.getElementById("rhythmFb"); fb.className="fb ok";
+fb.textContent="Отлично! Теперь прочитайте вслух и простучите по парте: ударения должны падать на одно и то же место в каждой строке. Если сбились — не беда, поэт всегда «допиливает» ритм!";
+});
+document.getElementById("saveRefl").addEventListener("click",function(){
+var v=document.getElementById("reflInput").value.trim();
+var fb=this.closest(".refl").querySelector(".fb")||document.createElement("div");
+try{localStorage.setItem("urok_fet_refl",v);}catch(e){}
+});
+})();
+</script>
+</body>
+</html>
