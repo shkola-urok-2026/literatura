@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>А. А. Фет «Это утро, радость эта…» — интерактивный урок</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color:#3a2a1a;
+    background: linear-gradient(160deg, #4a148c 0%, #8e24aa 18%, #e64a89 38%, #ff7043 58%, #ffa726 78%, #ffe082 100%);
+    background-attachment: fixed;
+    min-height:100vh;
+  }
+  .container { max-width:1000px; margin:0 auto; padding:20px; }
+  header {
+    text-align:center; padding:40px 20px 30px;
+    background: rgba(255,255,255,0.12);
+    border-radius:0 0 30px 30px;
+    backdrop-filter: blur(4px);
+    animation: dawn 3s ease-out;
+  }
+  @keyframes dawn { from { background: rgba(40,10,70,0.6); opacity:0.3; } to { background: rgba(255,255,255,0.12); opacity:1; } }
+  h1 { color:#fff8e1; font-size:2.2em; text-shadow:0 2px 8px rgba(80,20,120,0.5); margin-bottom:8px; }
+  .subtitle { color:#fff3e0; font-size:1.15em; }
+  .badge { display:inline-block; background:#ffd54f; color:#5d4037; padding:6px 18px; border-radius:20px; font-weight:bold; margin:12px 4px 0; font-size:0.9em; }
+  nav { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:24px 0; }
+  nav button {
+    font-family:inherit; font-size:1em; padding:10px 20px; border:none; border-radius:24px;
+    background:#fff8e1; color:#6a1b9a; font-weight:bold; cursor:pointer; box-shadow:0 3px 8px rgba(80,20,120,0.3);
+    transition: transform .15s, background .15s;
+  }
+  nav button:hover { transform:translateY(-3px); background:#ffd54f; }
+  section {
+    background:rgba(255,253,245,0.96); border-radius:24px; padding:28px 32px; margin-bottom:26px;
+    box-shadow:0 6px 24px rgba(60,10,90,0.35); display:none; animation:fadein .4s;
+  }
+  section.active { display:block; }
+  @keyframes fadein { from {opacity:0; transform:translateY(12px);} to {opacity:1; transform:none;} }
+  h2 { color:#6a1b9a; margin-bottom:16px; font-size:1.6em; border-bottom:3px solid #ffd54f; padding-bottom:8px; }
+  .poem-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 40px; font-size:1.15em; line-height:1.75; }
+  .poem-grid span { cursor:pointer; transition:background .2s; padding:0 3px; border-radius:4px; }
+  .poem-grid span.anaph { background:#fff3c4; }
+  .poem-grid span.lit { background:#ffd54f; box-shadow:0 0 6px #ffca28; }
+  .counter { margin-top:18px; font-weight:bold; color:#e64a89; text-align:center; font-size:1.1em; }
+  .finalmsg { display:none; text-align:center; color:#2e7d32; font-size:1.3em; margin-top:10px; font-weight:bold; }
+  .player-box { background:#fff3e0; border-radius:20px; padding:20px; margin:14px 0; text-align:center; }
+  .player-box iframe { max-width:100%; border-radius:12px; }
+  .btn {
+    display:inline-block; margin:8px 6px; padding:12px 24px; border-radius:28px; text-decoration:none;
+    font-weight:bold; font-size:1.05em; box-shadow:0 4px 12px rgba(60,10,90,0.3); transition:transform .15s;
+  }
+  .btn:hover { transform:translateY(-3px); }
+  .btn-ya { background:#ffdb4d; color:#3a2a1a; }
+  .btn-cult { background:#e64a89; color:#fff; }
+  .btn-old { background:#4fc3f7; color:#0d3b52; }
+  table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.98em; }
+  th { background:#8e24aa; color:#fff; padding:10px; }
+  td { border:1px solid #e1bee7; padding:10px; background:#fdf9ff; }
+  tr td:first-child { font-weight:bold; color:#6a1b9a; background:#f3e5f5; }
+  .card { border-radius:16px; padding:14px 18px; margin:10px 0; cursor:pointer; color:#fff; transition:transform .15s; }
+  .card:hover { transform:scale(1.01); }
+  .card .head { font-weight:bold; font-size:1.1em; }
+  .card .body { display:none; margin-top:10px; background:rgba(255,255,255,0.25); padding:12px; border-radius:10px; line-height:1.6; }
+  .card.open .body { display:block; }
+  .c1 { background:#7b1fa2; } .c2 { background:#d81b60; } .c3 { background:#e65100; }
+  .c4 { background:#2e7d32; } .c5 { background:#00838f; } .c6 { background:#4527a0; }
+  .word-card { background:#ede7f6; border-left:5px solid #8e24aa; border-radius:10px; padding:12px 16px; margin:8px 0; cursor:pointer; }
+  .word-card .def { display:none; margin-top:8px; }
+  .word-card.open .def { display:block; }
+  .quiz-q { background:#f3e5f5; border-radius:14px; padding:16px 20px; margin:12px 0; }
+  .quiz-q p { font-weight:bold; margin-bottom:10px; }
+  .quiz-opt { display:block; width:100%; text-align:left; font-family:inherit; font-size:1em; margin:6px 0; padding:10px 14px; border:2px solid #ce93d8; border-radius:10px; background:#fff; cursor:pointer; }
+  .quiz-opt:hover { background:#f8bbd0; }
+  .quiz-opt.correct { background:#c8e6c9; border-color:#2e7d32; }
+  .quiz-opt.wrong { background:#ffcdd2; border-color:#c62828; }
+  .expl { display:none; margin-top:8px; font-style:italic; color:#4a148c; }
+  .score { text-align:center; font-size:1.3em; font-weight:bold; color:#6a1b9a; margin-top:16px; }
+  .gap { border-bottom:2px solid #8e24aa; min-width:90px; display:inline-block; }
+  .gap-input { border:none; border-bottom:2px solid #8e24aa; font-family:inherit; font-size:inherit; text-align:center; width:130px; background:#fffde7; outline:none; }
+  .footer { text-align:center; color:#fff3e0; padding:20px; font-size:0.95em; }
+  @media (max-width:700px){ .poem-grid{grid-template-columns:1fr;} section{padding:20px;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>☀️ А. А. Фет. «Это утро, радость эта…»</h1>
+  <div class="subtitle">Интерактивный урок литературы • 10 класс • Урок 36 «Человек и природа в лирике А. А. Фета»</div>
+  <div>
+    <span class="badge">🎵 музыка</span>
+    <span class="badge">🔍 полный разбор</span>
+    <span class="badge">📖 словарь</span>
+    <span class="badge">⚖️ Фет и Тютчев</span>
+    <span class="badge">✅ тест</span>
+  </div>
+</header>
+
+<div class="container">
+<nav>
+  <button onclick="show('s1')">📜 Стихотворение</button>
+  <button onclick="show('s2')">🎧 Слушать</button>
+  <button onclick="show('s3')">🔍 Полный разбор</button>
+  <button onclick="show('s4')">📖 Словарь</button>
+  <button onclick="show('s5')">⚖️ Фет и Тютчев</button>
+  <button onclick="show('s6')">✅ Проверь себя</button>
+</nav>
+
+<!-- 1. СТИХОТВОРЕНИЕ -->
+<section id="s1" class="active">
+  <h2>📜 Стихотворение</h2>
+  <p style="margin-bottom:14px; font-style:italic;">Кликайте по строкам с повторяющимся словом «этот / эта / эти» — они засветятся золотом. Сколько их? Проверьте себя!</p>
+  <div class="poem-grid" id="poem">
+    <div><span class="anaph" onclick="lit(this)">Это утро, радость эта,</span><br>
+    <span class="anaph" onclick="lit(this)">Эта мощь и дня и света,</span><br>
+    <span class="anaph" onclick="lit(this)">Этот синий свод,</span><br>
+    <span class="anaph" onclick="lit(this)">Этот крик и вереницы,</span><br>
+    <span class="anaph" onclick="lit(this)">Эти стаи, эти птицы,</span><br>
+    <span class="anaph" onclick="lit(this)">Этот говор вод,</span></div>
+    <div><span class="anaph" onclick="lit(this)">Эти ивы и берёзы,</span><br>
+    <span class="anaph" onclick="lit(this)">Эти капли — эти слёзы,</span><br>
+    <span class="anaph" onclick="lit(this)">Этот пух — не лист,</span><br>
+    <span class="anaph" onclick="lit(this)">Эти горы, эти долы,</span><br>
+    <span class="anaph" onclick="lit(this)">Эти мошки, эти пчёлы,</span><br>
+    <span class="anaph" onclick="lit(this)">Этот зык и свист,</span></div>
+    <div><span class="anaph" onclick="lit(this)">Эти зори без затменья,</span><br>
+    <span class="anaph" onclick="lit(this)">Этот вздох ночной селенья,</span><br>
+    <span class="anaph" onclick="lit(this)">Эта ночь без сна,</span><br>
+    <span class="anaph" onclick="lit(this)">Эта мгла и жар постели,</span><br>
+    <span class="anaph" onclick="lit(this)">Эта дробь и эти трели,</span><br>
+    <span>Это всё — весна.</span></div>
+    <div style="align-self:end; color:#6a1b9a;">1881 г.</div>
+  </div>
+  <div class="counter" id="counter">Найдено подсвеченных строк: 0 из 18</div>
+  <div class="finalmsg" id="finalmsg">🎉 Великолепно! Все 18 строк — единый перечень счастья. Одно предложение, двадцать повторов — и целая весна!</div>
+</section>
+
+<!-- 2. СЛУШАТЬ -->
+<section id="s2">
+  <h2>🎧 Слушать</h2>
+  <p>Романс на стихи Фета играет прямо здесь — нажимайте ▶ внутри плеера:</p>
+  <div class="player-box">
+    <iframe frameborder="0" allow="clipboard-write" style="border:none;width:100%;max-width:614px;height:556px;" width="614" height="556"
+      src="https://music.yandex.ru/iframe/album/39981086">Слушайте <a href="https://music.yandex.ru/album/39981086?utm_source=web&utm_medium=copy_link">Это утро, радость эта</a> — <a href="https://music.yandex.ru/artist/24892405">Некрасов Live</a> на Яндекс Музыке</iframe>
+  </div>
+  <p>Дополнительно:</p>
+  <a class="btn btn-ya" href="https://music.yandex.ru/album/39981086/track/146725571" target="_blank">🎵 Трек на Яндекс Музыке</a>
+  <a class="btn btn-old" href="https://staroeradio.ru/audio/15317" target="_blank">🎙 Чтение Якова Смоленского</a>
+  <a class="btn btn-cult" href="https://www.culture.ru/poems/12695/eto-utro-radost-eta" target="_blank">🏛 Текст на «Культуре.РФ»</a>
+  <p style="margin-top:14px; font-size:0.95em;">Справка: на стихи Фета написано более двухсот романсов. Это стихотворение положено на музыку А. Б. Матюхиным; есть романсы и других композиторов.</p>
+</section>
+
+<!-- 3. РАЗБОР -->
+<section id="s3">
+  <h2>🔍 Полный разбор</h2>
+  <h3 style="color:#d81b60;">История стихотворения</h3>
+  <p>Написано во <b>второй половине 1881 года</b>, когда Фету было почти 60 лет. При жизни поэта <b>не издавалось</b> — впервые опубликовано лишь в 1901 году в разделе «Природа. Весна». Известны романсы на эти стихи А. Б. Матюхина и М. Радовского.</p>
+  <h3 style="color:#d81b60; margin-top:18px;">Тема и идея</h3>
+  <p><b>Тема:</b> расцвет весенней природы и единство человека с миром.<br>
+  <b>Идея:</b> весна — не время года, а состояние души; «всё» перечисленное и есть счастье, целостность бытия.</p>
+  <h3 style="color:#d81b60; margin-top:18px;">Композиция: сутки за шесть строф</h3>
+  <table>
+    <tr><th>Строки</th><th>Время суток</th><th>Что видим и слышим</th></tr>
+    <tr><td>«Это утро…» — «говор вод»</td><td>Утро</td><td>Свет, небо, крик птиц, шум воды — пробуждение мира</td></tr>
+    <tr><td>«Эти ивы…» — «зык и свист»</td><td>День</td><td>Берёзы с клейкими каплями-слезами, мошки, пчёлы — жизнь в каждом звуке</td></tr>
+    <tr><td>«Эти зори…» — «ночь без сна»</td><td>Вечер и ночь</td><td>Заря без затменья, вздох селенья, бессонная ночь</td></tr>
+    <tr><td>«Эта мгла…» — «Это всё — весна»</td><td>Итог</td><td>Слияние ночи и дня в одном чувстве — весне</td></tr>
+  </table>
+  <h3 style="color:#d81b60; margin-top:18px;">Художественные средства (кликайте по карточкам)</h3>
+  <div class="card c1" onclick="toggle(this)"><div class="head">1. Анафора</div><div class="body">20 повторов слова «этот/эта/эти» в начале строк. Создают эффект единого потока счастья: мир перечисляется, как подарки, и каждый — бесценен.</div></div>
+  <div class="card c2" onclick="toggle(this)"><div class="head">2. Бессоюзие</div><div class="body">Ни одного глагола-сказуемого почти во всём стихотворении: мир не «делает» — он просто ЕСТЬ. Одно финальное предложение на 18 строк — как единый выдох весны.</div></div>
+  <div class="card c3" onclick="toggle(this)"><div class="head">3. Градация</div><div class="body">Перечисление нарастает от одного предмета к целому миру — и обрывается выводом «Это всё — весна». Кульминация не событие, а слово.</div></div>
+  <div class="card c4" onclick="toggle(this)"><div class="head">4. «Пух — не лист» — точность детали</div><div class="body">Фет ловит мгновение: на берёзах ещё не листья, а клейкий пух с каплями росы («эти слёзы»). Поэт-импрессионист фиксирует не картину, а её миг.</div></div>
+  <div class="card c5" onclick="toggle(this)"><div class="head">5. Звукопись</div><div class="body">«Этот крик и вереницы», «говор вод», «зык и свист», «дробь и трели» — стихотворение звучит: в нём слышны птицы, вода, пчёлы. Звук — такой же герой, как свет.</div></div>
+  <div class="card c6" onclick="toggle(this)"><div class="head">6. Антитеза дня и ночи</div><div class="body">Утро — ночь, свет — мгла, жар постели — зори. Но антитезы не спорят, а складываются в один день: и то, и другое — «всё — весна». У Фета противоположности примиряются чувством.</div></div>
+  <h3 style="color:#d81b60; margin-top:18px;">Лирический герой</h3>
+  <p>Герой не назван и не показан — но он везде: каждое «это» — то, что он видит, слышит и переживает. Природа у Фета <b>не противопоставлена человеку</b>, а отражает его состояние: весна вокруг — весна внутри. Отсюда ответ на проблемный вопрос урока: у Фета природа не спорит с человеком, а сливается с ним в одном чувстве.</p>
+</section>
+
+<!-- 4. СЛОВАРЬ -->
+<section id="s4">
+  <h2>📖 Словарь устаревших слов</h2>
+  <p style="margin-bottom:12px;">Нажмите на слово — откроется значение:</p>
+  <div class="word-card" onclick="toggle(this)"><b>Зык</b><div class="def">Шум, звон, гул. «Этот зык и свист» — гул весеннего дня.</div></div>
+  <div class="word-card" onclick="toggle(this)"><b>Вереницы</b><div class="def">Ряды, цепочки. Здесь — стаи птиц, летящих чередой.</div></div>
+  <div class="word-card" onclick="toggle(this)"><b>Затменье</b><div class="def">Затемнение (как при затмении солнца). «Зори без затменья» — ясные, чистые зори.</div></div>
+  <div class="word-card" onclick="toggle(this)"><b>Селенье</b><div class="def">Деревня, селение. «Вздох ночной селенья» — далёкий звук деревенской ночи.</div></div>
+  <div class="word-card" onclick="toggle(this)"><b>Дробь</b><div class="def">Быстрые повторяющиеся звуки — например, дробь дятла или капель.</div></div>
+</section>
+
+<!-- 5. ФЕТ И ТЮТЧЕВ -->
+<section id="s5">
+  <h2>⚖️ Природа у Тютчева и у Фета</h2>
+  <p style="margin-bottom:12px;">Сначала подумайте сами — потом открывайте подсказку:</p>
+  <table>
+    <tr><th>Линия сравнения</th><th>Тютчев</th><th>Фет</th></tr>
+    <tr><td>Какова природа?</td><td>Великая, таинственная, грозная сила</td><td>Родная, нежная, «пейзаж души»</td></tr>
+    <tr><td>Человек и мир</td><td>Человек — малая часть грозного целого</td><td>Человек и природа — единое чувство</td></tr>
+    <tr><td>Мысль или чувство?</td><td>Философское раздумье</td><td>Мгновенное ощущение</td></tr>
+    <tr><td>Словарь поэта</td><td>«хаос», «бездна», «дума»</td><td>«шёпот», «дыханье», «хрустально»</td></tr>
+  </table>
+  <div class="card c4" onclick="toggle(this)"><div class="head">💡 Вывод для тетради</div><div class="body">Тютчев спорит с природой и удивляется ей; Фет растворяется в ней. У Тютчева человек спрашивает у мира — у Фета мир уже отвечает его собственным чувством.</div></div>
+</section>
+
+<!-- 6. ТЕСТ -->
+<section id="s6">
+  <h2>✅ Проверь себя</h2>
+  <div class="quiz-q"><p>1. Когда написано стихотворение?</p>
+    <button class="quiz-opt" onclick="ans(this,0)">В молодости Фета</button>
+    <button class="quiz-opt" onclick="ans(this,1)">Во второй половине 1881 года</button>
+    <button class="quiz-opt" onclick="ans(this,0)">В 1901 году</button>
+    <div class="expl">Верно: 1881 год, при жизни поэта не издавалось, впервые опубликовано в 1901 году.</div></div>
+  <div class="quiz-q"><p>2. Сколько раз повторяется слово «этот/эта/эти»?</p>
+    <button class="quiz-opt" onclick="ans(this,0)">Двенадцать</button>
+    <button class="quiz-opt" onclick="ans(this,1)">Двадцать</button>
+    <button class="quiz-opt" onclick="ans(this,0)">Десять</button>
+    <div class="expl">Верно: 20 повторов — анафора, создающая поток счастья.</div></div>
+  <div class="quiz-q"><p>3. Какая композиционная особенность объединяет стихотворение?</p>
+    <button class="quiz-opt" onclick="ans(this,1)">Одно предложение на 18 строк и почти нет глаголов</button>
+    <button class="quiz-opt" onclick="ans(this,0)">Рифма только в первой строфе</button>
+    <button class="quiz-opt" onclick="ans(this,0)">Диалог героя и тучки</button>
+    <div class="expl">Верно: единое бессоюзное перечисление — как один «выдох» весны. Диалог с тучкой — это Лермонтов, «Утёс» 🙂</div></div>
+  <div class="quiz-q"><p>4. Что означает «зык»?</p>
+    <button class="quiz-opt" onclick="ans(this,0)">Тень</button>
+    <button class="quiz-opt" onclick="ans(this,1)">Шум, звон, гул</button>
+    <button class="quiz-opt" onclick="ans(this,0)">Порыв ветра</button>
+    <div class="expl">Верно: «зык» — шум, звон, гул.</div></div>
+  <div class="quiz-q"><p>5. Чем природа у Фета отличается от тютчевской?</p>
+    <button class="quiz-opt" onclick="ans(this,0)">Она грозна и таинственна</button>
+    <button class="quiz-opt" onclick="ans(this,1)">Она созвучна человеку, слита с его чувством</button>
+    <button class="quiz-opt" onclick="ans(this,0)">Она всегда ночная</button>
+    <div class="expl">Верно: у Фета природа — «пейзаж души», мгновенное созвучие чувства.</div></div>
+  <div class="quiz-q"><p>6. Каким одним словом можно назвать итог стихотворения?</p>
+    <button class="quiz-opt" onclick="ans(this,0)">Осень</button>
+    <button class="quiz-opt" onclick="ans(this,1)">Весна</button>
+    <button class="quiz-opt" onclick="ans(this,0)">Гроза</button>
+    <div class="expl">Верно: «Это всё — весна» — финальная строка и смысловой итог.</div></div>
+  <div class="score" id="score">Результат: 0 из 6</div>
+  <h3 style="color:#d81b60; margin-top:20px;">✏️ Заполни пропуски (подготовка к заучиванию)</h3>
+  <p style="line-height:2.2;">Это <input class="gap-input" data-a="утро">, радость эта,<br>
+  Эта мощь и дня и света,<br>
+  Этот <input class="gap-input" data-a="синий"> свод,<br>
+  Этот крик и вереницы,<br>
+  Эти стаи, эти <input class="gap-input" data-a="птицы">,<br>
+  Этот говор <input class="gap-input" data-a="вод">,<br>
+  <button class="btn btn-cult" style="padding:8px 18px; margin-top:10px;" onclick="checkGaps()">Проверить</button> <span id="gapres" style="font-weight:bold;"></span></p>
+</section>
+</div>
+<div class="footer">🌿 «Методический Бахчан» • Урок литературы, 10 класс • Тема 36: Человек и природа в лирике А. А. Фета</div>
+
+<script>
+function show(id){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+let litCount=0;
+function lit(el){ if(el.classList.contains('lit'))return; el.classList.add('lit'); litCount++;
+  document.getElementById('counter').textContent='Найдено подсвеченных строк: '+litCount+' из 18';
+  if(litCount===18) document.getElementById('finalmsg').style.display='block';
+}
+function toggle(el){ el.classList.toggle('open'); }
+let answered={};
+function ans(btn, ok){
+  const q=btn.closest('.quiz-q'), idx=[...document.querySelectorAll('.quiz-q')].indexOf(q);
+  if(answered[idx])return; answered[idx]=true;
+  if(ok){btn.classList.add('correct');} else {btn.classList.add('wrong');
+    [...q.querySelectorAll('.quiz-opt')][[...q.querySelectorAll('.quiz-opt')].findIndex(b=>b.onclick.toString().includes('ans(this,1)'))]?.classList.add('correct');}
+  q.querySelector('.expl').style.display='block';
+  document.getElementById('score').textContent='Результат: '+Object.values(answered).filter(Boolean).length+' из 6 отвечено';
+}
+function checkGaps(){
+  let ok=0,total=0;
+  document.querySelectorAll('.gap-input').forEach(inp=>{
+    total++;
+    if(inp.value.trim().toLowerCase()===inp.dataset.a){inp.style.background='#c8e6c9'; ok++;}
+    else {inp.style.background='#ffcdd2';}
+  });
+  document.getElementById('gapres').textContent=' '+ok+' из '+total+' верно!';
+}
+</script>
+</body>
+</html>
